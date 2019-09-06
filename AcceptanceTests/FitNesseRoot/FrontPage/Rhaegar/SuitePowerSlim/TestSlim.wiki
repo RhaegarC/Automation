@@ -1,0 +1,6 @@
+---
+RecentChanges: no
+Versions: no
+---
+|script|
+|show|eval|Get-Date|

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <date>2019-09-05T23:42:50-07:00</date>
+    <runTimeInMillis>158</runTimeInMillis>
+    <content>&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td colspan="3"&gt;script&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor9"&gt;
+		&lt;td&gt;show&lt;/td&gt;
+		&lt;td&gt;eval&lt;/td&gt;
+		&lt;td&gt;Get-Date&lt;/td&gt;
+	&lt;td&gt;9/5/2019 11:42:50 PM&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>TestSlim</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='eval', args=[Get-Date]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>scriptTable_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ShowActionExpectation</type>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>PowerShell -executionpolicy unrestricted -file .\slim.ps1 51251</command>
+    <exitCode>0</exitCode>
+    <stdOut>05.09.19 23:42:50.468	========== Starting SLIM runner on Port 51251 ==========
+True
+05.09.19 23:42:50.745	Get-Date : 0.013486
+</stdOut>
+    <stdErr>. : The term 'C:\RhaegarC\Automation\client.ps1' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At C:\RhaegarC\Automation\slim.ps1:689 char:5
++   . $scriptPath\client.ps1
++     ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\RhaegarC\Automation\client.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+</stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>1</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>854</totalRunTimeInMillis>
+</testResults>
+

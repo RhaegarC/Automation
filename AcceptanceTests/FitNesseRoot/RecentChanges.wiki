@@ -1,3 +1,7 @@
+|FrontPage.Rhaegar.SuitePowerSlim||24:08:32 Fri, Sep 06, 2019|
+|FrontPage.Rhaegar||24:08:27 Fri, Sep 06, 2019|
+|FrontPage.Rhaegar.SuitePowerSlim.TestSlim||24:02:40 Fri, Sep 06, 2019|
+|FrontPage.Rhaegar.SuiteDotnetSlim||23:06:48 Thu, Sep 05, 2019|
+|FrontPage.Rhaegar.SuiteDotNetSlim||23:06:26 Thu, Sep 05, 2019|
 |FrontPage||20:39:29 Thu, Sep 05, 2019|
 |FrontPage.RhaegarTest||20:38:37 Thu, Sep 05, 2019|
-|FrontPage.Rhaegar||20:37:15 Thu, Sep 05, 2019|

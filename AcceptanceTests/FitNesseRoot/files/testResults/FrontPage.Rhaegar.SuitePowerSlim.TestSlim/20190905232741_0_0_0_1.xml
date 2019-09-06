@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</rootPath>
+  <result>
+    <counts>
+      <right></right>
+      <wrong></wrong>
+      <ignores></ignores>
+      <exceptions></exceptions>
+    </counts>
+    <date>2019-09-05T23:27:42-07:00</date>
+    <runTimeInMillis>$result.runTimeInMillis</runTimeInMillis>
+    <content></content>
+    <relativePageName>TestSlim</relativePageName>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>PowerShell -executionpolicy unrestricted -file .\slim.ps1 51109</command>
+    <exitCode>1</exitCode>
+    <stdOut>05.09.19 23:27:42.289	========== Starting SLIM runner on Port 51109 ==========
+True
+05.09.19 23:27:42.618	 : 0.0046974
+</stdOut>
+    <stdErr>. : The term 'C:\RhaegarC\Automation\client.ps1' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At C:\RhaegarC\Automation\slim.ps1:689 char:5
++   . $scriptPath\client.ps1
++     ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\RhaegarC\Automation\client.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+iex : At line:1 char:124
++ ... e()'),('decisionTable_0_1','call','decisionTable_0','table',[000000)) ...
++                                                                  ~
+Missing type name after '['.
+At line:1 char:123
++ ... te()'),('decisionTable_0_1','call','decisionTable_0','table',[000000) ...
++                                                                  ~
+Missing expression after ','.
+At line:1 char:123
++ ... ()'),('decisionTable_0_1','call','decisionTable_0','table',[000000)))
++                                                                ~~~~~~~
+Unexpected token '[000000' in expression or statement.
+At line:1 char:123
++ ... te()'),('decisionTable_0_1','call','decisionTable_0','table',[000000) ...
++                                                                  ~
+Missing closing ')' in expression.
+At line:1 char:130
++ ... ()'),('decisionTable_0_1','call','decisionTable_0','table',[000000)))
++                                                                       ~
+Missing ']' after array index expression.
+At line:1 char:131
++ ... ()'),('decisionTable_0_1','call','decisionTable_0','table',[000000)))
++                                                                        ~
+Unexpected token ')' in expression or statement.
+At line:1 char:132
++ ... ()'),('decisionTable_0_1','call','decisionTable_0','table',[000000)))
++                                                                         ~
+Unexpected token ')' in expression or statement.
+At C:\RhaegarC\Automation\slim.ps1:36 char:22
++   $script:ps_table = iex $ps_exp
++                      ~~~~~~~~~~~
+    + CategoryInfo          : ParserError: (:) [Invoke-Expression], ParseException
+    + FullyQualifiedErrorId : MissingTypename,Microsoft.PowerShell.Commands.InvokeExpressionCommand
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:41 char:3
++   !($ps_table[0] -is [array])
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:548 char:7
++       $ps_table = $ps_table[0]
++       ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:551 char:6
++   if($ps_table[0].StartsWith("scriptTable_") -or $ps_table[0].StartsW ...
++      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:41 char:3
++   !($ps_table[0] -is [array])
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:362 char:16
++ function Id() {$script:ps_row[0]}
++                ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:363 char:23
++ function Operation() {$script:ps_row[1]}
++                       ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:468 char:3
++   $ps_action = $ins[3].split('_')[0];
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:474 char:7
++       Set-Script $ins[4] $EvalFormat__
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Cannot index into a null array.
+At C:\RhaegarC\Automation\slim.ps1:483 char:5
++     $result = Invoke-SlimCall $ins[3]
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+You cannot call a method on a null-valued expression.
+At C:\RhaegarC\Automation\slim.ps1:63 char:5
++     $ps_obj.ToString().Length.ToString("d6")
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
+You cannot call a method on a null-valued expression.
+At C:\RhaegarC\Automation\slim.ps1:63 char:5
++     $ps_obj.ToString().Length.ToString("d6")
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
+</stdErr>
+    <exception>java.lang.String cannot be cast to java.util.List</exception>
+    <exception>java.lang.ClassCastException: java.lang.String cannot be cast to java.util.List</exception>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>766</totalRunTimeInMillis>
+</testResults>
+

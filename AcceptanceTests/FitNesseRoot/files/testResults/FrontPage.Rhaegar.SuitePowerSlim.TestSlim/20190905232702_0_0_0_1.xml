@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>1</exceptions>
+    </counts>
+    <date>2019-09-05T23:27:02-07:00</date>
+    <runTimeInMillis>203</runTimeInMillis>
+    <content>&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td colspan="2"&gt;script&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor4"&gt;
+		&lt;td&gt;eval &lt;span class="error"&gt;System.Management.Automation.ParseException: At line:1 char:10
++ Get-Date()
++          ~
+An expression was expected after '('.
+   at System.Management.Automation.ScriptBlock.Create(Parser parser, String fileName, String fileContents)
+   at System.Management.Automation.ScriptBlock.Create(ExecutionContext context, String script)
+   at Microsoft.PowerShell.Commands.InvokeExpressionCommand.ProcessRecord()
+   at System.Management.Automation.CommandProcessor.ProcessRecord()&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;Get-Date()&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>TestSlim</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='eval', args=[Get-Date()]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <status>error</status>
+          <instructionId>scriptTable_0_0</instructionId>
+          <type>ScriptActionExpectation</type>
+          <evaluationMessage>System.Management.Automation.ParseException: At line:1 char:10
++ Get-Date()
++          ~
+An expression was expected after '('.
+   at System.Management.Automation.ScriptBlock.Create(Parser parser, String fileName, String fileContents)
+   at System.Management.Automation.ScriptBlock.Create(ExecutionContext context, String script)
+   at Microsoft.PowerShell.Commands.InvokeExpressionCommand.ProcessRecord()
+   at System.Management.Automation.CommandProcessor.ProcessRecord()</evaluationMessage>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>PowerShell -executionpolicy unrestricted -file .\slim.ps1 51107</command>
+    <exitCode>0</exitCode>
+    <stdOut>05.09.19 23:27:02.463	========== Starting SLIM runner on Port 51107 ==========
+True
+05.09.19 23:27:02.776	Get-Date() : 0.0788122
+</stdOut>
+    <stdErr>. : The term 'C:\RhaegarC\Automation\client.ps1' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At C:\RhaegarC\Automation\slim.ps1:689 char:5
++   . $scriptPath\client.ps1
++     ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\RhaegarC\Automation\client.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+</stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>907</totalRunTimeInMillis>
+</testResults>
+

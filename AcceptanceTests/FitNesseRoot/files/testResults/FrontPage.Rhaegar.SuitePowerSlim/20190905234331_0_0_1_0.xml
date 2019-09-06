@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<suiteResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim</rootPath>
+  <pageHistoryReference>
+    <name>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</name>
+    <date>2019-09-05T23:43:31-07:00</date>
+    <pageHistoryLink>FrontPage.Rhaegar.SuitePowerSlim.TestSlim?pageHistory&amp;resultDate=20190905234331</pageHistoryLink>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <runTimeInMillis>156</runTimeInMillis>
+  </pageHistoryReference>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>PowerShell -executionpolicy unrestricted -file .\slim.ps1 51259</command>
+    <exitCode>0</exitCode>
+    <stdOut>05.09.19 23:43:31.643	========== Starting SLIM runner on Port 51259 ==========
+True
+05.09.19 23:43:31.893	Get-Date : 0.0176075
+</stdOut>
+    <stdErr>. : The term 'C:\RhaegarC\Automation\client.ps1' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At C:\RhaegarC\Automation\slim.ps1:689 char:5
++   . $scriptPath\client.ps1
++     ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\RhaegarC\Automation\client.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+</stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>1</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>828</totalRunTimeInMillis>
+</suiteResults>
+

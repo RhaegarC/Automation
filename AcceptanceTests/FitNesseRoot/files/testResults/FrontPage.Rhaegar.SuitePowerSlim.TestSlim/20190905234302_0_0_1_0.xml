@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>0</exceptions>
+    </counts>
+    <date>2019-09-05T23:43:02-07:00</date>
+    <runTimeInMillis>156</runTimeInMillis>
+    <content>&lt;br/&gt;&lt;table&gt;
+	&lt;tr class="slimRowTitle"&gt;
+		&lt;td colspan="3"&gt;script&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="slimRowColor9"&gt;
+		&lt;td&gt;show&lt;/td&gt;
+		&lt;td&gt;eval&lt;/td&gt;
+		&lt;td&gt;Get-Date&lt;/td&gt;
+	&lt;td&gt;9/5/2019 11:43:02 PM&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>TestSlim</relativePageName>
+    <instructions>
+      <instructionResult>
+        <instruction>{id='scriptTable_0_0', instruction='call', instanceName='scriptTableActor', methodName='eval', args=[Get-Date]}</instruction>
+        <slimResult></slimResult>
+        <expectation>
+          <instructionId>scriptTable_0_0</instructionId>
+          <col>0</col>
+          <row>1</row>
+          <type>ShowActionExpectation</type>
+        </expectation>
+      </instructionResult>
+    </instructions>
+  </result>
+  <executionLog>
+    <testSystem></testSystem>
+    <command></command>
+    <exitCode>0</exitCode>
+    <stdOut>True
+05.09.19 23:43:02.538	Get-Date : 0.0150697
+</stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>1</ignores>
+    <exceptions>0</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>156</totalRunTimeInMillis>
+</testResults>
+

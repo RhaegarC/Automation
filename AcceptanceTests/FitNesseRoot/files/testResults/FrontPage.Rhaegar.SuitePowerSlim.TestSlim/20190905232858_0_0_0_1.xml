@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190716</FitNesseVersion>
+  <rootPath>FrontPage.Rhaegar.SuitePowerSlim.TestSlim</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>1</exceptions>
+    </counts>
+    <date>2019-09-05T23:28:59-07:00</date>
+    <runTimeInMillis>0</runTimeInMillis>
+    <content>&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;start &lt;span class="error"&gt;&lt;strong&gt; start: Bad table! DecisionTables should have at least three rows.&lt;/strong&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;remote&lt;/td&gt;
+		&lt;td&gt;10.154.14.102:35&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;eval&lt;/td&gt;
+		&lt;td colspan="2"&gt;Get-Date()&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>TestSlim</relativePageName>
+  </result>
+  <executionLog>
+    <testSystem>slim:fitnesse.slim.SlimService</testSystem>
+    <command>PowerShell -executionpolicy unrestricted -file .\slim.ps1 51116</command>
+    <exitCode>0</exitCode>
+    <stdOut>05.09.19 23:28:58.862	========== Starting SLIM runner on Port 51116 ==========
+True
+</stdOut>
+    <stdErr>. : The term 'C:\RhaegarC\Automation\client.ps1' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
+again.
+At C:\RhaegarC\Automation\slim.ps1:689 char:5
++   . $scriptPath\client.ps1
++     ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\RhaegarC\Automation\client.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+</stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>656</totalRunTimeInMillis>
+</testResults>
+
