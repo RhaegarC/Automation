@@ -1,2 +1,0 @@
-!|script|Remote|!-$lab | ? {($_.NMSP -eq $true) -or ($_.SharePoint -eq $true) } | % {$_.name}-!|
-|$VERSION=|eval|!-(Get-S3Object -BucketName NMSP -keyprefix 6. | % {$_.getenumerator()}| sort-object $_.LastModified | select-object -last 1).Key.split('/')[0]-!|

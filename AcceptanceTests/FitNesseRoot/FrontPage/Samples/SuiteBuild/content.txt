@@ -1,3 +1,0 @@
-!define BUILDER (builder.nmsp.org)
-!define SetupRootDir (C:\NMSP\setup)
-!contents -R2 -g -p -f -h

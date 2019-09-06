@@ -1,2 +1,0 @@
-!define LabName (konstantin)
-!contents -R2 -g -p -f -h

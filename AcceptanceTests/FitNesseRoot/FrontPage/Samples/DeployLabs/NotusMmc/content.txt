@@ -1,3 +1,0 @@
-!define LabName (mmc)
-!define LabSchema (${MMC})
-!contents -R2 -g -p -f -h

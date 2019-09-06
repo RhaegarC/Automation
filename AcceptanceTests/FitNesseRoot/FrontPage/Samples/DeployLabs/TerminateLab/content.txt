@@ -1,4 +1,0 @@
-!include -c .LabInstances.AwS
--!|script|
-|eval|$filters = ${LabSchema} !-|-! % { (new-object Amazon.EC2.Model.Filter).WithName('tag:Name').WithValue($_.name) }|
-|eval|!-$filters | % { (Get-EC2Instance -Filter $_  -Region 'us-east-1').RunningInstance | % { ec2-terminate-instance $_.InstanceId } } -!|

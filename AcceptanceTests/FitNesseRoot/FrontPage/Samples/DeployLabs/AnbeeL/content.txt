@@ -1,3 +1,0 @@
-!define LabName (anbeel)
-!define LabSchema (${DEV_SP2010})
-!contents -R2 -g -p -f -h

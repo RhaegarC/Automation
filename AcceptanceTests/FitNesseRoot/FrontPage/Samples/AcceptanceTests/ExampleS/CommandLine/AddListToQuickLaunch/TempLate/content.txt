@@ -1,9 +1,0 @@
-!*> NMSP source
-!|script|Remote|${REMOTED}:86|
-|Application|${APPNAME}|Template|${APPTEMPLATE}|
-*!
-!* Migrate
-!|script|Remote|${REMOTED}|
-|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${TARGETWEB}|List|${TARGETLIST}|Application|${APPNAME}|
-|RunJob|${JOBFILE}|
-*!

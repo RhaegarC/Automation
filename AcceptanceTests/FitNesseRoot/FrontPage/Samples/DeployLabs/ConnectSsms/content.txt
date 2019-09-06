@@ -1,3 +1,0 @@
-!|script:remote|${LAB}|
-|eval|Start-Process "Ssms.exe" -ArgumentList "-S nmsp -d questlinktracking" !-|-!Out-Null|
-|eval|sleep 90|

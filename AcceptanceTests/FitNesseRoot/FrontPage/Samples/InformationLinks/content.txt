@@ -1,8 +1,0 @@
-[[Steve Walch's blog about his favorite migration tool and other things related to Lotus Notes migration projects][http://notes2sharepoint.org/]]
-[[A Guide to Leaving Lotus Notes and Moving to Microsoft !-SharePoint-!][http://sharepointmagazine.net/articles/developer/a-guide-to-leaving-lotus-notes-and-moving-to-microsoft-sharepoint]]
-[[Notes API Samples][http://www.nsftools.com/tools/apisamples.htm]]
-[[embedding attachment (file from disk)][http://stackoverflow.com/questions/2046778/lotus-notes-automation]]
-[[Lotus Notes Integration with Microsoft .NET Platform (C#)][http://www.codeproject.com/Articles/18517/Lotus-Notes-Integration-with-Microsoft-NET-Platfor]]
-[[Lotus C API Tooklit for Notes/Domino V8.5.3][http://www14.software.ibm.com/webapp/download/nochargesearch.jsp?k=ALL&status=Active&q=Lotus+%22C+API%22]]
-[[Introducing Domino XML Language (DXL)][http://www.ibm.com/developerworks/lotus/library/domino-dxl/]]
-!contents -R2 -g -p -f -h

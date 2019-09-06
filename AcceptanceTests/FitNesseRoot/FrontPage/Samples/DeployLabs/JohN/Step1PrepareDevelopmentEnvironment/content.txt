@@ -1,3 +1,0 @@
-!|script|Remote|${REMOTED}|
-|show|eval|Read-S3Object -BucketName NMSP -KeyPrefix TestData -Folder "C:\Program Files (x86)\IBM\Lotus\Notes\Data"|
-#!include -c .NmSp.IncludedPages.GitClone

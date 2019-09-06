@@ -1,9 +1,0 @@
-!*> Password to secure string
-!|script|Remote|${REMOTED}|
-|eval|$password = "Qwerty123"|
-|eval|$secstr = New-Object -TypeName System.Security.SecureString|
-|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
-*!
-!|script|Remote|${REMOTED}|
-|eval|New-ADUser NotSiteOwner -ChangePasswordAtLogon $false -Enabled $true -AccountPassword $secstr|
-|eval|Add-ADGroupMember Administrators NotSiteOwner|

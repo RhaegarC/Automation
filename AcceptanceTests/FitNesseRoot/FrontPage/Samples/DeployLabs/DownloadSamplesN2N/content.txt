@@ -1,3 +1,0 @@
-!|script|Remote|n2n|
-|eval|Initialize-AWSDefaults|
-|show|eval|Read-S3Object -BucketName NMSP -KeyPrefix TestData -Folder 'C:\downloads'|

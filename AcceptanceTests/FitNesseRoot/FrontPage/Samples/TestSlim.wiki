@@ -1,2 +1,0 @@
-!|script|remote|WIN-RHAEGAR|
-|show|eval|Get-Date|

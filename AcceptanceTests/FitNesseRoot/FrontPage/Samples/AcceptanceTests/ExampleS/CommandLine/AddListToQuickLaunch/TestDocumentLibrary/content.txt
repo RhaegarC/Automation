@@ -1,6 +1,0 @@
-!*> Defines
-!define APPNAME (Quick Launch Document Library)
-!define APPTEMPLATE (doclbw7.ntf)
-!define MIGRATION (DocLib2DocLibWikiPages)
-*!
-!include -seamless TempLate

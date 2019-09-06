@@ -1,2 +1,0 @@
-!|script|Remote|${REMOTED}|
-|eval|[Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable("Path","Machine"), "Process")|

@@ -1,3 +1,0 @@
-!define LabName (lab2)
-!define LabSchema (${SP2013})
-!contents -R2 -g -p -f -h

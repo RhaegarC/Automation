@@ -1,5 +1,0 @@
-!define LS_CFG (C:\ProgramData\Quest\Migrator for Notes to SharePoint\Log Files\logstash.conf)
-!|script|Remote|${REMOTED}|
-|eval|(gc '${LS_CFG}') !-|-! % {$_ -replace 'host => ""', 'host => "logs-01.loggly.com"' } !-|-! sc '${LS_CFG}'|
-|eval|(gc '${LS_CFG}') !-|-! % {$_ -replace 'key => ""', 'key => "bd2f9286-5407-476b-8228-0178bf20d5f8@41058"' } !-|-! sc '${LS_CFG}'|
-|eval|(gc '${LS_CFG}') !-|-! % {$_ -replace 'replace => ["@source_host", "YOURHOSTNAME"]', 'replace => ["@source_host", "${LabName}"]' } !-|-! sc '${LS_CFG}'|
