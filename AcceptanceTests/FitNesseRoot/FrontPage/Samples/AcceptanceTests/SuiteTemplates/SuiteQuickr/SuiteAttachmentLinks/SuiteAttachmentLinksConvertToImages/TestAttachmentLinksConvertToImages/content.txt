@@ -1,0 +1,10 @@
+!define PAGE_URL (${SITE_URL}/${WEB}/Lists/${LIST}/DispForm.aspx?ID=1)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|Subset Query:remote|${NMSP}:38|$driver.FindElementsByTagName("img")!-|-!select @{ N='src'; E={$_.GetAttribute("src")}}|
+|src|
+|=~/Ec2%20Wall\+paper.jpg/|
+
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

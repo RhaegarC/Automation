@@ -1,0 +1,9 @@
+!|script|Remote|${SHAREPOINT}|
+|eval|$NMSPService = "${NMSP_Company_Name} ${NMSP_Product_Name} Services"|
+|eval|!-Get-WmiObject -Class Win32_Product | ? {$_.Name -like ($NMSPService+"*")} | % {$_.Uninstall()}-!|
+|check|eval|(start (get-childitem c:\msi MigratorforNotestoSharePoint-Services*).FullName '/qn ISPOOLUSER="${Admin}" ISPOOLPASSWORD="${AdminPassword}" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+
+
+!|script|Remote|${SHAREPOINT}|
+|eval|iisreset|
+|eval|sleep 3|

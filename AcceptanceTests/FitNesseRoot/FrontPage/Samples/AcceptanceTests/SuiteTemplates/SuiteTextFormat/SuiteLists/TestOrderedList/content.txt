@@ -1,0 +1,21 @@
+!*> Verify 1 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'Style.marginLeft','parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|parentElement.tagName|
+|OL|${LIST_NO_INDENT}|DIV|
+
+*!
+!*> Verify 5 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'Style.paddingTop','Style.paddingBottom'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|Style.paddingBottom|Style.paddingTop|
+|Select 1.|5.5px|null|
+|Select 2.|5.5px|null|
+|Select 3.|5.5px|null|
+|Select 4.|5.5px|null|
+|Select 5.|5.5px|null|
+*!

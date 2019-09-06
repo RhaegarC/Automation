@@ -1,0 +1,7 @@
+!include -c <AcceptanceTests.IncludePages.RemoveList
+
+!|script|Remote|${NMSP}|
+|Set|Options/MigrationReportOptions|Attribute|Enabled|Value|true|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+|Set|Options/MigrationReportOptions|Attribute|SiteUrl|Value|${SITE_URL}|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+|Set|Options/MigrationReportOptions|Attribute|ListName|Value|${REPORT_LIST}|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+|Set|Options/MigrationReportOptions|Attribute|BriefListName|Value|${SUMMARY_LIST}|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|

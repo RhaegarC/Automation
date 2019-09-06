@@ -1,0 +1,7 @@
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval| $content = $page.ParsedHtml.getElementById("${ID}").outerText|
+|check|eval|$content -match "${NMSP_Product_Name}"|True|
+|check|eval|$content -match "A test connection to the Link Tracking database from the Services Configuration page passed."|True|
+|check|eval|$content -match "A test connection to the Link Tracking database from the Import Service passed."|True|

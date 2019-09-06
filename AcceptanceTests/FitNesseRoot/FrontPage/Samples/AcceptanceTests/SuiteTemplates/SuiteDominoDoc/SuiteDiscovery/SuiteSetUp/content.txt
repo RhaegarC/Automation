@@ -1,0 +1,18 @@
+!|script|Remote|${NMSP}|
+|eval|$server = start 'C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe' '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 36 server36' -PassThru|
+|eval|sleep 5|
+
+!|script|Remote|${NMSP36}|
+|eval|Import-Module "${NMSP_Install_Directory_Client}\PowerShell\discovery.psm1"|
+|eval|$lns = New-Object -ComObject Lotus.NotesSession|
+|eval|$lns.Initialize('')|
+
+!|script|Remote|${NMSP36}|
+|eval|$start = Get-Date|
+|eval|$result = 'QUICKR/ec2l!domdoc/DomdocTestLib' !-|-! Invoke-DiscoverDomino|
+|eval|$stop = Get-Date|
+|check|eval|($stop - $start).Seconds|_ < 20|
+
+!|script|Remote|${NMSP36}|
+|eval|Get-Database ALL 'QUICKR/ec2l' '${DATABASE}' !-|-! Invoke-DBAnalysis|
+|eval|$db = Get-Database ALL 'QUICKR/ec2l' '${DATABASE}'|

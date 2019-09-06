@@ -1,0 +1,11 @@
+!include -c <SuiteAttachments.EditJob
+!|script|Remote|${NMSP}|
+|Mapping|BodyAttachments|to|Word.Attachments|job|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|Word.EmbeddedObjects|job|${JOBFILE}|
+|Mapping|BodyAttachments|to|PDF.Attachments|job|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|PDF.EmbeddedObjects|job|${JOBFILE}|
+|Mapping|BodyAttachments|to|MSG.Attachments|job|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|MSG.EmbeddedObjects|job|${JOBFILE}|
+|Mapping|BodyAttachments|to|HTML.Attachments|job|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|HTML.EmbeddedObjects|job|${JOBFILE}|
+|Mapping|{DocCreated}|to|MSG.Date|job|${JOBFILE}|

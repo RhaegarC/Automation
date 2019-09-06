@@ -1,0 +1,4 @@
+!define DATABASE (!-BlockedFiles-!)
+!define APPNAME (!-BlockedFiles-!)
+!define MIGRATION (!-DocLib2DocLibPdfDoc-!)
+!contents -R2 -g -p -f -h

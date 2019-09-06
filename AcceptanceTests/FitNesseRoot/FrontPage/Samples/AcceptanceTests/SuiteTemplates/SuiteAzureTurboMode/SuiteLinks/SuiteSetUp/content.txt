@@ -1,0 +1,22 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking"}|
+|cleanUpDatabase|
+|startSqlService|
+
+!|script|remote|${NMSP}|
+|eval|!-if("-!${PAGE_PATH}!-".Contains("WithTurboMode"))
+{
+$xml = [xml](get-content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config")
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureTurboModeEnabled>true</AzureTurboModeEnabled>"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureStorageName>-!${STORAGE_ACCOUNT}!-</AzureStorageName>"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureStorageAccessKey>-!${ACCESS_KEY}!-</AzureStorageAccessKey>"
+$xml.save("$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config")
+}
+-!|
+
+!|script|
+|startUiautomation|
+|closeMainWindows|
+
+!|script|
+|importUilib|

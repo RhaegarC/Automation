@@ -1,0 +1,3 @@
+!|script|Remote|${WEB_SCRAPER}|
+|Get Tag|BR|
+|check|eval|$tags.Count|${NUMBER_OF_BR}|

@@ -1,0 +1,14 @@
+!|script|Remote|${NMSP}|
+|eval|remove-item "${NMSP_Report_Path}\_DatabaseReportTemplate-nubwmzas.rdlc" |
+
+|script|
+|startConsole|
+
+!|script|remote|${NMSP}:36|
+|eval|expandTreeItem "Reports"|
+|eval|displayContextMenu "Reports"|
+|eval|clickMenu "CreateCustomReportMenu"|
+|eval|setText "ReportTitle" "NewCustomReport"|
+|eval|click "CreateCustomReport"|
+|check|eval|test-path "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Custom Reports\_DatabaseReportTemplate-????????.rdlc"|True|
+|check|eval|test-path "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Custom Reports\_DatabaseReportTemplate-????????.xml"|True|

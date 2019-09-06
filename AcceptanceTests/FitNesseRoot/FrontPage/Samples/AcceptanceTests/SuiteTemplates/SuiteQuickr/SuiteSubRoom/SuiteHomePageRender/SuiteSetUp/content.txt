@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+

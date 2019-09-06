@@ -1,0 +1,31 @@
+!define PLACE (suiteversions)
+!define TEMPLATE (!-QRPageToCustomList-!)
+!define LIST (!-TestVersionNumber-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+As an administrator
+I can using multiple formulas like " @Text(@DocumentUniqueID)='xxx'|@Text(@DocumentUniqueID)='xxx'" to do the migration
+So that I can view migrated pages in !-SharePoint-! without any errors
+
+!1 scenarios
+![
+Given source data in quickr with multiple version was selected
+When I select "All documents" and "All versions" in Document Selection tab of Source Data Definition
+And I enable "Select pages based on Notes @Formula language"
+And I add multiple formulas like " @Text(@DocumentUniqueID)='xxx'|@Text(@DocumentUniqueID)='xxx'"
+And run a migration
+Then I can view migrated pages in SharePoint without any errors
+
+Given source data in quickr with multiple version was selected
+When I select "All documents" and "All versions" in Document Selection tab of Source Data Definition
+And I enable "Select pages based on Notes @Formula language"
+And I add a formulas like " @Text(@DocumentUniqueID)='xxx'"
+And run a migration
+Then I can view migrated page in SharePoint without any errors
+
+Given source data in quickr with multiple version was selected
+When I select "All documents" and "All versions" in Document Selection tab of Source Data Definition
+And run a migration
+Then I can view migrated pages in SharePoint without any errors
+]!

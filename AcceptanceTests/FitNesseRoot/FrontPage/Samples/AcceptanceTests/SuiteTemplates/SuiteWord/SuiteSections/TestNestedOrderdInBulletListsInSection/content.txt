@@ -1,0 +1,8 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:p") !-|-! WordListItemElement $numbering | 
+|text|type|
+|First bullet|["bullet","bullet"]|
+|First number|["decimal","bullet"]|
+|Second number|["decimal","bullet"]|
+|Second bullet|["bullet","bullet"]|
+|null|["decimal","bullet"]|
+|null|["bullet","bullet"]|

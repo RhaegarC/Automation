@@ -1,0 +1,22 @@
+!define DATABASE (SuiteDocument)
+!define DBNumber (2)
+!define DocNumber (38)
+!define AttachmentNumber (6)
+
+!1 user story
+
+As an administrator
+I can discover the database of domino.doc
+So that I can make the strategy to migrate the database
+
+!1 scenarios
+![
+Given NMSP is installed
+When I click "discover databases" on the context menu of Console
+Then I find all the databases of domino.doc
+
+Given NMSP is installed
+When I scan the databases of domino.doc
+Then I can view the result of the scanning
+]!
+!contents -R2 -g -p -f -h

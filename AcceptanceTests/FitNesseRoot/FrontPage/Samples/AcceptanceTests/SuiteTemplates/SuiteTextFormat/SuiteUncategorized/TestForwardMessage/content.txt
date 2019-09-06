@@ -1,0 +1,62 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|innerText|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|----- Forwarded by Stephen Walch/Proposion on 02/22/2009 08:11 AM -----!- -!|
+
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|background|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|background|
+|=~/_Attachments/TestForwardMessage.GIF/|
+
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'STRONG'|properties|innerText|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|Doc Library|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|innerText|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|http://www.sysinternals.com/ntw2k/source/filemon.shtml|
+|see this tech note|
+
+!* ''<BR>''s description
+!define NUMBER_OF_BR (14)
+
+  -Steve
+  <br>
+  <br>
+  Stephen Walch
+  <br>
+  Quest Software...
+  <br>
+  38 Merrimac Street
+  <br>
+  Newburyport, MA  01950
+  <br>
+  +1 978-388-7342   corporate
+  <br>
+  +1 978-961-0358   direct
+  <br>
+  +1 617-480-4121   mobile
+  <br>
+  +1 413-480-3408   fax
+  <br>
+  http://www.proposion.com
+  <br>
+  Forwarded by ...
+  <br>
+  <td width="603" bgcolor="#e9e3db" valign="top">
+  <br>
+  <div style color... 
+  <br>
+*!

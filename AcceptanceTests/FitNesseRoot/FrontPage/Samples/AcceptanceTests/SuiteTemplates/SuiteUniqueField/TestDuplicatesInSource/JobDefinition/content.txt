@@ -1,0 +1,4 @@
+-!|script|Remote|${NMSP}|
+|Source|@{Value='Categories'; Alias='Category'; ReturnType='String'; Option='Multi'}|
+|Target|@{Name='${TARGET_FIELD_NAME}'; Type='Text'; AddToViews='DefaultView'; EnforceUniqueValues='true'}|
+|Mapping|Category|to|${TARGET_FIELD_NAME}|MultiValueDisposition|First|job|${JOBFILE}|

@@ -1,0 +1,13 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'SPAN'|properties|innerText|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|beginĂ|
+|Σ|
+|end|
+|Ă|
+|Σ|
+|Ã|
+
+!define NUMBER_OF_BR (0)

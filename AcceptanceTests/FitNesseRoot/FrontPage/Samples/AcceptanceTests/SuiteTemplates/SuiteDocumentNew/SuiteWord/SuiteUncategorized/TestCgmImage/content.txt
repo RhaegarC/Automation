@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestCgmImage-!)
+
+!style_green[Check the word content contains text "Case 2186595".]
+!style_green[Check the word content should contains a picture, but now there is no picture under text "Case 2186595".]
+!style_green[Check the word content contains text "End of case", which is under the place where the picture should be.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

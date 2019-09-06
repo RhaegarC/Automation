@@ -1,0 +1,4 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText")!-|-!WordHyperLinkElement|
+|href|
+|=~/_Attachments/Test.xlsx/|
+|=~/_Attachments/Test.xlsx/|

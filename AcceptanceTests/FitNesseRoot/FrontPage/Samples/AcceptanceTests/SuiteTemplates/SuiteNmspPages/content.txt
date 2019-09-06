@@ -1,0 +1,13 @@
+!define ADMIN (/_admin/${NMSP_Company_Name}/)
+!define NMSP_ABBREVIATION (NMSP)
+
+!* Suite parameters
+|'''Parameter'''|'''Possible values'''|'''Where to define?'''|Meaning|
+|!style_meta[LAYOUTS]|!style_caps{/_layouts/, /_layouts/15/}|Root Level|!-http://lab1_sp2010.nmsp.org/sites/ImportService-!'''!style_green[/_layouts/]'''!-NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices-!'''!style_green[/_layouts/15/]'''!-NMSPServicesConfig.aspx-!|
+|!style_meta[ADMIN]|!style_caps{/_admin/quest/}|Mode Level|!-http://lab1_sp2010.nmsp.org/sites/ImportService-!'''!style_green[/_admin/quest/]'''!-NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices-!'''!style_green[/_admin/quest/]'''!-NMSPServicesConfig.aspx-!|
+|!style_meta[CAPORT]|!style_caps{SharePoint Central Administration port}|Root Level|In use by <SuiteTemplates.SuiteNmspPages.TestAdminServicePage|
+|!style_meta[SELECTOR_BREADCRUMB]|e.g. !style_caps{getElementsByTagName('h2')}|Root Level|In use by <SuiteTemplates.SuiteNmspPages.TestServicePage|
+|!style_meta[SELECTOR_DESCRIPTION]|e.g. !style_caps{getElementsByTagName('span') !-|-! ? id -eq 'ms-pageDescription'}|Root Level|In use by <SuiteTemplates.SuiteNmspPages.TestServicePage|
+|!style_meta[IS_ENABLED]|!style_caps{!-False, True-!}|Mode Level|''Enable Import Service'' check-box at http://lab1_sp2010.nmsp.org/sites/ImportService/_layouts/NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices/_layouts/15/NMSPServicesConfig.aspx. In use by <SuiteTemplates.SuiteNmspPages.TestServicePage|
+*!
+!contents -R2 -g -p -f -h

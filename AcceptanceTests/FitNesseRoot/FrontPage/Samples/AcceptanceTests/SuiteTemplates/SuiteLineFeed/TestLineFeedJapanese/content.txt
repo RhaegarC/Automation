@@ -1,0 +1,39 @@
+!* Document has 24 <BR> tags
+!define NUMBER_OF_BR (19)
+*!
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'Text'|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: left')|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|ああああああああああ|
+|いああああああああああ|
+|うああああああああああ|
+|えああああああああああ|
+|おああああああああああ| 
+
+''Check for extra table indent''
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TABLE'|properties|'Style.marginLeft'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Style.marginLeft|
+|null|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/ああああああああああ/|
+|null|
+|null|
+|null|
+
+#!|script|Remote|${WEB_SCRAPER}|
+#|select|TABLE|limit to|style.margin.Contains('margin')|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Get Tag|BR|
+|check|eval|$tags.Count|${NUMBER_OF_BR}|

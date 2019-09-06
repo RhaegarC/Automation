@@ -1,0 +1,7 @@
+!define URL (${LIST}/_Attachments/TestPictureAndAttachment.JPG)
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|TestPictureAndAttachment|=~/${URL}/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|(Invoke-WebRequest -Uri ${WEB_URL}/${URL} -Credential $AdminCred).StatusCode|200|

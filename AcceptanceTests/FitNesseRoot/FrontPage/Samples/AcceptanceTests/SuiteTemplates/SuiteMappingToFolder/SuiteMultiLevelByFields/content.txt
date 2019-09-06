@@ -1,0 +1,6 @@
+!define LIST (!-SuiteMultiLevelByFields-!)
+!define TARGETFIELDS ("<!-Field Name='Status_Folder' Type='Folder'-! />","<!-Field Name='Subject_Folder' Type='Folder'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Status_Folder' SourceValue='Status' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Subject_Folder' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define SOURCE (${LIST_URL}/Submitted/${RUNNING_PAGE_NAME}/${RUNNING_PAGE_NAME}.pdf)
+!define TARGET (${TARGETFOLDER}\Submitted\${RUNNING_PAGE_NAME}\${RUNNING_PAGE_NAME}.pdf)
+!contents -R2 -g -p -f -h

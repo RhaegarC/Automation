@@ -1,0 +1,20 @@
+!define MigrationExitCode (-1)
+!define EXPECTED_ERROR (The field ModDate of PDF document is NULL. Please add the document's Modified field to the field mappings.)
+
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|eval|$process = start .\NMSPCMD.EXE '-job ${JOBFILE}' -wait -PassThru|
+|eval|$process.WaitForExit()|
+
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+
+!|Subset Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+|message|stackTrace|
+|${EXPECTED_ERROR}||

@@ -1,0 +1,14 @@
+|script|Remote|${NMSP}|
+|eval|!-
+foreach($i in 1..65535)
+{
+$tempfile = [System.IO.Path]::GetTempFileName()
+}-!|
+
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:!-"Subject='radiobutton'|Subject='documentlinkicom'"-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

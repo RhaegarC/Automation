@@ -1,0 +1,3 @@
+!include -c <WebServices.IncludePages.GetCredentials
+!include -c <ImportService.IncludePages.GetCredentials
+!include -c .NmSp.AcceptanceTests.IncludePages.ImportService.LoadSharePointApi

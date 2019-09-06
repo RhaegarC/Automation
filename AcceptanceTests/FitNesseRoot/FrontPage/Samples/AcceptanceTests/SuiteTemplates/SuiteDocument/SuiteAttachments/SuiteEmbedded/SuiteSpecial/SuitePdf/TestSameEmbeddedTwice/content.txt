@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+|object0.docx|
+|object1.docx|

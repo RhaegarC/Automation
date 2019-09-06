@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestHidden-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

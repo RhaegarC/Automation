@@ -1,0 +1,137 @@
+!|scenario|GetNintexXml|nintexPath|
+|eval|$nintexXml = $null|
+|eval|$nintexXml = [xml](Get-Content "@nintexPath")|
+|check|eval|$nintexXml -ne $null|True|
+|eval|$ns = New-Object System.Xml.XmlNamespaceManager($nintexXml.NameTable)|
+|eval|$ns.AddNamespace("ns", "http://schemas.datacontract.org/2004/07/Nintex.Forms")|
+|eval|$ns.AddNamespace("nsd2p1", "http://schemas.datacontract.org/2004/07/Nintex.Forms.FormControls")|
+
+!|scenario|NintexFieldExist|xPath|ExpectedValue|value|
+|eval|$node = $null|
+|eval|!-$node = $nintexXml.SelectSingleNode("//ns:Form/ns:FormControls/nsd2p1:FormControlProperties/nsd2p1:"+"@xPath",$ns)-!|
+|check|eval|$node -ne $null|@value|
+
+!|scenario|GetXMLNode|xpath|from|path|
+|eval|$xml = [xml](Get-Content "@path")|
+|eval|$ele = $xml.SelectSingleNode("@xpath")|
+
+!|scenario|GetNintexFormControl|uniqueId|controlType|type|
+|eval|$node = $nintexXml.SelectNodes("//*/nsd2p1:FormControlProperties",$ns) !-|-! ? {$_.type -eq '@type' -and $_.UniqueId -eq @uniqueId }|
+|check|eval|$node -eq $null|False|
+
+!| scenario | NintexFieldProperty| propertyName| ExpectedValue|value|
+|eval|$fieldNode = $null|
+|eval|$fieldNode = $node.parentNode.SelectSingleNode("./nsd2p1:"+"@propertyName",$ns)|
+|check|eval|$fieldNode.innerText.Trim()|@value|
+
+!| scenario | NintexFieldAttribute| attributeName| ExpectedValue|value|
+|eval|$fieldAttribute = $null|
+|eval|$fieldAttribute = $node.parentNode.Attributes.ItemOf("@attributeName")|
+|check|eval|$fieldAttribute.value|@value|
+
+!|scenario|GetTabInfo|index|
+|eval|$xml = [xml](Get-Content "${NOTESFORM_FILE}")|
+|eval|$tabbed_tables = $xml.SelectNodes("//*/Table[@Tabbed = 'true']")|
+|eval|$ele = $tabbed_tables[@index]|
+
+!|scenario|GetNintexFormControl|uniqueId|controlType|type|
+|eval|$node = $nintexXml.SelectNodes("//*/nsd2p1:FormControlProperties",$ns) !-|-! ? {$_.type -eq '@type' -and $_.UniqueId -eq @uniqueId }|
+|check|eval|$node -eq $null|False|
+
+!|scenario|ControlSize|xPath|Height|height|Width|width|
+|eval|$node = $null|
+|eval|$node = $nintexXml.SelectSingleNode("//ns:Form/ns:FormControls/nsd2p1:FormControlProperties/nsd2p1:"+"@xPath",$ns)|
+|eval|$layout = $null|
+|eval|!-$layout = $nintexXml.SelectNodes("//*/ns:FormControlLayout",$ns) | ? {$_.FormControlUniqueId -eq $node.ParentNode.UniqueId}-!|
+|check|eval|$layout.height|@height|
+|check|eval|$layout.width|@width|
+
+!|scenario|GetSectionContent|headerText|
+|NintexFieldExist|DisplayName[text() ='@headerText']|ExpectedValue|True|
+|eval|$choiceId = $null|
+|eval|$choiceId = $node.parentNode.ClientClick.Replace("fnSelectSection(this,","").Replace(")","")|
+|NintexFieldExist|ExposedClientIdJavascriptVariable[text() ='$choiceId']|ExpectedValue|True|
+|eval|$ruleNode= $null|
+|eval|$ruleNode=$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$node.parentNode.UniqueId+'*'}|
+|eval|$sectionLayout = $null|
+|eval|$sectionLayout = $nintexXml.SelectNodes("//*/ns:FormControlLayout",$ns) !-|-! ? {$_.FormControlUniqueId -eq $ruleNode.ControlIds.string}|
+|eval|$sectionContents = $null|
+|eval|$sectionContents = $sectionLayout.SelectNodes(".//ns:FormControlUniqueId",$ns)|
+
+!|scenario|CheckControlInSection|xPath|ExpectedValue|value|
+|NintexFieldExist|@xPath|ExpectedValue|True|
+|check|eval|$sectionContents.innerText.contains($node.parentNode.UniqueId)|@value|
+
+!|scenario|GetTableCells|headerText|
+|NintexFieldExist|Text[text() ='@headerText']|ExpectedValue|True|
+|eval|$followPanels=$null|
+|eval|!-$followPanels=$node.ParentNode.SelectNodes("following-sibling::nsd2p1:FormControlProperties",$ns) | ?{$_.type -eq 'd2p1:PanelFormControlProperties'}-!|
+|eval|$tableLayout=$null|
+|eval|!-$tableLayout= $nintexXml.SelectNodes("//*/ns:FormControlLayout",$ns) | ? {$_.FormControlUniqueId -eq $followPanels[0].UniqueId}-!|
+|eval|$tableCellsLayout= $null|
+|eval|$tableCellsLayout=$tableLayout.FormControlLayouts.childNodes|
+
+!|scenario|CheckTableCellCount|headerText|CellCount|count|
+|GetTableCells|@headerText|
+|check|eval|$tableCellsLayout.count|@count|
+
+!|scenario|CheckTableCellStyle|headerText|CellIndex|index|BorderColor|borderColor|BackgroundColor|bgColor|
+|GetTableCells|@headerText|
+|NintexFieldExist|UniqueId[text() ='"+$tableCellsLayout[@index].FormControlUniqueId+"']|ExpectedValue|True|
+|check|eval|$node.ParentNode.BorderColor|@borderColor|
+|check|eval|$node.ParentNode.BackgroundColor|@bgColor|
+
+!|scenario|BindSPField|xPath|To Column|column|In|nintexPath|
+|GetNintexXml|@nintexPath|
+|eval|!-$node = $nintexXml.SelectSingleNode("//ns:Form/ns:FormControls/nsd2p1:FormControlProperties/nsd2p1:"+"@xPath",$ns)-!|
+|eval|$node.ParentNode.DataField.InnerText = "List:@column"|
+|eval|$node.ParentNode.DataField.RemoveAttribute("i:nil")|
+|eval|$node.ParentNode.DataFieldDisplayName.InnerText = "Title"|
+|eval|$node.ParentNode.DataFieldDisplayName.RemoveAttribute("i:nil")|
+|eval|$nintexXml.Save("@nintexPath")|
+
+!|scenario|PublishNintexForm|targetFileUrl|WebUrl|url|ListName|listName|ContentType|ct|
+|eval|[System.Reflection.Assembly]::LoadFrom("${PublishFormDll}") !-|-! Out-null|
+|eval|$import=new-object NFPublishLib.PublishForm|
+|eval|$file = invoke-command -ComputerName ${LabComputerName} -Script {[System.IO.File]::ReadAllText('@targetFileUrl',[System.Text.Encoding]::Unicode)}|
+|check|eval|!-
+if("-!${SHAREPOINT_HOST}!-" -eq "SP2010")
+{
+$import.Publish("@url","@listName","@ct",$file)
+}
+else
+{
+$import.Publish("@url","@listName","@ct",$file,-!"${Admin}","${AdminPassword}")!-
+}
+-!|True|
+
+!|scenario|SelectListItem|item|
+|GetExpression|@item|
+|eval|$control = $null|
+|eval|$control = $object_xml.SelectSingleNode('//@item')|
+|eval|$iex = ""|
+|eval|!-$selectForm = $expression + "|Invoke-UIAListItemSelectItem -ItemName '" + $control.Name +"'"-!|
+|eval|!-$checkSelected =$expression + "| Get-UIASelectionItemState"-!|
+|GetExpression|Refresh|
+|eval|!-$refresh=$expression + "|Invoke-UIAControlClick"-!|
+|show|eval|$iex|
+|eval|$count = 0|
+|eval|!-
+do
+{
+if ($count -gt 0)
+{
+Invoke-Expression $refresh
+}
+Invoke-Expression $selectForm
+sleep 1
+$selected = Invoke-Expression $checkSelected
+$count = $count + 1
+}
+while (!$selected -and $count -lt 5)
+-!|
+|show|eval|$count|
+
+!|scenario|CheckControlInTable|headerText|CellIndex|index|ControlId|id|ControlExist|exist|
+|GetTableCells|@headerText|
+|check|eval|$tableCellsLayout[@index].innerText.contains(@id)|@exist|

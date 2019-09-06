@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestImageNameChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"IMG",selector:!-"src"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|src|
+|=~/_Attachments/TestImageNameChinese.JPG/|

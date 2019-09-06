@@ -1,0 +1,12 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText")!-|-!WordHyperLinkElement|
+|href|
+|=~/_Attachments/CrazyTruck.jpg/|
+|=~/_Attachments/123w.bmp/|
+|=~/_Attachments/icon_yahoo.gif/|
+|=~/_Attachments/iconWarning16.png/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|attachment|${OPENPATH}/_Attachments/CrazyTruck.jpg|
+|attachment|${OPENPATH}/_Attachments/123w.bmp|
+|attachment|${OPENPATH}/_Attachments/icon_yahoo.gif|
+|attachment|${OPENPATH}/_Attachments/iconWarning16.png|

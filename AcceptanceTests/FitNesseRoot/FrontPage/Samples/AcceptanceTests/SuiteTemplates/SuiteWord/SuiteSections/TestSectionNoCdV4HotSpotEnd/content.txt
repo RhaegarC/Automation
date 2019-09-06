@@ -1,0 +1,7 @@
+''Install indent
+
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement|
+|text|indLeft|
+|http://vlasenko.org|null|
+|Section Title|null|
+|This is text in my section|360|

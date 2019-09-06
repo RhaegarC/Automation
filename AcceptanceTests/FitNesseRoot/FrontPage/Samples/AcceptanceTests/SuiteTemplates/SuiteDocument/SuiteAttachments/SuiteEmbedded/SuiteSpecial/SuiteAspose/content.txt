@@ -1,0 +1,6 @@
+!define VIEW (Suite Aspose)
+!define LIST (SuiteEmbedded_SuiteSpecial_SuiteAspose)
+!define SAVE_AS (docx)
+!define DOCUMENT_NAME (TestOleForAsposeWord)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteAttachments.SuiteEmbedded.SuiteSpecial.SuiteAspose.EditJob)
+!contents -R2 -g -p -f -h

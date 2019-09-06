@@ -1,0 +1,3 @@
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+|中文文档资料.jpg|

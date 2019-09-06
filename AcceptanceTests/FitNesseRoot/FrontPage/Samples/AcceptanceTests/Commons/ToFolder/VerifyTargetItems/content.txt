@@ -1,0 +1,2 @@
+!|script|remote|${NMSP}|
+|eval|$elements=Get-ChildItem ${TARGETFOLDER}|

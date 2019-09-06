@@ -1,0 +1,2 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/Test1</p><p style="margin-top(&#58;!-|-!:)0px;margin-bottom(&#58;!-|-!:)0px;?">Line2</p><p style="margin-top(&#58;!-|-!:)0px;margin-bottom(&#58;!-|-!:)0px;?">Line3</p>/|

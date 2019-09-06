@@ -1,0 +1,13 @@
+!define LIST (!-TestLogMessageWhenFailedItemsMigration-!)
+!define APPNAME (!-SuiteAttachments-!)
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${APPNAME}",unid:"!-30b0f77873668f8a85257ce0005ee03f-!",removeNodes:"!-//Mapping[@Destination='HTML.Images']-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|show|eval|$warning|
+|check|eval|$warning.count -lt 3|True|

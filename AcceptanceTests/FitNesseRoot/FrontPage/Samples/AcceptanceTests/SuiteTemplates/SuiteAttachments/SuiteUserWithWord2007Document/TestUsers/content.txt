@@ -1,0 +1,10 @@
+'''Check the items'''
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Name|Reviewers|
+|Book_xlsx.xlsx|=~/^VELASKEC\\uservladimir;VELASKEC\\userkonstantin;.*administrator$/|
+|Test Docx.docx|=~/^VELASKEC\\uservladimir;VELASKEC\\userkonstantin;.*administrator$/|
+|Presentation_pptx.pptx|=~/^VELASKEC\\uservladimir;VELASKEC\\userkonstantin;.*administrator$/|
+|Microsoft Word Document.doc|VELASKEC\uservladimir;VELASKEC\userkonstantin|
+|Microsoft PowerPoint Presentation.pptx|VELASKEC\uservladimir;VELASKEC\userkonstantin|
+|Microsoft Word Documentx.docx|VELASKEC\uservladimir;VELASKEC\userkonstantin|
+

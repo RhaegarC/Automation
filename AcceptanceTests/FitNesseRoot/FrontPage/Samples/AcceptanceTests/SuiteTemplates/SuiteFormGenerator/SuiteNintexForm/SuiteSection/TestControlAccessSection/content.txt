@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|▶ Control Access Section|
+|CheckControlInSection|Text[text() = 'Table In Section2:']|ExpectedValue|True|

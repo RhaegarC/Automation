@@ -1,0 +1,13 @@
+!define PAGENAME (!-TestNestedBulletInOrderedListInSection-!)
+
+!style_green[Check the word content contains nested bullet in ordered list of a section, displays as below:]
+-------------
+Section
+1.	First number
+　　　　•	First bullet
+　　　　•	Second bullet
+2.	Second number
+3.	Third number
+　　　　•	Third bullet
+------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

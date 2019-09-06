@@ -1,0 +1,25 @@
+!* Verification Pdf document
+!|script|Remote|${WEB_SCRAPER}|
+|download|${PDFSOURCE}|to|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+|ParsePdfDoc|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$list.Action | select @{N='href'; E={$_.URI}}-!| 
+|href|
+|${Link}|
+*!
+
+!*> Finalize doesn't change anything as the target document has not been migrated
+!define LINKS (0)
+!define DOCUMENTS (0)
+!include -c <SuiteLinksFinalizeForPdf.DoFinalize
+*!
+
+!* Verification Pdf document
+!|script|Remote|${WEB_SCRAPER}|
+|download|${PDFSOURCE}|to|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+|ParsePdfDoc|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$list.Action | select @{N='href'; E={$_.URI}}-!| 
+|href|
+|${Link}|
+*!

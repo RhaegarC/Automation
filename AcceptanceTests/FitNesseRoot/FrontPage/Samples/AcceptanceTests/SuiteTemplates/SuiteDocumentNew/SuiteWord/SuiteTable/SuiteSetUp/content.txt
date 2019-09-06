@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"!-@Contains(subject;'TestAlignedCenteredWithTable') | @Contains(subject;'TestNestedListInTableCell') | @Contains(subject;'TestNestedTableWithMargin')| @Contains(subject;'TestSectionInsideTableCell')| @Contains(subject;'TestTabbedTable')| @Contains(subject;'TestTableBorderStyle')| @Contains(subject;'TestTableCellBorder')| @Contains(subject;'TestTableInsideSection')| @Contains(subject;'TestTableInsideTable')| @Contains(subject;'TestTableWidth')| @Contains(subject;'TestTableWithMargins')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

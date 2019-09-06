@@ -1,0 +1,36 @@
+!*> Delete list if exists
+!|script|Remote|${NMSP}|
+|eval|$list = $ctx.Site.OpenWeb('${MODE}${GROUP}').Lists.GetByTitle('${TARGETLIST}')|
+|eval|$list.DeleteObject()|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+*!
+!* Create job
+''Create job file''
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${TARGETWEB}|List|${TARGETLIST}|Application|${APPNAME}|
+
+''Edit job file''
+${EditJob}
+*!
+!*> Migrate
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|eval|$process = start .\NMSPCMD.EXE '-job ${JOBFILE}' -wait -PassThru|
+|eval|$process.WaitForExit()|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+
+*!
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|context|message|stackTrace|
+
+*!

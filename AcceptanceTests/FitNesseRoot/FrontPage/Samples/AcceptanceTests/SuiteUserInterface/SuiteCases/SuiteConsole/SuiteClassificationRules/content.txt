@@ -1,0 +1,17 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can new and provision !-SharePoint-! Content Types for a !-SharePoint-! Site in Technical Classification Rules
+So that I can view those provisioned Content Types in !-SharePoint-! Site Settings
+
+!1 scenarios:
+![
+Given "Enable automatic Content Type Assignment for database of this class" in Classification Rules - Technical Classification Rules - Properties - Content Types tab was enabled
+And a new content type was added by clicking New button in the same tab
+And a migration job was added in Migration Jobs tab
+And this Technical Classification Rules was apply to the target database
+When I run a migration on this database
+Then I can view the new content type in SharePoint Site Settings-Site Content Types
+]!

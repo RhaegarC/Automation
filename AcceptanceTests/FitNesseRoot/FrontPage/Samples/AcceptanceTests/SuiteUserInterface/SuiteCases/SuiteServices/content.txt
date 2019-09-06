@@ -1,0 +1,2 @@
+!define NMSP_Install_Directory_Service (!-C:\Program Files\Quest\Migrator for Notes to SharePoint Services-!)
+!contents -R2 -g -p -f -h

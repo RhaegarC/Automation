@@ -1,0 +1,6 @@
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:remote|${NMSP}|$items!-|-! select @{N='Title';E={$_['Title']}},@{N='SignatureBlock';E={$_['SignatureBlock']}}|
+|Title|SignatureBlock|
+|TestDocumentWithSignature|=~/\u003cpre\u003eWEINGARTEN REALTY INVESTORS,\u003cbr\u003ea Texas real estate investment trust\u003cbr\u003e\u003cbr\u003e\u003cbr\u003eBy\u0026#58;	__________________________________\u003cbr\u003eName\u0026#58;	__________________________________\u003cbr\u003eTitle\u0026#58;/|

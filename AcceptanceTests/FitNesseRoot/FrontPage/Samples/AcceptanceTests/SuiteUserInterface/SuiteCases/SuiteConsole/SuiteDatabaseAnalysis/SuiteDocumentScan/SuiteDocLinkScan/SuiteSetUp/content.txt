@@ -1,0 +1,9 @@
+!include -c <SuiteDatabaseAnalysis.SuiteSetUp
+
+|script|
+|startConsole|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+
+|script|
+|getAnalyzeResult|!{databaseElement:!-"SuiteDatabaseAnalysisDb"-!,scanOption:!-"DoclinkScan"-!,resultType:!-"LinkAnalyzeResult"-!}|

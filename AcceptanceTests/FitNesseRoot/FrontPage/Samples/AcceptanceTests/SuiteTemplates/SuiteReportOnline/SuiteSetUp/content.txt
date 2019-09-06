@@ -1,0 +1,11 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+
+!|script|Remote|${NMSP}|
+|eval|$list = $ctx.Site.RootWeb.Lists.GetByTitle('${REPORT_LIST}')|
+|eval|$list.DeleteObject()|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+
+

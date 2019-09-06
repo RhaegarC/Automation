@@ -1,0 +1,10 @@
+!*> Lab
+-!|script|
+|eval|$lab = ${LabSchema}|
+*!
+!* Uninstall previously installed
+!|script|Remote|${NMSP}|
+|check|eval|!-(Get-WmiObject -Class Win32_Product | ? {$_.Name -like "Quest Notes Migrator for SharePoint*"} | % {$_.Uninstall()}).ReturnValue-!|0|
+*!
+!include -c .NmSp.DeployLabs.GetLatestVersion
+!include -c .NmSp.DeployLabs.InstallClient

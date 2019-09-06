@@ -1,0 +1,6 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'STRIKE'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|
+|ABCD|

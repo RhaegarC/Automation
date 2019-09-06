@@ -1,0 +1,57 @@
+'''Check Decimal number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'Number']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+
+'''Check Percent number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'Percent']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+|NintexFieldProperty|ShowAsPercent|ExpectedValue|true|
+
+'''Check Scientific number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'Scientific']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+
+
+'''Check Currency number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'Currency']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|DataType|ExpectedValue|Currency|
+
+'''Check Allow Multiple Value number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'AllowMultipleValueNumber']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+
+'''Check Computed number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedNumber']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+
+'''Check Computed For Display Numberfield'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedForDisplayNumber']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+|NintexFieldProperty|DataType|ExpectedValue|Double|
+
+'''Check Computed When Composed Number field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedWhenComposedNumber']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+|NintexFieldProperty|DataType|ExpectedValue|Double|

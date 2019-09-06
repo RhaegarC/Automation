@@ -1,0 +1,22 @@
+!*> Defines
+!define APPNAME (Scrum Reporting)
+!define APPTEMPLATE (doclbw7.ntf)
+!define FIELD (Body)
+*!
+-!|script|Remote|${NAME1}:86|
+|Application|${APPNAME}|Template|${APPTEMPLATE}|
+
+-!|script|Remote|${NAME1}:86|
+|New Document|Quest Web Parts for SharePoint|
+
+-!|script|Remote|${NAME1}:86|
+|Add RichTextItem|${FIELD}|
+
+-!|script|Remote|${NAME1}:86|
+|Append Table|('Status','Yellow'),('Remaining story points','9'),('Remaining sprints','2'),('Average velocity in story points (based on last 3 sprints)','3')|
+
+-!|script|Remote|${NAME1}:86|
+|Append Table|('Sprint','Story Points'),('#5','0'),('#4','7'),('#3','2'),('#2','9'),('#1','1')|
+
+-!|script|Remote|${NAME1}:86|
+|Save Document|

@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestBulletListInNestedSections-!)
+
+!style_green[Check the html content contains a "Parent section", which has a "Nested section" with a bullet list, including "First bullet" and "Second bullet".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

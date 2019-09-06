@@ -1,0 +1,9 @@
+|script|
+|runMigration|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"Subject='Render_CheckBoxes'",addNodes:!-@{path="TransferJob/SharePointTargetDefinition";-!node="${TargetFields}"!-}-!,mapFields:"<!-Mapping Destination='DocSet.Name' SourceValue='Subject' -!/>"!-,-!"<!-Mapping Destination='DocSet.Description' SourceValue='Subject' -!/>"!-,-!"<!-Mapping Destination='DocSet.FTP Site' SourceType='Constant' SourceValue='https://www.google.com' -!/>"!-,-!"<!-Mapping Destination='DocSet.Date Created' SourceValue='{DocModified}' -!/>"!-,-!"<!-Mapping Destination='DocSet.Actual Work' SourceType='Constant' SourceValue='5' -!/>"!-,-!"<!-Mapping Destination='DocSet.Assigned To' SourceValue='{ModifiedBy}' -!/>"!-,-!"<!-Mapping Destination='DocSet.Gender' SourceType='Constant' SourceValue='Male' -!/>"!-,-!"<!-Mapping Destination='DocSet.Wiki Categories' SourceType='Constant' SourceValue='DocSet' -!/>"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Name';E={$_['Title']}},@{N='Description';E={$_['DocumentSetDescription']}},@{N='Gender';E={$_['Gender']}},@{N='FTPSite';E={$_['FTPSite'].Url}},@{N='AssignedTo';E={$_['AssignedTo'].LookupValue}},@{N='ActualWork';E={$_['ActualWork']}},@{N='DCDateCreated';E={$_['_DCDateCreated']}},@{N='WikiCategories';E={$_['Wiki_x0020_Page_x0020_Categories'].Label}}|
+|Name|Description|Gender|FTPSite|AssignedTo|ActualWork|DCDateCreated|WikiCategories|
+|Render_CheckBoxes|Render_CheckBoxes|Male|https://www.google.com|${AdminUserName}|5|5/29/2015 3:23:33 AM|DocSet|

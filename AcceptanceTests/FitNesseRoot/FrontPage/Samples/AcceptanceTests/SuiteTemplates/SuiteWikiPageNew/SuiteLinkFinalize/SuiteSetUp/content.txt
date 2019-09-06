@@ -1,0 +1,22 @@
+|script|remote|${NMSP}|
+|loadSqlLib|
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "DELETE FROM FinalizeLog"|
+|eval|$count=ExecuteNonQuery $con $comStr|
+
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!define LINKS (9)
+!define DOCUMENTS (7)
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization

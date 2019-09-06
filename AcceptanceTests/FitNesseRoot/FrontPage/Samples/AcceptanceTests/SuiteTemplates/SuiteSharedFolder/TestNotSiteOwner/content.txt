@@ -1,0 +1,4 @@
+!define MigrationExitCode (-3)
+!define COUNT (0)
+!define LIST (!-TestNotSiteOwner-!)
+!include -c .NmSp.AcceptanceTests.IncludePages.DoMigrationNotSiteOwner

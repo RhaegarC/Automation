@@ -1,0 +1,6 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|href, innerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|innerText|
+|about:/sites/Test/SuiteMultiByteCharacters/SuiteMultiByteCharacters/_Attachments/日本語%20全角.txt|日本語　全角.txt|

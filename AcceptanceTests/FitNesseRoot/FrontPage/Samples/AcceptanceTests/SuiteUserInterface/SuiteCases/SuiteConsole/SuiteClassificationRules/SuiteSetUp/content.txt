@@ -1,0 +1,6 @@
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startConsole|

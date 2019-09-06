@@ -1,0 +1,8 @@
+!define PAGE_URL (${WEB_URL}/Lists/Pages/AllItems.aspx?RootFolder=/sites/Test/suitequickr/Lists/Pages/FolderInToc)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|Query:remote|${NMSP}:38|$driver.FindElementsByTagName("a")!-|-!?{$_.GetAttribute("class") -eq "ms-listlink ms-draggable"}!-|-!select Text|
+|Text|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

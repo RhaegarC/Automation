@@ -1,0 +1,4 @@
+!define MIGRATION (DocLib2DocLibWordDocTemplateTables)
+!define LIST (SuiteHeaderFooterTablesTemplate)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWordTemplate.SuiteHeaderFooterTables.EditJob)
+!contents -R2 -g -p -f -h

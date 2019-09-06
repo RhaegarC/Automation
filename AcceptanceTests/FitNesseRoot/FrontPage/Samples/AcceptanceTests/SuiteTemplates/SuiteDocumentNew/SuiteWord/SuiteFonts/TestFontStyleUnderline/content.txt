@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestFontStyleUnderline-!)
+
+!style_green[Check the word content contains text "ABCD1234567890": 
+'ABCD' is Arial, black, underline, 24;
+'1234567890' is Arial, black, 18.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

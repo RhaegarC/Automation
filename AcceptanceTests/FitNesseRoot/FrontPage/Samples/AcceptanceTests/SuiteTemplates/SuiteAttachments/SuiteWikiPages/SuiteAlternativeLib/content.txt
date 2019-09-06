@@ -1,0 +1,5 @@
+!define LIST (SuiteAlternativeLib)
+!define VIEW (Suite Embedded)
+!define TEST_DOCUMENT (TestSameEmbeddedTwice)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.SuiteAlternativeLib.EditJob)
+!contents -R2 -g -p -f -h

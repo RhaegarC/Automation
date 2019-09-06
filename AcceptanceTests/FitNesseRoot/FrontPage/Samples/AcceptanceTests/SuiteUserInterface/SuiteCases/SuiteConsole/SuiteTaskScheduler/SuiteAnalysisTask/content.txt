@@ -1,0 +1,88 @@
+!define TASKNAME (!-AnalysisTask-!)
+!define TASKTEMPLATE (!-ScheduledTaskForAnalysis-!)
+!define AnalyzeDB (!-SuiteDatabaseAnalysis-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can create scheduled task for analysis
+So that I can make the analysis job easier to maintain
+
+!1 scenarios
+![
+Given I configure to scan Database Heaser
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Data Documents/Data Tally only
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Data Documents/Analyze Documents
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Data Documents/Analyze Rich Text
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Elements
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Elements/Compare with class templates for best fit
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Elements/Assign default templates for database comparison
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Elements/Copy database designs to local folder
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Elements/Override prior copies
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Doclink
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to scan Design Scripts
+When run the command with the task
+Then I can see the proper result
+
+Given I configure to check all the options
+When run the command with the task
+Then I can see the proper result
+]!
+
+!1 scenarios
+![
+Given I click analyze dtabases of one database
+And checked all the options
+And I choose to create a scheduled task
+When save the settings
+Then a task is created
+When I run the task manually
+Then the task runs successfully
+And the analysis result is OK.
+
+Given I click analyze dtabases of 3 databases, including quickr and domino doc
+And checked only the scan doclink and analyze Rich Text
+And I choose to create a scheduled task
+When save the settings
+Then a task is created
+When the task is run as scheduled
+Then the task runs successfully
+And the analysis result is OK.
+
+Given I create a task for analysis
+When I click Edit of the task
+Then I can change the settings
+And save the settings successfully
+]!

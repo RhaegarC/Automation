@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"!-@Contains(subject;'TestCgmImage') | @Contains(subject;'TestCopyPdfFile') | @Contains(subject;'TestImportedPicture')| @Contains(subject;'TestLargeParagraph')| @Contains(subject;'TestPackagerObject')| @Contains(subject;'TestPowerPointSlides')| @Contains(subject;'TestSimpleParagraphForWord')| @Contains(subject;'TestTabBetweenTexts')| @Contains(subject;'TestTermWithAmpersand')| @Contains(subject;'TestUnicodeCharacters')| @Contains(subject;'TestWmfFile')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

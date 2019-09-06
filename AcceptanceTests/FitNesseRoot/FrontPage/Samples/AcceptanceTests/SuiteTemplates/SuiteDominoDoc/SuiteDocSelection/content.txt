@@ -1,0 +1,27 @@
+!contents -R2 -g -p -f -h
+
+|!img /files/nmsp/images/DominoDoc/DocumentSelection.png|
+!1 user story
+
+As an administrator
+I can select the documents that I want to migrate
+So that I can migrate different documents based on my strategy.
+
+!1 scenarios
+![
+Given I have unpublished documents in a cabinet of domino.doc database
+When I select "unpublished documents" of source data definition
+And I run the migration to SharePoint
+Then I can see the unpublished documents on SharePoint list
+
+Given I have published and unpublished documents in a cabinet of domino.doc database
+When I select "All documents" of source data definition
+And I run the migration to SharePoint
+Then I can see all the documents on SharePoint list
+
+Given I have some binders in a cabinet of domino.doc database
+When I select "Binders Only" of source data definition
+And I map title, notesurl, documentType to sharepoint
+And I run the migration to SharePoint
+Then I can see fields on SharePoint
+]!

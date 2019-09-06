@@ -1,0 +1,6 @@
+-!|script|Remote|${NMSP}|
+|ParsePdfDoc|${TARGETFOLDER}\FirstDoc.pdf|
+
+!|Query: Remote|${NMSP}|!-$list.Action | select @{N='href'; E={$_.URI}}-!| 
+|href|
+|${LINK}|

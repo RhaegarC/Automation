@@ -1,0 +1,12 @@
+!define TARGET (lab4_sp2013.at-nmsp.com)
+
+!|script:remote|localhost|
+|eval|!-cmdkey /generic:TERMSRV/"-!${TARGET}!-" /user:"velaskec\administrator" /pass:"Qwerty123"
+$ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo
+$Process = New-Object System.Diagnostics.Process
+$ProcessInfo.FileName = "$($env:SystemRoot)\system32\mstsc.exe"
+$ProcessInfo.Arguments = "/admin /v -!${TARGET}!- /w 1920 /h 1080"
+$ProcessInfo.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Minimized
+$Process.StartInfo = $ProcessInfo
+$Process.Start()
+-!|

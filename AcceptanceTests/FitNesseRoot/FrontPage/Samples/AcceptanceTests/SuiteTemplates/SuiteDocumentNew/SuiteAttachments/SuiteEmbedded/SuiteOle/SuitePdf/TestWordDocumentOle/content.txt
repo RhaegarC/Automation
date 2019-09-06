@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestWordDocumentOle-!)
+
+!note '''!-FileName-!''' mapping doesn't work here (https://github.com/GitQuest/NMSP/issues/171)
+!style_green[Check the pdf embedded files contains "object0.docx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

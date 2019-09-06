@@ -1,0 +1,18 @@
+!define LIST (renderMissingForm)
+!define SAVE_AS (pdf)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I should be noted if a form is missing for render
+So that I am clear about the migration
+
+!1 scenarios
+![
+Given a form is deleted
+When I render a document that uses this form
+Then there is a warning message in NMSP showing this.
+
+]!

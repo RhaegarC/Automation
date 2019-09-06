@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestFontStyleStrikeout-!)
+
+!style_green[Check the word content contains text "ABCD12345678": 
+'ABCD' is Arial, black, strikethrough, 24;
+'12345678' is Arial, black, 18.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

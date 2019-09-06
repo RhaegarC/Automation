@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestHideTextInCell-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

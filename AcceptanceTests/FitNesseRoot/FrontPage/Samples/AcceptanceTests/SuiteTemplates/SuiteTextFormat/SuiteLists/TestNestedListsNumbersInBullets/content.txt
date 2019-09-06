@@ -1,0 +1,28 @@
+!* Description
+Top level bullet list has one indentation
+*!
+!*> Verify 3 list elements
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'Style.marginLeft','parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|parentElement.tagName|
+|UL|${LIST_ONE_INDENT}|DIV|
+|OL|${LIST_NO_INDENT}|LI|
+|OL|${LIST_NO_INDENT}|LI|
+
+*!
+!*> Verify 7 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|UL|
+|OL|
+|OL|
+|UL|
+|OL|
+|OL|
+|UL|
+*!

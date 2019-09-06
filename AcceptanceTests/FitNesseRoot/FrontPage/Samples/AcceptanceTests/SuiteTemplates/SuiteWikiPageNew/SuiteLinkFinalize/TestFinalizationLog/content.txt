@@ -1,0 +1,6 @@
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "SELECT COUNT(*) FROM FinalizeLog WHERE SourceUrl like '%_.000' AND UrlCount > 0"|
+|eval|$count=ExecuteScalar $con $comStr|
+|check|eval|$count|0|

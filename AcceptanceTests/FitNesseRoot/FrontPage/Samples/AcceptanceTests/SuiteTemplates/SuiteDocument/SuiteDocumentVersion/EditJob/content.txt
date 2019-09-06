@@ -1,0 +1,11 @@
+!|script|Remote|${NMSP}|
+|$DUPLICATE=|eval|'${RUNNING_PAGE_NAME}' -Replace 'Test',''|
+|Remove|TransferJob/JobOptions/DuplicateDocumentHandling|from|${JOBFILE}|
+|Add|TransferJob/JobOptions/DuplicateDocumentHandling|InnerText|$DUPLICATE|to|${JOBFILE}|
+|Remove|TransferJob/JobOptions/PreserveDates|from|${JOBFILE}|
+|Add|TransferJob/JobOptions/PreserveDates|InnerText|false|to|${JOBFILE}|
+|Remove|TransferJob/JobOptions/ClearListData|from|${JOBFILE}|
+|Add|TransferJob/JobOptions/ClearListData|InnerText|false|to|${JOBFILE}|
+|Add|TransferJob/SharePointTargetDefinition/EnableVersioning|InnerText|true|to|${JOBFILE}|
+
+

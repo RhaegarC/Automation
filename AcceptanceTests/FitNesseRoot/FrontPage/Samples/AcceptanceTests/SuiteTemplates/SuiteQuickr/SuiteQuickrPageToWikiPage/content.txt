@@ -1,0 +1,6 @@
+!define PLACE (!-suitequickr-!)
+!define TEMPLATE (!-QRPageToWikiPage-!)
+!define QRSERVER (!-quickr/O=ec2l-!)
+!define ROOM (!-Main.nsf-!)
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|eval|Write-Host "stop server 37"|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server37')) {$p[$_].Terminate()}
+}-!|

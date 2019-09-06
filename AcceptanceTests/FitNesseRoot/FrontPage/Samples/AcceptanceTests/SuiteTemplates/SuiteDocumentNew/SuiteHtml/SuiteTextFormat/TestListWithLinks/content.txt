@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestListWithLinks-!)
+
+!style_green[Check the html content contains text "1. Number 1 with link DELL.", and "DELL" can link to "http://www.dell.com/".]
+!style_green[Check the html content contains text "2. Number 2".]
+!style_green[Check the html content contains text "3. Number 3 with link Quest.", and "Quest" can link to "https://www.quest.com/".]
+
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

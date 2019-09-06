@@ -1,0 +1,44 @@
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.FileFunctions
+!include -c <AcceptanceTests.IncludePages.ImportedLibrary.ForFolder
+
+!|scenario|Target|attributes|
+|Add|TransferJob/FolderTargetDefinition/Field|Attributes|@attributes|to|${JOBFILE}|
+
+!|scenario|JobFile|path|Template|template|Root|root|Folder|folder|Application|name|
+|JobFile|templates/folder/@template|Application|@name|
+|eval|$xml.TransferJob.FolderConnection.Location= '@root/@folder'|
+|eval|new-item (Split-Path @path) -type directory -force|
+|eval|$xml.Save("@path")|
+
+!|scenario|attachment|path|
+|check|eval|Test-Path '@path'|True|
+
+!|scenario|Set|xpath|SaveAs|Value|value|in|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|eval|$el = $xml.SelectSingleNode("@xpath")|
+|eval|$el.SaveAs = "@value"|
+|eval|$xml.Save("@xml")|
+
+!|scenario|Mapping|src|to|dest|SourceType|type|job|path|
+|eval|$xml = [xml](Get-Content '@path')|
+|eval|$el = $xml.CreateNode('element', 'Mapping', '')|
+|eval|$el.SetAttribute('Destination','@dest')|
+|eval|$el.SetAttribute('SourceValue','@src')|
+|eval|$el.SetAttribute('SourceType','@type')|
+|eval|$xml.TransferJob.AppendChild($el)|
+|eval|$xml.Save('@path')|
+
+!|scenario|EditFile|path|
+|eval|'Hello' !-|-! sc '@path'|
+
+!|scenario|Page|path|Contains|string|
+|eval|$cnt = Get-Content '@path'|
+|check|eval|$cnt|=~/@string/|
+
+!*> Dummy scenarios for compatibility with !-SharePoint-! tests
+'''We'll find the way to avoid them
+
+!|scenario|download|url|to|target|
+|check|eval|1+1|2|
+*!
+

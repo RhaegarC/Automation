@@ -1,0 +1,7 @@
+!define TARGETFILENAME {Document1}
+!define DATABASE {!-SuiteDuplicate-!}
+!define APPNAME (!-SuiteDuplicate-!)
+!define MIGRATION {!-DocLib2Document-!}
+!define SAVE_AS (docx)
+
+!contents -R2 -g -p -f -h

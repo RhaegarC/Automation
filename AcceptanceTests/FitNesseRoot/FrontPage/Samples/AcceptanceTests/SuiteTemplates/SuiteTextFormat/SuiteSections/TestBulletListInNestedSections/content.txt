@@ -1,0 +1,19 @@
+!include -c VerifyNestedSections
+!*> Verify 1 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'parentElement.className'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|parentElement.className|
+|UL|section|
+
+*!
+!*> Verify 2 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|UL|
+|UL|
+*!

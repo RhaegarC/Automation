@@ -1,0 +1,6 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordFontElement| 
+|text|strike|
+|ABCD|yes|
+|EF|yes|
+|G|yes|
+|H|yes|

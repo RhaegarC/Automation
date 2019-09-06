@@ -1,0 +1,13 @@
+!define PAGENAME (!-TestTabbedTableChinese-!)
+
+!style_green[Check the word content contains text and tables displays as below:]
+------------------------
+'''列表一 '''
+| 第一列 (1.1) | 第二列 (1.2) | 第三列 (1.3) |
+'''列表二 '''
+| 第一列 (2.1) | 第二列 (2.2) | 第三列 (2.3) |
+'''列表三'''
+| 第一列 (3.1) | 第二列 (3.2) | 第三列 (3.3) |
+------------------------
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

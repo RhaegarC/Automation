@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestImages-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/CrazyTruck.jpg".]
+!style_green[Check the pdf content contains "_Attachments/123w.bmp".]
+!style_green[Check the pdf content contains "_Attachments/icon_yahoo.gif".]
+!style_green[Check the pdf content contains "_Attachments/iconWarning16.png".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

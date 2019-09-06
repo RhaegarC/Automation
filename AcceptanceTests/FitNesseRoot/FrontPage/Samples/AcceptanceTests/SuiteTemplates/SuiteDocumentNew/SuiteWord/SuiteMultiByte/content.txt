@@ -1,0 +1,9 @@
+!define WEB (!-SuiteMultiByteToWord-!)
+!define APPNAME (!-MultiByteCharacters-!)
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!define VIEW (!-Suite MultiByteToWord-!)
+!define LIST (!-SuiteMultiByteToWord-!)
+!define DATABASE (!-MultiByteCharacters-!)
+!define WORDPROPERTY (!-href-!)
+!define WORDPROPERTYSELECT (!-WordHyperLinkElement-!)
+!contents -R2 -g -p -f -h

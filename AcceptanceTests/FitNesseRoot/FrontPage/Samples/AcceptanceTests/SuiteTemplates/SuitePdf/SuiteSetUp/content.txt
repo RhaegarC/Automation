@@ -1,0 +1,10 @@
+!include -c <SuiteFolder.IncludePages.SuiteSetUp
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+
+!include -c <ImportService.IncludePages.CleanupTarget
+!include -c <WebServices.IncludePages.CleanupTarget
+
+!include -c <SuiteFolder.IncludePages.ExecuteSystemUnderTest
+!include -c <WebServices.IncludePages.ExecuteSystemUnderTest
+!include -c <ImportService.IncludePages.ExecuteSystemUnderTest

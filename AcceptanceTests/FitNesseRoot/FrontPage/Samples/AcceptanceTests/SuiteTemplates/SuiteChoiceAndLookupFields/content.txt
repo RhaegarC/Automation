@@ -1,0 +1,10 @@
+!define WEB (!-SuiteChoiceAndLookupFields-!)
+!define APPNAME (!-ChoiceAndLookupFields-!)
+!define MIGRATION (!-BasicList-!)
+!define AddToViews (!-DefaultView-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' Alias='Category' Value='Categories' ReturnType='String' Option='Multi'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Category' SourceValue='Category' MultiValueDisposition='-!${MultiValueDisposition}!-' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!* Information
+[[!-Parsing multi-value fields - MultiChoice, Lookup, User, URL-!][http://blogs.msdn.com/b/markarend/archive/2007/05/29/parsing-multi-value-fields-multichoice-lookup-user-url-rules-for-the-delimiter.aspx]]
+*!

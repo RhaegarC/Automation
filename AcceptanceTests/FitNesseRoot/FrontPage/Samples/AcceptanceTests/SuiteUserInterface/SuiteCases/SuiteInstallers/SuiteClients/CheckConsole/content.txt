@@ -1,0 +1,16 @@
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+
+|script|
+|startConsole|
+
+!|script|Remote|${NMSP36}|
+|eval|$window = Get-UIAWindow -ProcessName mmc -Seconds 10|
+| check | eval | $window !-|-! Read-UIAControlName | ${NMSP_Company_Name} ${NMSP_Product_Name} Console |
+| check | eval | $window !-|-! Get-UIATreeItem -Name 'Notes Databases' | System.Windows.Automation.AutomationElement |
+
+|script|
+|stopUiautomation|

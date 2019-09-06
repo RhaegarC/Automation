@@ -1,0 +1,7 @@
+!define DATABASE (!-SuiteAttachments-!)
+!define LIST (!-SuiteSpecialMapping-!)
+!define MAPFIELDS ("<!-Mapping Destination='SuiteSpecialMapping' SourceValue='Form' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Title' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='FileLeafRef' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define REMOVENODES (!-TransferJob/Mapping-!)
+!define SOURCEFIELDS (<Column !-ColumnType='Item' ReturnType='String' Value='Form'-! />)
+!define TARGERFIELDS ("<!-Field Name='SuiteSpecialMapping' Type='ManagedMetadata' ProvisionNewTaxonomyTerms='false'-! />","<!-Field Name='Title' Type='Text' NotesItems='Category' IsTitleField='true'-! />","<!-Field Name='FileLeafRef' Type='File' NotesItems='DocumentEmbeddedObjects; DocumentAttachments'-! />")
+!contents -R2 -g -p -f -h

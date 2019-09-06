@@ -1,0 +1,5 @@
+!define WEB (!-SuiteFolder-!)
+!define MIGRATION (!-DocLib2DocLibPdfDoc-!)
+!define APPNAME (!-SuiteFolderTarget-!)
+
+!contents -R2 -g -p -f -h

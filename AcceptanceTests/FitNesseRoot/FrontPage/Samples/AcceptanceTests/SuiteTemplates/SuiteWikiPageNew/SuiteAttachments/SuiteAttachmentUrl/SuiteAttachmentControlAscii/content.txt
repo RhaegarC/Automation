@@ -1,0 +1,24 @@
+!1 This case will fail in SP2010 as it don't support '&' in file name
+
+!define LIST (!-SuiteAttachmentsContorlAscii-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can set "Default Replacement Character" "Illegal Character" and "Replace With" in Options
+So that I can migrate source data title with illegal characters replaced by character I set before to !-SharePoint2016-!/Online successfully
+
+!1 scenarios
+![
+Given source data with control characters in title
+And "Default Replacement Character" was set in Options
+When I run a migration
+Then I can view those control characters in title was replaced by "Default Replacement Character" set before in SharePoint2016/Online
+
+Given source data with illegal characters in title
+And "Illegal Character" "Replace With" ("&" -> "&") was set in Options
+When I run a migration
+Then I can view those illegal characters ("&") in title was replaced by "Replace With" character ("&") set before in SharePoint2016/Online
+And no error was occur
+]!

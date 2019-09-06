@@ -1,0 +1,15 @@
+!define MAPFIELDS ("<Mapping !-Destination='Doc.Images' SourceValue='RenderImages' FormatString='{0}'-! />","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render table with background image in front of attachments into word
+So that I view them migrated properly
+
+!1 scenarios
+![
+Given table with background image in front of attachments were added in source document
+And Render was selected as Source Data Definition
+And mappings "RenderAttachments -> Doc.Attachments", "RenderEmbeddedObjects -> Doc.EmbeddedObjects", "RenderImages -> Doc.Images" were added
+When run a migration
+Then I can see table and attachments are migrated properly
+]!

@@ -1,0 +1,16 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordElement {
+   New-Object PSObject -Property @{
+    Text = $_.Text
+    Displayed     = $_.Displayed  
+    'margin-left' = $_.GetCssValue('margin-left')
+    'text-align'  = $_.GetCssValue('text-align')
+    'font-family' = $_.GetCssValue('font-family')
+    'font-size'   = $_.GetCssValue('font-size')
+    'font-weight' = $_.GetCssValue('font-weight')
+    'font-style'  = $_.GetCssValue('font-style')
+    color         = $_.GetCssValue('color')
+    alt           = $_.GetAttribute('alt')
+    start         = $_.GetAttribute('start')
+  }
+}</pre>-!|

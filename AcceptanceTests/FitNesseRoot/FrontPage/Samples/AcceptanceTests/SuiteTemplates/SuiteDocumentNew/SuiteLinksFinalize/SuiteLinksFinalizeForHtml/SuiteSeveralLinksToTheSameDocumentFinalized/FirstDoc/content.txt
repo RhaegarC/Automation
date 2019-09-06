@@ -1,0 +1,12 @@
+!define PAGENAME (!-FirstDoc-!)
+
+!style_green[Check the html content contains text shown as below, the "SecondDoc" is a link, and its url is finalized, click it can link to "SecondDoc" page.]
+--------------------
+Start First document
+ 
+Link to !-SecondDoc-! by using View with special characters
+ 
+ 
+End document
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

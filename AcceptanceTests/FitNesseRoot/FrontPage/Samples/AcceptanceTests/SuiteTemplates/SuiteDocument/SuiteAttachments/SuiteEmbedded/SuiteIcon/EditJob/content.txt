@@ -1,0 +1,25 @@
+'''Add source definition'''
+-!|script|Remote|${NMSP}|
+|Formula|subject="TestOLEIconWithMetafile"|for|${JOBFILE}|
+
+'''Replace Connecting String'''
+-!|script|Remote|${NMSP}|
+|ConnectionString|server="local"; database="SuiteAttachments.nsf"; zone=utc; useMetafileIcons=true|for|${JOBFILE}|
+
+'''Source'''
+!|script|Remote|${NMSP}|
+|Source Column|@{ColumnType='RichText'; Value='Spec'; Alias='SpecHtml'; Option='Html'}|
+|Source Column|@{ColumnType='RichText'; Value='Spec'; Alias='SpecText'; ReturnType='String'}|
+|Source Column|@{ColumnType='RichText'; Value='Spec'; Alias='SpecMime'; Option='Mime'}|
+|Source Column|@{ColumnType='Attachment'; Value='Spec'; Alias='SpecAttachments'; Option='Multi'}|
+|Source Column|@{ColumnType='OleObject'; Value='Spec'; Alias='SpecEmbeddedObjects'; Option='Multi'}|
+|Source Column|@{ColumnType='Image'; Value='Spec'; Alias='SpecImages'; Option='Multi'}|    
+
+'''Mapping'''
+!|script|Remote|${NMSP}|
+|Mapping|SpecHtml|to|Word.Body|job|${JOBFILE}|
+|Mapping|SpecImages|to|Word.Images|job|${JOBFILE}|
+|Mapping|SpecAttachments|to|Word.Attachments|job|${JOBFILE}|
+|Mapping|SpecEmbeddedObjects|to|Word.EmbeddedObjects|job|${JOBFILE}|
+
+

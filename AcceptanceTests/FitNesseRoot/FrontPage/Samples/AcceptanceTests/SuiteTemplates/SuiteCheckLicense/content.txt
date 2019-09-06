@@ -1,0 +1,11 @@
+' Put a single testing license into  C:/TestLicense folder of  ${NMSP}'
+' Using SimpleObjectsLib database documents from Suite Sections (13 records > 10 records for the trial version license)'
+!define WEB (CheckLicense)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibWikiPages)
+!define VIEW (Suite Sections)
+!define LIST (SuiteCheckLicense) 
+!define FOLDER (C:\TestLicense)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteCheckLicense.EditJob)
+!define READ_LIMIT_PATTERN (>=$read)
+!contents -R2 -g -p -f -h

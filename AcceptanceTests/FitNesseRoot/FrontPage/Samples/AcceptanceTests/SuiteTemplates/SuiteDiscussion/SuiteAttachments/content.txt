@@ -1,0 +1,17 @@
+!define LIST (!-DiscussionKatakana-!)
+!define APPNAME (!-DiscussionBoard-!)
+!define URL (Lists/${LIST}/Attachments/)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate all the attachments to discussion
+So that I have content fully migrated
+
+!1 scenarios
+![
+Given there is an attchment with Japanese name which is katakana
+When I migrate to discussion
+Then the attachment is migrated successfully
+]!

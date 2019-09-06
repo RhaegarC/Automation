@@ -1,0 +1,9 @@
+!define APPNAME (SimpleObjectsLib)
+!define LIST (SuiteLinks)
+!define VIEW (Suite Links)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWikiPage.SuiteLinks.EditJob)
+!* Suite parameters
+|'''Parameter'''|'''Possible values'''|'''Where to define?'''|Meaning|
+|!style_meta[LT_ENABLED]|!style_caps{!-False, True-!}|Mode Level|''Enable Link Tracking'' check-box at http://lab1_sp2010.nmsp.org/sites/ImportService/_layouts/NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices/_layouts/15/NMSPServicesConfig.aspx|
+*!
+!contents -R2 -g -p -f -h

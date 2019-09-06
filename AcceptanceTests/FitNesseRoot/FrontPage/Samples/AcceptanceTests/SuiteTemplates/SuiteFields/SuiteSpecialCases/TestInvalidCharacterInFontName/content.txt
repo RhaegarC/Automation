@@ -1,0 +1,4 @@
+!style_caps{Verification part is inside !-SetUp-!}
+
+!|Query:Remote|${WEB_SCRAPER}|$critical !-|-! select message|
+|message|

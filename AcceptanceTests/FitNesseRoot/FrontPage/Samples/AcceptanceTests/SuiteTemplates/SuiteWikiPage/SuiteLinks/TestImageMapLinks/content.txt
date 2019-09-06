@@ -1,0 +1,28 @@
+!define SearchLink [=~/${LinkTrackPage}\?noteslink=notes(:|%3a)///85257afe0056488b/0/3c9a96a973f208ce85257bc20050e727/]
+!|Query:Remote|${WEB_SCRAPER}|$page.Images !-|-! ? {$_.${USEMAP}}|
+|src|${USEMAP}|
+|${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks.GIF|=~/image0.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|=~/image2.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|=~/image3.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|=~/image4.GIF/|
+|${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks.JPG|=~/image5.JPG/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|=~/image6.GIF/|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$page.ParsedHtml.getElementsByTagName('area') | select href, shape, coords, @{N='map';E={$_.parentElement.name}}-!|
+|href|map|shape|coords|
+|http://google.com/|=~/image0.GIF/|=~/(?i)RECT/|6,6,164,45|
+|http://dell.com/|=~/image0.GIF/|=~/(?i)RECT/|171,6,328,45|
+|${SearchLink}|=~/image2.GIF/|=~/(?i)RECT/|9,10,153,55|
+|http://ww.ap.com/|=~/image2.GIF/|=~/(?i)CIRCLE/|53,107,30|
+|http://www.apple.com/|=~/image3.GIF/|=~/(?i)POLY/|34,39,141,57,121,158,36,160,17,96,77,94|
+|=~/85257afe0056488b/0/478eb0d4545747f885257bd40049e1bd/|=~/image4.GIF/|=~/(?i)RECT/|37,53,136,148|
+|=~/85257afe0056488b/0/02bf9d731aeab04085257c3d006fd142/|=~/image5.JPG/|=~/(?i)RECT/|19,24,114,45|
+|=~/85257afe0056488b/0/ca84b346f8b5440b85257c1a00690cbd/|=~/image5.JPG/|=~/(?i)RECT/|93,66,213,82|
+|=~/85257afe0056488b/0/9b6db0d1a78d38b985257b1d00712155/|=~/image5.JPG/|=~/(?i)RECT/|30,113,129,131|
+|http://vlasenko.org/|=~/image6.GIF/|=~/(?i)RECT/|26,46,143,100|
+
+!* Check default image behavior
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$page.Links | select href, innerHTML-!|
+|href|innerHTML|
+|http://www.cbc.ca|=~/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+*!

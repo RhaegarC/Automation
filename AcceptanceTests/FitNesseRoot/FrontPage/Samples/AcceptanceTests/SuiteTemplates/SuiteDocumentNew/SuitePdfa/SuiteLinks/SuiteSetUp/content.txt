@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}", view:"${VIEW}",formula:"@Contains(subject;'TestLinkHref')"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

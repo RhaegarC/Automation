@@ -1,0 +1,17 @@
+!define ROOM (!-PageLibrary85257FEF002EF4E3.nsf-!)
+!define LIST (!-HomePageWiki-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate Quickr sub-room to !-SharePoint-!
+So that I can view the migrated sub-room home page with no "<td width="710px" style="vertical-align:middle;">" in !-SharePoint-!
+
+!1 scenarios
+![
+Given a sub-room was created in Quickr
+When I select this sub-room as source data in Designer
+And I run a migration
+Then I can view the migrated sub-room home page with no "<td width="710px" style="vertical-align:middle;">" in SharePoint
+]!

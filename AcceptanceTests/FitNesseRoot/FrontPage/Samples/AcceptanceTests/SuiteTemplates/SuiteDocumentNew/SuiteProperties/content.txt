@@ -1,0 +1,3 @@
+!define APPNAME (!-SuiteProperties-!)
+!define LIST (!-SuiteProperties-!) 
+!contents -R2 -g -p -f -h

@@ -1,0 +1,24 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestRadioButton.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"input",filter:!-'$_.type -eq "radio"'-!,selector:!-"value","checked"-!}|
+
+!|Subset Query:remote|${NMSP}|$elements|
+|value|checked|
+|Option1|False|
+|Option2|False|
+|Option3|True|
+|Option4|False|
+|Option5|False|
+|Option1|True|
+|Option2|False|
+|Option3|False|
+|Option4|False|
+|Option5|False|
+|Type1|False|
+|Type2|False|
+|Type3|True|
+|Choice1|False|
+|Choice2|True|
+|Choice3|False|
+|Choice4|False|

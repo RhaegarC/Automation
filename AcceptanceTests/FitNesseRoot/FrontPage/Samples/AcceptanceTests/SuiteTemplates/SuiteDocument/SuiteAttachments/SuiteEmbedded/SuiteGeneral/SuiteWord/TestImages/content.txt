@@ -1,0 +1,6 @@
+!|Query:Remote|${WEB_SCRAPER}|$docOleObjects|
+|IconCaption|ProgId|OleIcon|
+|CrazyTruck.jpg|Package|True|
+|icon_yahoo.gif|Package|True|
+|iconWarning16.png|Package|True|
+||PBrush|True|

@@ -1,0 +1,3 @@
+!|scenario|SelectListItems|
+|eval|$li = $null|
+|eval|$li = $page.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('li') !-|-! select innerText, @{Name="parent";Expression={$_.parentElement.tagName}}|

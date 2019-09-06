@@ -1,0 +1,18 @@
+!* No attachments
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+*!
+!* Document url contains '''Blocked'''
+!|Query:Remote|${WEB_SCRAPER}|$msgBody !-|-! GetAllHrefsFromText|
+|href|
+|file:///AttachEXE.exe---Blocked|
+*!
+
+!* check '''Date''' property
+!|Query:Remote|${WEB_SCRAPER}|$outlookMessage !-|-! select DeliveryTime|
+|DeliveryTime|
+|5/22/2014 5:16:17 PM|
+*!
+
+
+!include -c <SuiteGeneral.CheckBlockedWarningMessage

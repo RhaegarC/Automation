@@ -1,0 +1,9 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/lists/${LIST}/AllItems.aspx"}|

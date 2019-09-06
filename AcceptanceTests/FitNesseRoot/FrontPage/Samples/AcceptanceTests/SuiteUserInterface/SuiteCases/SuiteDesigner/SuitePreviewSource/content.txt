@@ -1,0 +1,34 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can remove some fields from preview
+So that I can browse the data more conviniently
+
+!1 scenarios
+![
+Given I go to preview of the source
+When I right click a default field
+Then I can see only "Sort Descending" and "Sort Accending"
+When I click "Sort Descending"
+Then the items are sorted descendingly
+And the context menu of the field contains only "Sort Accending"
+When I click "Sort Accending"
+Then the items are sorted accendingly
+And the context menu of the field contains only "Sort Descending"
+
+Given I go to preview of the source
+When I right click a non default field
+Then I can see "Sort Descending", "Sort Accending", "Remove Field" and "Go To Definition"
+When I click "remove field"
+Then the field is removed from data fields and preview
+When I click "go to definition"
+Then I can go to the definition of the field
+
+Given I removed the field
+When I don't save the job
+Then the field is not removed from the job
+When I save the job
+Then the field is removed from the job
+]!

@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}|
+|eval|$server86 = start C:\Windows\syswow64\Windowspowershell\v1.0\powershell.exe '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 86 server86' -PassThru|

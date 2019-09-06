@@ -1,0 +1,12 @@
+!img http://fitnesse.at-nmsp.com/files/nmsp/images/DoNotInstallFrontEndServices.png
+-!|script|Remote|${SHAREPOINT}|
+|eval|remove-item "c:\msi\setup.log" -force|
+|check|eval|(start (get-childitem c:\msi MigratorforNotestoSharePoint-Services*).FullName '/qn ADDLOCAL=ALL REMOVE=SharePointRunTimeServices ISPOOLUSER="${Admin}" ISPOOLPASSWORD="${AdminPassword}" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+|eval|sleep 10|
+!* Verification
+!|Subset Query:Remote|${SHAREPOINT}|Get-SPSolution|
+|Name|SolutionId|Deployed|
+|${Admin_WSP}|519931ce-058f-4025-8869-7bfc60dd32f6|True|
+*!
+!include -c VerifyAppPoolEnumaration
+!include -c VerifyAppPool

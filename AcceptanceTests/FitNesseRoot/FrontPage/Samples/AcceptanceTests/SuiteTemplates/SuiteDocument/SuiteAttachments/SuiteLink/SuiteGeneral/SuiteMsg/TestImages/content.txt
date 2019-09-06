@@ -1,0 +1,6 @@
+!|Query: Remote|${WEB_SCRAPER}|$msgBody !-|-! GetAllHrefsFromText|
+|href|
+|=~/_Attachments${SLASH}CrazyTruck.jpg/|
+|=~/_Attachments${SLASH}123w.bmp/|
+|=~/_Attachments${SLASH}icon_yahoo.gif/|
+|=~/_Attachments${SLASH}iconWarning16.png/|

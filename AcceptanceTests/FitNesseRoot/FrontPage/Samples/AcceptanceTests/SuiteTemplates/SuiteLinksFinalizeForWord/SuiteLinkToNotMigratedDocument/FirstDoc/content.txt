@@ -1,0 +1,28 @@
+!* Verification Word document
+-!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") |-! ${WORDPROPERTYSELECT}|
+|${WORDPROPERTY}|
+|=~/${Link}/|
+*!
+
+
+
+!*> Finalize doesn't change anything as the target document has not been migrated
+!define LINKS (0)
+!define DOCUMENTS (0)
+!include -c <SuiteLinksFinalizeForWord.DoFinalize
+*!
+
+!include -c <WebServices.IncludePages.DownloadDocument
+!include -c <ImportService.IncludePages.DownloadDocument
+
+!* Verification Word document
+-!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") |-! ${WORDPROPERTYSELECT}|
+|${WORDPROPERTY}|
+|=~/${Link}/|
+*!

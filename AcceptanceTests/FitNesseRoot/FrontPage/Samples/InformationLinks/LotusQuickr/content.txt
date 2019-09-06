@@ -1,0 +1,10 @@
+!contents -R2 -g -p -f -h
+[[Welcome to the IBM Lotus Quickr Wiki][http://www.lotus.com/ldd/lqwiki.nsf]]
+[[Welcome to the IBM Lotus Quickr Version 8.1.x Information Center][http://publib.boulder.ibm.com/infocenter/lqkrhelp/v8r0/index.jsp?topic=/com.ibm.lotus.quickr.dominov81.doc/install/toc_installing.html]]
+!* Command line to remove a public place (e.g. kanata)
+
+  1. cd C:\Program Files\IBM\Lotus\Domino
+  2. nqptool.exe remove -now -p kanata
+*!
+[[How to create a Quickr Place automatically via an HTTP request][http://wiki.urspringer.de/doku.php/qfaq/tutorials_howtos_etc/how_to_create_a_quickr_place_automatically]]
+[[!-QuickPlace-! API][/files/nmsp/Quickr/QuickPlace%20API.pdf]]

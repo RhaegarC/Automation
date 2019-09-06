@@ -1,0 +1,7 @@
+|script|
+|download|!{url:"${LIST_URL}/_Attachments/Attach1MB.log",file:"${TARGETFOLDER}\_Attachments\Attach1MB.log"}|
+|check|eval|$exist|True|
+|download|!{url:"${LIST_URL}/_Attachments/Attach4MB.xml",file:"${TARGETFOLDER}\_Attachments\Attach4MB.xml"}|
+|check|eval|$exist|True|
+|download|!{url:"${LIST_URL}/_Attachments/Attach53MB.log",file:"${TARGETFOLDER}\_Attachments\Attach53MB.log"}|
+|check|eval|$exist|False|

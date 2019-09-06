@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestBulletListInNestedSections-!)
+
+!style_green[Check the word content contains a bullet list in a nested sections, displays as below:]
+--------------------
+Parent section
+　　Nested section
+　　•	First bullet
+　　•	Second bullet
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

@@ -1,0 +1,15 @@
+|script|
+|runScheduledTask|!{scheduledTaskName:"${TASKNAME}",taskTemplate:"${TASKTEMPLATE}",scheduledTaskType:"Analysis",databases:"!fordiscovery/${AnalyzeDB}.nsf",dataAnalysisType:"None",scanDesign:"true"}|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|getDatabase ${AnalyzeDB}|
+|check|eval|$db.DesignElementCount|44|
+|check|eval|$db.FormCount|6|
+|check|eval|$db.ViewCount|3|
+
+|script|
+|stopServer86|

@@ -1,0 +1,27 @@
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Title|SignatureBlock|
+|TestDocumentWithSignature|WEINGARTEN REALTY INVESTORS,
+a Texas real estate investment trust
+
+
+By:	__________________________________
+Name:	__________________________________
+Title:	__________________________________
+
+
+
+WS ATLANTIC WEST, LLC,
+a Delaware limited liability company
+
+By:	Weingarten Sleiman, LLC,
+	a Delaware limited liability company,
+	Its Sole Member
+
+	By:	Weingarten Realty Investors,
+		a Texas real estate investment trust,
+		Its Managing Member
+
+
+		By:	________________________________
+		Name:	________________________________
+		Title: ___________________________________|

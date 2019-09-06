@@ -1,0 +1,14 @@
+!define PAGENAME (!-ThirdDoc-!)
+
+!style_green[Check the html content contains text shown as below; There are two icons in the end of the second and third rows, and their url are finalized, click them can link to "SecondDoc" page.]
+--------------------
+Start Third document
+ 
+Link to !-SecondDoc-! [icon]
+ 
+The same link to !-SecondDoc-! again [icon]
+ 
+ 
+End document
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

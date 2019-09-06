@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"!-@Contains(Subject;'Topic 1' ) | @Contains(Subject;'reply 1-1' )-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

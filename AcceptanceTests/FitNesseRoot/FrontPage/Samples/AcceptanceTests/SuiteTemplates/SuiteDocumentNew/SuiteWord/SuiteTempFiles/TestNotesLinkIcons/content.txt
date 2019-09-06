@@ -1,0 +1,11 @@
+!define PAGENAME (!-documentlinkicom-!)
+
+!style_green[Check the word content contains text and tables as following image, and when click the icon, it would link to another notes file, but in this case, this notes file does not exist.]
+!img files/nmsp/images/CheckpointImages/TestNotesLinkIcons.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+-!|comment|
+|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("v:imagedata") | select id-!|
+|id|
+|rId4|

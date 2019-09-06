@@ -1,0 +1,7 @@
+!define LabName (ss3.at-nmsp.com)
+!define MIGRATION_MODE (Web Services)
+!define SITE_COLLECTION (wsmzh.sharepoint.com-sites-testsiteonline)
+!define SITE (/sites/testsiteonline)
+
+
+!contents -R2 -g -p -f -h

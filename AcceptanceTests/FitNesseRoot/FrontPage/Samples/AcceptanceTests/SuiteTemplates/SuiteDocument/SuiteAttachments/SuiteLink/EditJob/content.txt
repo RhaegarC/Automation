@@ -1,0 +1,5 @@
+!include -c <SuiteAttachments.EditJob
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+|Mapping|BodyAttachments|to|Attachments|job|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|Objects|job|${JOBFILE}|

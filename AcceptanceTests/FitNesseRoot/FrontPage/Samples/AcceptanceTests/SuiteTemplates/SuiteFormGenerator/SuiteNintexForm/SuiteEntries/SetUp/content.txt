@@ -1,0 +1,4 @@
+!* Close process if running
+!|script|Remote|${NMSP}|
+|eval|get-process ${PROCESS_NAME} !-|-! stop-process|
+*!

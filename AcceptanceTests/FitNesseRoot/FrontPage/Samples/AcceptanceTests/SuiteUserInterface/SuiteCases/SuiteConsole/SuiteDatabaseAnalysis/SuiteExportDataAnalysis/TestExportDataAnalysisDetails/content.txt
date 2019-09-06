@@ -1,0 +1,9 @@
+!|script|Remote|${NMSP}|
+|eval|$files = Get-ChildItem "C:\Users\Administrator\Documents\${AnalyzeDB}"|
+
+!|Query:remote|${NMSP}|$files|
+|Name|
+|Attachment Summaries.csv|
+|Data Analysis by Author.csv|
+|Data Analysis by Form Used.csv|
+|Document Link Analysis.csv|

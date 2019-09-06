@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestTableInsideTable-!)
+
+!style_green[Check the word content contains tables inside a table, displays as below:]
+!img files/nmsp/images/CheckpointImages/TestTableInsideTable.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

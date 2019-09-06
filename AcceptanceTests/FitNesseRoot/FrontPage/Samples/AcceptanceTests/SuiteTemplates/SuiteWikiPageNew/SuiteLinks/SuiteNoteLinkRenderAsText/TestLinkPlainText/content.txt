@@ -1,0 +1,12 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestAllLinkTypeRenderAsText.aspx",tag:"p",selector:"innerText"}|
+
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|Common Link:|
+|link to note document  notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6|
+|Document Link:|
+|!-notes:///85257afe0056488b/8c703b5a31c4da9385257bc1006cbf65/9b6db0d1a78d38b985257b1d00712155  -!|
+|Picture Link:|
+|!-  notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/bc8c78c7239f857385257387000a9ff6-!|

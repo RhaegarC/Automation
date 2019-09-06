@@ -1,0 +1,13 @@
+!define PAGENAME (!-TestAlignedPadding-!)
+
+!style_green[Check the word content contains text displays as below:]
+---------
+Top padding.(spacing)
+　　　　Indent Paragraph (2 tabs)
+　　　　　　1　Tab 
+　　　　　　　　　2　Tab
+　　　　End
+
+End
+---------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

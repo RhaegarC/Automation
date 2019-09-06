@@ -1,0 +1,23 @@
+!define DATABASE (!-SuiteAttachments-!)
+!define LIST (!-SuiteMultiRichTextAttachment-!)
+!define FORMULA (!-subject='TestMultiRichTextField'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Value='Body1' Alias='Body1Html' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='Body1' Alias='Body1Attachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='Body1' Alias='Body1Images' Option='Multi'-! />","<!-Column ColumnType='RichText' Value='body2' Alias='Body2Html' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='body2' Alias='Body2Attachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='body2' Alias='Body2Images' Option='Multi'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Doc.Body' SourceValue='Body1Html' FormatString=''-! />","<!-Mapping Destination='Doc.Attachments' SourceValue='Body1Attachments' FormatString=''-! />","<!-Mapping Destination='Doc.Images' SourceValue='Body1Images' FormatString=''-! />","<!-Mapping Destination='Doc.Body' SourceValue='Body2Html' FormatString=''-! />","<!-Mapping Destination='Doc.Attachments' SourceValue='Body2Attachments' FormatString=''-! />","<!-Mapping Destination='Doc.Images' SourceValue='Body2Images' FormatString=''-! />")
+
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate multiple rich text fields to PDF in !-SharePoint-!
+So that I view them migrated and displayed properly
+
+!1 scenarios
+![
+Given multiple rich text fields in Notes contain different images and documents
+And make sure the order of images and documents are same in these rich text fields
+And these rich text fields were added in Source Data Definition
+And PDF was selected as Target Data Definition
+And mappings for these rich text fields were added
+And "Preserve Created/Modified dates" was checked
+When I run a migration
+Then I can view them were migrated to PDF in SharePoint and displayed properly
+]!

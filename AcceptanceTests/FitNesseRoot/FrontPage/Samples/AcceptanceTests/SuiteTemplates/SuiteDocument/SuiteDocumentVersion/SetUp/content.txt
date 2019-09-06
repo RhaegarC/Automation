@@ -1,0 +1,8 @@
+### Temporary ###!include -c <SuiteDocument.SuiteSetUp
+
+### Temporary ###!|script|Remote|${NMSP}|
+### Temporary ###|JobFile|${JOBFILE}|Template|${MIGRATION}|Root|${ROOT}|Folder|${FOLDER}|Application|SuiteImagesTwo|
+
+''Edit job file''
+### Temporary ###${EditJob}
+### Temporary ###!include -c <AcceptanceTests.IncludePages.RunMigration

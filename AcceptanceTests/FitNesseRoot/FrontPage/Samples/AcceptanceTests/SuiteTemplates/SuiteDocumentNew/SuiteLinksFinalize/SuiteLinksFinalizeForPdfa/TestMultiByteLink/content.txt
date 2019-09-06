@@ -1,0 +1,8 @@
+!define PAGENAME (!-MultiByteLink-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdfa content contains text shown as below, the "中文文档资料" is a link, and its url is finalized, click it can link to "FirstDoc" pdf.]
+--------------------
+Link with Chinese 中文文档资料 characters
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

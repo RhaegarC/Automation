@@ -1,0 +1,7 @@
+!define PAGE_URL (${LIST_URL}/home.aspx)
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|script|remote|${NMSP}:38|
+|check|eval|($driver.FindElementsByTagName("img") !-|-! where {$_.GetAttribute("src") -like '*quickrimage*'}).length|4|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

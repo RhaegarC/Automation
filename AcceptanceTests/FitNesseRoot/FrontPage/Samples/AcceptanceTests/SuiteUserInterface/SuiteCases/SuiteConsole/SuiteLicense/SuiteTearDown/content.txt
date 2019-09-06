@@ -1,0 +1,11 @@
+'''Restore System Date and Time'''
+!| script | Remote | ${NMSP}:36 |
+| eval | Set-Date -date "$current" |
+| eval | w32tm /resync |
+| show | eval | Get-Date |
+| eval |cd 'C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\bin'|
+| eval |.\LicenseInstallerCmd.exe -path 'C:\msi\license\license6.dlv'|
+
+|script|
+|closeMainWindows|
+|stopUiautomation|

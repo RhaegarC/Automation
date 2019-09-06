@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

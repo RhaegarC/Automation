@@ -1,0 +1,36 @@
+!define WEB (!-SuiteReportToSharePoint-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+!define MIGRATION (!-DocLib2DocLibPdfDoc-!)
+!define VIEW (Suite Sections)
+!define REPORT_SITE (${WEBAPP_URL}${SITE})
+!define REPORT_LIST (${SHAREPOINT}_${MODE}_Report)
+!define SUMMARY_LIST (${SHAREPOINT}_${MODE}_Summary)
+!contents -R2 -g -p -f -h
+
+
+!1 user story
+
+As an administrator 
+I can record the migration progress to a sharePoint list
+So that I can check migration summary in sharePoint
+
+!1 scenarios
+![
+Given "Enable publishing migration status to SharePoint" check box of "Publish Status" tab in "Migrator for Notes to SharePoint Options" was unselected (Designer)
+When I run migration
+Then I can NOT see a list named "QuestMigrationSummary" in SharePoint
+
+Given "Enable publishing migration status to SharePoint" check box was selected 
+And "Site Url" was filled correctly
+When I run migration 
+Then I can see a list named "QuestMigrationSummary" in SharePoint
+When I click "QuestMigrationSummary" list
+Then I can see a new record of the migration just run before in the list
+And I can see a column named "Replica Id"
+
+Given "Enable publishing migration status to SharePoint" check box was unselected
+When I run migration
+And I click "QuestMigrationSummary" list
+Then I can NOT see a new record in the list
+
+]!

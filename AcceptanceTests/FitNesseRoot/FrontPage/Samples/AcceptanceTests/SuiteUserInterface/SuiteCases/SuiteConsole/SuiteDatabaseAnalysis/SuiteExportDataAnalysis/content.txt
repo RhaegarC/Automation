@@ -1,0 +1,29 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can scan the database and export the data anlaysis details to the CSV files.
+
+!1 scenarios
+![
+Given NMSP is installed
+When I click "Analyze Databases" on the context menu of a database
+Then I can chose the option named "Doclink Scanning" and "Rich Text Scan"
+When I click the run button
+Then I can see the data analysis details in the "data analysis" tab
+
+Given NMSP is installed
+When I click "Export Data Analysis Details" on the context menu of a database
+Then I can see the browser dialog to chose a exported taget folder
+When I chose the target folder
+Then I can see the data analysis details are exporting to the csv files under the target folder
+
+Given NMSP is installed
+When I chose multiple databases to export the data
+Then I can see the "Export Data Analysis Details" on the context menu
+
+Given NMSP is installed
+When I click "Extract Database Users..." on the context menu of a database
+Then I can see the ACL's person/group names of Notes display properly in Extract Database Users and Groups window 
+]!

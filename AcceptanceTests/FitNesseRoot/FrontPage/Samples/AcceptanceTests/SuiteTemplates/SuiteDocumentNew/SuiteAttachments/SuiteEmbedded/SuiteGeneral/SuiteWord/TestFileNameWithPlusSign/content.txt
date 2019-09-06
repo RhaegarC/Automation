@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithPlusSign-!)
+
+!style_green[Check the word embedded files contains "Special + sign.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

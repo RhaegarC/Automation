@@ -1,0 +1,3 @@
+!define LIST (SuiteLinkToNotMigratedDocument)
+!define MAXRECORD (1)
+!contents -R2 -g -p -f -h

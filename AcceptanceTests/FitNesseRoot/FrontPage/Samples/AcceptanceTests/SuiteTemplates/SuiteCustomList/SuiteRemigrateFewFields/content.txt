@@ -1,0 +1,30 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define APPNAME (!-SuiteAttachments-!)
+!define LIST (!-SuiteRemigrateFewFields-!)
+!define MIGRATION (!-BasicList-!)
+!define FORMULA (!-subject='TestTabbedTable'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' Value='Categories' Alias='Category' ReturnType='String' Option='Multi'-! />")
+!define TARGETFIELDS ("<!-Field Name='Category' Type='Text' NotesItems='Categories;Category' InternalName='Category'-! />")
+!define MAPFIELDS ("")
+!define NEWMAPFIELDS ("<!-Mapping Destination='Category' SourceValue='Category' FormatString=''-! />")
+!define CAML ("<View><Query></Query></View>")
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can update !-SharePoint-! existing item in the second migration
+So that I can view the updated value of the existing item in !-SharePoint-!
+
+!1 scenarios
+![
+Given a migration was run with duplicate found option "Update existing item (mapped fields)"
+When I only add the mappings in Map Data tab for the existing fields which need to be updated
+And I run a migration with duplicate found option "Update existing item (mapped fields)" again
+Then I can only view the updated value for existing fields which was adding mappings before migration in SharePoint
+And the value of existing fields which was not added in mappings would be retained.
+
+When I only add the mappings in Map Data tab for the new fields
+And I run a migration with option "Add or upgrade List Fields" enabled
+And with duplicate found option "Update existing item (mapped fields)" selected
+Then I can view the new fields are added for all item in SharePoint
+And only the new fields of item selected in source has value
+]!

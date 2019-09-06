@@ -1,0 +1,9 @@
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+
+'''Mapping'''
+-!|script|Remote|${NMSP}|
+|Mapping|test|to|Doc.Author|SourceType|Constant|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.NotesTitle|job|${JOBFILE}|
+|Mapping|{DocCreated}|to|Doc.CreationDate|job|${JOBFILE}|
+|Mapping|Category|to|Doc.NotesCategory|job|${JOBFILE}|

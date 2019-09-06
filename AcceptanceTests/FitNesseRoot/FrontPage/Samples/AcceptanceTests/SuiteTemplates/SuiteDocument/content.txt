@@ -1,0 +1,5 @@
+!define WEB (!-SuiteDocument-!)
+#????? !define WEB (SuiteDocument)
+!define MIGRATION (DocLib2Document)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.${SAVE_AS})
+!contents -R2 -g -p -f -h

@@ -1,0 +1,6 @@
+''' We are replacing '# { } % ~ &'characters by '_' in an attachment's name while migrating it to !-SharePoint-!.
+''' The problem is that we didn't change an attachment name and url in a document which is referencing to it. 
+
+!|Query:Remote|${WEB_SCRAPER}|$pdf.pages[1].annotations !-|-! % {$_.Action.URI}|
+|Value|
+|=~/_Attachments/Special______'chars.txt/|

@@ -1,0 +1,8 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}"}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",enableMinorVersions:"true"}|
+
+|script|
+|runMigrationToExistingList|!{job:"${DOMINODOCJOBFILE}",template:"${MIGRATION}",sourceType:"DominoDoc",server:"${DOMINODOC_SERVER}",path:"${DOMINODOC_PATH}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",duplicateHandle:"CreateNewVersion",sourceVersions:"all",sourceSelect:"all",autoCreateList:"false",enableVersioning:"false",targetFields:"<!-Field Name='domdocVersion' Type='Text'-!/>",mapFields:"<!-Mapping Destination='domdocVersion' SourceValue='{VersionMajor}'-!/>"}|

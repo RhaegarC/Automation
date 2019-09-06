@@ -1,0 +1,11 @@
+|script|
+|startConsole|
+
+!|script|Remote|${LabName}:36|
+|eval|expandTreeItem "Tools"|
+|eval|click "LinkHandle"|
+|eval|click "UpdateLinksTab"|
+|eval|setText "OldURLPrefix" "test"|
+|eval|click "UpdatePreviewButton"|
+|eval|sleep 150|
+|check|eval|getControlName "LinksUpdatePreviewResult"|Updating Database Links Preview: Task complete|

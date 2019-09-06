@@ -1,0 +1,5 @@
+!define LIST (!-SuiteSpecialCases-!)
+!define DATABASE (!-SuiteSpecialCases-!)
+!define GROUP (!-SuiteSpecialCases-!)
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!contents -R2 -g -p -f -h

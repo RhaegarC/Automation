@@ -1,0 +1,23 @@
+!define SOURCE (${LIST_URL}/!-TestAttachmentInSection-!.${SAVE_AS})
+!define MIGRATION (!-Render2DocLibWordDoc-!)
+!define LIST (render2worddoc)
+!define SOURCEFIELDS ("<Column !-ColumnType='RichText' Value='Body' Alias='BodyHtml' Option='Html'-!/>","<Column !-ColumnType='Image' Value='Body' Alias='BodyImages' Option='Multi'-!/>")
+!define MAPFIELDS ("<Mapping !-Destination='Doc.Images' SourceValue='RenderImages' FormatString='{0}'-!/>","<Mapping !-Destination='Doc.Images' SourceValue='BodyImages' FormatString='{0}'-!/>","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' FormatString='{0}'-!/>","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderEmbeddedObjects' FormatString='{0}'-!/>")
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render attachments in sections into word
+So that I can view them migrated properly
+
+!1 scenarios
+![
+Given attachments were added in sections in Notes document
+And Render was selected as Source Data Definition
+And "BodyHtml""BodyImages" were added in Source Data Fields
+And mappings "RenderImages -> Doc.Images""BodyImages -> Doc.Images""RenderAttachments -> Doc.Attachments""RenderEmbeddedObjects -> Doc.Attachment" were added
+
+When I run a migration
+Then I can see attachments in sections are migrated properly
+And attachments icon are correct
+And I can not see warning "Failed to replace Attachment icon:..."
+]!

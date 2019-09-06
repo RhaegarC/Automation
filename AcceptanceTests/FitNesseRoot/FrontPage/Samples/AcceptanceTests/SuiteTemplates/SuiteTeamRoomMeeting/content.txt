@@ -1,0 +1,22 @@
+!define GROUP (!-SuiteTeamRoomMeeting-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate default teamroom calendar to !-SharePoint-!
+So that I can view those calendar items in !-SharePoint-!
+
+!1 scenarios
+![
+Given a default teamroom calendar source data was selected 
+And Target Type of 'Attendees' data field in Target Data Definition is "User"
+And "Map Event / Recurrence data" was enabled in Map Data tab
+And "MultiValueDisposition" of 'Attendees' field mapping was set to "All"
+And user mappings were added into UserMapping.xml
+And 'Attendees' column was enabled in Event content type in !-SharePoint-!
+When I run migration
+Then I can view those calendar items in !-SharePoint-!
+
+]!

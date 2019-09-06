@@ -1,0 +1,5 @@
+!|Ordered Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("v:shape") | select alt-!|
+|alt|
+|image0.JPG|
+
+

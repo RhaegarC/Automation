@@ -1,0 +1,7 @@
+!define PAGE_URL (${LIST_URL}/home.aspx)
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|script|remote|${NMSP}:38|
+|check|eval|$driver.FindElementById("welcome_banner").FindElementByTagName("div").text.ToLower()|=~/get(_!-|-! )started/|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

@@ -1,0 +1,12 @@
+!include <SuiteCases.GlobalSteps.RunMigration
+
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:${CAML}}|
+
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }  |
+|Title|
+|TestBlockedFile|
+|TestEmbeddedObjectAndAttachment|
+

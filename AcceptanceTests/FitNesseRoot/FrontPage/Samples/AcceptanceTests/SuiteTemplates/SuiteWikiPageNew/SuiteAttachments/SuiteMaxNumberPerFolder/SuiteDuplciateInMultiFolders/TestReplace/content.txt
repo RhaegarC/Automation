@@ -1,0 +1,14 @@
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 9)
+!define DUPLICATE (!-Replace-!)
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}", view:"${VIEW}", properties:!-@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Files']";name="MaxItemsPerFolder";value="-!${MaxItemsPerFolder}!-"}-!, duplicateHandle:"${DUPLICATE}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+!include -c <SuiteMaxNumberPerFolder.VerifyDuplciateInMultiFolders

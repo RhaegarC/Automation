@@ -1,0 +1,34 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: center')|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/"Instandhaltung MET"/|
+|=~/Schließen Sie dieses.\r\n\(z.B. durch Doppelklick\)/|
+|* * *|
+|Datenbank "Instandhaltung MET"|
+|Januar 2111|
+!include -c <SuiteTextFormat.SuiteTable.NoExtraIndentForTable
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: center')|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Startansicht|
+|=~/MET-Kontakt/|
+|Einrichter-Hilfe|
+|=~/Instandhalter/|
+|Alle Dokumente|
+|Login|
+|Kontaktpartner-Login|
+|Einrichter-Login|
+|Instandhalter-Login|
+|Instandhalter-Login| 
+
+!* Document has 2 <BR> tags
+!define NUMBER_OF_BR (2)
+ * After Schließen Sie dieses
+ * After Die dieser Ansicht zugeordneten Dokumente
+*!
+

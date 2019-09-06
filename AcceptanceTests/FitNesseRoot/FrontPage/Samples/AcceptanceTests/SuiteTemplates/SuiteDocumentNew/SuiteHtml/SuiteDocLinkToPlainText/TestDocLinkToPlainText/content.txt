@@ -1,0 +1,3 @@
+!define PAGENAME (!-Document3-!)
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

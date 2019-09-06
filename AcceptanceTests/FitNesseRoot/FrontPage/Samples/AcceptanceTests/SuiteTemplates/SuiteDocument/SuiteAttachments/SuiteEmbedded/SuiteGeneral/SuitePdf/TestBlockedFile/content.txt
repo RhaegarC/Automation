@@ -1,0 +1,10 @@
+!* No attachments
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+*!
+!* Document url contains '''Blocked'''
+!|Query:Remote|${WEB_SCRAPER}|$list.Action.URI|
+|Value|
+|file:///AttachEXE.exe---Blocked|
+*!
+!include -c <SuiteGeneral.CheckBlockedWarningMessage

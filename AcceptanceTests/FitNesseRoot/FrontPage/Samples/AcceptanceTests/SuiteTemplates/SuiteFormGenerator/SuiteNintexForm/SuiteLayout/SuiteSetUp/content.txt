@@ -1,0 +1,31 @@
+!include -c <SuiteNintexForm.SuiteSetUp
+!* Delete target folder
+!|script|Remote|${NMSP}|
+|eval|remove-item "${TARGET_FOLDER}" -force -recurse -confirm:$false|
+*!
+!* Start process
+!|script|Remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE}'!-|-! out-null|
+*!
+
+!* Generate a form with all type of fields
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+*!
+
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|Basic Table|
+
+
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+|eval|$tables = $null|
+|eval|$tables = $nintexXml.SelectNodes("//*/nsd2p1:FormControlProperties",$ns) !-|-! ? {$_.Text -match "\S*<TABLE"}|

@@ -1,0 +1,22 @@
+!define SOURCE (${LIST_URL}/${PAGENAME}.${SAVE_AS})
+!define PAGENAME (!-Home-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate Quickr pages to Word/Pdf
+So that I can view these Quickr pages are migrated as Word/Pdf in !-SharePoint-!
+
+!1 scenarios
+![
+Given Quickr pages(Standard page/Wiki page/Blog page) were selected as source data
+And "Quickr Pages" was selected as Sourct Data Definition
+And Word/Pdf was selected as Target Data Definition
+And mapping "{Attachments} -> Doc.Attachments" or "{Attachemnts} -> Files" was added in Map Data tab
+When I run a migration with Web Service or Import Service or O365
+Then I can view selected Quickr pages are migrated as Word/Pdf in SharePoint
+
+Given links of migrated pages were added in Quickr pages before migration
+When I run a link finalization after the migration
+Then I can open the migrated Word/Pdf by finalized link in migrated Word/Pdf
+]!

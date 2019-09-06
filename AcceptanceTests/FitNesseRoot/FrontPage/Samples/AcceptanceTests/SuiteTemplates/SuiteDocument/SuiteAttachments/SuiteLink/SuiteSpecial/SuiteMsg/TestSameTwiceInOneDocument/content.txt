@@ -1,0 +1,4 @@
+!|Query: Remote|${WEB_SCRAPER}|$msgBody !-|-! GetAllHrefsFromText|
+|href|
+|=~/_Attachments${SLASH}Test.xlsx/|
+|=~/_Attachments${SLASH}Test/|

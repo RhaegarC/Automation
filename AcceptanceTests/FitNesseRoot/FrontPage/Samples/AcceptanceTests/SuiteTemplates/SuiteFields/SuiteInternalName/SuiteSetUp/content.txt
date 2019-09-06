@@ -1,0 +1,12 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}'}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|addSPListFields|!{web:"${WEB_URL}",list:"${LIST}",fields:"<!-Field Type='Text' Name='field' DisplayName='field' -!/>"!-,-!"<!-Field Type='Text' Name='fie ld1' DisplayName='fie ld1' -!/>"!-,-!"<!-Field Type='Text' Name='field1' DisplayName='field1' -!/>"}|
+
+
+
+|script|
+|runMigrationToExistingList|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",targetFields:"${TargetFields}",mapFields:"${MapFields}"}|
+

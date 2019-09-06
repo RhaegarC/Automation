@@ -1,0 +1,11 @@
+!define APPNAME (LinkTracking)
+!define JOBNAME (SuiteLinksFinalizeForHtml)
+#!define FOLDER (SuiteLinksFinalizeForHtml)
+!define WEB (LinksFinalizeForHtml)
+!define MIGRATION (DocLib2HtmlDoc)
+!define FinalizeThrough (SharePoint CA)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteLinksFinalizeForHtml.EditJob) 
+!define MAXRECORD (9999)
+!define SAVE_AS (html)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.${SAVE_AS})
+!contents -R2 -g -p -f -h

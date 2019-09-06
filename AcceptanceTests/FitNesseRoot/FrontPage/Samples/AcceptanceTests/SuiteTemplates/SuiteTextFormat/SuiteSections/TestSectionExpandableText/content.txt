@@ -1,0 +1,23 @@
+'''Dynamic feature not supported'''
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|innerText|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|AAA|
+|FFF|
+|XXX|
+|YYY|
+|ZZZ|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'STRONG'|properties|innerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|BBB|
+|CCC|
+|EEE|
+|DDD|
+
+!define NUMBER_OF_BR (0)

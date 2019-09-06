@@ -1,0 +1,17 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordListItems $numbering | 
+|text|type|
+|1.0|decimal|
+|2.0|decimal|
+|1.1|decimal|
+|2.1|decimal|
+|bullet 1|bullet|
+|some text for bullet 1|bullet|
+|bullet 2|bullet|
+|some text for bullet 2|bullet|
+|item a|lowerLetter|
+|item b|lowerLetter|
+|3.1|decimal|
+|some text for 3.1|decimal|
+|3.0|decimal|
+|some text for 3.0|decimal|
+

@@ -1,0 +1,4 @@
+!define MAPFIELDS ("<Mapping !-Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Objects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define LIST (!-TestOleNew-!)
+
+!contents -R2 -g -p -f -h

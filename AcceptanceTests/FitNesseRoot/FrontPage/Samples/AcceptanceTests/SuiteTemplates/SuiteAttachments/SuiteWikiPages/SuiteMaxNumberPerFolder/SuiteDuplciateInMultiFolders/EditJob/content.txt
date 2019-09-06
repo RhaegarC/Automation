@@ -1,0 +1,6 @@
+!include -c <SuiteMaxNumberPerFolder.EditJob
+
+!|script|Remote|${NMSP}|
+|$DUPLICATE=|eval|'${RUNNING_PAGE_NAME}' -Replace 'Test',''|
+|Remove|TransferJob/JobOptions/DuplicateDocumentHandling|from|${JOBFILE}|
+|Add|TransferJob/JobOptions/DuplicateDocumentHandling|InnerText|$DUPLICATE|to|${JOBFILE}|

@@ -1,0 +1,23 @@
+'''Check Editable Listbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'EditableListbox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Listbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedListBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Formulachoice Listbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MultiChoiceListBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Editable Listbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'FormulaChoiceListBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

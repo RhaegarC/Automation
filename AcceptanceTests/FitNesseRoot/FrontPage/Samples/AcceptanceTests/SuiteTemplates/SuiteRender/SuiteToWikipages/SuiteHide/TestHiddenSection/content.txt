@@ -1,0 +1,17 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHiddenSection.aspx",tag:"td",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHiddenSection.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Subject:TestHiddenSection|
+|Content:This document has a hidden section in it form. The hidden section is located after Body field.|
+
+
+-!|script|Remote|${WEB_SCRAPER}|
+|check not|eval|$main.innerText|=~/Hidden Parts/|

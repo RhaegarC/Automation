@@ -1,0 +1,6 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|href|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|
+|file://local/unicodetest/english%20space.txt|

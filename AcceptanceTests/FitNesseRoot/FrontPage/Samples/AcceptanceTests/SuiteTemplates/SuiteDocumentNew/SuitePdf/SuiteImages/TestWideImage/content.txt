@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestWideImage-!)
+
+!style_green[Check the pdf content contains a wide picture.]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

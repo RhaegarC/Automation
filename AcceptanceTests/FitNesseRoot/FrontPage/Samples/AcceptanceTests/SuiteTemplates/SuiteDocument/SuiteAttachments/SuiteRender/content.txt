@@ -1,0 +1,6 @@
+!define VIEW ()
+!define LIST (SuiteAttachments_SuiteRender)
+!define SAVE_AS (docx)
+!define DOCUMENT_NAME (TestAttachFileOutOfBody)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteAttachments.SuiteRender.EditJob)
+!contents -R3 -g -p -f -h

@@ -1,0 +1,11 @@
+!define WEB (SuiteReportToSharePoint)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibPdfDoc)
+!define VIEW (Suite Sections)
+!define LIST (${RUNNING_PAGE_NAME}) 
+!define REPORT_SITE (${WEBAPP_URL}${SITE})
+!define REPORT_LIST (MigrationReport)
+!define SUMMARY_LIST (MigrationSummary)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteReportOnline.EditJob)
+
+!contents -R2 -g -p -f -h

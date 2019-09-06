@@ -1,0 +1,15 @@
+!define PAGE_URL (${WEB_URL}/Lists/Pages/AllItems.aspx?RootFolder=/sites/Test/suitequickr/Lists/Pages/Library)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|script|remote|${NMSP}:38|
+|eval|($driver.FindElementsByTagName("a")!-|-!?{$_.Text -eq "link finalization page 2"}).Click()|
+
+|script|
+|waitElementExists|!{by:"className",value:"ms-rtestate-field"}|
+
+!|Query:remote|${NMSP}:38|$driver.FindElementByClassName("ms-rtestate-field").FindElementsByTagName("a")!-|-!select @{ N='text'; E={$_.text} }, @{ N='href'; E={$_.GetAttribute("href")} }|
+|text|href|
+|http://quickr/LotusQuickr/suitequickr/Main.nsf/h_Toc/4df38292d748069d0525670800167212/?OpenDocument#{type=0&unid=5FC974B8F704D6DD85257FEF002F2066}|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

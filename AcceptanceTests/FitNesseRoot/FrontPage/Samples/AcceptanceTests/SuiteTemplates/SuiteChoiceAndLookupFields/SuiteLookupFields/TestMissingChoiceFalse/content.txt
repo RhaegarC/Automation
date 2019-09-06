@@ -1,0 +1,9 @@
+'''Check the items'''
+''Only items which have the '''Canada''' in Lotus Notes categories will have '''Canada''' as value for lookup field in !-SharePoint-!. All other values are skipped.''
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Title|Category|
+|NoCategories|null|
+|TwoCategories|Canada|
+|SecondCategory|null|
+|FistCategory|Canada|
+|SpecialCharacters|null|

@@ -1,0 +1,7 @@
+!|script|remote|${NMSP}:36|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "LicenseDetails" |
+|check|eval|getControlName "ContactUrl"|https://www.quest.com/company/contact-us.aspx|
+|check|eval|getControlName "PurchaseLicense"|https://support.quest.com/contact-us/licensing|
+|eval|click "LicenseOK"|
+

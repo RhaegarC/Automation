@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-Render_FormulaSectionTitle.aspx-!)
+
+|script|
+|parseHtml|!{url:"${TARGET_PAGE}",tag:"div",filter:'$_.class -eq "sectionheader expanded"',selector:!-"InnerText"-!,type:"wiki"}|
+
+!|Query:remote|${NMSP}|$elements|
+|InnerText|
+|=~/Subject/|

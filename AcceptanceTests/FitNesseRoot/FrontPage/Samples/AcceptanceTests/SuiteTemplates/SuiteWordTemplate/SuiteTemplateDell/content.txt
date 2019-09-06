@@ -1,0 +1,4 @@
+!define MIGRATION (DocLib2DocLibWordDocTemplateDell)
+!define LIST (SuiteDellTemplate)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWordTemplate.SuiteTemplateDell.EditJob)
+!contents -R2 -g -p -f -h

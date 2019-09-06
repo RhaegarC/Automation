@@ -1,0 +1,57 @@
+!define FOLDER (C:\TestLicense)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can import the purchased license 
+So that I can use the functions which is not available without license
+
+!1 scenarios
+![
+Given NMSP was new installed
+When I click 'License Details' in the console
+Then I can see a warning dialog "You must import a license before you can use this product." pop up
+
+Given a license was purchased
+When I import the license
+And I open the 'License Details'
+Then I can view "License Info" and "Used Databases"
+
+Given a license was purchased
+When I import the license
+And I operate all those functions on DBs which needs license entitlement
+Then I can view a warning dialog "This will consume 1 database license. Continue?" pop up
+When I click No
+Then the operation would be cancelled
+And I can not view these DB's ID and Title in the "Used Databases" tab of 'License Details'
+
+Given a Trial license was purchased
+When I import this license
+And I operate all those functions on DBs which needs license entitlement
+Then I can view a warning dialog "This will consume 1 database license. Continue?" pop up
+When I click Yes
+Then I can continue the operation
+And I can view these DB's ID and Title in the "Used Databases" tab of 'License Details'
+
+Given a Standard license was purchased
+When I import this license
+And I operate 'Migrate to SharePoint...'/ 'Generate InfoPath Form Template...'/ 'Generate Third-party Form Template...'/ 'Export Database Records...'/ 'Extract Database Users...' on DBs which needs license entitlement
+Then I can view a warning dialog "This will consume 1 database license. Continue?" pop up
+When I click Yes
+Then I can continue the migration
+And I can view these DB's ID and Title in the "Used Databases" tab of 'License Details'
+
+Given a Nolimitation license was purchased
+When I import this license
+And I operate 'Migrate to SharePoint...'/ 'Generate InfoPath Form Template...'/ 'Generate Third-party Form Template...'/ 'Export Database Records...'/ 'Extract Database Users...' on DBs
+Then I can not view a warning dialog pop up
+And I can view these DB's ID and Title in the "Used Databases" tab of 'License Details'
+
+Given a database license was just consumed
+When I check the DB icon
+Then the DB icon is still the same as before
+When I reopen the console
+Then I can view the DB icon was changed
+]!

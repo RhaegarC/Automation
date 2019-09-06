@@ -1,0 +1,27 @@
+!define PAGENAME (!-TestLinksToDocOnFileServer-!)
+
+!style_green[Check the word content contains text "link to file://"]
+
+!style_green[Check the word content contains hotspot URL 'Link to external image' which can link to "file://alvclyw40/Attachments/Cases/1067113/mapping.jpg"]
+
+!style_green[Check the word content contains text "link to double backslash"]
+
+!style_green[Check the word content contains hotspot URL 'Link to backslash' which can link to "\\alvclyw40\Attachments\Cases\1067113\mapping.jpg"]
+
+!style_green[Check the word content contains text "link to ", hotspot URL "www.slashdot.org " and text "(no http://)"]
+
+!style_green[Check the word content contains hotspot URL 'Slashdot' which can link to "www.slashdot.org"]
+
+!style_green[Check the word content contains text "Link to ", hotspot URL "https://slashdot.org/ " and text "(should not change)"]
+
+!style_green[Check the word content contains hotspot URL 'Slashdot' which can link to "https://slashdot.org"]
+
+!style_green[Check the word content contains text "Link to ", hotspot URL "http://www.slashdot.org/ " and text "(should not change)"]
+
+!style_green[Check the word content contains hotspot URL 'Slashdot' which can link to "http://www.slashdot.org"]
+
+!style_green[Check the word content contains text "Link to ", hotspot URL "ftp://www.slashdot.org/ " and text "(should not change)"]
+
+!style_green[Check the word content contains hotspot URL 'Slashdot' which can link to "ftp://www.slashdot.org"]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

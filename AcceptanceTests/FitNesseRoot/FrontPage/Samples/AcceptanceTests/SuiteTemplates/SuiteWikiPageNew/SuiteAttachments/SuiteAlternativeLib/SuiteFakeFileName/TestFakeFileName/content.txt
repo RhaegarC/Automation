@@ -1,0 +1,11 @@
+!define FILE_NAME (32b53fd8dabef7bc85257ce0006e36d4)
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${TEST_DOCUMENT}.aspx", tag:"IMG",selector:!-"src"-!}|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/Documents\/${FILE_NAME}.GIF/|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/Documents/${FILE_NAME}.gif"}|

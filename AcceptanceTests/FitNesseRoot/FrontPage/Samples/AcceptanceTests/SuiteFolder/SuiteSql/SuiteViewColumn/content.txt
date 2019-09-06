@@ -1,0 +1,20 @@
+!define GROUP (!-SuiteSql-!)
+!define LIST (!-SuiteViewColumn-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can create a source data field which column type is 'ViewColumn'
+And mapping 'ViewColumn' to a target data field
+So that I can migrate a multi value column in 'ViewColumn' to sql server
+
+!1 scenarios
+![
+Given a source data field was added
+And its column type is 'ViewColumn'
+And it was mapping to a target data field
+When I run migration
+Then I can view all the values were migrated to sql server
+And they were separated in different rows just as they were set in Notes
+]!

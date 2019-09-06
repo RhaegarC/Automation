@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$html !-|-! GetAllHrefsFromText|
+|href|content|
+|=~/_Attachments${SLASH}中文文档资料.jpg/||
+    

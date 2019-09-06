@@ -1,0 +1,15 @@
+'''We need to understand the real customer scenario before enabling this test'''
+!* Auto redirect is not configured
+-!|script|Remote|${REMOTESP}|
+|auto redirect not configured|
+
+-!|script|Remote|${REMOTESP30}|
+|Open|${TARGETLISTURL}${FIRSTDOC}.aspx|
+
+!|Query:Remote|${REMOTESP30}|$page.Links !-|-! ? innerHtml -like '*doclink.gif*'|
+|href|
+|${Link}|
+
+-!|script|Remote|${REMOTESP30}|
+|Page|http://${SPHOSTNAME}${Link}|Contains|The Quest Link Tracking Service was not configured for the site|
+*!

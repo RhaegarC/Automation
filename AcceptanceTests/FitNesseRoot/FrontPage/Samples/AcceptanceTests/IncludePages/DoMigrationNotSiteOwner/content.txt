@@ -1,0 +1,50 @@
+!*> Get User1 credentials
+!|script|Remote|${NMSP}|
+|eval|$username = "velaskec\NotSiteOwner"|
+|eval|$password = "Qwerty123"|
+|eval|$secstr = New-Object -TypeName System.Security.SecureString|
+|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
+|eval|$UserCred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr|
+|check|eval|$UserCred|System.Management.Automation.PSCredential|
+|eval|Remove-ADUser -Identity NotSiteOwner -Confirm:$false|
+|eval|New-ADUser NotSiteOwner -ChangePasswordAtLogon $false -Enabled $true -AccountPassword $secstr|
+|eval|Add-ADGroupMember Administrators NotSiteOwner|
+
+*!
+!*> !-RunAs User1-!
+!|script|Remote|${NMSP}|
+|show|eval|$server = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 36 server36' -PassThru -Credential $UserCred|
+|eval|sleep 10|
+*!
+!*> Migrate
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Root|${ROOT}|Folder|${FOLDER}|Application|${APPNAME}|
+
+!|script|Remote|${NMSP}:36|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|eval|$process = start .\NMSPCMD.EXE '-job ${JOBFILE}' -wait -PassThru|
+|eval|$process.WaitForExit()|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+*!
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|message|stackTrace|
+|=~/Access was denied to the SharePoint Services configuration for 'http://.+'./||
+
+*!
+!*> Kill process
+-!|script|Remote|${NMSP}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server36')) {$p[$_].Terminate()}
+}-!|
+*!

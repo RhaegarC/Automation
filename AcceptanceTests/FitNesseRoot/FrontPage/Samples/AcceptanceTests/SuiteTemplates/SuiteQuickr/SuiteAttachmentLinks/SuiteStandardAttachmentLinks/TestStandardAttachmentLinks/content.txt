@@ -1,0 +1,6 @@
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='Body'; E={$_['Body']} }, @{ N='Length'; E={$_['Body'].Length} } |
+|Title|Body|Length|
+|upload file in toc|=~/!-[<a href="/sites/Test/suitequickr/Lists/TestStandardAttachmentLinks/Attachments/1/ddocinstall.log">ddocinstall.log</a>]-!/|160|

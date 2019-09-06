@@ -1,0 +1,29 @@
+|script|
+|download|!{url:"!-http://fitnesse.at-nmsp.com/files/nmsp/objects/MigrationLogWithError.log-!",file:"!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\Log Files\MigrationLogWithError.log-!"}|
+|check|eval|$exist|True|
+
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|expandMenu "FileMenu"|
+|eval|clickMenu "OpenLog"|
+|eval|setText "LogFile" "!-'C:\ProgramData\Quest\Migrator for Notes to SharePoint\Log Files\MigrationLogWithError.log'-!"|
+|eval|click "OpenLogFile"|
+|eval|click ${LogErrorItem}|
+|eval|doubleClick ${LogErrorItem}|
+|eval|click "SearchforSolution"|
+|eval|sleep 5|
+|eval|$articleResult = getControlValue "KnowledgeBaseArticlesResult"|
+|check|eval|$articleResult|${ArticleResults}|
+|eval|$top10Result = getControlValue "Top10KBResult"|
+|eval|$top10Result= $top10Result.Replace('"','')|
+|eval|$top10ResultString= [string]$top10Result|
+|eval|$matchItem = $top10ResultString -match "</span>"|
+|check|eval|$matchItem|False|
+
+
+|script|
+|stopUiautomation|

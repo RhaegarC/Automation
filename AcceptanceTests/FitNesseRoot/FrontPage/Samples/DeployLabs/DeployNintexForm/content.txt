@@ -1,0 +1,9 @@
+!|script|remote|${SharePoint}|
+|eval|set-location "C:\NintexForms2010\Forms"|
+|eval|.\Install.ps1|
+|eval|Add-Type -AssemblyName "Nintex.Forms.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c52d764dcf7ec883" -ErrorAction:SilentlyContinue !-|-! out-null|
+|eval|Update-NFLicense 'C:\Nintex Forms 2010.nlf'|
+|eval|Add-PSSnapin "Microsoft.SharePoint.PowerShell" -PassThru -ErrorAction:SilentlyContinue|
+|eval|Enable-SPFeature -Identity NintexFormsWebApplication -url http://nmsp-ey-s01|
+|eval|Enable-SPFeature -Identity NintexFormsSitePrerequisites -url http://nmsp-ey-s01|
+|eval|Enable-SPFeature -Identity NintexFormsListSite -url http://nmsp-ey-s01|

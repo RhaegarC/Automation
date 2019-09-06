@@ -1,0 +1,16 @@
+!|script|remote|${NMSP}|
+|eval|$jobfiles=Get-ChildItem "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files"|
+|eval|$files=@()|
+|eval|!-foreach($f in $jobfiles){
+$exist="false"
+$content=[xml](get-content $f.fullname)
+if($content.TransferJob.JobOptions.PreserveDates -eq "true"){
+$exist="true"
+}
+$info=@{}
+$info.Name=$f.Name
+$info.Exist=$exist
+$files+=$info
+}-!|
+|show|eval|$files.GetEnumerator() !-|-! out-string|
+|check|eval|"false" -notin $files.exist|True|

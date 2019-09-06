@@ -1,0 +1,24 @@
+!include -c <SuiteNintexForm.SuiteSetUp
+
+!* Delete target folder
+!|script|Remote|${NMSP}|
+|eval|remove-item "${NMSP_Install_Directory_Client}\Bin\Target Files\New Folder\" -force -recurse -confirm:$false|
+*!
+
+!* Start Form Generator
+!|script|remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE}'!-|-! out-null|
+*!
+
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|SetText|TargetFolder|Value|${NMSP_Install_Directory_Client}\Bin\Target Files\New Folder\${FORM_NAME}.xml|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+
+!|script|Remote|${NMSP36}|
+|CheckBox|WriteLog|Value|false|
+|CheckBox|WriteReport|Value|false|
+|Click|Next|

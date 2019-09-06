@@ -1,0 +1,95 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can scan run jobs through scheduled tasks
+so that I can schedule a task of operations
+
+!1 scenarios
+![
+Given I select a database
+When I choose create a scheduled task
+Then the task is created in Console
+And the task files are generated in program data folder
+And a task is created in windows task scheduler
+And the status of the task is ready
+
+Given a task is created
+When I run it manually
+Then I can see the status is running
+When I close the job window before it is finished
+Then I can see the status is aborted
+
+Given a task is created
+When the migration is successfuly with warning message
+Then I can see the status is succeeded
+
+Given a task is created
+When the migration is finished with error message
+Then I can see the status is failed
+When I rerun the task
+And it is successful
+Then I can see the status is succeeded
+
+Given I select a database that has no job imported
+When I choose create a scheduled task
+Then I no task is created
+
+Given I select more than two database
+When I choose create a scheduled task
+Then the task is created in Console
+And the task files are generated in program data folder
+And a task is created in windows task scheduler
+
+Given I select three database, one of which has no job imported
+When I choose create a scheduled task
+Then the task for two databases is created in Console
+And the task files are generated in program data folder
+And a task is created in windows task scheduler
+
+Given a task is created
+When it is scheduled to run the next day
+Then it runs on time
+And I can see the task history in Console
+
+Given a task is created
+When it is scheduled to run in thirty seconds
+Then it runs on time
+And I can see the task history in Console
+
+Given a task is created
+When it has five jobs in three databases
+Then it runs on time
+And I can see the task history in Console
+
+Given a task is created
+When I click delete from the Console
+Then the task is removed
+And the task files are removed from folder
+And the task in windows task scheduler is removed
+
+Given a task is created
+When I run the task
+And I remove the task before it is finished
+Then there is warning message showing that it can be deleted
+
+Given a task is created
+And it is not run yet
+When I click History of the task
+Then I can see the history is empty
+
+Given a task is created
+And it is run once
+When I click History of the task
+Then I can see one item in the history
+
+Given a task is created with five jobs in three databases
+And it is run three times
+When I click History of the task
+Then I can see all the history of the task
+
+Given fifty tasks are created
+And totally one hundren times the tasks run for
+Then I can see the history in task history
+]!

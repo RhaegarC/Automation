@@ -1,0 +1,12 @@
+'''Check the items'''
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Name|${LIST}|
+|EmptyCategory.docx|null|
+|TestDisabledChildTerm.docx|DisabledChildTerm|
+|TestDisabledChildTermInHierarchy.docx|null|
+|TestDisabledTermWithChild.docx|null|
+|TestDisabledTermWithoutChild.docx|null|
+|TestDisabledParentTermInHierarchy.docx|DisabledParentTerm_Level2|
+|TestEnabledChildTerm.docx|null|
+|TestEnabledTermWithChild.docx|null|
+|TestEnabledTermWithoutChild.docx|null|

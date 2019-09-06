@@ -1,0 +1,24 @@
+!include -c VerifyNestedSections
+!*> Verify 2 list elements
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'parentElement.className','parentElement.parentElement.className'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|parentElement.className|parentElement.parentElement.className|
+|UL|section|section|
+|OL|section|null|
+*!
+!*> Verify 7 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Ordered Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|OL|
+|OL|
+|OL|
+|OL|
+|UL|
+|UL|
+|UL|
+*!

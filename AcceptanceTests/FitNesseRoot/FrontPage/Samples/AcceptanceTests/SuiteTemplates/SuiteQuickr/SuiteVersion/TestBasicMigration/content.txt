@@ -1,0 +1,47 @@
+!define PAGE_URL (${WEB_URL}/_layouts/15/Versions.aspx?)
+
+
+|script|
+|startServer38|
+
+
+!|script|remote|${NMSP}:38|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${WEB_URL}')|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list= $ctx.Site.OpenWeb('${WEB}').Lists.GetByTitle('${LIST}')|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|show|eval|$list.Id|
+|eval|Add-Type -Path C:\selenium\WebDriver.dll|
+|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+|eval|$driver = New-Object OpenQA.Selenium.IE.InternetExplorerDriver|
+|eval|$driver.Url="${PAGE_URL}list={"+$list.Id.Guid.ToString()+"}&ID=1"|
+|eval|$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds(60))|
+|eval|$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::ClassName("ms-core-brandingText")))|
+
+
+!|Query:remote|${NMSP}:38|$driver.FindElementById("DeltaPlaceHolderMain").FindElementsByTagName("td")!-|-!?{$_.Text -match "\d*\.0"}!-|-!select Text|
+|Text|
+|12.0|
+|11.0|
+|10.0|
+|9.0|
+|8.0|
+|7.0|
+|6.0|
+|5.0|
+|4.0|
+|3.0|
+|2.0|
+|1.0|
+
+!|Query:remote|${NMSP}:38|$driver.FindElementById("DeltaPlaceHolderMain").FindElementsByTagName("td")!-|-!?{$_.Text -match "7/20/2016 2:20 AM"}!-|-!measure!-|-!select Count|
+|Count|
+|4|
+
+!|Query:remote|${NMSP}:38|$driver.FindElementById("DeltaPlaceHolderMain").FindElementsByTagName("td")!-|-!?{$_.Text -match "3/1/2018 11:03 PM"}!-|-!measure!-|-!select Count|
+|Count|
+|2|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

@@ -1,0 +1,5 @@
+!|Query:remote|${NMSP}:36|$gridData|
+|Database Title|Count|Server|File Path|
+|(48257DBA:0023963D)|4|||
+|(85257B4F:0055CD9C)|3|||
+|SuiteDatabaseAnalysis|17|(local)|fordiscovery/SuiteDatabaseAnalysis.nsf|

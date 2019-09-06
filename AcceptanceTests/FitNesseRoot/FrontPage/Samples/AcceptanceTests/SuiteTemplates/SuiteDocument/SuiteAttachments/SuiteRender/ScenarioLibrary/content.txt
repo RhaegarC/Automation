@@ -1,0 +1,2 @@
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.WordFunctions
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.WordScenarios

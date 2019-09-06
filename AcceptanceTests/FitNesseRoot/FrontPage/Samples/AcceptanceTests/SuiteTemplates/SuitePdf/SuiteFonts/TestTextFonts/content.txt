@@ -1,0 +1,11 @@
+!|script|Remote|${WEB_SCRAPER}|
+|PDF find text|Text for.[^\r\n]+|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|font-family|font-size|color|
+|Text for existing font - Arial, red, 8|ArialMT|8|#FF0000|
+|Text for existing font - Calibri, Blue, 12|Calibri|12|#0000FF|
+|Text for existing font - Courier, 15, Italic|CourierNewPS-ItalicMT|15|#00|
+|Text for existing font - Microsoft Sans Serif, Green, 10|MicrosoftSansSerif|10|#00C200|
+|Text for existing font - Verdana, 18, Bold|Verdana-Bold|18|#0000FF|
+|Text for missing font - Vladimir Script, Black, 18|TimesNewRomanPSMT|18|#00|

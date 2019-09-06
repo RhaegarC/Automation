@@ -1,0 +1,13 @@
+!|Script|Remote|${WEB_SCRAPER}|
+|eval|[System.Reflection.Assembly]::LoadWithPartialName("System.web")|
+
+!|Query:Remote|${WEB_SCRAPER}|[regex]::matches( [system.web.httputility]::htmldecode($page.Content),'(margin-left:\d{2}px)')|
+|Value|
+|${TEXT_2_TABS}|
+|${TEXT_3_TABS}|
+|${TEXT_4_TABS}|
+|${TEXT_2_TABS}|
+
+!* Document has 0 <BR> tag
+!define NUMBER_OF_BR (0)
+*!

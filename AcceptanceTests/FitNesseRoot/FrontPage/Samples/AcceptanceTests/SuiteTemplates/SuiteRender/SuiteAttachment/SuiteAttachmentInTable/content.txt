@@ -1,0 +1,16 @@
+!define MAPFIELDS ("<Mapping !-Destination='Doc.Images' SourceValue='RenderImages' FormatString='{0}'-!/>","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' FormatString='{0}'-!/>")
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate documents with attachments in table to sharePoint
+So that I can view correct attachment icons in table of migrated documents
+
+!1 scenarios
+![
+Given documents with attachments in table were selected as Source Data
+And Render was selected as Source Data Definition
+And mapping "RenderAttachments -> Doc.Attachments" and "RenderImages -> Doc.Images" were added in Map Data tab
+When I run a migration
+Then I can view correct attachment icons in table of migrated documents
+]!

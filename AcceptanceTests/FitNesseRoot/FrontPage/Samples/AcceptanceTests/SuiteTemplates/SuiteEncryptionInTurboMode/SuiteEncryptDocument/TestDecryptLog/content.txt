@@ -1,0 +1,6 @@
+!define JOBMESSAGE (!-Finish processing Azure migration job. Please check here for detail:-!)
+
+|script|Remote|${WEB_SCRAPER}|
+|eval|$jobPath=  ([xml]$log).!-SelectNodes-!("//message[contains(text(),'${JOBMESSAGE}')]").innerXml.Replace('${JOBMESSAGE}','').Trim()|
+|eval|$jobContent= Get-Content $jobPath|
+|check|eval|$jobContent[0].Contains("Start Time")|True|

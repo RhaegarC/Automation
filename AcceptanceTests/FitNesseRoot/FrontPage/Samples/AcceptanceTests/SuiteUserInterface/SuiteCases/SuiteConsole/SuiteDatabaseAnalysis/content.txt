@@ -1,0 +1,2 @@
+!define AnalyzeDB (!-SuiteDatabaseAnalysis-!)
+!contents -R2 -g -p -f -h

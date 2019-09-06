@@ -1,0 +1,17 @@
+'''Check Editable Rich Text field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'RichText']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:MultiLineTextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|IsRichText|ExpectedValue|true|
+
+'''Check Computed Rich Text field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'Computed']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:HtmlFormControlProperties|
+
+'''Check Rich Text Lite field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'RichTextLite']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:MultiLineTextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

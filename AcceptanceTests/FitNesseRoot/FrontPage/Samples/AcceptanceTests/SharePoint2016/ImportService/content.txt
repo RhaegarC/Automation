@@ -1,0 +1,8 @@
+!define NMSP (lab6.at-nmsp.com)
+!define SHAREPOINT (lab6_sp2016.at-nmsp.com)
+!define MODE (!-ImportService-!)
+!define LT_PSW (GYm1tBjGWP/Af1b0JE84PA==)
+!define MIGRATION_MODE (Import Service)
+!define IS_ENABLED (True)
+!define LT_ENABLED (True)
+!contents -R2 -g -p -f -h

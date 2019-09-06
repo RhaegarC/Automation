@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideByReferenceNotOverrideBySubForm.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Sub Form 2: Set 'Hide paragraph if formula is False(1 = 2)'. (The Pab Hide id is 1.)|
+|Used Formula from Ref 1.(Current element is behind sub form.)| 
+|Subject: TestHideByReferenceNotOverrideBySubForm|

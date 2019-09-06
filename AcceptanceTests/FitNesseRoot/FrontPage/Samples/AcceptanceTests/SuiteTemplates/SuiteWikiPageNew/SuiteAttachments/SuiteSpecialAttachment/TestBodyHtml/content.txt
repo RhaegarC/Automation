@@ -1,0 +1,6 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${TEST_DOCUMENT}.aspx",tag:"A",selector:!-"href"-!}|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|
+|=~/SuiteSpecialAttachments/SuiteSpecialAttachment/_Attachments/J100E006.doc/|

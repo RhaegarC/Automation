@@ -1,0 +1,25 @@
+'' Git #335''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement| 
+|text|indLeft|hanging|
+|First paragraph|2160|2160|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin.!- -!|2160|2160|
+|2ND PARAGRAPH|2520|2520|
+|•|2520|2520|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|2520|
+|=~/Test margin left and first-line margin./|2520|2520|
+|=~/Test margin left and first-line margin./|2520|2520|
+|=~/Test margin left and first-line margin./|2520|2520|
+|Third paragraph |2520|2160|
+|1. |2520|2160|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|2160|
+|2.|2520|2160|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|2160|
+|3.|2520|360|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|360|
+|=~/4./|2520|2160|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|2160|
+|=~/5./|2520|3240|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|3240|
+|=~/6./|2520|2520|
+|Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. Test margin left and first-line margin. |2520|2520|
+|=~//|2520|2520|

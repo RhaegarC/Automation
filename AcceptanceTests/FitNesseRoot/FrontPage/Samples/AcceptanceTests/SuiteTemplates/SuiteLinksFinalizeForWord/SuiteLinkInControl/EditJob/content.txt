@@ -1,0 +1,14 @@
+!include -c <SuiteLinksFinalizeForWord.EditJob
+
+#'''Mapping'''
+#-!|script|Remote|${NMSP}|
+#|Mapping|BodyHtml|to|Doc.RichTextLinkTitle|job|${JOBFILE}|
+
+#-!|script|Remote|${NMSP}|
+#|eval|$xml = [xml](Get-Content '${JOBFILE}')|
+#|eval|$el = $xml.CreateNode('element', 'Mapping', '')|
+#|eval|$el.SetAttribute('Destination','Doc.RichTextLinkTitle')|
+#|eval|$el.SetAttribute('SourceValue','<a href="/sites/WebServices/QuestLinkTracking.aspx?noteslink=notes:///85257B4F0055CD9C/0/FF16649C9A93DC4E85257B4F00606FB0">SecondDoc</a>')|
+#|eval|$el.SetAttribute('SourceType','Constant')|
+#|eval|$xml.TransferJob.AppendChild($el)|
+#|eval|$xml.Save('${JOBFILE}')|

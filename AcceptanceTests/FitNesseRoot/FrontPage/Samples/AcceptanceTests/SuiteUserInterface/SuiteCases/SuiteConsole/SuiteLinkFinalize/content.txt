@@ -1,0 +1,22 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can set execution time-out in Link Tracking tab in Options
+So that if I have larger data in the Link Tracking DB, I do not have to worry about task failing due to a short timeout
+ 
+!1 scenarios
+![
+Given MNSP was installed
+When I open Options - Link Tracking tab
+Then I can see the default execution time-out is 30
+When I type exists words in the Old URL Prefix in Console - Tools - Link Analyzer/Updater/Finalizer - Update Links
+And I click Preview button
+Then I can view the task complete
+
+When I clear the execution time-out
+And I click save button
+And I reopen Options
+Then I can view the execution time-out change to default 30
+]!

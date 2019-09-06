@@ -1,0 +1,6 @@
+|script|
+|newParseWordDoc|!{folder:"${TARGETFOLDER}",name:"documentlinkicom"}|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("v:imagedata") | select id-!|
+|id|
+|rId4|

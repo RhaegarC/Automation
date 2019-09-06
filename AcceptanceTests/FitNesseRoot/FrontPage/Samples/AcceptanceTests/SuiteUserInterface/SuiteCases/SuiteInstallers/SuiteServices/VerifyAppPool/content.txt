@@ -1,0 +1,3 @@
+!|Query:Remote|${SHAREPOINT}|!-gwmi -ComputerName . -namespace "root/MicrosoftIISv2" -class IIsApplicationPool | ? {$_.Name -like '*Quest*'}-!|
+|Name|
+|W3SVC/APPPOOLS/Quest Migrator Import Service App Pool|

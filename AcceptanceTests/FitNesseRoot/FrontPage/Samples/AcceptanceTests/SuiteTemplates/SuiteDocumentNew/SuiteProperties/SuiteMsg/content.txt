@@ -1,0 +1,3 @@
+!define MIGRATION (!-DocLib2Document-!)
+!define SAVE_AS (msg)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,22 @@
+!define WEB (suiteGroupMapping)
+!define PLACE (userandgroupmapping)
+!define LIST (testuserandgroupmapping)
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate quickr group to sharepoint
+so that I can grant proper right for users in sharepoint
+
+!3 scenarios:
+![
+Given I set source versions to "all versions"
+And I choose to map groups
+When I run the migration to SharePoint
+Then I can see the group is migrated successfully
+
+Given I set source versions to "current versions"
+And I choose to map groups
+When I run the migration to SharePoint
+Then I can see the group is migrated successfully
+
+]!

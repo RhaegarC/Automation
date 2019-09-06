@@ -1,0 +1,17 @@
+!define LIST {!-TestTestAllDocuments-!}
+|script|
+|runMigration|!{job:"${DOMINODOCJOBFILE}",template:"${MIGRATION}",sourceType:"DominoDoc",server:"${DOMINODOC_SERVER}",path:"${DOMINODOC_PATH}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",sourceSelect:"all",properties:!-@{path="TransferJob/SourceDefinition/QuerySpec";name="BinderId";value="0"}-!}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:remote|${NMSP}|$items!-|-! select @{N='Title';E={$_['Title0']}}|
+|Title|
+|Basic Document|
+|Document with Multiple Versions|
+|Unpublished Document|
+|_Attachments|
+|TestPictureAndAttachment|
+|DocumentStartingWithMinorVersion|
+|DocumentWithMajorAndMinorVersions|
+|DocumentLeaveCheckOut - (New)|

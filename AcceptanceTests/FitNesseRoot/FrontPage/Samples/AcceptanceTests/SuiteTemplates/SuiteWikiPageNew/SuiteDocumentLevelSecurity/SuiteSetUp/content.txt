@@ -1,0 +1,15 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',identityLookupMode:'MappingFileLookup',notesIdPassword:'ukxpoTKrlTn3ZvoGMUBv+w==',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+
+|script|
+|makeMappingFile|!{target:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!',clearUsers:"true",clearGroups:"true",users:'<user sharePoint="${USERMAPPING_NONEXISTENTUSER}" notes="anbeel" />'!-,-!'<user sharePoint="${USERMAPPING_USER1}" notes="CN=Vladimir Sementchouk/O=Vladimir Sementchouk" />'!-,-!'<user sharePoint="${USERMAPPING_USER2}" notes="CN=Konstantin Vlasenko/O=Konstantin Vlasenko" />'}|
+
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 3|
+
+|script|
+|removeUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USERLOGINNAME1}"!-,-!"${USERMAPPING_USERLOGINNAME2}"!-,-!"${USERMAPPING_NONEXISTENTUSERLOGIN}"}|
+
+#|script|
+#|ensureUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USER1}"!-,-!"${USERMAPPING_USER2}"!-,-!"${USERMAPPING_NONEXISTENTUSER}"}|

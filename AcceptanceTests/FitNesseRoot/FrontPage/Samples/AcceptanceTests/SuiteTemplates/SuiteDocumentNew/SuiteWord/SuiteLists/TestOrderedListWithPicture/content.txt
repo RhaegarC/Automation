@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestOrderedListWithPicture-!)
+
+!style_green[Check the word content contains text "Dokument", the font is Arial, black, bold, 14;]
+!style_green[Check the word content contains text "1.   First line.", the font is Arial, black, 10;]
+!style_green[Check the word content contains a picture, which is under the text "1.   First line.";]
+!style_green[Check the word content contains text "2.   Second line.", the font is Arial, black, 10.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

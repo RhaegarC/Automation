@@ -1,0 +1,15 @@
+!|script|Remote|${NMSP}|
+|Find Elements By Css Selector|img.WACImage|
+
+!|Query: Remote|${NMSP}|$elements|
+|alt|
+|Image|
+
+#!|Ordered Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:hyperlink") | select tooltip-!|
+#|tooltip|
+#|TestLinkHref.pdf|
+
+#!|script|Remote|${WEB_SCRAPER}|
+#|eval|!-$link = $rels.GetElementsByTagName("Relationship") | ? {$_.Target -imatch "TestLinkHref"} -!|
+#|show|eval| $link.Target|
+#|check|eval|(Invoke-WebRequest -Uri "$($link.Target)" -Credential $AdminCred).StatusCode|200|

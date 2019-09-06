@@ -1,0 +1,16 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists 
+!include -c <NmSp.AcceptanceTests.IncludePages.ScriptForClientObjectModel.DeleteDocumentLibrary
+!include -c <NmSp.AcceptanceTests.IncludePages.ScriptForClientObjectModel.AddDocumentLibrary
+!include -c <NmSp.AcceptanceTests.IncludePages.ScriptForClientObjectModel.ModifyDocumentLibrary
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget
+
+!* !-Note-!
+ * Setup document library with Content approval enabled
+*!
+!contents -R2 -g -p -f -h
+

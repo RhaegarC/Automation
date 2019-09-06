@@ -1,0 +1,3 @@
+!define GROUP {!-SuiteFieldsInTable-!}
+
+!contents -R2 -g -p -f -h

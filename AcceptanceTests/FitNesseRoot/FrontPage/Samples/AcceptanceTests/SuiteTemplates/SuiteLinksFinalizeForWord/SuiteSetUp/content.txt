@@ -1,0 +1,22 @@
+!include -c <SuiteFolder.IncludePages.SuiteSetUp
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+
+!include -c <ImportService.IncludePages.CleanupTarget
+!include -c <WebServices.IncludePages.CleanupTarget
+
+!include -c <AcceptanceTests.IncludePages.RemoveFolder
+
+!include -c <WebServices.IncludePages.EnableLinkTracking
+!include -c <ImportService.IncludePages.EnableLinkTracking
+!include -c <SuiteFolder.IncludePages.EnableFolderLinkTracking
+
+!include -c <AcceptanceTests.IncludePages.CleanupLinkTrackingDatabase
+
+!include -c <SuiteFolder.IncludePages.ExecuteSystemUnderTest
+!include -c <WebServices.IncludePages.ExecuteSystemUnderTest
+!include -c <ImportService.IncludePages.ExecuteSystemUnderTest
+
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.WordFunctions
+
+

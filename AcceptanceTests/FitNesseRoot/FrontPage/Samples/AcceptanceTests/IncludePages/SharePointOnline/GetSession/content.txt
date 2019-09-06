@@ -1,0 +1,3 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|Import-Module c:\powershell\GetSharePointOnlinePage.psm1|
+|eval|$O365Session = Get-SPOnlineSession '${SiteCollectionUrl}' '${Admin}' '${O365_PASSWORD}'|

@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{template:"Render2HTMLFiles",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:!-"subject='TestHideFormulaLost'"-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

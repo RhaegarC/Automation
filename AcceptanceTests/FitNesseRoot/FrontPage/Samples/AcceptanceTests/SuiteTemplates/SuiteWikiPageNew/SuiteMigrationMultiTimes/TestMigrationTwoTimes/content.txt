@@ -1,0 +1,4 @@
+!|Query:Remote|${NMSP}|GetFiles ${GET_FILES}|
+|Name|
+|TestProperties.aspx|
+|=~/TestProperties${DUPLICATION_SUFFIX}.aspx/|

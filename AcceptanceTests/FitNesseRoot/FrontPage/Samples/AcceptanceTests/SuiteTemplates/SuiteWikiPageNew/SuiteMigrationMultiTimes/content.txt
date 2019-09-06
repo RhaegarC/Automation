@@ -1,0 +1,4 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define LIST (!-SuiteMigrationMultiTimes-!)
+!define VIEW (!-Suite Standard Properties-!)
+!contents -R2 -g -p -f -h

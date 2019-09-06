@@ -1,0 +1,3 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval| $content = $page.ParsedHtml.getElementById("${ID}").outerText|
+|check|eval|$content -match "${NMSP_ABBREVIATION}"|False|

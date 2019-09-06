@@ -1,0 +1,5 @@
+!|Subset Query: Remote|${WEB_SCRAPER}|$page.Links !-|-! select outerText|
+|outerText|
+|CGMMeta.jpg|
+
+!define NUMBER_OF_BR (0)

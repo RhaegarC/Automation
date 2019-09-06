@@ -1,0 +1,23 @@
+!|script|Remote|${SHAREPOINT}|
+|show|eval|!-$count = 0
+do{
+$message = ""
+$SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+$SqlConnection.ConnectionString = "Server = -!${SQLINSTANCE}!-; Database = -!${LinkDatabase}!-; Integrated Security=True"
+try{
+  $SqlConnection.Open() 
+}
+catch [exception]
+{
+  $message = $_.Exception.Message
+  $message
+}
+finally {
+   $SqlConnection.Close()
+}
+if($message -eq ""){break}
+$count++
+sleep 3
+}
+while($count -lt 10)-!|
+|show|eval|$count|

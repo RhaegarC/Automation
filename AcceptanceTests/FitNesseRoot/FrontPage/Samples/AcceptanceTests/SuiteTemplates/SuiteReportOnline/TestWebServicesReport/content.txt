@@ -1,0 +1,45 @@
+!*> Set web services report list
+!|script|Remote|${NMSP}|
+|Set|Options/MigrationReportOptions|Attribute|SiteUrl|Value|http://sp2010/sites/webservices|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+|Set|Options/MigrationReportOptions/SharePointEnvironment|Attribute|EnvironmentType|Value|RemoteWebServicesClassicModeAuthentication|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+|Set|Options/MigrationReportOptions/SharePointEnvironment/Settings|Attribute|type|Value|ClientWebServicesEnvironmentSettings|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+
+!|script|Remote|${NMSP}|
+|Remove|UserOptions/MigrationReportClientCredentials|from|$($env:APPDATA)\${NMSP_AppData_Path}\UserOptions.config|
+
+!|script|Remote|${NMSP}|
+|eval|$username_ws = "VELASKEC\Administrator"|
+|eval|$password_ws = "Qwerty123"|
+|eval|$secstr_ws = New-Object -TypeName System.Security.SecureString|
+|eval|$password_ws.ToCharArray() !-|-! ForEach-Object {$secstr_ws.AppendChar($_)}|
+|eval|$AdminCred_ws = new-object -typename System.Management.Automation.PSCredential -argumentlist $username_ws, $secstr_ws|
+|eval|$ctx_ws = New-Object Microsoft.SharePoint.Client.ClientContext('http://sp2010/sites/webservices')|
+|eval|$ctx_ws.Credentials = $AdminCred_ws |
+*!
+
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"|
+|eval|$items = $ctx_ws.Site.RootWeb.Lists.GetByTitle('${REPORT_LIST}').GetItems($caml)|
+|eval|$ctx_ws.Load($items)|
+|eval|$ctx_ws.ExecuteQuery()|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} },@{ N='Source Type'; E={$_['Source_x0020_Type']} }, @{ N='Status'; E={$_['Status']} } ,@{ N='Migration Mode'; E={$_['Migration_x0020_Mode']} } ,@{ N='Source Documents'; E={$_['Source_x0020_Documents']} } ,@{ N='Processed Documents'; E={$_['Processed_x0020_Documents']} } ,@{ N='Migrated Items'; E={$_['Migrated_x0020_Items']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Warnings'; E={$_['Warnings']} }, @{ N='Accepted'; E={$_['Accepted']} }, @{ N='Target Definition'; E={$_['Target_x0020_Definition']} }, @{ N='Last Error'; E={$_['Last_x0020_Error']} } |
+|Job Name|Source Type|Status|Migration Mode|Source Documents|Processed Documents|Migrated Items|Errors|Warnings|Accepted|Target Definition|Last Error|
+|"${WEB}.${LIST}"|"Notes"|"Completed"|"${MIGRATION_MODE}"|12|12|12|0|1|false|"PDF Documents"|null|
+
+!|script|Remote|${NMSP}|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"|
+|eval|$items = $ctx_ws.Site.RootWeb.Lists.GetByTitle('${SUMMARY_LIST}').GetItems($caml)|
+|eval|$ctx_ws.Load($items)|
+|eval|$ctx_ws.ExecuteQuery()|
+|eval|$ctx_ws.Dispose()|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Records Read'; E={$_['Records_x0020_Read']} } ,@{ N='Records Written'; E={$_['Records_x0020_Written']} } ,@{ N='Warnings'; E={$_['Warnings']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Run By'; E={$_['Run_x0020_By']} },@{ N='Database'; E={$_['Database']} }   |
+|Job Name|Records Read|Records Written|Warnings|Errors|Run By|Database|
+|"${WEB}.${LIST}"|12|12|1|0|"Administrator"|"${APPNAME}.nsf"|
+
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions

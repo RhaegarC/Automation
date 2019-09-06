@@ -1,0 +1,3 @@
+!|script|remote|${WEB_SCRAPER}|
+|check|eval|$pdf.Metadata["pdfaid:part"]|3|
+|check|eval|$pdf.Metadata["pdfaid:conformance"]|B|

@@ -1,0 +1,2 @@
+!define LIST (!-TestFinalizeRecover-!)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,6 @@
+!define ID (ctl00_PlaceHolderMain_ctl01)
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${CA}${ADMIN}NMSPTestLinkTracking.aspx?SiteCollection=${WEBAPP_URL}${SITE}&SqlServer=${SQLINSTANCE}&SqlDatabase=${LinkDatabase}&ConnString=Data Source=${SQLINSTANCE}; Initial Catalog=${LinkDatabase}; UID=velaskec%5Cadministrator; PWD=Qwerty123&ISAddr=${WEBAPP_URL}:8888/ImportSession.svc&ISEnabled=true&ISImpersonation=true|
+
+!include -c CheckLinkTrackingContent

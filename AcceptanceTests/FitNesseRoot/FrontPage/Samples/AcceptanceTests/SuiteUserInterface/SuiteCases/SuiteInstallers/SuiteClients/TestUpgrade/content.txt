@@ -1,0 +1,30 @@
+!|script|Remote|${NMSP}|
+|check|eval|(Get-WmiObject -Class Win32_Product !-|-! ? {$_.Name -like ("${NMSP_Company_Name} ${NMSP_Product_Name}*")} !-|-! % {$_.Uninstall()}).ReturnValue|0|
+
+!*> Install old RTM
+!|script|Remote|${NMSP}|
+|eval|Read-S3Object -BucketName NMSP-ZHUHAI -Key ${LATEST_RTM_VERSION}/MigratorforNotestoSharePoint-Clients-${LATEST_RTM_VERSION}.msi -File c:\msi\RTM\MigratorforNotestoSharePoint-Clients-${LATEST_RTM_VERSION}.msi|
+
+!|script|Remote|${NMSP}|
+|check|eval|(start c:\msi\RTM\MigratorforNotestoSharePoint-Clients-${LATEST_RTM_VERSION}.msi '/qn NDPROG="C:\Program Files (x86)\IBM\Lotus\Notes" NDDATA="C:\Program Files (x86)\IBM\Lotus\Notes\Data" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+
+!|script|Remote|${NMSP}|
+|check|eval|(Get-WmiObject -Class Win32_Product !-|-! ? {$_.Name -like ("${NMSP_Company_Name} ${NMSP_Product_Name}*")} !-|-! % {$_.Uninstall()}).ReturnValue|0|
+*!
+!* Upgrade to the current version  
+!|script|Remote|${NMSP}|
+|check|eval|(start (get-childitem c:\msi\MigratorForNotestoSharePoint*).FullName '/qn NDPROG="C:\Program Files (x86)\IBM\Lotus\Notes" NDDATA="C:\Program Files (x86)\IBM\Lotus\Notes\Data" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+*!
+!* No Beta; One product; Right name
+!|script|Remote|${NMSP}|
+|eval|$product = @(Get-WmiObject -Class Win32_Product !-|-! ? {$_.Name -like ("${NMSP_Company_Name} ${NMSP_Product_Name}*")})|
+|check|eval|$product.Count|1|
+|check not|eval|$product.Name|=~/(?i)Beta/|
+|check|eval|$product.Name|${NMSP_Company_Name} ${NMSP_Product_Name} ${NMSP_Product_Version}|
+*!
+!* No Beta in msi 
+!|script|Remote|${NMSP}|
+|check|eval|select-string -path (get-childitem c:\msi\MigratorForNotestoSharePoint*).FullName -pattern " Beta"|=~/^$/|
+*!
+
+!include -c CheckConsole

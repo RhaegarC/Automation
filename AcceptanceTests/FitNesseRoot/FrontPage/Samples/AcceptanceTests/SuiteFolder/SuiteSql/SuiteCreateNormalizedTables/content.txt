@@ -1,0 +1,22 @@
+!define GROUP (!-SuiteSql-!)
+!define LIST (!-SuiteCreateNormalizedTables-!)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can create tables or add table fields to SQL target DB automatically
+So that I can view these created tables or added table fields in SQL target DB
+
+!1 scenarios
+![
+Given "Primary Table" and "Normalized Tables" names were set in "List Definition" tab of "Target Data Definition"
+And "Create Tables" checkbox was enabled
+And fields were added in "Data Fields" tab of "Target Data Definition" (including normalized tables)
+And "Primary key" were set (including normalized tables)
+And mappings were added in "Map Data" tab
+When I click "Run Provisioning Only"
+Then I can view tables were created in SQL target DB
+And the fields of these tables were created based on the fields added in "Target Data Definition"
+When I click "Run Job"
+Then I can view the data were migrated to these tables
+]!

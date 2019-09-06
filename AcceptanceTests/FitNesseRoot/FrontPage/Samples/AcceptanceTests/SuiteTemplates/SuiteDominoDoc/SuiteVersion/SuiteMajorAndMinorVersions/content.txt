@@ -1,0 +1,2 @@
+!define LIST {!-TestCreateMajorAndMinorVersions-!}
+!contents -R2 -g -p -f -h

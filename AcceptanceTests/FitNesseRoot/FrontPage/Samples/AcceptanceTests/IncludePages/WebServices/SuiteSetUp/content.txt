@@ -1,0 +1,6 @@
+!include -c LoadSharePointApi
+!include -c GetCredentials
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions
+
+!|script|remote|${NMSP}|
+|SharePoint LinkTracking|false|

@@ -1,0 +1,12 @@
+!define WEB (SuitePdf)
+!define FOLDER (PDF)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibPdfDoc)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.pdf)
+!define TARGET (${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf)
+!define EditJob (!include -c <NmSp.AcceptanceTests.SuiteTemplates.SuitePdf.EditJob)
+!contents -R2 -g -p -f -h
+
+
+

@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+
+|script|
+|jobDefinition|!{template:"Render2HTMLFiles",job:"${JOBFILE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",db:"${DATABASE}",formula:"!-@Contains(subject;'TestBgColorIn')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,117 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordHyperLinkElement {
+   if($_.parentNode.rPr)
+   {
+     New-Object PSObject -Property @{
+      href = $_.'#text'.split('"')[1]
+     }
+   }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordTextElement {
+  New-Object PSObject -Property @{
+    text = $_.'#text'
+    'text-align' = $_.parentNode.parentNode.pPr.jc.val
+    indLeft = $_.parentNode.parentNode.pPr.ind.left
+    hanging = $_.parentNode.parentNode.pPr.ind.hanging
+    borderStyleTop = $_.parentNode.parentNode.parentNode.tcPr.tcBorders.top.val
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordImages {
+  New-Object PSObject -Property @{
+    size = $_.ImageData.ImageBytes.Length
+    type = $_.ImageData.ImageType
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordListItemElement($numbering) {
+  if($_.pPr.numPr)
+  {
+    $ilvl =  $_.pPr.numPr.ilvl.val
+    $l = $numbering.GetElementsByTagName('w:lvl') | ? ilvl -eq $ilvl
+    New-Object PSObject -Property @{
+      text = $_.r.t
+      indLeft = $_.pPr.ind.left
+      hanging = $_.pPr.ind.hanging
+      type = $l.numFmt.val
+    }
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordListItems($numbering) {
+  $pPr = $_.parentNode.parentNode.pPr
+  if($pPr.numPr)
+  {
+    $ilvl = $pPr.numPr.ilvl.val
+    $l = $numbering.GetElementsByTagName('w:lvl') | ? ilvl -eq $ilvl
+    New-Object PSObject -Property @{
+      text = $_.'#text'
+      indLeft = $pPr.ind.left
+      hanging = $pPr.ind.hanging
+      type = $l.numFmt.val
+    }
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordHybridListItems($numbering) {
+  $pPr = $_.parentNode.parentNode.pPr
+  if($pPr.numPr)
+  {
+    $numId1 = $pPr.numPr.numId.val - 1
+    $ilv0 = $numbering.GetElementsByTagName("w:lvl") | ? {$_.ilvl -eq "0"}
+    $ilvAbstr =  $ilv0 | ?{$_.parentNode.abstractNumId -eq $numId1}
+     New-Object PSObject -Property @{
+        text = $_.'#text'
+        indLeft = $pPr.ind.left
+        hanging = $pPr.ind.hanging
+        type = $ilvAbstr.numFmt.val
+    }
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordMultiLevelListItems($numbering) {
+  $pPr = $_.parentNode.parentNode.pPr
+  if($pPr.numPr)
+  {
+    $ilvl = $pPr.numPr.ilvl.val
+    $ilv0 = $numbering.GetElementsByTagName("w:lvl") | ? {$_.ilvl -eq "0"}
+    $ilvAbstr =  $ilv0 | ? {$_.parentNode.abstractNumId -eq $ilvl}
+    New-Object PSObject -Property @{
+       text = $_.'#text'
+       indLeft = $pPr.ind.left
+       hanging = $pPr.ind.hanging
+       type = $ilvAbstr.numFmt.val
+    }
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordTableElement {
+  New-Object PSObject -Property @{
+    text = $_.'#text'
+    'leftMargin' = $_.parentNode.parentNode.parentNode.parentNode.tblPrEx.tblInd.w
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordFontElement {
+  New-Object PSObject -Property @{
+    text = $_.'#text'
+    family = $_.parentNode.rPr.rFonts.cs
+    size = $_.parentNode.rPr.sz.val
+    color = $_.parentNode.rPr.color.val
+    bgcolor = $_.parentNode.parentNode.pPr.shd.fill
+    weight = if(($_.parentNode.rPr.b -ne $null) -and ($_.parentNode.rPr.b.val -ne "0")){'bold'}else{'normal'}
+    italic = $_.parentNode.rPr.i
+    underline = if($_.parentNode.rPr.u -ne $null){'yes'}else{'no'}
+    strike = if($_.parentNode.rPr.strike -ne $null){'yes'}else{'no'}
+    vertAlign = $_.parentNode.rPr.vertAlign.val
+  }
+}</pre>-!|

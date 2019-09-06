@@ -1,0 +1,3 @@
+!define LIST {!-TestAttachmentsVersions-!}
+!define MIGRATION {!-DominoDoc2BinaryFiles-!}
+!contents -R2 -g -p -f -h

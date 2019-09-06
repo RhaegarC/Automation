@@ -1,0 +1,7 @@
+!*> References
+|[[Pivotal Tracker][https://www.pivotaltracker.com/story/show/46745279]]|
+|Jive|
+*!
+!contents -R2 -g -p -f -h
+!img /files/nmsp/images/MigrateMappedData/toFolders.png
+''Start to watch [[this video][http://communities.quest.com/servlet/JiveServlet/download/14812-1-43490/NMSP%206.2%20training.wmv]] from the [19:00] for more information.''

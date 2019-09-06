@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestTableWithMargins-!)
+
+!style_green[Check the word content contains text and tables as following image:]
+!img files/nmsp/images/CheckpointImages/TestTableWithMargins.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

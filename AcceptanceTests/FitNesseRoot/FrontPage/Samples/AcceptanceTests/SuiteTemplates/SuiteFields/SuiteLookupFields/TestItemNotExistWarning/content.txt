@@ -1,0 +1,16 @@
+!define LIST {!-TestItemNotExistWarning-!}
+!define DATABASE {!-ChoiceAndLookupFields-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!define LOOKUP_LIST {!-TestItemNotExistWarning_Lookup-!}
+!define TARGET_FIELD {<!-Field MultipleValues='false' Name='Category' AddToViews='DefaultView' LookupColumn='Title' Type='Lookup' AddMissingChoices='true' IsRequired='false'-!><!-LookupTarget-!><!-ListName-!>!-TestItemNotExistWarning_Lookup-!</!-ListName-!></!-LookupTarget-!></!-Field-!>}
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LOOKUP_LIST}",type:"CustomList"}|
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",autoCreateList:"true",autoCreateFields:"true",targetFields:"${TARGET_FIELD}",mapFields:"<!-Mapping Destination='Category' SourceValue='Category' MultiValueDisposition='Last' Transform='None' FormatString='{0}' -!/>",duplicateHandle:"CreateDuplicate",formula:"subject='TwoCategories'"}|
+|runJob|!{job:"${JOBFILE}"}|
+
+!|script|remote|${NMSP}|
+|check|eval|([string]$log).Contains("Item does not exist")|False|
+

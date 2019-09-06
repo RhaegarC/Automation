@@ -1,0 +1,7 @@
+!define LINK (notes${COLON_CHAR}///85257B4F0055CD9C/0/FF16649C9A93DC4E85257B4F00606FB0)
+!define SHARENAME (sharedfolder)
+!define SHARED_FOLDER (C:\TargetFolder\${SHARENAME})
+!define BASEFOLDER (\\localhost\${SHARENAME}\SuiteRootFolder)
+!define LINKS (7)
+!define DOCUMENTS (6)
+!contents -R2 -g -p -f -h

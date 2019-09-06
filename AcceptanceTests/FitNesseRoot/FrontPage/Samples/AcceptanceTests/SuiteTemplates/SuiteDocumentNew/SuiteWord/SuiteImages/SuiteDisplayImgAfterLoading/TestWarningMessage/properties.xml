@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Suites>Ignore2013WS, Ignore2013IS, Ignore2016WS, Ignore2016IS, IgnoreToFolder, IgnoreTurboMode, IgnoreSpOnline</Suites>
+<Test/>
+</properties>

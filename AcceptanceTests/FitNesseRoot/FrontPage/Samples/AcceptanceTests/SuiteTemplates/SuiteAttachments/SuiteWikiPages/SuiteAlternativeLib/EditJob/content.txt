@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+
+!* ''Add target definitions'''
+!|script|Remote|${NMSP}|
+|set|TransferJob/SharePointTargetDefinition/Field[@Name='Files']|Attributes|@{AlternateLibrary='Documents';AlternateFolder=''}|in|${JOBFILE}|
+*!

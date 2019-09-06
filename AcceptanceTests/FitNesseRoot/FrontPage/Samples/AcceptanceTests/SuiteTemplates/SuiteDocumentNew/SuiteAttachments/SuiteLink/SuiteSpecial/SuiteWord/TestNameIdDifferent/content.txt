@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestNameIdDifferent-!)
+
+!style_green[Check the word content contains "_Attachments/Test.xlsx".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

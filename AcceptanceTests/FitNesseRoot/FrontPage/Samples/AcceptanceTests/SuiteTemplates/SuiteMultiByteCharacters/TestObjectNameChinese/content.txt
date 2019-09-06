@@ -1,0 +1,9 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'IMG'|properties|src|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/_Attachments/TestObjectNameChinese.GIF/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|(Invoke-WebRequest -Uri ${LIST_URL}/_Attachments/TestObjectNameChinese.bmp -Credential $AdminCred).StatusCode|200|

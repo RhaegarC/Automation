@@ -1,0 +1,58 @@
+!define VIEW (Suite General)
+!define LIST (SuiteLink_SuiteAttachmentLinks)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate attachment icons as image files into PDF/(PDF/A)/Word/Mail
+So that I can view these attachments' icon in these migrated documents
+
+!1 scenarios
+![
+Given "Migrate attachment icons as image files" option of Word Target Data Definition was checked
+And "Body Attachments -> Doc.Attachments" Field Mappings was added in Map Data Tab
+When I run migration
+Then I can view these attachments' icon in the migrated documents
+And I can double click to open these attachments
+
+Given "Migrate attachment icons as image files" option of Word Target Data Definition was checked
+And "Body Attachments -> Doc.Attachments" Field Mappings was deleted in Map Data Tab
+When I run migration
+Then I can view these attachments' icon in the migrated documents
+And I can't double click to open these attachments
+
+Given "Migrate attachment icons as image files" option of Word Target Data Definition was unchecked
+And "Body Attachments -> Doc.Attachments" Field Mappings was added in Map Data Tab
+When I run migration
+Then I can double click to open these attachments
+
+Given "Migrate attachment icons as image files" option of Word Target Data Definition was unchecked
+And "Body Attachments -> Doc.Attachments" Field Mappings was deleted in Map Data Tab
+When I run migration
+Then I can view these attachments' link displays with space between them in the migrated documents
+And I can click the links to open these attachments
+
+Given "Migrate attachment icons as image files" option of PDF/(PDF/A)/Mail Target Data Definition was checked
+And "Body Attachments -> Doc.Attachments" Field Mappings was added in Map Data Tab
+When I run migration
+Then I can view these attachments' icon in the migrated documents
+And I can’t click to download these attachments
+
+Given "Migrate attachment icons as image files" option of PDF/(PDF/A)/Mail Target Data Definition was checked
+And "Body Attachments -> Doc.Attachments" Field Mappings was deleted in Map Data Tab
+When I run migration
+Then I can view these attachments' icon in the migrated documents
+And I can click to download these attachments
+
+Given "Migrate attachment icons as image files" option of PDF/(PDF/A)/Mail Target Data Definition was unchecked
+And "Body Attachments -> Doc.Attachments" Field Mappings was added in Map Data Tab
+When I run migration
+Then I can view some words indicated the attachments’ name
+
+Given "Migrate attachment icons as image files" option of PDF/(PDF/A)/Mail Target Data Definition was unchecked
+And "Body Attachments -> Doc.Attachments" Field Mappings was deleted in Map Data Tab
+When I run migration
+Then I can view these attachments' link displays with space between them in the migrated documents
+And I can click the link to download these attachments
+
+]!

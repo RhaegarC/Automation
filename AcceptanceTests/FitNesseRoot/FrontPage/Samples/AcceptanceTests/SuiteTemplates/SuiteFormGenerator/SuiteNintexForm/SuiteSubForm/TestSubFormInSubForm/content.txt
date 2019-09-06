@@ -1,0 +1,6 @@
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|AllowMultiValueDatetime|
+
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[text() = 'Subsubform1:']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'DatetimeContol']|ExpectedValue|True|

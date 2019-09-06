@@ -1,0 +1,2 @@
+!include -c <SuiteWikiPage.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.RunMigration

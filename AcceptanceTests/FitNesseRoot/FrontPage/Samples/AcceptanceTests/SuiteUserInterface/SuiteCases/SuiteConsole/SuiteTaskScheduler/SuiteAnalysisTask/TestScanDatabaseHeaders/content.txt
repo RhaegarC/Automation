@@ -1,0 +1,14 @@
+|script|
+|runScheduledTask|!{scheduledTaskName:"${TASKNAME}",taskTemplate:"${TASKTEMPLATE}",scheduledTaskType:"Analysis",databases:"!fordiscovery/${AnalyzeDB}.nsf",dataAnalysisType:"None"}|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|getDatabase ${AnalyzeDB}|
+|check|eval|$db.DatabaseSize|620032|
+|check|eval|$db.DesignDocs|28|
+
+|script|
+|stopServer86|

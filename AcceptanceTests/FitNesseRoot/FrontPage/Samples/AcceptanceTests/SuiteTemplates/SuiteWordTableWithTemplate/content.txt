@@ -1,0 +1,11 @@
+!define WEB (SuiteWordTableWithTemplate)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibWordDocTemplateBodyTable)
+!define VIEW (Suite Table)
+!define LIST (SuiteWordTableWithTemplate)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWordTableWithTemplate.EditJob)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.docx)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define TARGET (c:\TargetFolder\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx)
+
+!contents -R2 -g -p -f -h

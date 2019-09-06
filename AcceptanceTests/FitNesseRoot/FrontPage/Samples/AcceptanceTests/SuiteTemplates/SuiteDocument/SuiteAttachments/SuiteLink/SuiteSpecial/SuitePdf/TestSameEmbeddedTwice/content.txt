@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$list.Action.URI|
+|Value|
+|=~/_Attachments/object0.docx!-|-!_Attachments/TestSameEmbeddedTwice.docx/|
+|=~/_Attachments/object1.docx!-|-!_Attachments/TestSameEmbeddedTwice.docx/|

@@ -1,0 +1,28 @@
+!1 user story
+
+As an administrator
+I can scan all the document links inside a database
+and view the detailed information for the links
+So that I can make the strategy to migrate the database
+
+!1 scenarios
+![
+Given NMSP is installed
+When I click "Analyze Databases" on the context menu of a database
+Then I can see an option named "Doclink Scanning"
+
+Given NMSP is installed
+When I go to the "data Analysis" tab on the property window 
+Then I can see a button named "Doclink Scan"
+When I click the button
+Then I can see the link number on the button "Doclinks"
+When I click the button "Doclinks"
+Then I can see the detailed information of the links, including "Database Title", "Count", "Server" and "FilePath"
+
+Given there is a link pointing to a document that does not discovered yet
+When I click doc link scan
+Then I can see the replica ID of the server and the database in the result
+When I discover the database
+And I click doc link scan again
+Then I can see the name of the server and database
+]!

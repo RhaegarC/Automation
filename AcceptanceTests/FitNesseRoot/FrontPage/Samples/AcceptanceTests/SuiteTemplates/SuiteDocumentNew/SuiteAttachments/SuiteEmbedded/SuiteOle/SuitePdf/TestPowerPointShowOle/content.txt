@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestPowerPointShowOle-!)
+
+!style_green[Check the pdf embedded files contains "object0.pptx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

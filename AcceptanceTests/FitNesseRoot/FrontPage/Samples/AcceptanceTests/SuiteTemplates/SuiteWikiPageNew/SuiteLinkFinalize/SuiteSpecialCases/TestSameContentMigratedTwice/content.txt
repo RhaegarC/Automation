@@ -1,0 +1,34 @@
+!define FIRSTLIST (Migration1)
+!define SECONDLIST (Migration2)
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${FIRSTLIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SECONDLIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!define LINKS (6)
+!define DOCUMENTS (6)
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${FIRSTLIST}",caml:"<View><Query></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|Document1|=~/${SITE}/${WEB}/${LIST}/Document2.aspx/|
+|Document2|=~/${SITE}/${WEB}/${LIST}/Document3.aspx/|
+|Document3|=~/${SITE}/${WEB}/${LIST}/Document1.aspx/|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SECONDLIST}",caml:"<View><Query></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|Document1|=~/${SITE}/${WEB}/${LIST}/Document2.aspx/|
+|Document2|=~/${SITE}/${WEB}/${LIST}/Document3.aspx/|
+|Document3|=~/${SITE}/${WEB}/${LIST}/Document1.aspx/|

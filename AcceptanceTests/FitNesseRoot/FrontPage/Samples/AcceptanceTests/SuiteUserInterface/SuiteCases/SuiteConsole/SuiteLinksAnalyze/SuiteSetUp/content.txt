@@ -1,0 +1,24 @@
+!include <SuiteCases.GlobalSteps.DisableSetupWizard
+
+!|script|Remote|${SQLHOST}|
+|startSqlService|
+
+!|script|Remote|${SQLHOST}|
+|MMC LinkTracking enabled|
+
+!include -c <AcceptanceTests.IncludePages.CleanupLinkTrackingDatabase
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking",formula:"subject='MultiByteLink'"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startConsole|
+
+!include -c <SuiteLinksAnalyze.DoAnalyze

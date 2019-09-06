@@ -1,0 +1,29 @@
+'''Check Authors Person'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'AuthorBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d3p1:PeoplePickerFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Name Person'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'NamesBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d3p1:PeoplePickerFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Reader Person'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ReaderBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d3p1:PeoplePickerFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Authors Person'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedAuthors']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d3p1:PeoplePickerFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Dialog For Choice Person'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'DialogForChoicePerson']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d3p1:PeoplePickerFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

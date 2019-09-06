@@ -1,0 +1,4 @@
+!include -c <SuiteAttachments.SuiteWikiPages.SuiteMaxNumberPerFolder.EditJob
+''If duplicated found: Write new item''
+!|script|Remote|${NMSP}|
+|Remove|TransferJob/JobOptions/DuplicateDocumentHandling|from|${JOBFILE}|

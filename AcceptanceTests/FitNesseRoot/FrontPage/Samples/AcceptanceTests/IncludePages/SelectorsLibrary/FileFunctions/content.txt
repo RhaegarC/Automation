@@ -1,0 +1,12 @@
+!|script|Remote|${NMSP}|
+|eval|!-<pre>function GetFiles($folder) {
+  $items = ls $folder
+  $items | % {
+    New-Object PSObject -Property @{
+      Name  = $_.Name
+      File  = $_.FullName
+      Size  = $_.Length
+      Modified = $_.LastWriteTime
+    }
+  }
+}</pre>-!|

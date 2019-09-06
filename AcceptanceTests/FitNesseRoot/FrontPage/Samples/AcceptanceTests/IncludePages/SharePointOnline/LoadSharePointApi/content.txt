@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx.Credentials = $AdminCred |
+
+
+
+

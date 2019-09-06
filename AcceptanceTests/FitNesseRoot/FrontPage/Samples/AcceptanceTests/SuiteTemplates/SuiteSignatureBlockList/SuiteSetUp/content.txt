@@ -1,0 +1,9 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+
+''Mapping'''
+-!|script|Remote|${NMSP}|
+|Mapping|SignatureBlock|to|SignatureBlock|FormatString|${PRESERVE}|job|${JOBFILE}|
+!include <SuiteCases.GlobalSteps.RunMigration

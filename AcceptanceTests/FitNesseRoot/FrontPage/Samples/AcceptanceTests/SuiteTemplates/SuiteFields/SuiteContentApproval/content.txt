@@ -1,0 +1,8 @@
+!define WEB (!-SuiteContentApproval-!)
+!define VIEW (!-Suite Special-!)
+!define LIST (!-DocLibraryContentApproval-!)
+!define DATABASE (!-SuiteAttachments-!)
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!define TARGETFIELDS (<!-Field Name='Approval Status' Type='ApprovalCode'-! />)
+!define MAPFIELDS (<Mapping !-Destination='Approval Status' SourceValue='Approved' SourceType='Constant'-! />)
+!contents -R2 -g -p -f -h

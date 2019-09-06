@@ -1,0 +1,24 @@
+!define DATABASE (!-SuiteSpecialCases-!)
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!define LIST (!-TestRefreshCookieList-!)
+!define GROUP (!-SuiteO365Authentication-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+
+As a tool that can migrate documents to !-SharePoint-! Online
+NMSP can handle !-SharePoint-! Online authentication properly
+So that the process of migration is smooth
+
+!1 scenarios
+![
+Given proper user name and password of SharePoint Online is set
+And I don't force cookies to expire
+When I click run migration
+Then I can find only one item about cookies in the log
+
+Given proper user name and password of SharePoint Online is set
+And I set to force cookies to expire in 30 minutes
+When I click run migration
+Then I can find only one item about cookies in the log
+]!

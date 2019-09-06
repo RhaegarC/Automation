@@ -1,0 +1,6 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestIconSize.aspx",tag:"img",filter:'!--not $_.outerHTML.Contains("width")-!',selector:"tagName"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|tagName|
+|IMG|

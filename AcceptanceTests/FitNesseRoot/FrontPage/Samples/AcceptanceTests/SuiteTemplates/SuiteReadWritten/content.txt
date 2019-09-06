@@ -1,0 +1,8 @@
+!define WEB (SuiteReadWritten)
+!define MIGRATION (DocLib2DocumentX)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.${SAVE_AS})
+!define APPNAME (SimpleObjectsLib)
+!define LIST (${RUNNING_PAGE_NAME}) 
+!define DOCUMENT_NAME (TestProperties)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteReadWritten.EditJob)
+!contents -R2 -g -p -f -h

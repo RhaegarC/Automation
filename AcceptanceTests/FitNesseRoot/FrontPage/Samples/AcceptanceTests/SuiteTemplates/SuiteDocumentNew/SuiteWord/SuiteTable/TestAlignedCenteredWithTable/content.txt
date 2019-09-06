@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestAlignedCenteredWithTable-!)
+
+!style_green[Check the word content contains text as following image:]
+!img files/nmsp/images/CheckpointImages/TestAlignedCenteredWithTable.png 
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

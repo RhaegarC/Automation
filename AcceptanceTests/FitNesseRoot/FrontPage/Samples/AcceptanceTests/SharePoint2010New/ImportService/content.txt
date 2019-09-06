@@ -1,0 +1,9 @@
+!define NMSP (lab2.at-nmsp.com)
+!define SHAREPOINT (lab2_sp2010.at-nmsp.com)
+!define SHAREPOINT_HOST (SP2010)
+!define LT_PSW (iU2LNL7dQ2tlOvcwgBHnxQ==)
+!define MODE (!-ImportService-!)
+!define MIGRATION_MODE (Import Service)
+!define IS_ENABLED (True)
+!define LT_ENABLED (True)
+!contents -R1 -g -p -f -h

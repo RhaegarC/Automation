@@ -1,0 +1,2 @@
+!define ENV_NAME (SP2010WS)
+!contents -R2 -g -p -f -h

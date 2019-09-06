@@ -1,0 +1,23 @@
+!contents -R2 -g -p -f -h
+
+!define AutoCreateFields (!-<Field ColumnName='UNID' Type='VarChar' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='ID' Type='Integer' TableName='tbl_vw_SECTION_blank_MAIL' IsPrimaryKey='true' IsIdentityColumn='true' /><Field ColumnName='BooleanField' Type='Boolean' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='NumberField' Type='Number' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='CurrencyField' Type='Currency' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='DateTimeField' Type='DateTime' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='TimeField' Type='Time' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='FileField' Type='File' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='TextField' Type='Text' TableName='tbl_vw_SECTION_blank_MAIL' /><AutoCreateTable>true</AutoCreateTable><AutoCreateFields>true</AutoCreateFields>-!)
+!define MappingFields (!-<Mapping Destination='tbl_vw_SECTION_blank_MAIL.BooleanField' SourceType='Constant' SourceValue='1' FormatString='' /><Mapping Destination='tbl_vw_SECTION_blank_MAIL.NumberField' SourceType='Constant' SourceValue='10' FormatString='' /><Mapping Destination='tbl_vw_SECTION_blank_MAIL.CurrencyField' SourceType='Constant' SourceValue='10.2' FormatString='' /><Mapping Destination='tbl_vw_SECTION_blank_MAIL.DateTimeField' SourceValue='{DocCreated}' FormatString='' /><Mapping Destination='tbl_vw_SECTION_blank_MAIL.TimeField' SourceType='None' FormatString='' /><Mapping Destination='tbl_vw_SECTION_blank_MAIL.TextField' SourceValue='Form' FormatString='' />-!)
+
+|script|remote|${NMSP}|
+|loadSqlLib|
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='tbl_vw_SECTION_blank_MAIL') DROP TABLE [tbl_vw_SECTION_blank_MAIL]"|
+|eval|ExecuteNonQuery $con $comStr|
+
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",sqlServerEnabled:"true"}|
+
+|script|
+|jobDefinition|!{template:"ViewColumn2SQL",db:"SRSG Tracking03",targetType:"SQL",job:"${JOBFILE}",removeNodes:"!-//Field[@ColumnName='UNID']-!",addNodes:!-@{path="TransferJob/SqlServerTargetDefinition";-!node="${AutoCreateFields}"!-}-!,mapFields:"${MappingFields}"}|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|

@@ -1,0 +1,37 @@
+!* First migration
+!define LIST (Migration1)
+!include -c <AcceptanceTests.IncludePages.RemoveList
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+*!
+!* Second migration
+!define LIST (Migration2)
+!include -c <AcceptanceTests.IncludePages.RemoveList
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+*!
+!* Finalize
+!define LINKS (6)
+!define DOCUMENTS (6)
+!include -c <SuiteLinksFinalize.DoFinalize
+*!
+!* Verify First migration
+!define LIST (Migration1)
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|Document1|=~/${SITE}/${WEB}/${LIST}/Document2.aspx/|
+|Document2|=~/${SITE}/${WEB}/${LIST}/Document3.aspx/|
+|Document3|=~/${SITE}/${WEB}/${LIST}/Document1.aspx/|
+*!
+!* Verify First migration
+!define LIST (Migration2)
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|Document1|=~/${SITE}/${WEB}/${LIST}/Document2.aspx/|
+|Document2|=~/${SITE}/${WEB}/${LIST}/Document3.aspx/|
+|Document3|=~/${SITE}/${WEB}/${LIST}/Document1.aspx/|
+*!

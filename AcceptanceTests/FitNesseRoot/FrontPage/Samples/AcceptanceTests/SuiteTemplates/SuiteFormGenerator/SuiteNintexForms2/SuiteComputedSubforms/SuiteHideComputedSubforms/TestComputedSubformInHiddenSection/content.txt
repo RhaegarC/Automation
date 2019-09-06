@@ -1,0 +1,2 @@
+!|Ordered Query:remote|${NMSP}|!-$elements| ? {$_.InnerText -match "Formula7|Formula8|Computed\d"} | select innerText-!|
+|innerText|

@@ -1,0 +1,7 @@
+|script|
+|newParsePdfDoc|!{url:"${SOURCE}",file:"${TARGET}",findText:"Content!-: TestMappingMultiValuedSource-!"}|
+
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Content: TestMappingMultiValuedSource|

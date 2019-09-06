@@ -1,0 +1,36 @@
+!|script|Remote|${NMSP}|
+|Set|Options/MigrationReportOptions|Attribute|SiteUrl|Value|http://WrongUrl|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|
+
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${WEB_URL}|List|${LIST}|Application|${APPNAME}|
+
+''Edit job file''
+${EditJob}
+
+!*> Migrate
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|show|eval|!-
+do {
+ $process = start .\NMSPCMD.EXE '-job -!${JOBFILE}!-' -wait -PassThru
+ $process.WaitForExit()
+ $process.ExitCode
+}
+while($process.ExitCode -eq 1)-!|
+|check|eval|$process.ExitCode|-3|
+
+*!
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|eval|$critical = ([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+
+*!
+
+!|script|Remote|${NMSP}|
+|Set|Options/MigrationReportOptions|Attribute|SiteUrl|Value|${SITE_URL}|in|$($env:PROGRAMDATA)\${NMSP_AppData_Path}\Options.config|

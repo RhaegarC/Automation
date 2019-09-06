@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestTableWithBulletList-!)
+
+!style_green[Check the word content contains text as following image, and the font is Arial, font color is black, font size is 9.]
+!img files/nmsp/images/CheckpointImages/TestTableWithBulletList.png 
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

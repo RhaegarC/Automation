@@ -1,0 +1,20 @@
+
+|script|
+|runJob|!{job:"${JOBFILE}",mode:"RecoverLTS"}|
+
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|show|eval|(Get-ChildItem '$LogFolder' !-|-! select -last 1).Name|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|eval|$critical = ([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|eval|$warning = ([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+
+!|Query:Remote|${NMSP}|$critical|
+|context|message|stackTrace|
+*!
+

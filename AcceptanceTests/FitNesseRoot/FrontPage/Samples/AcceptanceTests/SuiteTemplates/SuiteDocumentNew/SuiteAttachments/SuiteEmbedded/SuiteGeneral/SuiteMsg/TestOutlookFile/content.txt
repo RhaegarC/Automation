@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestOutlookFile-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|Outlook.msg|

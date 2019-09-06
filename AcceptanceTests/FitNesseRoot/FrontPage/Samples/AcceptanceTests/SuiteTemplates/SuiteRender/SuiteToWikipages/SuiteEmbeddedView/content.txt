@@ -1,0 +1,45 @@
+!define LIST (!-SuiteEmbeddedView-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate embedded view to sharepoint
+So that I have full content migrated
+
+!1 scenarios
+![
+Given I have embeded view with last column name empty
+When I run migration
+Then the migration is successful
+
+Given I have embeded view of normally created view from current database
+When I run migration
+Then I can see the content of the view turned into a table with 3 columns on sharepoint
+
+Given I have embeded view of "By Category" with filtered result
+And I show a single category by formula
+And the formula is the field name of the categorized column
+When I run migration
+Then I can see the filtered content of the view turned into a table with 3 columns on sharepoint
+
+Given I have embeded view of "By Category" with filtered result
+And I show a single category by formula
+And the formula contains "@Name"
+When I run migration
+Then I can see the filtered content of the view turned into a table with 3 columns on sharepoint
+
+Given I have embeded view of "By Category" with filtered result
+And I show a single category by formula
+And the formula is a string
+When I run migration
+Then I can see the filtered content of the view turned into a table with 3 columns on sharepoint
+
+Given there is embeded view of selected by complex formula
+When I run migration by rendering the form
+Then I can see the content of the view is migrated
+
+Given there is embeded view filtered by complex formula
+When I run migration by rendering the form
+Then I can see the content of the view is migrated
+]!

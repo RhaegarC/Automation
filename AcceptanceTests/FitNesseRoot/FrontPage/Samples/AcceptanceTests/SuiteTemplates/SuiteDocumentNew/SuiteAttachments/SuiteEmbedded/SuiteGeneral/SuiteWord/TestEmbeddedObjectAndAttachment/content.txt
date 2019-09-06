@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestEmbeddedObjectAndAttachment-!)
+
+!style_green[Check the word embedded files contains "object0.xlsx".]
+!style_green[Check the word embedded files contains "prepare.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

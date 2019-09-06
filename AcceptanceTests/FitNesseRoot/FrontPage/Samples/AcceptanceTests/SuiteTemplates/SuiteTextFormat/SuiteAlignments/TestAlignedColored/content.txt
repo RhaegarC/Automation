@@ -1,0 +1,13 @@
+!* Verify 2 tabs
+!|script|Remote|${WEB_SCRAPER}|
+|select|'SPAN'|properties|'Style.whiteSpace'|limit to|className -like 'Apple-tab-span'|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Style.whiteSpace|
+|pre|
+|pre|
+*!
+
+!* Document has 0 <BR> tag
+!define NUMBER_OF_BR (0)
+*!

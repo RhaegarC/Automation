@@ -1,0 +1,19 @@
+!define LIST (!-TestSection-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate section to sharepoint
+So that I have full content migrated
+
+!1 scenarios
+![
+Given I have controlled access section with formula that hides the paragraph
+When I run migration from render to word
+Then I can see section is migrated
+
+Given I have standard section with formula title
+When I run migration from render to word
+Then I can see section is migrated
+]!

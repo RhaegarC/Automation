@@ -1,0 +1,5 @@
+!define DOMINODOC_SERVER (QUICKR/ec2l)
+!define DOMINODOC_PATH (domdoc/KVLO-A3CAC8)
+!define WEB {!-SuiteDominoDoc-!}
+!define MIGRATION {!-DominoDoc2DocLibWikiPages-!}
+!contents -R2 -g -p -f -h

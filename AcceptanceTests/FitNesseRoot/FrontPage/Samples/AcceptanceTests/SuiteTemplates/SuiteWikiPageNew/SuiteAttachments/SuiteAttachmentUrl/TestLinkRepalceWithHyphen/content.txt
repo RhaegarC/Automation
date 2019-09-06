@@ -1,0 +1,11 @@
+|script|
+|globalOptions|!{replacementCharacter:"-",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['FileRef']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|=~/TestFileNameWithSbecChars.aspx/|=~/${URL}/_-Attachments/Sbecial------%27chars.txt/|

@@ -1,0 +1,8 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}'}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|runMigration|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"${FORMULA}",mapFields:"${MAPFIELDS}"}|

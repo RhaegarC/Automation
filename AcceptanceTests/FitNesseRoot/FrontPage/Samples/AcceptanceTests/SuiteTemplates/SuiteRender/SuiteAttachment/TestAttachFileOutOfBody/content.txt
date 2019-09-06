@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestAttachFileOutOfBody-!)
+
+|script|
+|newWordDoc|!{url:"${SOURCE}",file:"${TARGETFOLDER}\${PAGENAME}.${SAVE_AS}",targetFolder:"${TARGETFOLDER}\${PAGENAME}"}|
+
+|script|Remote|${NMSP}|
+|check|eval|$document.innerXml.contains("dealer")|True|

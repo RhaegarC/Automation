@@ -1,0 +1,8 @@
+''[[!-DirPrep-!][http://www.microsoft.com/en-us/download/details.aspx?id=29566&WT.mc_id=rss_alldownloads_all]] is a !-PowerShell-! based script that prepares the customer’s Lotus Notes and Active Directory environment for migration.
+The !-DirPrep-! process will populate all of the email related attributes on user accounts, create accounts to represent shared/group mailboxes, create accounts for rooms and resources, and will create groups in AD for each group being migrated from Notes.''
+
+'''!-DirPrep-! prepares the following AD objects:'''
+ * Users
+ * Group Mailboxes
+ * Rooms and Resources
+ * Groups

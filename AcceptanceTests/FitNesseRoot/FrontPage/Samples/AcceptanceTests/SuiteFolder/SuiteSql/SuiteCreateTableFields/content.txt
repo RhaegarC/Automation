@@ -1,0 +1,20 @@
+!define GROUP (!-SuiteSql-!)
+!define LIST (!-SuiteCreateTableFields-!)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can create tables or add table fields to SQL target DB automatically
+So that I can view these created tables or added table fields in SQL target DB
+
+!1 scenarios
+![
+Given fields were added in "Data Fields" tab of "Target Data Definition"
+And target table name was added in "List Definition" tab of "Target Data Definition"
+And "Add Table Fields" checkbox was enabled
+And mappings were added in "Map Data" tab
+When I click "Run Provisioning Only"
+Then I can view new fields based on the fields added in "Target Data Definition" were added to the target table
+When I click "Run Job"
+Then I can view the corresponding data were migrated to target table
+]!

@@ -1,0 +1,4 @@
+!define WEB (SuiteAttachments)
+!define APPNAME (SuiteAttachments)
+!define VIEW (Suite General)
+!contents -R2 -g -p -f -h

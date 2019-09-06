@@ -1,0 +1,12 @@
+!define GROUP {!-SuiteDocumentset-!}
+!define LIST {!-TestMigrateToDocumentSet-!}
+!define DATABASE {!-SuiteDuplicate-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!define TargetFields (<Field Name=!-'DocSet' Type='DocumentSet'-!><DocumentSetTemplate><DocSetContentType>Document Set</DocSetContentType><DocSetField><MappableName>Description</MappableName><Type>Note</Type></DocSetField><DocSetField><MappableName>Name</MappableName><Type>Text</Type></DocSetField></DocumentSetTemplate></Field>-!)
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",addNodes:!-@{path="TransferJob/SharePointTargetDefinition";-!node="${TargetFields}"!-}-!,mapFields:"<!-Mapping Destination='DocSet.Name' SourceValue='Subject' -!/>"!-,-!"<!-Mapping Destination='DocSet.Description' SourceValue='Status' -!/>"}|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/${LIST}/Forms/AllItems.aspx"}|
+|check|eval|$content.contains('icdocset.gif')|True|

@@ -1,0 +1,33 @@
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate documents to !-SharePoint-! online(using Azure Turbo Mode)
+So that I migrate the documents faster
+
+!1 scenarios
+![
+Given I enable Azure turbo mode with proper account and access key(Optional)
+And the target list is an existing document library
+When I run the migration to SharePoint
+Then I can see the documents are migrated
+And the process is recorded in the log
+
+Given I enable Azure turbo mode with proper account and access key(Optional)
+And the target list is an non-existing document library
+When I run the migration to SharePoint
+Then I can see the documents are migrated
+And the process is recorded in the log
+
+Given I enable Azure turbo mode with proper account and access key(Optional)
+And the target list is an existing custom list
+When I run the migration to SharePoint
+Then I can see the documents are migrated
+And there is a warning in the log that custom list is not supported(When Azure tubo mode is enabled)
+
+Given I enable Azure turbo mode with proper account and access key(Optional)
+And the target list is an non-existing document library
+When I run the migration to SharePoint
+Then I can see the documents are migrated
+And there is a warning in the log that custom list is not supported(When Azure tubo mode is enabled)
+
+]!

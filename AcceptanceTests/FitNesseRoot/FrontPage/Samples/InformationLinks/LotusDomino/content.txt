@@ -1,0 +1,2 @@
+!contents -R2 -g -p -f -h
+[[Integrating IBM Lotus Domino Directory with Microsoft Active Directory using ADSync][http://www.ibm.com/developerworks/lotus/library/domino-adsync/]]

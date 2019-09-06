@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestImages-!)
+
+!style_green[Check the word embedded files contains "CrazyTruck.jpg".]
+!style_green[Check the word embedded files contains "123w.bmp".]
+!style_green[Check the word embedded files contains "icon_yahoo.gif".]
+!style_green[Check the word embedded files contains "iconWarning16.png".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

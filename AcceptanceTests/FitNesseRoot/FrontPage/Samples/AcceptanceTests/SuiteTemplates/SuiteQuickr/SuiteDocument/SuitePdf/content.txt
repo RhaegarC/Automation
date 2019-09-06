@@ -1,0 +1,7 @@
+!define APPNAME (!-QuickrPdf-!)
+!define TARGET ${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx
+!define SAVE_AS (pdf)
+!define LIST (PDF)
+!define TEMPLATE (!-QRPageToPdf-!)
+
+!contents -R2 -g -p -f -h

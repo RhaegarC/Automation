@@ -1,0 +1,9 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordListItems $numbering -!| 
+|text|type|indLeft|hanging|
+|First number.|decimal|360|345|
+|First level bullet.|bullet|1080|281|
+|Second level bullet.|bullet|1800|281|
+|Third level bullet.|bullet|2520|281|
+|Fourth level bullet.|bullet|3240|281|
+|Second number.|decimal|360|345|
+

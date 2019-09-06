@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|▶ Standard Section|
+|CheckControlInSection|DisplayName[text() = 'name_1']|ExpectedValue|True|

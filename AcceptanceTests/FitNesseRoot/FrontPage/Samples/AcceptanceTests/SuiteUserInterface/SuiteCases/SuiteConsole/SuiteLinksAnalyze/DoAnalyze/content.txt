@@ -1,0 +1,11 @@
+!|script|Remote|${LabName}:36|
+|eval|$window=$null|
+|eval|$count=0|
+|eval|do{try{$window = Get-UIAWindow -Name "Quest Migrator for Notes to SharePoint Console" -Seconds 60} catch [exception] {};sleep 3;$count++}while($window -eq $null -and $count -lt 5)|
+|show|eval|$count|
+|eval|expandTreeItem "Tools"|
+|eval|click "LinkHandle"|
+|eval|click "AnalyzeTab"|
+|eval|click "AnalyzeButton"|
+|eval|click "AnalyzeOk"|
+|eval|sleep 15|

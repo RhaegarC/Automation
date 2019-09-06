@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Edit>true</Edit>
+<Files>true</Files>
+<Properties>true</Properties>
+<RecentChanges>true</RecentChanges>
+<Refactor>true</Refactor>
+<Search>true</Search>
+<Suite>true</Suite>
+<SymbolicLinks>
+<SuiteAuthentication>.NmSp.AcceptanceTests.SuiteTemplates.SuiteAuthentication</SuiteAuthentication>
+<SuiteCustomList>.NmsP.AcceptanceTests.SuiteTemplates.SuiteCustomList</SuiteCustomList>
+<SuiteDiscussion>.NmSp.AcceptanceTests.SuiteTemplates.SuiteDiscussion</SuiteDiscussion>
+<SuiteDocument>.NmsP.AcceptanceTests.SuiteTemplates.SuiteDocumentNew</SuiteDocument>
+<SuiteQuickLaunch>.NmSp.AcceptanceTests.SuiteTemplates.SuiteQuickLaunch</SuiteQuickLaunch>
+<SuiteRender>.NmSp.AcceptanceTests.SuiteTemplates.SuiteRender</SuiteRender>
+<SuiteReportToSharepoint>.NmSp.AcceptanceTests.SuiteTemplates.SuiteReportToSharepoint</SuiteReportToSharepoint>
+<SuiteScheduledTask>.NmSp.AcceptanceTests.SuiteTemplates.SuiteScheduledTask</SuiteScheduledTask>
+<SuiteUserGroupMapping>.NmSp.AcceptanceTests.SuiteTemplates.SuiteUserGroupMapping</SuiteUserGroupMapping>
+<SuiteWikiPage>.NmSp.AcceptanceTests.SuiteTemplates.SuiteWikiPageNew</SuiteWikiPage>
+</SymbolicLinks>
+<Versions>true</Versions>
+<WhereUsed>true</WhereUsed>
+</properties>

@@ -1,0 +1,4 @@
+!define LIST (!-SuiteMultiValuedSource-!)
+!define SOURCE (${LIST_URL}/category_1/TestMappingMultiValuedSource.pdf)
+!define TARGET (${TARGETFOLDER}\category_1\TestMappingMultiValuedSource.pdf)
+!contents -R2 -g -p -f -h

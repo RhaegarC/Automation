@@ -1,0 +1,4 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:!-"Subject='TestIconSize'"-!,removeNodes:"//TransferJob/SharePointTargetDefinition/ExtractIcons",addNodes:!-@{path="TransferJob/SharePointTargetDefinition";node="<ExtractIcons>true</ExtractIcons>"}-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}:86|
+|eval|Invoke-DiscoverLocal|

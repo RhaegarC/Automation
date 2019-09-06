@@ -1,0 +1,53 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") | WordHyperLinkElement -!|
+|href|
+|notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/bc8c78c7239f857385257387000a9ff6|
+|notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6|
+|http://quest-e52a78ada:8777/site/proposion.nsf/pages/PortalMigrator|
+|http://notes2sharepoint.org/default.aspx|
+|notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6|
+|notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/99769fe9ae21fa7e85257494004f193a|
+|notes:///852576e20073a967|
+|notes:///852576e20073a967/120c2bedef870e108525686a0051a9dd|
+|notes:///852576e20073a967/7a07de808078b09885256866005efde6/cc90c94d3d628726852576be0060e1e1|
+|http://quest-e52a78ada:8777/site/Proposion.nsf/97ACC1A79DF4AA1B85256B61006DF901/313200749DBBBC3B852572E10067121B?OpenDocument|
+|notes:///852571ba005f1a0b/e7a291052e43215e852567240071e2ad/7bb295581ade934b85257688007066a9|
+|notes:///852571ba005f1a0b/0/7bb295581ade934b85257688007066a9|
+|notes:///852571BA005F1A0B/E7A291052E43215E852567240071E2AD/7BB295581ADE934B85257688007066A9|
+|notes:///852571BA005F1A0B/E7A291052E43215E852567240071E2AD/7BB295581ADE934B85257688007066A9|
+|http://www.quest.com|
+|http://www.quest.com|
+|http://quest-e52a78ada:8777/QuickPlace/extreme/PageLibrary852572A7000C9D27.nsf?OpenDatabase|
+
+
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t")| WordTextElement -!|
+|text|
+|=~/This is a true Notes DocLink:/|
+|This is also a Notes DocLink;!- -![|
+|click here|
+|].|
+|This link really points to a Notes page:!- -![|
+|click here|
+|]|
+|This link points to a page outside of our Notes domain:!- -![|
+|click here|
+|]|
+|This link does not include a view component:!- -!|
+|This link points to a section:!- -!|
+|This link is a native database / view / doc link from Network Service Requests:!- -!|
+|People who are interested in this might also be interested in!- -!|
+|this case study!- -!|
+|on the Proposion web site.|
+|Eagle doclink!- -!|
+|=~/and/|
+|another|
+|.|
+|Eagle notes:!- -!|
+|link|
+|=~/and/|
+|Notes://eagle/852571BA005F1A0B/E7A291052E43215E852567240071E2AD/7BB295581ADE934B85257688007066A9|
+|.|
+|Plain ole http link:!- -!|
+|http://www.quest.com|
+|http://www.quest.com|
+|Database Link:!- -!|
+|http://quest-e52a78ada:8777/QuickPlace/extreme/PageLibrary852572A7000C9D27.nsf?OpenDatabase|

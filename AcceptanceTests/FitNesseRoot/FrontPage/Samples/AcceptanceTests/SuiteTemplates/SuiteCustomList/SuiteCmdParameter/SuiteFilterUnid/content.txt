@@ -1,0 +1,18 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate specific pages by unid with NMSPCMD program
+So that I can view those migrated pages in !-SharePoint-!
+
+!1 scenarios
+![
+Given the job for migration is prepared
+And the page unid is known
+When I use NMSPCMD program with this unid to run a migration
+Then I can view this migrated page in SharePoint
+
+Given the job for migration is prepared
+And multiple page unids are known
+When I use NMSPCMD program with these unids(sepearted with semicolon) to run a migration
+Then I can view these migrated pages in SharePoint
+]!

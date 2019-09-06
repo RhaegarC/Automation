@@ -1,0 +1,3 @@
+!define PAGENAME (!-Render_FormulaSectionTitle-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

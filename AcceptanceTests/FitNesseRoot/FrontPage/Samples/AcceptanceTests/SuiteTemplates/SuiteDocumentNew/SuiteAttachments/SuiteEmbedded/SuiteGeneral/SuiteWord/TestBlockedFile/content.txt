@@ -1,0 +1,14 @@
+!define PAGENAME (!-TestBlockedFile-!)
+
+!style_green[Document url contains 'Blocked'. Check the word embedded files contains "/AttachEXE.exe---Blocked".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+
+'''Customer should be provided with warning message'''
+!|script|Remote|${NMSP}|
+|eval|$missing = ([xml]$log).Log.entry !-|-! ? context -eq 'Missing Attachment/EmbeddedObject'|
+
+!|Subset Query:Remote|${NMSP}|$missing|
+|documentUrl|message|
+|${RUNNING_PAGE_NAME}.${SAVE_AS}|=~/AttachEXE.exe/|

@@ -1,0 +1,4 @@
+'''Create lookup list'''
+!|script|Remote|${NMSP}|
+|check|eval|DeleteList ${SITE_URL} ${WEB} ${LookupListName}|=~/does not exist!-|-!^$/|
+|eval|CreateList ${SITE_URL} ${WEB} ${LookupListName}|

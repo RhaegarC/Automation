@@ -1,0 +1,45 @@
+!* Verify '''Adding file''' log entries
+!|script|Remote|${NMSP}|
+|eval|$addFile= ([xml]$log).Log.entry !-|-! ? {$_.Context -eq 'Adding file' -or $_.Context -eq 'Uploading file'}|
+
+!|Query:Remote|${NMSP}|$addFile|
+|message|
+|!-File: TestWindowsMetaFileLink.EMF
+Size: 921718-!|
+|!-File: TestWindowsMetaFileLink.EMF
+Size: 921718-!|
+|!-File: TestImageMapLinks.GIF
+Size: 1381-!|
+|!-File: TestImageMapLinks.GIF
+Size: 7721-!|
+|!-File: TestImageMapLinks.GIF
+Size: 4938-!|
+|!-File: TestImageMapLinks.GIF
+Size: 7721-!|
+|!-File: TestImageMapLinks.GIF
+Size: 7721-!|
+|!-File: TestImageMapLinks.JPG
+Size: 8536-!|
+|!-File: TestImageMapLinks.GIF
+Size: 4938-!|
+|!-File: TestAllLinkTypeRenderAsText.GIF
+Size: 902-!|
+|!-File: TestImageMapToFileLink.JPG
+Size: 10492-!|
+*!
+
+!* Check that all map images are properly migrated to _Attachments folder of a list
+!|Query: Remote|${NMSP}|GetFiles ${GET_ATTACHMENTS}|
+|Size|File|
+|1381|${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks.GIF|
+|4938|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+|7721|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+|7721|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+|7721|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+|8536|${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks.JPG|
+|4938|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapLinks-[0-9A-F]{15}.GIF/|
+|921718|${SITE}/${WEB}/${LIST}/_Attachments/TestWindowsMetaFileLink.EMF|
+|921718|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestWindowsMetaFileLink-[0-9A-F]{15}.EMF/|
+|902|${SITE}/${WEB}/${LIST}/_Attachments/TestAllLinkTypeRenderAsText.GIF|
+|10492|${SITE}/${WEB}/${LIST}/_Attachments/TestImageMapToFileLink.JPG|
+*!

@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestChineseAttachment-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/中文文档资料.jpg".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

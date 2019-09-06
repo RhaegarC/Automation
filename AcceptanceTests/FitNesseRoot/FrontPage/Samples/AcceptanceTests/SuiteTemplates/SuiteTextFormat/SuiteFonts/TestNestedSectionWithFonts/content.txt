@@ -1,0 +1,13 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'Style.Color','Style.fontSize'|limit to|Style.Color -ne $null|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|Style.Color|Style.fontSize|
+|Base Section|${COLOR_BLUE}|12pt|
+|Text in Base section!- -!|${COLOR_BLUE}|10pt|
+|Inner Section!- -!|${COLOR_PURPLE}|12pt|
+|Text in Inner section!- -!|${COLOR_MAROON}|10pt|
+
+
+
+

@@ -1,0 +1,6 @@
+!|Query:Remote|${WEB_SCRAPER}|$page.Images !-|-! select src !-|-! ? {$_.src -like '*/${LIST}/*.GIF'}|
+|src|
+|${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}${ALT_SUFFIX}.GIF|
+|${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}${ALT_SUFFIX}.GIF|
+|${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}${ALT_SUFFIX}.GIF|
+|${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}${ALT_SUFFIX}.GIF|

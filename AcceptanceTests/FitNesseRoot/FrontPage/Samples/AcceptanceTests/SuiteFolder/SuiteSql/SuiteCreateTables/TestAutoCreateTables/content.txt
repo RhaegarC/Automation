@@ -1,0 +1,22 @@
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "SELECT COUNT(*) FROM tbl_vw_SECTION_blank_MAIL"|
+|eval|$count=ExecuteScalar $con $comStr|
+|check|eval|$count|2|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? context -eq 'Provision Table: [tbl_vw_SECTION_blank_MAIL]'|
+|message|
+|!-CREATE TABLE tbl_vw_SECTION_blank_MAIL (
+[ParentUNID] varchar(MAX) ,
+[Form] varchar(MAX) ,
+[MAIL_blank_ADDRESS] varchar(MAX) ,
+[UNID] varchar(MAX) ,
+[ID] int IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+[BooleanField] bit ,
+[NumberField] decimal ,
+[CurrencyField] money ,
+[DateTimeField] datetime ,
+[TimeField] time ,
+[FileField] varbinary(MAX) ,
+[TextField] text );-!|

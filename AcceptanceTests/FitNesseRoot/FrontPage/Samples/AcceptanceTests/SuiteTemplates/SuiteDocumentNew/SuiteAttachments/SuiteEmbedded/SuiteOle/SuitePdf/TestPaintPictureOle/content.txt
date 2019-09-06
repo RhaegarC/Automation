@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestPaintPictureOle-!)
+
+!style_green[Check the pdf embedded files contains "object0.bmp".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

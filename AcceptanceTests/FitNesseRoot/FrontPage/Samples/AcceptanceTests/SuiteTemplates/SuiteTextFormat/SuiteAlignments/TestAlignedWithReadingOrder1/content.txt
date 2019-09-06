@@ -1,0 +1,15 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'div'|limit to|getAttribute("dir") -eq 'rtl'|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|لإجراءات الجديدة للرجوع اليها .|
+|العملاء الصورية الموجودة حالياً حسب الاقتضاء.|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'p'|limit to|getAttribute("dir") -eq 'rtl'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|لإجراءات الجديدة للرجوع اليها .|
+|العملاء الصورية الموجودة حالياً حسب الاقتضاء.|

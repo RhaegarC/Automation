@@ -1,0 +1,14 @@
+!*> verification
+!|script|Remote|${REMOTESP}:30|
+|eval|$page = $null|
+|eval|$page = Invoke-WebRequest -Uri ${TARGETWEB}default.aspx -Credential $AdminCred|
+
+!|Query:Remote|${REMOTESP}:30|!-$page.Links | ? {$_.class -like 'static menu-item*'} | select innerText-!|
+|innerText|
+|Home|
+|Libraries|
+|Lists|
+|Discussions|
+|${TARGETLIST}|
+*!
+!include -c .NmSp.AcceptanceTests.IncludePages.LotusNotes.UnLoadApi

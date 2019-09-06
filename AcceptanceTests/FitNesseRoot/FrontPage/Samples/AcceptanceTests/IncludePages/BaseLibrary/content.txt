@@ -1,0 +1,476 @@
+!style_red['''Important: restart powerslim every time when you change the comment tables''']
+!|scenario|convertHash|args|
+|show|eval|!-$hash = @{}
+if(@(@args).count -eq 1){
+$hash = @(@args)[0]
+if($hash.multiEnv){
+if($current_url -ne "http://fitnesse.at-nmsp.com/-!${RUNNING_PAGE_PATH}.${RUNNING_PAGE_NAME}!-"){
+$current_url="http://fitnesse.at-nmsp.com/-!${RUNNING_PAGE_PATH}.${RUNNING_PAGE_NAME}!-"
+$request= Invoke-WebRequest $current_url
+
+$current_hash=@{}
+$current_multiEnv=$hash.multiEnv
+$reg=Invoke-WebRequest "http://fitnesse.at-nmsp.com/files/nmsp/regex.txt"
+$tableName="<"+"/"+"table"+">"
+$tdName="<"+"td"+">"
+if($request.Content -match("\<TD\>comment:\s*$($hash.multiEnv.trim('"'))\s*\<\/TD\>[\s\S]*\<TD\>env:.*-!${ENV_NAME}!-.*\<\/TD\>"))
+{
+	$searchHtml= $request.Content.Substring($request.Content.IndexOf($tdName+"comment:"+$hash.multiEnv))
+	$searchHtml= $searchHtml.Substring($searchHtml.IndexOf($tdName+"env:-!${ENV_NAME}!-"))
+	$searchHtml= $searchHtml.Substring(0,$searchHtml.IndexOf($tableName))
+	$searchHtml| select-string -pattern $reg.Content -AllMatches |%{$_.matches}|%{$current_hash[$_.groups[1].value]=$_.groups[2].value;$_.groups[1].value}
+}
+elseif($request.Content -match "\<TD\>comment:\s*$($hash.multiEnv.trim('"'))\s*\<\/TD\>[\s\S]*\<TD\>env:.*default.*\<\/TD\>")
+{
+	$searchHtml= $request.Content.Substring($request.Content.IndexOf($tdName+"comment:"+$hash.multiEnv))
+	$searchHtml= $searchHtml.Substring($searchHtml.IndexOf($tdName+"env:default"))
+	$searchHtml= $searchHtml.Substring(0,$searchHtml.IndexOf($tableName))
+	$searchHtml| select-string -pattern $reg.Content -AllMatches |%{$_.matches}|%{$current_hash[$_.groups[1].value]=$_.groups[2].value;$_.groups[1].value}
+}
+else{"No comment table is found"}
+}
+elseif($current_multiEnv -ne $hash.multiEnv){
+$current_hash=@{}
+$current_multiEnv=$hash.multiEnv
+$reg=Invoke-WebRequest "http://fitnesse.at-nmsp.com/files/nmsp/regex.txt"
+if($request.Content -match("\<TD\>comment:\s*$($hash.multiEnv.trim('"'))\s*\<\/TD\>[\s\S]*\<TD\>env:.*-!${ENV_NAME}!-.*\<\/TD\>"))
+{
+	$searchHtml= $request.Content.Substring($request.Content.IndexOf($tdName+"comment:"+$hash.multiEnv))
+	$searchHtml= $searchHtml.Substring($searchHtml.IndexOf($tdName+"env:-!${ENV_NAME}!-"))
+	$searchHtml= $searchHtml.Substring(0,$searchHtml.IndexOf($tableName))
+	$searchHtml| select-string -pattern $reg.Content -AllMatches |%{$_.matches}|%{$current_hash[$_.groups[1].value]=$_.groups[2].value;$_.groups[1].value}
+}
+elseif($request.Content -match "\<TD\>comment:\s*$($hash.multiEnv.trim('"'))\s*\<\/TD\>[\s\S]*\<TD\>env:.*default.*\<\/TD\>")
+{
+	$searchHtml= $request.Content.Substring($request.Content.IndexOf($tdName+"comment:"+$hash.multiEnv))
+	$searchHtml= $searchHtml.Substring($searchHtml.IndexOf($tdName+"env:default"))
+	$searchHtml= $searchHtml.Substring(0,$searchHtml.IndexOf($tableName))
+	$searchHtml| select-string -pattern $reg.Content -AllMatches |%{$_.matches}|%{$current_hash[$_.groups[1].value]=$_.groups[2].value;$_.groups[1].value}
+}
+else{"No comment table is found"}
+}
+$current_hash.GetEnumerator()|%{$hash[$_.Key] = iex $_.Value}
+}
+}
+-!|
+|show|eval|$hash!-|-!out-string|
+
+!|scenario|loadSharepointLib|
+|eval|!-<pre>function loadSharePointApi($path)
+{
+Set-Location $path
+Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.dll")
+Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Runtime.dll")
+}
+
+function createWeb($site,$aWeb)
+{
+$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+$webInfo = new-object Microsoft.SharePoint.Client.WebCreationInformation
+$webInfo.Title = $aWeb
+$webInfo.Url = $aWeb
+$webInfo.UseSamePermissionsAsParentSite = $true
+$webInfo.WebTemplate = 'STS#1'
+$web = $ctx.Web.Webs.Add($webInfo)
+$ctx.Load($web)
+try{ $ctx.ExecuteQuery() }catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}
+}
+
+function addField($site,$list,$type,$name)
+{
+$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+$list = $ctx.Web.Lists.GetByTitle($list)
+$ctx.Load($list)
+$ctx.ExecuteQuery()
+$fieldschema = "<Field Type='$type' Name='$name' DisplayName='$name' />"
+$field = $list.Fields.AddFieldAsXml($fieldschema, $false, 0)
+$ctx.Load($field)
+$ctx.ExecuteQuery()
+$ctx.Dispose()
+}
+
+function addList($site,$listTitle,$ct)
+{
+$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+$web=$ctx.Web;
+$listInfo= new-object Microsoft.SharePoint.Client.ListCreationInformation
+$listInfo.Title= $listTitle
+$ctID = 101
+if($ct -eq "Tasks")
+{$ctID = 107}
+ElseIf($ct -eq "CustomList")
+{$ctID = 100}
+$listInfo.TemplateType = $ctID
+$newList = $web.Lists.Add($listInfo)
+$ctx.Load($newList)
+try {$ctx.ExecuteQuery()} catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}
+}
+
+
+function removeList($site,$aWeb,$aList)
+{
+$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+$list = $ctx.Site.OpenWeb($aWeb).Lists.GetByTitle($aList)
+$list.DeleteObject()
+$ctx.Load($list)
+try{ $ctx.ExecuteQuery()}catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}
+}</pre>-!|
+
+!|scenario|loadConfigurationLib|
+|eval|!-<pre>function download($source,$targetFolder,$file)
+{
+new-item $targetFolder -ItemType directory -erroraction 'silentlycontinue'
+Set-Location $targetFolder
+Invoke-WebRequest $source -OutFile $file
+}
+
+function addChildNode($path,$nodeString)
+{
+$parent = $xml.SelectSingleNode($path)
+$newXml = [xml]('<parent>'+$nodeString+'</parent>')
+$newXml.parent.ChildNodes | % {$parent.AppendChild($xml.ImportNode($_,$true))} 
+}
+
+function removeNodes($xpaths)
+{
+foreach($xpath in $xpaths)
+{
+$nodes = $xml.SelectNodes($xpath)
+$nodes | % {$_.ParentNode.RemoveChild($_)}
+}
+}
+
+function editNodeProperty($path,$name,$value)
+{
+$node = $xml.SelectSingleNode($path)
+$node.SetAttribute($name,$value)
+}
+</pre>-!|
+
+!|scenario|loadUilib|
+|eval|!-<pre>function getExpression()
+{
+param($aControl,$subtitutions=@{})
+if($object_xml -eq $null){$object_xml = [xml](Invoke-WebRequest('http://fitnesse.at-nmsp.com/files/nmsp/objects/formgenerator.xml'))}
+$control = $object_xml.SelectSingleNode("//$aControl")
+$expression = ""
+do 
+{
+$string = ""
+$string = $control.method
+foreach($a in $control.Attributes)
+{
+    if(!$a.Name.ToLower().Equals("method"))
+    {
+        $string = $string + " -" + $a.Name + " '" +$a.Value +"'"
+    }
+}
+$expression = $string + " |" +$expression
+$control= $control.ParentNode
+}
+while (!$control.Name.Equals("UIAutomation"))
+$expression=$expression.Remove($expression.length-1,1)
+$subtitutions.GetEnumerator()|%{$expression=$expression -creplace $_.Key,$_.Value}
+return $expression
+}
+
+function setText()
+{
+param($textbox,$value,$subtitutions=@{})
+$expression = getExpression $textbox $subtitutions
+$iex = $expression + "| Set-UiaEditText -text $value"
+Invoke-Expression $iex
+}
+
+function setControlText()
+{
+param($textbox,$value,$subtitutions=@{})
+$expression = getExpression $textbox $subtitutions
+$iex = $expression + "| Set-UiaControlText -text $value"
+Invoke-Expression $iex
+}
+
+function click()
+{
+param($item,$subtitutions=@{})
+$expression = getExpression $item $subtitutions
+$iex = $expression + "|Invoke-UIAControlClick"
+Invoke-Expression $iex
+}
+
+function clickHyperlink()
+{
+param($item,$subtitutions=@{})
+$expression = getExpression $item $subtitutions
+$iex = $expression + "|Invoke-UiaHyperlinkClick"
+Invoke-Expression $iex
+}
+
+function rightClick()
+{
+param($item,$subtitutions=@{})
+$expression = getExpression $item $subtitutions
+$iex = $expression + "|Invoke-UIAControlClick -RightClick"
+Invoke-Expression $iex
+}
+
+function resizeWindow($windows,$width,$height)
+{
+$expression = getExpression $windows
+$iex = $expression + "| Invoke-UiaWindowTransformResize -TransformResizeWidth $width -TransformResizeHeight $height"
+Invoke-Expression $iex
+}
+
+function setWindowPattern($windows,$pattern)
+{
+$expression = getExpression $windows
+$iex = $expression + "| Invoke-UiaWindowPattern -PatternName $pattern"
+Invoke-Expression $iex
+}
+
+function waitEnable($item)
+{
+$expression = getExpression $item
+$iex = $expression + "|Wait-UIAButtonIsEnabled -Seconds 120"
+Invoke-Expression $iex
+}
+
+function waitExist($item,$timeout=60)
+{
+$expression = getExpression $item
+$i=0
+$element=$null
+do{
+try{
+$element=Invoke-Expression $expression
+}
+catch [Exception]{
+
+}
+$i++
+"waiting..."
+sleep 5
+}
+while($i -lt ($timeout/5+1) -and $element -eq $null)
+}
+
+function doubleClick($item)
+{
+$expression = getExpression $item
+$iex = $expression + "|Invoke-UIAControlClick -DoubleClick"
+Invoke-Expression $iex
+}
+
+function getGridData($item)
+{
+$expression = getExpression $item
+$iex = $expression + "|ConvertFrom-UiaDataGrid |ConvertFrom-Csv"
+$gridItems= Invoke-Expression $iex
+return $gridItems
+}
+
+function expandTreeItem($item)
+{
+$expression = getExpression $item
+$iex =  $expression + "|Invoke-UIATreeItemExpand"
+Invoke-Expression $iex
+}
+
+function displayContextMenu()
+{
+param($item,$subtitutions=@{})
+$expression = getExpression $item $subtitutions
+$iex =  $expression + "|Invoke-UIAControlContextMenu"
+Invoke-Expression $iex
+}
+
+
+function clickMenu()
+{
+param($item,$subtitutions=@{})
+$expression = getExpression $item $subtitutions
+$iex =  $expression + "|Invoke-UIAMenuItemClick"
+Invoke-Expression $iex
+}
+
+function expandMenu($item)
+{
+$expression = getExpression $item
+$iex =  $expression + "|Invoke-UIAMenuItemExpand"
+Invoke-Expression $iex
+}
+
+function checkBox()
+{
+param($checkbox,$status,$subtitutions=@{})
+$expression = getExpression $checkbox $subtitutions
+$iex = $expression + "|Invoke-UIACheckBoxToggle"
+$checked = Invoke-Expression ($expression +"|Get-UIACheckBoxToggleState")
+if(!$checked.ToString().ToLower().Equals($status.ToLower())){Invoke-Expression $iex}
+}
+
+function selectRadioButton($item)
+{
+$expression = getExpression $item
+$iex =  $expression + "|Invoke-UIAControlClick"
+Invoke-Expression $iex
+}
+
+function SelectListItem($list,$item)
+{
+if($object_xml -eq $null){$object_xml = [xml](Invoke-WebRequest('http://fitnesse.at-nmsp.com/files/nmsp/objects/formgenerator.xml'))}
+$list_iex = (getExpression $list)+"| Get-UIAListSelection"
+$itemNode = $object_xml.SelectSingleNode("//$item")
+$item_iex = (getExpression $item) + "|Invoke-UIAListItemSelectItem -ItemName '"+$itemNode.Name+"'"
+$listNode = $object_xml.SelectSingleNode("//$list")
+$dropDown= ""
+if($listNode.PreviousSibling){$dropDown= $listNode.PreviousSibling.Name}
+if($listNode.NextSibling){$dropDown= $listNode.NextSibling.Name}
+$i = 0
+while((iex $list_iex).current.Name -ne $itemNode.Name -and $i -lt 5)
+{
+if($dropDown){click $dropDown}
+Invoke-Expression $item_iex
+$i = $i +1
+}
+}
+
+function selectGridCell($cell,$rowNumber)
+{
+$expression = getExpression $cell
+$iex = $expression.remove($expression.Length-2) + " $rowNumber'|Invoke-UIAControlClick"
+Invoke-Expression $iex
+}
+
+function setCellText($edit,$text)
+{
+$expression = getExpression $edit
+$iex = $expression + "|Set-UIAEditText '$text'"
+Invoke-Expression $iex
+}
+
+function getControlValue($item)
+{
+$expression = getExpression $item
+$iex = $expression + "|Get-UIATextText"
+$controlValue= Invoke-Expression $iex
+return $controlValue
+}
+
+function getDocumentRangeText($item)
+{
+$expression = getExpression $item
+$iex = $expression + "|Get-UiaDocumentRangeText|out-string"
+$text= Invoke-Expression $iex
+return $text
+}
+
+function getControlName()
+{
+param($item,$subtitutions=@{})
+try{
+$expression = getExpression $item $subtitutions
+$iex = $expression + "|Read-UIAControlName"
+$controlName= Invoke-Expression $iex
+return $controlName
+}catch{}
+}
+
+function treeScroll($item,$hPercent=100,$vPercent=100)
+{
+$expression = getExpression $item
+$iex = $expression + "|Invoke-UIATreeScroll -HorizontalPercent " + $hPercent + " -VerticalPercent " + $vPercent
+Invoke-Expression $iex
+}
+
+</pre>-!|
+
+!|scenario|loadBasicLib|
+|eval|!-function convertToObject($properties,$values){
+$h=@{}
+for($i=0;$i -lt $properties.length;$i++){
+$h[$properties[$i]]=$values[$i]
+}
+New-Object PSObject -Property $h
+}
+-!|
+
+!|scenario|loadSqlLib|
+|eval|!-<pre>function CreateSqlConnection($conStr)
+{
+    try
+    {
+        $con = New-Object System.Data.SqlClient.SqlConnection
+        $con.ConnectionString = $conStr
+        return $con
+    }
+    catch [Exception]
+    {
+         Write-Warning ('Execute Sql command failed with error message:{0}' -f $_)
+         return $null
+    }
+}
+
+function GetDataSet($con, $query)
+{
+    $dataSet = new-object "System.Data.DataSet" "WrestlersDataset"
+    $dataAdapter = new-object "System.Data.SqlClient.SqlDataAdapter" ($query,$con)
+    $dataAdapter.Fill($dataSet) | Out-Null
+    return $dataSet
+}
+
+function GetDataTable($con, $query)
+{
+    $dataSet = new-object "System.Data.DataSet" "WrestlersDataset"
+    $dataAdapter = new-object "System.Data.SqlClient.SqlDataAdapter" ($query,$con)
+    $dataAdapter.Fill($dataSet) | Out-Null
+    return $dataSet.Tables | select -First 1
+}
+
+function ExecuteNonQuery($con, $query)
+{
+    $cmd = $con.CreateCommand()
+    try
+    {
+        $cmd.CommandText = $query
+        $con.Open()
+        $cmd.ExecuteNonQuery() | Out-Null
+        return $true
+    }
+    catch [Exception]
+    {
+         Write-Warning ('Execute Sql command failed with error message:{0}' -f $_)
+         return $false
+    }
+    finally
+    {
+        $con.Close()
+    }
+}
+
+function ExecuteScalar($con,$query)
+{
+    $cmd = $con.CreateCommand()
+    $result = $null
+    try
+    {
+        $cmd.CommandText = $query
+        $con.Open()
+        $result = $cmd.ExecuteScalar()
+    }
+    catch [Exception]
+    {
+        Write-Host ('Execute Sql command failed with error message:{0}' -f $_)
+    }
+    finally
+    {
+        $con.Close()
+    }
+    return $result
+}
+</pre>-!|
+
+!|script|remote|${NMSP}|
+|loadSharepointLib|
+|loadConfigurationLib|
+|loadBasicLib|

@@ -1,0 +1,30 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'Style.Color','Style.fontFamily','Style.fontSize','Style.textAlign'|limit to|Style.Color -ne $null|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|Style.textAlign|Style.Color|Style.fontFamily|Style.fontSize|
+|Text for existing font - Arial, red, 8|left|${COLOR_RED}|Arial, san-serif|8pt|
+|Text for existing font - Calibri, Blue, 12|left|${COLOR_BLUE}|Calibri, san-serif|12pt|
+|Text for existing font - Courier, 15, Italic|left|${COLOR_BLACK}|Courier, serif, monospace|15pt|
+|Text for existing font - Microsoft Sans Serif, Green, 10|left|${COLOR_LIGHT_GREEN}|Microsoft Sans Serif, san-serif|10pt|
+|Text for existing font - Verdana, 18, Bold|left|${COLOR_BLUE}|Verdana, san-serif|18pt|
+|Text for missing font - Vladimir Script, Black, 18|left|${COLOR_BLACK}|Vladimir Script, script|18pt|
+
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'SPAN'|properties|'Style.Color','Style.fontFamily','Style.fontSize'|limit to|Style.Color -ne $null|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|Style.Color|Style.fontFamily|Style.fontSize|
+|Text with mixed!- -!|${COLOR_BLACK}|Arial Black, san-serif|18pt|
+|Arial|${COLOR_RED}|Arial, san-serif|8pt|
+|,|${COLOR_RED}|Arial, san-serif|8pt|
+|Calibri,|${COLOR_BLUE}|Calibri, san-serif|12pt|
+|Courier,|${COLOR_BLACK}|Courier, serif, monospace|15pt|
+|MSS,|${COLOR_GREEN}|Microsoft Sans Serif, san-serif|10pt|
+|Verdana,|${COLOR_BLACK}|Verdana, san-serif|18pt|
+|!- -!VScript fonts|${COLOR_BLACK}|Vladimir Script, script|18pt|
+
+!* 
+!define NUMBER_OF_BR (7)
+*!

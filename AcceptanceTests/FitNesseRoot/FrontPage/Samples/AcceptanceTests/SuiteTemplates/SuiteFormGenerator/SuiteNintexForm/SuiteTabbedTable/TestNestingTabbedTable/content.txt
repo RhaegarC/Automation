@@ -1,0 +1,21 @@
+!|script|remote|${NMSP}|
+|GetTabInfo|1|
+
+!* Check the control whether exist
+!|script|remote|${NMSP}|
+|GetNintexFormControl|$ele.Id|controlType|d2p1:PanelFormControlProperties|
+|GetNintexFormControl|$ele.TabbedId|controlType|d2p1:ChoiceFormControlProperties|
+*!
+
+'''Check the rules'''
+!|Query:remote|${NMSP}|$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$ele.TabbedId+'*'} !-|-! select ExpressionValue|
+|ExpressionValue|
+|=~/\{Control:\S*\}\s*!= "Tab1"/|
+|=~/\{Control:\S*\}\s*!= "InsideTab2"/|
+|=~/\{Control:\S*\}\s*!= "Tab3"/|
+
+'''Check the control layout '''
+!|script|remote|${NMSP}|
+|eval|$layout = $nintexXml.SelectNodes("//*/ns:FormControlLayout",$ns) !-|-! ? {$_.FormControlUniqueId -eq $ele.Id}|
+|eval|$subLayout = $layout.FormControlLayouts.SelectNodes("ns:FormControlLayout",$ns)|
+|check|eval|$subLayout.Count -eq $ele.TableRow.Count|True|

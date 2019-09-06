@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',azureTurboTimeOut:"0.0005"}|
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",maxRecord:"15"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,4 @@
+!define APPNAME (SuiteImages)
+!define LIST (SuiteImages)
+!define ALT_SUFFIX ()
+!contents -R2 -g -p -f -h

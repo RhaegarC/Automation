@@ -1,0 +1,2 @@
+!include -c <AcceptanceTests.IncludePages.ImportedLibrary.SharePointOnline
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.ScomFunctions

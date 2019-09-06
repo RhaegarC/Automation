@@ -1,0 +1,49 @@
+!* Defines
+!define SHAREPOINT30 (${SHAREPOINT})
+!define WEB_SCRAPER (${NMSP})
+!define SHAREPOINT_HOST (SP2016)
+!define TAXONOMY (${NMSP})
+!define AUTH (!-ClassicModeAuthentication-!)
+!define WEBAPP_URL (!-http://sp2016-!)
+!define PublishFormDll (C:\msi\NFPublishLib2013.dll)
+!define CREDENTIALS (Credential $AdminCred)
+!define LAYOUTS (/_layouts/15/)
+!define CAPORT (21820)
+
+!define CA (http://sp2016:${CAPORT})
+!define USEMAP (usemap)
+!define Qwerty123 (GYm1tBjGWP/Af1b0JE84PA==)
+!define SharePointLogin (i:0#.w!-|-!velaskec\administrator)
+!define SharePointDisplayName (administrator)
+!define SITE_COLLECTION (sp2016-sites-Test)
+!define SIGNATURE_BLOCK (${RESULT2013})
+!define SHAREPOINT_ONLY (script)
+*!
+!* HTML character
+!define MARGIN_LEFT (margin-left)
+
+!define COLON_CHAR_SP (%3a)
+!define SPACE_CHAR (%20)
+!define LESS_CHAR (%3c)
+!define GREATER_CHAR (%3e)
+
+!define Indexed (True)
+*!
+!* !-PowerShell selectors-!
+!define SELECTOR_BREADCRUMB [getElementsByTagName('span') | ? id -eq 'DeltaPlaceHolderPageTitleInTitleArea']
+!define SELECTOR_DESCRIPTION [getElementsByTagName('span') | ? id -eq 'ms-pageDescription']
+*!
+!* Polymorphism
+!define SOURCEFOLDER (${SITE}/${WEB}/${LIST})
+!define DUPLICATION_SUFFIX (-[0-9A-F]{1,15})
+!define BASEFOLDER (C:\SharePoint)
+!define ROOT (${WEB_URL})
+!define FOLDER (${LIST})
+!define SPACE (%20)
+!define SLASH (/)
+!define TARGET_DEFINITION (SharePointTargetDefinition)
+!define GET_ATTACHMENTS (${SOURCEFOLDER}/_Attachments ${SITE_URL} ${WEB} ${LIST})
+!define GET_FILES (${SOURCEFOLDER} ${SITE_URL} ${WEB} ${LIST})
+!define EDITABLE_PATH (${SITE}/${WEB}/${LIST}/_Attachments/EditableAttachment.txt)
+*!
+!contents -R2 -g -p -f -h

@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestMultiRichTextField-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

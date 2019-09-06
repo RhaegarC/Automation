@@ -1,0 +1,9 @@
+!define PAGE_URL (${SITE_URL}/suitesubroom/Lists/Pages/AllItems.aspx)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|Query:remote|${NMSP}:38|$driver.FindElementsByTagName("a")!-|-!?{$_.GetAttribute("class") -eq "ms-listlink ms-draggable"}!-|-!select Text|
+|Text|
+|Home|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

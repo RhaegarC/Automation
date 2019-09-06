@@ -1,0 +1,44 @@
+!* Not Finalized
+'''Check the items'''
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|  
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='${FIELDNAME}'; E={$_['${FIELDNAME}'].Url} } |
+|Title|${FIELDNAME}|
+|${FIRSTDOC}|${SecondDocLink}|
+|${SECONDDOC}|${ThirdDocLink}|
+|${THIRDDOC}|null|
+|${MAPDOC}|null|
+|TestContentWithGtAndLt|null|
+|TestDocWithNoLinks|${SecondDocLink}|
+|MultiByteLink|null|
+|MultiByteAttachment|null|
+|TestDatabaseLink|null|
+*!
+
+!define LINKS (3)
+!define DOCUMENTS (3)
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+'''Check the items'''
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|  
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='${FIELDNAME}'; E={$_['${FIELDNAME}'].Url} } |
+|Title|${FIELDNAME}|
+|${FIRSTDOC}|${SecondDocLinkFinalized}|
+|${SECONDDOC}|${ThirdDocLinkFinalized}|
+|${THIRDDOC}|null|
+|${MAPDOC}|null|
+|TestContentWithGtAndLt|null|
+|TestDocWithNoLinks|${SecondDocLinkFinalized}|
+|MultiByteLink|null|
+|MultiByteAttachment|null|
+|TestDatabaseLink|null|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${WEB_URL}/Lists/${LIST}/DispForm.aspx?ID=2|
+|Open|${WEB_URL}/Lists/${LIST}/DispForm.aspx?ID=3|

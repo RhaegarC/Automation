@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|eval|$env:path += '; c:\Selenium'|
+|eval|Add-Type -path C:\Selenium\net40\WebDriver.dll|

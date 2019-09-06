@@ -1,0 +1,4 @@
+!|script|Remote|${SQLHOST}|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM NotesObjects"'|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM Linkage"'|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM Links"'|

@@ -1,0 +1,13 @@
+|script|
+|ensureUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USER1}"!-,-!"${USERMAPPING_USER2}"}|
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',groupIdentityLookupMode:'MappingFileLookup',identityLookupMode:'MappingFileLookup',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!',groupMappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+
+|script|
+|makeMappingFile|!{clearUsers:"true",users:'<user notes="CN=Konstantin Vlasenko/O=Konstantin Vlasenko" sharePoint="${USERMAPPING_USER2}" /><user notes="CN=EditorUser1/OU=suitequickr/OU=QP/O=ec2l" sharePoint="${USERMAPPING_USER1}" />'}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

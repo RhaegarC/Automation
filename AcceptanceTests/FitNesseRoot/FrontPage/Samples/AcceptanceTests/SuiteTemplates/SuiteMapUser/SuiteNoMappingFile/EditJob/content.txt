@@ -1,0 +1,7 @@
+!* Migrate documents created byStephen Walch only!
+!|script|Remote|${NMSP}|
+|Formula|From="CN=Stephen Walch/O=Proposion"|for|${JOBFILE}|
+|MaxRecords|3|job|${JOBFILE}|
+*!
+
+

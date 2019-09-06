@@ -1,0 +1,34 @@
+!|script|
+|startConsole|
+
+!4 '''!style_orange[Test Trial 30Days Evaluation license]'''
+'''Set System Date and Time'''
+!define SYSDATETIME (10/24/2018 12:00)
+!| script | Remote | ${NMSP}:36 |
+|eval|sleep 5|
+|eval|$current=Get-Date -displayhint Date|
+|eval| Set-Date -date "${SYSDATETIME}" |
+|show| eval | Get-Date |
+
+'''Install Trial 30Days Evaluation license (trialdays)'''
+!style_blue[!-TrialInstallByDate: 2019-10-16-!]
+!define LICENSE (TrialDaysEvaluationLicense2018.dlv)
+!include <SuiteLicense.InstallLicense
+
+'''Check Expiry Date of License'''
+!include <SuiteLicense.CheckExpiryDate
+
+!4 '''!style_orange[Test Trial Evaluation license]'''
+'''Set System Date and Time'''
+!define SYSDATETIME (11/14/2018 00:00)
+!| script | Remote | ${NMSP}:36 |
+|eval    |Set-Date -date "${SYSDATETIME}"    |
+|show    |eval            |Get-Date          |
+
+'''Install Trial Evaluation license (expirydate)'''
+!style_blue[!-ExpiryDate: 2018-11-15-!]
+!define LICENSE (EvaluationExpiryDateLicense2018.dlv)
+!include <SuiteLicense.InstallLicense
+
+'''Check Expiry Date of License'''
+!include <SuiteLicense.CheckExpiryDate

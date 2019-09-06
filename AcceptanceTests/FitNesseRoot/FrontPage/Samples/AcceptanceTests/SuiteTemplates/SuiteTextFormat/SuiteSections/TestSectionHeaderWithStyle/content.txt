@@ -1,0 +1,6 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'Style.fontFamily','Style.fontSize','Style.Color'|limit to|className -like 'sectionheader*'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|Style.fontFamily|Style.fontSize|Style.Color|
+|Section Header|Arial Black, san-serif|11pt|=~/rgb\(194, 0, 65\)!-|-!#c20041/ |

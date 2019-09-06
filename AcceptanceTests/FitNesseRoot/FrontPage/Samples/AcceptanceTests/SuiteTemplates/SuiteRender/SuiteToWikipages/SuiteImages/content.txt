@@ -1,0 +1,21 @@
+!define LIST (!-RenderImages-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can render image and migrate to sharepoint
+So that I have full content migrated
+
+!1 scenarios
+![
+Given I have an image with great size in document
+When I run migration
+Then the image is migrated properly
+
+Given I have an image with the format jpg, gif, pmg in document
+When I run migration
+Then the image is migrated properly
+
+]!

@@ -1,0 +1,17 @@
+!define DATABASE (!-SuiteLinksFinalize.SuiteSpecialCases-!)
+!define LIST (!-SuiteDocLinks_SuiteWord-!)
+!define APPNAME (!-SuiteDocLink-!)
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate doc links to !-SharePoint-! with "Convert to native notes:// URLs (plain text)" selected 
+So that I can view these doc links were migrated as plain text in !-SharePoint-!
+
+!1 scenarios
+![
+Given DocLink handling: "Convert to native notes:// URLs (plain text)" was selected in Advanced tab of Designer
+And "Process internal HTTP links as DocLinks" was enabled/disabled
+And WORD was selected as Target Data Definition
+When I run a migration
+Then I can view these doc links were migrated as plain text in migrated WORD in SharePoint
+]!

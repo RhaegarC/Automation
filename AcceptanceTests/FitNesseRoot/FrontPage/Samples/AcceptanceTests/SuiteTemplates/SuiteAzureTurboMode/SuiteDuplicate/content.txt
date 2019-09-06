@@ -1,0 +1,3 @@
+!define GROUP {!-SuiteDuplicate-!}
+!define TARGETFILENAME (Document1)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpace-!)
+
+!style_green[Check the pdf embedded files contains "Space char.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,30 @@
+!define PAGE_URL (${WEB_URL}/Lists/Pages/AllItems.aspx?RootFolder=/sites/Test/suitequickr/Lists/Pages/Library)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|script|remote|${NMSP}:38|
+|eval|($driver.FindElementsByTagName("a")!-|-!?{$_.Text -eq "link finalization"}).Click()|
+
+|script|
+|waitElementExists|!{by:"className",value:"ms-rtestate-field"}|
+
+!|Query:remote|${NMSP}:38|$driver.FindElementByClassName("ms-rtestate-field").FindElementsByTagName("a")!-|-!select @{ N='text'; E={$_.text} }, @{ N='href'; E={$_.GetAttribute("href")} }|
+|text|href|
+||null|	
+|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Toc/4df38292d748069d0525670800167212/?OpenDocument#{type=0&unid=4DF38292D748069D0525670800167212}|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|library link|http://sp2013/sites/Test/suitequickr/Lists/Pages/Library|
+|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Toc/4df38292d748069d0525670800167212/?OpenDocument#{type=1&unid=2A922D48C75DD00B052567080016723A}|http://sp2013/sites/Test/suitequickr/Lists/Calendar|
+|target page|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|http://quickr/LotusQuickr/suitequickr/Main.nsf/h_Index/5FC974B8F704D6DD85257FEF002F2066?OpenDocument#{type=0&unid=5FC974B8F704D6DD85257FEF002F2066}|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Index/5FC974B8F704D6DD85257FEF002F20aa?OpenDocument#{type=0&unid=5FC974B8F704D6DD85257FEF002F20aa}|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Index/5FC974B8F704D6DD85257FEF002F20aa?OpenDocument#%7btype=0&unid=5FC974B8F704D6DD85257FEF002F20aa%7d|
+|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Toc/4df38292d748069d05256708001672cc/?OpenDocument#{type=0&unid=5FC974B8F704D6DD85257FEF002F20bb}|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Toc/4df38292d748069d05256708001672cc/?OpenDocument#%7btype=0&unid=5FC974B8F704D6DD85257FEF002F20bb%7d|
+|http://quickr.velaskec.ec2l.com/LotusQuickr/suitequickr/Main.nsf/h_Index/5FC974B8F704D6DD85257FEF002F2066?OpenDocument#{type=0&unid=5FC974B8F704D6DD85257FEF002F2066}|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|https://www.github.com|https://www.github.com/|
+|ftp://baidu.com|ftp://baidu.com/|
+|news://www.news.com|news://www.news.com/|
+|mailto:ab@gmail.com?subject=testsubject&body=testbody|mailto:ab@gmail.com?subject=testsubject&body=testbody|
+|#anchor 1|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+.*#anchor1/|
+|file preview|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|file quickly download|=~/http:\/\/sp2013\/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

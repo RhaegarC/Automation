@@ -1,0 +1,94 @@
+''' Test document's Header'''
+!|Query: Remote|${WEB_SCRAPER}|!-$header.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|Subject standard field:!- -!|
+|[Subject]|
+|null|
+|PlainText|
+|!- -!field for Subject|
+|:!- -!|
+|BasicDocumentForTemplate|
+|ComboBox|
+|:!- -!|
+|Category_1|
+
+
+''' Test document's Body'''
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|The!- -!|
+|RichText|
+|!- -!below is child of document Body:!- -!|
+|BasicDocumentForTemplate|
+|PlainText|
+|ComboBox|
+|!- -!in the right is child of paragraph and can contain only inline elements|
+|RichText|
+|Standard fields|
+|Vladimir!- -!|
+|Sementchouk|
+|[Publish Date]|
+|"test"|
+|[Status]|
+|[Subject]|
+|Basic text|
+|DataPicker|
+|ListBox|
+|:!- -!|
+|BasicDocumentForTemplate|
+|:!- -!|
+|=~/BasicDocumentForTemplate/|
+|:!- -!|
+|Category_1|
+|:!- -!|
+|Category_1|
+|:!- -!|
+|10/11/13 20:32:55|
+|Content Controls with placeholder|
+|Content Controls w/o placeholder|
+|Basic text|
+|Basic text|
+|Basic text|
+
+
+''' Test document's Body Plain Text Without'''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:tag")| 
+|val|
+|TestRT|
+|PlainTextWithout|
+|PlainText1|
+|RichText1|
+|ComboBoxTitle1|
+|ListBoxTitle1|
+|DatePickerTitle1|
+|RichTextWith|
+|PlainText|
+|RichTextWithout|
+
+
+''' Test document's Footer'''
+!|Query: Remote|${WEB_SCRAPER}|!-$footer.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|RichText|
+|:!- -!|
+|=~/Rich Text/|
+|DataPicker|
+|:!- -!|
+|10/11/13 20:32:55|
+|ListBox|
+|:!- -!|
+|Category_1|
+|PlainText|
+|:!- -!|
+|BasicDocumentForTemplate| 
+
+
+#!* Verify migration log file
+#!|Query:Remote|${NMSP}|$warning|
+#|context|message|
+#|=~/SharePoint Environment/|=~/SharePoint Environment/ |
+#*!
+
+
+
+

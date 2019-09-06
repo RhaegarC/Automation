@@ -1,0 +1,2 @@
+!define MAPFIELDS ("<Mapping !-Destination='Doc.Images' SourceValue='RenderImages' FormatString='{0}'-!/>","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' FormatString='{0}'-!/>")
+!contents -R2 -g -p -f -h

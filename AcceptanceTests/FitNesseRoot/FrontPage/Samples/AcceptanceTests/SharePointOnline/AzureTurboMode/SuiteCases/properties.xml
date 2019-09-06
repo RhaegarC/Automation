@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Edit>true</Edit>
+<Files>true</Files>
+<Properties>true</Properties>
+<RecentChanges>true</RecentChanges>
+<Refactor>true</Refactor>
+<Search>true</Search>
+<Suite>true</Suite>
+<SymbolicLinks>
+<SuiteCustomList>.NmsP.AcceptanceTests.SuiteTemplates.SuiteCustomList</SuiteCustomList>
+<SuiteDiscussion>.NmSp.AcceptanceTests.SuiteTemplates.SuiteDiscussion</SuiteDiscussion>
+<SuiteDocument>.NmsP.AcceptanceTests.SuiteTemplates.SuiteDocumentNew</SuiteDocument>
+<SuiteEncryptionInTurboMode>.NmSp.AcceptanceTests.SuiteTemplates.SuiteEncryptionInTurboMode</SuiteEncryptionInTurboMode>
+<SuiteQuickLaunch>.NmSp.AcceptanceTests.SuiteTemplates.SuiteQuickLaunch</SuiteQuickLaunch>
+<SuiteRender>.NmSp.AcceptanceTests.SuiteTemplates.SuiteRender</SuiteRender>
+<SuiteScheduledTask>.NmSp.AcceptanceTests.SuiteTemplates.SuiteScheduledTask</SuiteScheduledTask>
+<SuiteUserGroup>.NmsP.AcceptanceTests.SuiteTemplates.SuiteUserGroupMapping</SuiteUserGroup>
+<SuiteWikiPage>.NmSp.AcceptanceTests.SuiteTemplates.SuiteWikiPageNew</SuiteWikiPage>
+</SymbolicLinks>
+<Versions>true</Versions>
+<WhereUsed>true</WhereUsed>
+</properties>

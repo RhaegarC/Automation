@@ -1,0 +1,18 @@
+!|script|Remote|${SHAREPOINT}:38|
+|eval|$web = Get-SpWeb ${SITE_URL}|
+|eval|New-SPUser -UserAlias "VELASKEC\userkonstantin" -Web $web|
+|eval|New-SPUser -UserAlias "VELASKEC\uservladimir" -Web $web|
+|show|eval|Get-SPUser -Web $web|
+
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|eval|$mapuser = ([xml]$log).Log.entry !-|-! ? context -eq 'Map User'|
+
+!|Ordered Query:Remote|${NMSP}|$mapuser|
+|rec|message|
+|1|Map Notes user 'CN=Vladimir Sementchouk/O=Vladimir Sementchouk' to Windows user 'VELASKEC\uservladimir' (NOT CACHED)|
+|1|=~/Found existing Principal from name 'VELASKEC\\uservladimir'/|
+|1|Map Notes user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to Windows user 'VELASKEC\userkonstantin' (NOT CACHED)|
+|1|=~/Found existing Principal from name 'VELASKEC\\userkonstantin'/|
+

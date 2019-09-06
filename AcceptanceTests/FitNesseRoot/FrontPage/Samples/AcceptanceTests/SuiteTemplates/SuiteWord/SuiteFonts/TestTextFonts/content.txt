@@ -1,0 +1,21 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordFontElement| 
+|text|family|size|color|weight|italic|
+|Text for existing font - Arial, red, 8|Arial|16|FF0000|normal|null|
+|=~/Calibri, Blue, 12/|Calibri|null|0000FF|normal|null|
+|Text for existing font!- -!|Courier|30|000000|normal||
+|- Courier, 15, Italic|Courier|30|000000|normal||
+|Text for existing font - Microsoft Sans Serif, Green, 10|Microsoft Sans Serif|20|00C200|normal|null|
+|Text for existing font - Verdana, 18, Bold|Verdana|36|0000FF|bold|null|
+|=~/Vladimir Script, Black, 18/|Vladimir Script|36|000000|normal|null|
+|Text with mixed!- -!|Times New Roman|36|000000|normal|null|
+|Arial|Arial|16|FF0000|normal|null|
+|,|Arial|16|FF0000|normal|null|
+| |Vladimir Script|36|000000|normal|null|
+|Calibri,|Calibri|null|0000FF|normal|null|
+| |Vladimir Script|36|000000|normal|null|
+|Courier,|Courier|30|000000|normal||
+| |Vladimir Script|36|000000|normal|null|
+|MSS,|Microsoft Sans Serif|20|00FF00|normal|null|
+| |Vladimir Script|36|000000|normal|null|
+|Verdana,|Verdana|36|000000|bold|null|
+|=~/VScript fonts/|Vladimir Script|36|000000|normal|null|

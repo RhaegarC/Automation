@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithPlusSign-!)
+
+!style_green[Check the html content contains "_Attachments/Special + sign.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

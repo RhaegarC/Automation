@@ -1,0 +1,4 @@
+!define TARGET_FIELD {"<!-Field Name='Category_Folder' Type='Folder'-!/>"}
+!define MAPPING_FIELD {<!-Mapping Destination='Category_Folder' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}' -!/>}
+
+!include <SuiteMappingToFolder.SuiteSetUp

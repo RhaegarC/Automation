@@ -1,0 +1,14 @@
+'''Check Pass-Through Text field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[text() = 'This is Pass-Through text.']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:LabelFormControlProperties|
+
+'''Check Regular Text field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[contains(text(),'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM')]|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:LabelFormControlProperties|
+
+'''Check Text field with popup'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[contains(text(),'This is a text containing hotspot')]|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:LabelFormControlProperties|

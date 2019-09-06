@@ -1,0 +1,7 @@
+!define GROUP (!-SuiteWikiPage-!)
+!define LIST (!-SuiteLinkFinalize-!)
+!define DATABASE (!-LinkTracking-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define LinkDatabase (QuestLinkTrackingForUI)
+
+!contents -R2 -g -p -f -h

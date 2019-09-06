@@ -1,0 +1,9 @@
+!define PAGENAME (!-FirstDoc-!)
+!define ORIGIN_SITE_URL (!-http://sp2016/sites/Test-!)
+
+!include <SuiteCases.GlobalSteps.RunRecoverLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

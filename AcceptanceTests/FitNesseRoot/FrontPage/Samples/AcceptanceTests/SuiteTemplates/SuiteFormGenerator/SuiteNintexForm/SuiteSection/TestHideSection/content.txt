@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = '▶ Control Section for hidding']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = '▶ Section3']|ExpectedValue|True|

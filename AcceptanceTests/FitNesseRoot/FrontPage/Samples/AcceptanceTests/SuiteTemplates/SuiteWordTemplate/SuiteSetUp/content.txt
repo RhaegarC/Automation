@@ -1,0 +1,6 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <AcceptanceTests.IncludePages.RemoveList
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.WordFunctions

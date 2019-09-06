@@ -1,0 +1,37 @@
+'''Install license'''
+!|script|Remote|${NMSP}|
+|eval|$file = Get-ChildItem ${FOLDER}|
+|eval|$path = "${FOLDER}\" + $file.Name|
+|eval|$res = LicenseInstallerCmd -path $path|
+|check|eval|$res|License successfully installed.|
+
+'''Run Migration Job'''
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+'''Check if number of records is exceeded the license limit'''
+!|script|Remote|${NMSP}|
+|eval|[xml]$license = Get-Content $path|
+|eval|$licenseType = $license.GetElementsByTagName("LicenseType").'#text'|
+|eval|!-if ($licenseType -eq "Trial")
+           {$recordsLimit = [int]$license.GetElementsByTagName("Records").'#text'}
+        else {$recordsLimit = 1000}-!|
+|check|eval|$recordsLimit|_${READ_LIMIT_PATTERN}|
+
+'''Display Number of databases limitation'''
+!|script|Remote|${NMSP}|
+|eval|$limitDatabases = $license.GetElementsByTagName("Databases").'#text'|
+|show|eval|$limitDatabases|
+
+'''Display Number of days left before Expiry Date'''
+!|script|Remote|${NMSP}|
+|eval|$currentDate = Get-Date|
+|eval|!-if ($licenseType -eq "Trial") {
+             $daysLeft = $license.GetElementsByTagName("TrialDays").'#text'}
+        else {
+             $expiry = $license.GetElementsByTagName("ExpiryDate").'#text'
+             if ($expiry -ne $null) {
+                 $expiryDate = [DateTime]$license.GetElementsByTagName("ExpiryDate").'#text'
+                 $days = $expiryDate - $currentDate
+                 $daysLeft = $days.Days}
+       }-!|
+|show|eval|$daysLeft|

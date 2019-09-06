@@ -1,0 +1,3 @@
+!define PAGENAME (!-Render_CheckBoxes-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

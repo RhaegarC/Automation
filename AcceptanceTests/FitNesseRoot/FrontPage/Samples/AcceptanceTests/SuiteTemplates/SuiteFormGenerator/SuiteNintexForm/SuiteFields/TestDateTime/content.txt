@@ -1,0 +1,37 @@
+'''Check Editable Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'datetime']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:DateTimeFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedDatetime']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:DateTimeFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Multiline Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'AllowMultiValueDatetime']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:DateTimeFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Date Only Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'OnlyDate']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:DateTimeFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Time Only field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'OnlyTime']|ExpectedValue|False|
+
+'''Check Computed for display Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedForDisplay']|ExpectedValue|False|
+
+'''Check Computed when composed Datetime field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedWhenComposed']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:DateTimeFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|

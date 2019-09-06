@@ -1,0 +1,76 @@
+!* Defines
+!define SHAREPOINT (${LabName})
+!define WEB_SCRAPER (${LabName})
+!define TAXONOMY (${NMSP})
+!define BASEFOLDER (C:\SharePoint)
+# Change in C:\fitnesse\FitNesseRoot\files\nmsp\options\UserOptions.config.Office365Authentication
+!define MODE (!-WebServices-!)
+!define SLASH (/)
+#!define LOTUS_NOTES_DATA_DIR [c:\Program Files (x86)\IBM\Notes\Data]
+*!
+!* HTML character
+!define MARGIN_LEFT (MARGIN-LEFT)
+
+!define COLON_CHAR (%3a)
+!define LESS_CHAR (%3c)
+!define GREATER_CHAR (%3e)
+!define SPACE_CHAR (%20)
+*!
+
+!* OLD of test site
+!define WEBAPP_URL (!-https://questsoftware.sharepoint.com-!)
+!define O365_PASSWORD (fitnesse!@#123)
+!define SITE (/sites/nmspFitnesse)
+!define SITE_COLLECTION (questsoftware.sharepoint.com-sites-nmspFitnesse)
+!define RemoteSharePointSitesConfig (RemoteSharePointSites.config.default.nmspFitnesse)
+!define Admin (user1.nmsp@QUESTSOFTWARE.onmicrosoft.com)
+!define AdminUserName (!-user1 nmsp-!)
+!define AUTH (!-Office365Authentication-!)
+!define CREDENTIALS (WebSession $O365Session)
+!define SPHOSTNAME (questsoftware.sharepoint.com)
+!define SETUP_OPTIONS (!include -c .NmSp.AcceptanceTests.IncludePages.ResetGlobalOptions)
+!define REMOTESP (${LabName})
+!define REMOTESP30 (${REMOTESP})
+!define SOURCEFOLDER (${SITE}/${WEB}/${LIST})
+!define GET_FILES (${SOURCEFOLDER} ${SITE_URL} ${WEB} ${LIST})
+!define EDITABLE_PATH (${SITE}/${WEB}/${LIST}/_Attachments/EditableAttachment.txt)
+!define DUPLICATION_SUFFIX (-[0-9A-F]{1,15})
+!define GET_ATTACHMENTS (${SOURCEFOLDER}/_Attachments ${SITE_URL} ${WEB} ${LIST})
+!define USERMAPPING_FILE (!-UserMappingsforO365.xml-!)
+!define USERMAPPING_USER1 (!-user2.nmsp@questsoftware.onmicrosoft.com-!)
+!define USERMAPPING_USER1_NAME (!-user2 nmsp-!)
+!define USERMAPPING_USER2 (!-user3.nmsp@questsoftware.onmicrosoft.com-!)
+!define USERMAPPING_USER2_NAME (!-user3 nmsp-!)
+!define USERMAPPING_NONEXISTENTUSER (!-user4.nmsp@questsoftware.onmicrosoft.com-!)
+!define USERMAPPING_USERLOGINNAME1 (!-i:0#.f|membership|user2.nmsp@questsoftware.onmicrosoft.com-!)
+!define USERMAPPING_USERLOGINNAME2 (!-i:0#.f|membership|user3.nmsp@questsoftware.onmicrosoft.com-!)
+!define USERMAPPING_NONEXISTENTUSERLOGIN (!-i:0#.f|membership|user4.nmsp@questsoftware.onmicrosoft.com-!)
+*!
+!*> !-PowerShell-! statements override
+''Check the original definitions at one level up''
+!define TAG_AREA {@([System.__ComObject].InvokeMember("getElementsByTagName",[System.Reflection.BindingFlags]::InvokeMethod, $null, $page.ParsedHtml, 'area')) !-|-! select href, shape}
+*!
+
+
+!* New
+!define SITE_COLLECTION (wsmzh.sharepoint.com-sites-testsite)
+!define AUTH (!-Office365TurboAuthentication-!)
+!define O365_PASSWORD (!-software.2018-!)
+!define SITE (/sites/testsite)
+!define Admin (william@wsmzh.onmicrosoft.com)
+!define AdminUserName (!-william-!)
+!define SPHOSTNAME (wsmzh.sharepoint.com)
+!define WEBAPP_URL (!-https://wsmzh.sharepoint.com-!)
+
+
+!define USERMAPPING_FILE (!-UserMappingsforO365Turbo.xml-!)
+!define USERMAPPING_USER1 (!-user2.nmsp@wsmzh.onmicrosoft.com-!)
+!define USERMAPPING_USER2 (!-user3.nmsp@wsmzh.onmicrosoft.com-!)
+!define USERMAPPING_NONEXISTENTUSER (!-user4.nmsp@wsmzh.onmicrosoft.com-!)
+!define USERMAPPING_USERLOGINNAME1 (!-i:0#.f|membership|user2.nmsp@wsmzh.onmicrosoft.com-!)
+!define USERMAPPING_USERLOGINNAME2 (!-i:0#.f|membership|user3.nmsp@wsmzh.onmicrosoft.com-!)
+!define USERMAPPING_NONEXISTENTUSERLOGIN (!-i:0#.f|membership|user4.nmsp@wsmzh.onmicrosoft.com-!)
+
+*!
+
+!contents -R2 -g -p -f -h

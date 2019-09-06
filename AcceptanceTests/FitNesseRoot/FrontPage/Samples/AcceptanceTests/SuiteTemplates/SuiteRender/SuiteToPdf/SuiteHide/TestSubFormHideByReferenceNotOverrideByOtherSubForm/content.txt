@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestSubFormHideByReferenceNotOverrideByOtherSubForm-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

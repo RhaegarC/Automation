@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Edit>true</Edit>
+<Files>true</Files>
+<Properties>true</Properties>
+<RecentChanges>true</RecentChanges>
+<Refactor>true</Refactor>
+<Search>true</Search>
+<Suite>true</Suite>
+<SymbolicLinks>
+<GeneralCases>.NmSp.AcceptanceTests.SuiteTemplates.SuiteFolder</GeneralCases>
+<SuiteDocument>.NmSp.AcceptanceTests.SuiteTemplates.SuiteDocumentNew</SuiteDocument>
+<SuiteMappingToFolder>.NmSp.AcceptanceTests.SuiteTemplates.SuiteMappingToFolder</SuiteMappingToFolder>
+<SuiteScheduledTask>.NmSp.AcceptanceTests.SuiteTemplates.SuiteScheduledTask</SuiteScheduledTask>
+</SymbolicLinks>
+<Versions>true</Versions>
+<WhereUsed>true</WhereUsed>
+</properties>

@@ -1,0 +1,2 @@
+!define SAVE_AS (MsgDocument)
+!include -seamless TestTemplate

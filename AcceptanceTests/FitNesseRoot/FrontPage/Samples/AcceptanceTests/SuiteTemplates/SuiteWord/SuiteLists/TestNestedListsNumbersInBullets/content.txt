@@ -1,0 +1,11 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordMultiLevelListItems $numbering -!| 
+|text|type|indLeft|
+|Bullet 1|bullet|720|
+|Number 1 in bullet 1|decimal|1440|
+|Number 2 in bullet 1|decimal|1440|
+|Bullet 2|bullet|720|
+|Number 1 in bullet 2|decimal|1440|
+|Number 2 in bullet 2|decimal|1440|
+|Bullet 3|bullet|720|
+
+

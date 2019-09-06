@@ -1,0 +1,31 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'li'|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: left')|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|This is left alignment with left-to-right reading order.|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'li'|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: right')|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|This is right alignment with right-to-left reading order.|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'ol'|limit to|getAttribute("dir") -eq 'rtl'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|This is right alignment with right-to-left reading order.|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'ul'|limit to|getAttribute("dir") -eq 'rtl'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|This is left alignment with left-to-right reading order.|
+
+
+
+

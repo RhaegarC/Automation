@@ -1,0 +1,4 @@
+!define LIST (!-SuiteLinkToPdfa-!)
+!define MIGRATION (!-DocLib2DocLibPdfaDoc-!)
+!define SAVE_AS (pdf)
+!contents -R2 -g -p -f -h

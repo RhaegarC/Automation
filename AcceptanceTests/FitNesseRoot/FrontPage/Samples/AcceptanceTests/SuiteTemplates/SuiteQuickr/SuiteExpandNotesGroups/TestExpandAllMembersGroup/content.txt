@@ -1,0 +1,4 @@
+!|Subset Query:Remote|${NMSP}|$warning !-|-! select message|
+|message|
+|=~/Could not add user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to SharePoint group '__userandgroupmapping_QP_ec2l'/|
+|=~/Could not add user 'CN=Read1 in group1/OU=userandgroupmapping/OU=QP/O=ec2l' to SharePoint group '__userandgroupmapping_QP_ec2l'/|

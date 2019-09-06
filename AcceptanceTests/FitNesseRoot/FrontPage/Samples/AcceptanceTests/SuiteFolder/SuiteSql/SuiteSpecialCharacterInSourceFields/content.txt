@@ -1,0 +1,17 @@
+!define GROUP (!-SuiteSql-!)
+!define LIST (!-SuiteSpecialCharacterInSourceFields-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate source data which fields alias contains special characters to SQL without any error
+So that I can see the migrated data in SQL
+ 
+!1 scenarios
+![
+Given source data which fields alias contains special characters was selected in Notes tab
+And mappings of these fields were added in Map Data tab
+When I run a migration
+Then I can see the migrated data in SQL
+]!

@@ -1,0 +1,4 @@
+!|script|Remote|${NMSP86}|
+|eval|Import-Module "${NMSP_Install_Directory_Client}\PowerShell\discovery.psm1"|
+#|check|eval|$lns = New-Object -ComObject Lotus.NotesSession|=~/^$/|
+#|eval|$lns.Initialize()|

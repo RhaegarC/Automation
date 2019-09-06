@@ -1,0 +1,2 @@
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/TestWindowsMetaFile.aspx|

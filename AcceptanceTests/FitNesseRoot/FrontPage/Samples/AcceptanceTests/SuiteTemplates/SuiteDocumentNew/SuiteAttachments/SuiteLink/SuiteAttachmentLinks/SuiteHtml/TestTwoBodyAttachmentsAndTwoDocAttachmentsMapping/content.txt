@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestTwoBodyAttachmentsAndTwoDocAttachmentsMapping-!)
+
+!style_green[Check the html content contains "Merrimac Software w-9.pdf" and "1.xml".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

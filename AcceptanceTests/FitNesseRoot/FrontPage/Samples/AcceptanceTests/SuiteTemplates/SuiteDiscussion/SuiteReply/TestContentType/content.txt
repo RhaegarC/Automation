@@ -1,0 +1,5 @@
+!|Query: Remote|${NMSP}|QueryItems ${SITE_URL} ${WEB} ${LIST} '<View Scope="Recursive"></View>' !-|-! select @{N='Title'; E={$_['Title']}}, @{N='ContentType';E={GetContentType ${SITE_URL} ${WEB} ${LIST} $_["ContentTypeId"]}}|
+|Title|ContentType|
+|reply 1-1|Message|
+|reply 1-1-1|Message|
+

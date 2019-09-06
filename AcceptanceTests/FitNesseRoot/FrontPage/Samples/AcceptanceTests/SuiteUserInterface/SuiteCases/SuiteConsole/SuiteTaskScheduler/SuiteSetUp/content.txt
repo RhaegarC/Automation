@@ -1,0 +1,31 @@
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false",scanLocations:"fordiscovery"}|
+
+|script|
+|closeMainWindows|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|removeDiscoverDatabases|!{server:"(local)"}|
+
+|script|
+|stopServer86|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|discoverLocalDatabases|
+|eval|$db=Get-Database ALL "(local)" "SuiteDatabaseAnalysis"|
+|eval|$db.TechnicalClassName = "Document Library"|
+|applyClassRule|!{class:"Document Library",removedJobs:"DocLibrary to !-BasicPage-!"!-,-!"DocLibrary to List",server:"(local)",addedJobs:"${NMSP_Install_Directory_Client}\Job Files\!-DocLibrary to BasicPage-!.pmjob",site_url:"!-http://sp2016/sites/test-!",database:"SuiteDatabaseAnalysis"}|
+
+|script|
+|stopServer86|
+
+|script|
+|startUiautomation|

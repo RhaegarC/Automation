@@ -1,0 +1,6 @@
+!define WEB (!-SuiteQuickLaunch-!)
+!define LIST (!-SuiteQuickLaunch-!)
+!define APPNAME (!-SuiteProperties-!) 
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+
+!contents -R2 -g -p -f -h

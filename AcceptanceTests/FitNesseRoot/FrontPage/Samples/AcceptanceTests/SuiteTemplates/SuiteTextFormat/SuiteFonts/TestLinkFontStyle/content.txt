@@ -1,0 +1,8 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|
+|user@email.com|
+
+

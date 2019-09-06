@@ -1,0 +1,3 @@
+!define VIEW (Suite Links)
+!define LIST (SuiteLinks)
+!contents -R2 -g -p -f -h

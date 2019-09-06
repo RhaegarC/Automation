@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestNewLineInListItem-!)
+
+!style_green[Check the word content contains text shown as below (the font is Arial, black, 9):]
+----------------
+•   First bullet
+     no bullet
+•   Second bullet
+----------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

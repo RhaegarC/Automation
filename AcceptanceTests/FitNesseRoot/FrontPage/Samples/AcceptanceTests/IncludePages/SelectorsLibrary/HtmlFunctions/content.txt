@@ -1,0 +1,77 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:Element($props) {
+   $element = $_
+   $object = New-Object PSObject -Property @{
+     Name = $_.tagName
+     Text = $_.innerText
+   }
+   $props | % { $exp = '$element.'+"$_";  $object | add-member Noteproperty $_ (iex $exp) } 
+   $object
+}</pre>-!|
+
+
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:HtmlElementLite {
+   New-Object PSObject -Property @{
+    Name                    = $_.tagName
+    Text                    = $_.innerText
+    innerHtml               = $_.innerHtml  
+    colSpan                 = $_.colSpan
+    'margin-left'           = $_.Style.marginLeft
+    parent                  = $_.parentElement.tagName
+    'parent-class'          = $_.parentElement.className
+    grandparent             = $_.parentElement.parentElement.tagName
+    'grandparent-class'     = $_.parentElement.parentElement.className
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:HtmlElement {
+   New-Object PSObject -Property @{
+    Name                    = $_.tagName
+    Text                    = $_.innerText
+    innerHtml               = $_.innerHtml  
+    colSpan                 = $_.colSpan
+    bgcolor                 = $_.bgColor 
+    color                   = $_.Style.color
+    'white-space'           = $_.Style.whiteSpace
+    'margin-left'           = $_.Style.marginLeft
+    'margin-right'          = $_.Style.marginRight
+    'margin-bottom'         = $_.Style.marginBottom
+    'margin-top'            = $_.Style.marginTop
+    'padding-bottom'        = $_.Style.paddingBottom
+    'padding-top'           = $_.Style.paddingTop
+    'text-align'            = $_.Style.textAlign
+    'font-family'           = $_.Style.fontFamily
+    'font-size'             = $_.Style.fontSize
+    'font-weight'           = $_.Style.fontWeight
+    'font-style'            = $_.Style.fontStyle
+    'border-color'          = $_.Style.borderColor
+    'border-style'          = $_.Style.borderStyle
+    'text-decoration'       = $_.Style.textDecoration
+    'vertical-align'        = $_.Style.valign
+    parent                  = $_.parentElement.tagName
+    'parent-class'          = $_.parentElement.className
+    'parent-vertical-align' = $_.parentElement.valign
+    'parent-margin-left'    = $_.parentElement.Style.marginLeft 
+    'parent-margin-right'   = $_.parentElement.Style.marginRight
+    'parent-margin-bottom'  = $_.parentElement.Style.marginBottom
+    'parent-margin-top'     = $_.parentElement.Style.marginTop
+    'parent-text-align'     = $_.parentElement.Style.textAlign
+    grandparent             = $_.parentElement.parentElement.tagName
+    'grandparent-class'     = $_.parentElement.parentElement.className
+  }
+}</pre>-!|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:GetAllHrefsFromText {
+   [regex]$regex = 'href=\"(?<href>.*?)\">(?<content>.*?)</a>'
+   $regex.Matches($_) | % {
+     New-Object PSObject -Property @{
+       href = $_.Groups[1].Value
+       content = $_.Groups[2].Value
+     }
+   } 
+}</pre>-!|
+

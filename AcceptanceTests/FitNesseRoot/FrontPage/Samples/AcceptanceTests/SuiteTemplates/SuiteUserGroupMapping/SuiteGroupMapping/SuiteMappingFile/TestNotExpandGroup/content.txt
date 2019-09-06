@@ -1,0 +1,12 @@
+!define MAPGROUPS {<!-GroupMapping ExpandGroup='false' NotesName='testgroup' SharePointName='{Members}'-! />}
+!define LIST {!-SuiteNotExpandGroups-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:"From='CN=anbeel/O=anbeel'",mapACLRoles:"true",securityMapping:"true",mapGroups:"${MAPGROUPS}"}|
+
+!|script|Remote|${NMSP}|
+|eval|$mapgroup = ([xml]$log).Log.entry !-|-! ? context -eq 'Expand Group'|
+
+!|Subset Query:Remote|${NMSP}|$mapgroup|
+|message|
+|=~/Could not expand the group 'testgroup' because the Expand Group field is set to False in the Security Group Mapping/|

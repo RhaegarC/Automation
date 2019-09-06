@@ -1,0 +1,29 @@
+'''Check Editable Radio Button'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'RadioButton']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Radio Button'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedRadioButton']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Multi Value Radio Button'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MultiValueRadioButton']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Multi Choice Button'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MultiChoiceRadioButton']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Formula Radio Button'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'FormulaChoiceRadioButton']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

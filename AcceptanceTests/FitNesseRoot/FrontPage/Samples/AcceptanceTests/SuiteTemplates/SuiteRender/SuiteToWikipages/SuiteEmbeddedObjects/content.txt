@@ -1,0 +1,16 @@
+!define LIST (!-RenderEmbeddedObjects-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can render documents with embedded objects without collapse
+So that I can support rendering all elements
+
+!1 scenarios
+![
+Given I have a documents with embedded objects
+When I render it and migrate to sharepoint
+Then no error is reported during migration
+]!

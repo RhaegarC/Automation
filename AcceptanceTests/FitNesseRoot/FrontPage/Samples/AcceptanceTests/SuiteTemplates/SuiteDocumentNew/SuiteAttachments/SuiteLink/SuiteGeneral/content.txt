@@ -1,0 +1,4 @@
+!define VIEW (Suite General)
+!define LIST (SuiteLink_SuiteGeneral)
+!define MAPFIELDS ("<Mapping !-Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Objects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h

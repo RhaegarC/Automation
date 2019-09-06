@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestIdeographicSpaceinAttachmentFilename.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"A",selector:!-"href","innerText"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|href|innerText|
+|=~/${SITE}/SuiteMultiByteCharacters/SuiteMultiByteCharacters/_Attachments/日本語%20全角.txt/|日本語　全角.txt|

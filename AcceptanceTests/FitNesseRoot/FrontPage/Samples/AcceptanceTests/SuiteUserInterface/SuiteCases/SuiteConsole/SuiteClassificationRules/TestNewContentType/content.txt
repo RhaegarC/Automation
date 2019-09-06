@@ -1,0 +1,17 @@
+!|script|remote|${NMSP}:36|
+|eval|expandTreeItem "ClassificationRules"|
+|eval|click "TechnicalClassificationRules" |
+|eval|sleep 5|
+|eval|rightClick "DiscussionRule" |
+|eval|rightClick "DiscussionRule" |
+|eval|doubleClick "DiscussionRule" |
+|eval|doubleClick "DiscussionRule" |
+|eval|click "RuleContentTypesTab" |
+|eval|click "EnableRuleContentTypes" |
+|eval|click "RuleNewButton" |
+|eval|setText "RuleContentTypeTargetSite" "http://sp2013" |
+|eval|setText "RuleContentTypeName" "NewContentType" |
+|eval|setText "RuleParentContentType" "Document" |
+|eval|click "RuleOKButton" |
+|eval|sleep 2|
+|check|eval|getControlName "RuleNewContentType"|NewContentType|

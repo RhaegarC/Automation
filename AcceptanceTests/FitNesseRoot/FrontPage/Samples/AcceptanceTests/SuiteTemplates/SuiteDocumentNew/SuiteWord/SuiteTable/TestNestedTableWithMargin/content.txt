@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestNestedTableWithMargin-!)
+
+!style_green[Check the word content contains nested tables with margin as following image, and the font is Arial, font color is black, font size is 9.]
+!img files/nmsp/images/CheckpointImages/TestNestedTableWithMargin.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

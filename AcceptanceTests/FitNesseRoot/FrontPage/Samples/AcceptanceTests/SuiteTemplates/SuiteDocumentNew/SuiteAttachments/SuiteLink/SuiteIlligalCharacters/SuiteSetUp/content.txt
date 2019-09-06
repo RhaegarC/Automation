@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",formula:"subject='TestFileNameWithSpecChars'",properties:!-@{path="//Field[@Name='Attachments']";name="AlternateFolder";value="_#Attachments"}-!,multiEnv:"target"}|
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+

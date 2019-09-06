@@ -1,0 +1,13 @@
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate documents to document set in  sharepoint online (using Azure Turbo Mode)
+So that I have full information of the documents on sharepoint
+
+!1 scenarios
+![
+Given there are documents in notes database
+When I map the documents to document set of sharepoint
+And I run migration (using Azure turbo mode)
+Then I can see the document set is created
+]!

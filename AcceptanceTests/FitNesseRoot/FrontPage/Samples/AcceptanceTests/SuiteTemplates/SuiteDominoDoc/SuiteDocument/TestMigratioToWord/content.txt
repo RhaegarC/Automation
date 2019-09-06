@@ -1,0 +1,8 @@
+|script|
+|download|!{file:"${TARGETFOLDER}\${FILENAME}.docx",url:"${LIST_URL}/${FILENAME}.docx"}|
+
+|script|Remote|${NMSP}|
+|newParseWordDoc|!{folder:"${TARGETFOLDER}",name:"${FILENAME}"}|
+|check|eval|$document.innerXml.contains("Content in basic document")|True|
+
+

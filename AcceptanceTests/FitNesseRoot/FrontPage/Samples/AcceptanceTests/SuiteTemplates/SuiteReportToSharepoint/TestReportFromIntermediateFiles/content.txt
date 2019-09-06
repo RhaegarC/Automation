@@ -1,0 +1,49 @@
+!define LIST (!-TestReportFromIntermediateFiles-!)
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"Suite Sections"}|
+
+!|script|Remote|${NMSP}|
+|eval|$FilePath = "C:\IntermediateFiles"|
+|eval|$exist = Test-Path -Path $FilePath|
+|eval|if (-not $exist) {new-item $FilePath -itemtype directory}|
+
+!*> Export to intermediate file
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|show|eval|!-
+do {
+ $process = start .\NMSPCMD.EXE '-job -!${JOBFILE}!- -export C:\IntermediateFiles\doc.xml' -wait -PassThru
+ $process.WaitForExit()
+ $process.ExitCode
+}
+while($process.ExitCode -eq 1)-!|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+*!
+
+!*> Import from intermediate file
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|show|eval|!-
+do {
+ $process = start .\NMSPCMD.EXE '-job -!${JOBFILE}!- -import C:\IntermediateFiles\doc.xml' -wait -PassThru
+ $process.WaitForExit()
+ $process.ExitCode
+}
+while($process.ExitCode -eq 1)-!|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+*!
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${REPORT_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Status'; E={$_['Status']} } ,@{ N='Processed Documents'; E={$_['Processed_x0020_Documents']} } ,@{ N='Migrated Items'; E={$_['Migrated_x0020_Items']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Warnings'; E={$_['Warnings']} } |
+|Job Name|Status|Processed Documents|Migrated Items|Errors|Warnings|
+|${WEB}.${LIST}|Completed|13|13|0|1| 
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SUMMARY_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Records Read'; E={$_['Records_x0020_Read']} } ,@{ N='Records Written'; E={$_['Records_x0020_Written']} } ,@{ N='Warnings'; E={$_['Warnings']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Run By'; E={$_['Run_x0020_By']} },@{ N='Database'; E={$_['Database']} }   |
+|Job Name|Records Read|Records Written|Warnings|Errors|Run By|Database|
+|SuiteReportToSharePoint.${LIST}|13|13|1|0|Administrator|${APPNAME}.nsf|

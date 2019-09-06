@@ -1,0 +1,10 @@
+!include -c <AcceptanceTests.SuiteTemplates.SuiteWikiPageNew.SuiteDocumentLevelSecurity.SuiteSetUp
+
+!define SOURCE_FIELDS (!-'<Column ColumnType="Item" Alias="{overridedocumentwriters}" Value="AdditionalAuthors" ReturnType="String" Option="Multi" />','<Column ColumnType="Item" Alias="{overridedocumentreaders}" Value="AdditionalReaders" ReturnType="String" Option="Multi" />'-!)
+!define REMOVE_NODES (!-"TransferJob/SecurityMapping/MapACLUsers","TransferJob/SecurityMapping/MapACLGroups"-!)
+!define PROPERTIES (!-@{path="TransferJob/SecurityMapping/AccessLevelMappings";name="StandardPermissionLevelsOnly";value="false"},@{path="TransferJob/SecurityMapping/AccessLevelMappings/AccessLevelMapping[@NotesAccessLevel='Author']";name="SharePointPermissionLevel";value="Edit"},@{path="TransferJob/SecurityMapping/AccessLevelMappings/AccessLevelMapping[@NotesAccessLevel='Author']";name="SharePointGroup";value="{Members}"}-!)
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",sourceFields:${SOURCE_FIELDS},removeNodes:${REMOVE_NODES},securityMapping:"true",mapDocumentLevelSecurity:"true",mapACLRoles:"true",properties:${PROPERTIES}}|
+
+|script|
+|checkList|!{sp_site:"${WEB_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|

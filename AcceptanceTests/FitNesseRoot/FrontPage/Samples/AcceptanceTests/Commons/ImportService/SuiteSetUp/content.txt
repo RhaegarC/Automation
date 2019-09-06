@@ -1,0 +1,6 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}"}|
+
+!|script|remote|${NMSP}|
+|SharePoint LinkTracking|false|
+

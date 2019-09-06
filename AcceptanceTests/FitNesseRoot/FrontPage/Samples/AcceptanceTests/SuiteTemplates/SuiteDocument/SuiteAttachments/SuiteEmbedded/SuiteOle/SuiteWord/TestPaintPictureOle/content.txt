@@ -1,0 +1,3 @@
+!|Query:Remote|${WEB_SCRAPER}|$docOleObjects|
+|IconCaption|ProgId|OleIcon|
+||PBrush|False|

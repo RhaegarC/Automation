@@ -1,0 +1,15 @@
+!define CONTEXT [=~/Migrating File|Missing Attachment/]
+!define MESSAGE [=~/An attachment was not extracted correctly|Missing Attachment/]
+
+!define PAGENAME (!-TestInvalidOle-!)
+
+!style_green[Check the pdf content contains "http://Body/object0.pdf".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc
+
+!* We will show warning message below in case of corrupted Ole object
+!|Subset Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+|context|message|
+|${CONTEXT}|${MESSAGE}|
+*!
+

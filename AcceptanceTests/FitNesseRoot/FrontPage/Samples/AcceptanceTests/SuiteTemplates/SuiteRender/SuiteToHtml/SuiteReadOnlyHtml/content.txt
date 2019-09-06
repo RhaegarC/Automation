@@ -1,0 +1,29 @@
+!define LIST (!-SuiteReadOnlyHtml-!)
+!define SAVE_AS (htm)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate documents to read-only html files
+So that I can have different types of target files
+
+!1 scenarios
+![
+Given I set read-only to true of the File field in mapping tab
+When I run migration
+Then the controls in the target html files are disabled
+
+Given I set read-only to false of the File field in mapping tab
+When I run migration
+Then the controls in the target html files are NOT disabled
+
+Given the source field is render with the type html
+And the target field type is File
+When I create mapping for them
+Then I can see the read-only field in mapping tab
+
+Given the source field is render with the type xml
+And the target field type is File
+When I create mapping for them
+Then I can NOT see the read-only field in mapping tab
+]!

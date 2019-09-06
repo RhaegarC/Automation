@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestImageNameChinese-!)
+
+!style_green[Check the word content contains "中文文档资料.jpg".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+

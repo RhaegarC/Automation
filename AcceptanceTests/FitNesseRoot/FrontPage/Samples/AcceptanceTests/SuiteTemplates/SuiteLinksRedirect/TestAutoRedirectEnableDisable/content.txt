@@ -1,0 +1,23 @@
+!* Auto redirect enabled
+!include -c .NmSp.AcceptanceTests.IncludePages.LinkTrackingService.EnableAutoRedirect
+-!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${FIRSTDOC}.aspx|
+
+!|Query:Remote|${WEB_SCRAPER}|$page.Links !-|-! ? innerHtml -like 'SecondDoc'|
+|href|
+|${Link}|
+
+-!|script|Remote|${WEB_SCRAPER}|
+|Url|${WEBAPP_URL}${Link}|RedirectsTo|${LIST}/${SECONDDOC}.aspx|
+*!
+!* Auto redirect disabled
+!|script|Remote|${NMSP}|
+|SharePoint LinkTracking AutoRedirect|False|
+
+!|script|Remote|${SHAREPOINT}|
+|ActivateNMSPRedirectorFeature|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${Link}|Contains|This record has been migrated to SharePoint.|
+
+*!

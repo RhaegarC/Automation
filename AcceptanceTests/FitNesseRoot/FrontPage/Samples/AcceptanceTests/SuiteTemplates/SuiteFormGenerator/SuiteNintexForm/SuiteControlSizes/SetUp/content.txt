@@ -1,0 +1,12 @@
+!* Close process if running
+!|script|Remote|${NMSP}|
+|eval|get-process ${PROCESS_NAME} !-|-! stop-process|
+*!
+!* Delete target folder
+!|script|Remote|${NMSP}|
+|eval|remove-item "${TARGET_FOLDER}" -force -recurse -confirm:$false|
+*!
+!* Start process
+!|script|Remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE}'!-|-! out-null|
+*!

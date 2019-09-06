@@ -1,0 +1,28 @@
+!define NMSP (ss1.at-nmsp.com)
+!define AUTH (!-ClassicModeAuthentication-!)
+!define MODE (!-ExportToFolder-!)
+!define OPENPATH (${TARGETFOLDER})
+!define WEB_SCRAPER (${NMSP})
+!define BASEFOLDER (C:\TargetFolder)
+!define TARGETDEFINITION (FolderTargetDefinition)
+!define FOLDER_ONLY (script)
+!define TEMPLATE_PATH (http://fitnesse.at-nmsp.com/files/nmsp/templates/folder)
+!define SQLHOST (${NMSP})
+!define SQLINSTANCE (localhost)
+!define UNIQUE_ENV (true)
+
+!* Polymorphism
+!define SOURCEFOLDER (${TARGETFOLDER})
+!define DUPLICATION_SUFFIX [\(\d+\)]
+!define ROOT (${BASEFOLDER}\${WEB}\${APPNAME})
+!define FOLDER (${LIST})
+!define SPACE ( )
+!define SLASH (\\)
+!define TARGET_DEFINITION (FolderTargetDefinition)
+!define GET_FILES (${SOURCEFOLDER})
+!define GET_ATTACHMENTS (${SOURCEFOLDER}\_Attachments)
+!define EDITABLE_PATH (C:\TargetFolder\${WEB}\${APPNAME}\${LIST}\_Attachments\EditableAttachment.txt)
+!define WEBAPP_URL ( )
+*!
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,10 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${TEST_DOCUMENT}.aspx",tag:"IMG",selector:!-"src"-!}|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/Documents\/TestSameEmbeddedTwice.GIF/|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/Documents/TestSameEmbeddedTwice.gif"}|
+

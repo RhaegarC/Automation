@@ -1,0 +1,11 @@
+!define LabName (lab7.at-nmsp.com)
+!define SHAREPOINT (lab7_sp2016.at-nmsp.com)
+!define SQLHOST (${LabName})
+!define SQLINSTANCE (nmsp)
+!define MODE (!-WebServices-!)
+!define AUTH (!-ClassicModeAuthentication-!) 
+!define CREDENTIALS (Credential $AdminCred)
+!define WEB_SCRAPER (${NMSP})
+!define WEBAPP_URL (!-http://sp2016-!)
+!define NMSP_Install_Directory_Service (!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin-!)
+!contents -R2 -g -p -f -h

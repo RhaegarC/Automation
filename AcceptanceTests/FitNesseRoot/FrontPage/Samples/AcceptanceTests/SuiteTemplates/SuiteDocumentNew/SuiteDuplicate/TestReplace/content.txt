@@ -1,0 +1,44 @@
+!define DuplicateHandle (Replace)
+!define TARGET_FOLDER (C:\TargetFolder\SuiteDocument\SuiteDuplicate\TestReplace)
+!define LIST (!-TestReplace-!)
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",duplicateHandle:"${DuplicateHandle}", preserveDates:"false", clearListData:"false", mapFields:"<!-Mapping Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' -!/>"!-,-!"<!-Mapping Destination='Objects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|$FirstPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$FirstDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$FirstMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$FirstHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|
+
+!* !-Replace content of EditableAttachment.txt file in SharePoint/Folder-!
+!|script|Remote|${NMSP}|
+|EditFile|${EDITABLE_PATH}|
+*!
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+!|script|Remote|${NMSP}|
+|$SecondPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$SecondDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$SecondMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$SecondHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|
+
+
+!|script|Remote|${NMSP}|
+|check|eval|(Date "$SecondPdf") -gt (Date "$FirstPdf")|True|
+|check|eval|(Date "$SecondDocx") -gt (Date "$FirstDocx")|True|
+|check|eval|(Date "$SecondMsg") -gt (Date "$FirstMsg")|True|
+|check|eval|(Date "$SecondHtml") -gt (Date "$FirstHtml")|True|
+
+!* Original content of this document is restored in !-SharePoint-!
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${EDITABLE_PATH}|Contains|Original|
+*!
+
+!include -c VerifyAttachmentsSkipReplace

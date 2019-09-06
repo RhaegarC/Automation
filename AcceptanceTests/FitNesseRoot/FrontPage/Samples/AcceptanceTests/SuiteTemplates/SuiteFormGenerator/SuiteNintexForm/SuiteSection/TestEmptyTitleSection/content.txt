@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|!-▶ -!|
+|CheckControlInSection|DisplayName[text() = 'radiobutton_1_1']|ExpectedValue|True|

@@ -1,0 +1,6 @@
+!include -c <SuiteManagedMetadata.SetUp
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget

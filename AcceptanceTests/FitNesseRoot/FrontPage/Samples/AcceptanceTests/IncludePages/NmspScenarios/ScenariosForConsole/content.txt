@@ -1,0 +1,230 @@
+|comment: parameters for !style_blue['''removeDiscoverDatabases''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[server]|yes|string|"(local)"||
+|!style_blue[place]|yes|string|"Place1"||
+|!style_blue[ignoreDB]|yes|string|"SuiteDatabaseAnalysis"||
+
+!|scenario|removeDiscoverDatabases|args|
+|start|remote|${NMSP}:86|
+|convertHash|@args|
+|eval|!- Get-Database ALL $hash.server $hash.place | ?{$_.Title.ToLower() -ne $hash.ignoreDB} | Invoke-DeleteDatabaseFromRepository-!|
+|eval|sleep 3|
+
+!|scenario|discoverLocalDatabases|
+|start|remote|${NMSP}:86|
+|check|eval|(Invoke-DiscoverLocal).RunningTaskRecord.Status|Completed|
+|eval|sleep 3|
+
+!|scenario|discoverQuickrDatabases|
+|start|remote|${NMSP}:86|
+|eval|"mmc","nmsp"!-|-!%{get-process $_ !-|-!stop-process}|
+|eval|$start = Get-Date|
+|eval|$result = 'quickr' !-|-! Invoke-DiscoverQuickr|
+|eval|$stop = Get-Date|
+|check|eval|($stop - $start).Seconds|_ < 50|
+
+!|scenario|getDatabase|name|
+|start|remote|${NMSP}:86|
+|eval|$db= $null|
+|eval|$db = Get-Database ALL '(local)' '@name'|
+
+|comment: parameters for !style_blue['''linkFinalize''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[linkNumber]|yes|int|6||
+|!style_blue[docNumber]|yes|int|3||
+|!style_blue[scope]|no|string|''http://www.www.com''||
+|!style_blue[linksToScope]|no|string|''http://www.www.com''||
+
+!|scenario|linkFinalize|args|
+|start|remote|${NMSP}:36|
+|convertHash|@args|
+|startConsole|
+|eval|$window=$null|
+|eval|$count=0|
+|eval|do{try{$window = Get-UIAWindow -Name "Quest Migrator for Notes to SharePoint Console" -Seconds 60} catch [exception] {};sleep 3;$count++}while($window -eq $null -and $count -lt 5)|
+|show|eval|$count|
+|eval|expandTreeItem "Tools"|
+|eval|click "LinkHandle"|
+|eval|waitExist "FinalizeTab"|
+|eval|click "FinalizeTab"|
+|eval|!-
+if($hash.scope -ne $null -and $hash.scope.Length -gt 0){
+click "RbFinalizeLinkScope"
+setText "TxtFinalizaLinkScope" $hash.scope
+}
+-!|
+|eval|!-
+if($hash.linksToScope -ne $null -and $hash.linksToScope.Length -gt 0){
+click "RbFinalizeLinkToScope"
+setText "TxtFinalizaLinkToScope" $hash.linksToScope
+}
+-!|
+|eval|click "FinalizeButton"|
+|eval|click "FinalizeOk"|
+|eval|waitEnable "FinalizeButton"|
+|show|eval|(iex (getExpression "FinalizeStatus")).Current.Name|
+|check|eval|(iex (getExpression "FinalizeStatus")).Current.Name -eq "Successfully finalized $($hash.linkNumber) links in $($hash.docNumber) documents"|True|
+
+
+!|scenario|analyzeDatabase|args|
+|start|remote|${NMSP}:36|
+|convertHash|@args|
+|startConsole|
+|eval|sleep 5|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+|eval|sleep 8|
+|eval|displayContextMenu $hash.databaseElement|
+|eval|sleep 3|
+|eval|clickMenu "AnalyzeDatabasesMenuItem"|
+|eval|!-
+switch($hash.scanOption)
+{
+"ScanDocument" {checkBox "ScanDataDocuments" "true"; selectRadioButton "AnalyzeDocuments"}
+"DoclinkScan" {checkBox "ScanDoclink" "true"}
+"AllScan" {checkBox "ScanDataDocuments" "true"; selectRadioButton "AnalyzeRichText"; checkBox "ScanDoclink" "true"}
+}
+-!|
+|eval|!-
+if($hash.isScheduledTask -ne $null)
+{
+    if($hash.scanDesign -ne $null)
+    {
+		checkBox "ScanDesign" "true"        
+    }
+    if($hash.scanDesignScript -ne $null)
+    {
+		checkBox "ScanDesignScript" "true"        
+    }
+	if($hash.scanDoclink -ne $null)
+    {
+		checkBox "ScanDoclink" "true"        
+    }
+	selectRadioButton "ScheduleTask"
+}
+else
+{
+	checkBox "Runtaskinbackground" "true"
+}
+-!|
+|eval|click AnalyzeDatabasesOK|
+
+!|scenario|getAnalyzeResult|args|
+|start|remote|${NMSP}:36|
+|convertHash|@args|
+|eval|doubleClick $hash.databaseElement|
+|eval|click "DataAnalysisTab"|
+|eval|!-
+switch($hash.scanOption)
+{
+"ScanDocument" {click "DocumentScan"; sleep 5; waitEnable "Byformsused"; click "Byformsused"}
+"DoclinkScan" {click "DoclinkScan"; sleep 5; waitEnable "ByDoclinks"; click "ByDoclinks"}
+}
+-!|
+|eval|$gridData= getGridData $hash.resultType|
+
+!|scenario|exportAnalyzeResult|args|
+|start|remote|${NMSP}:36|
+|convertHash|@args|
+|eval|displayContextMenu $hash.databaseElement|
+|eval|clickMenu "ExportDataAnalysisMenuItem"|
+|eval|click "ExportDataAnalysisOK"|
+|eval|sleep 5|
+|eval|click "ExportDataAnalysisFinishedDialogOK"|
+
+!|scenario|startConsole|
+|start|remote|${NMSP}:36|
+|closeMainWindows|
+|eval|Start-Process '${NMSP_Install_Directory_Client}\Bin\MigratorConsole.exe'|
+
+|comment: parameters for !style_blue['''runQuickrMigration''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[database]|yes|string|"!-suitequickr-!"||
+
+!|scenario|runDatabaseMigration|args|
+|start|remote|${NMSP}:86|
+|convertHash|@args|
+|eval|$db = Get-Database ALL quickr/ec2l $hash.database|
+|eval|!- if($db.GetType() -Eq [Object[]])
+{
+Start-Migration $db[0]
+}
+else{
+Start-Migration $db
+}
+-!|
+
+|comment: parameters for !style_blue['''applyClassRule''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[class]|yes|string|"Quickr"||
+|!style_blue[navigationLink]|yes|string|"true"|"true","false"|
+|!style_blue[removedJobs]|no|Array|"Quickr-Folders","Quickr-Pages"||
+|!style_blue[addedJobs]|no|Array|"!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files\Quickr-Folders.qrjob-!","!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files\QR-Pages.qrjob-!"||
+|!style_blue[site_url]|yes|string|"!-${SITE_URL}-!"||
+|!style_blue[database]|yes|string|"!-suitequickr-!"||
+
+!|scenario|applyClassRule|args|
+|start|remote|${NMSP}:86|
+|convertHash|@args|
+|eval|if($hash.navigationLink){Enable-NavigationLinks $hash.class $hash.navigationLink}|
+|eval|if($hash.site_url){Set-TechClassBaseUrl $hash.class $hash.site_url}|
+|eval|!-if($hash.removedJobs)
+{
+$hash.removedJobs | % {Remove-JobFromTechClass $hash.class $_}
+}
+-!|
+|eval|!-if($hash.addedJobs)
+{
+$hash.addedJobs | % {Add-JobToTechClass $hash.class $_}
+}
+-!|
+|eval|!-if($hash.subsite)
+{
+Update-NewSiteRelativeToClass $hash.class $hash.subsite
+}
+-!|
+|eval|!-if($hash.server)
+{
+$server=$hash.server
+}
+else{
+$server="quickr/ec2l"
+}
+-!|
+|eval|$db = Get-Database ALL $server $hash.database|
+|eval|!- if($db.GetType() -Eq [Object[]])
+{
+Use-TechClassRules $db[0]
+}
+else{
+Use-TechClassRules $db
+}
+-!|
+
+!|scenario|loadDatabaseIntoConsole|args|
+|start|remote|${NMSP}:86|
+|convertHash|@args|
+|eval|$db = Get-Database ALL $hash.server $hash.database|
+|eval|!-if($db -eq $null)
+{
+	if($hash.type -eq "Local")
+    {
+		Invoke-DiscoverLocal
+    }
+    elseif($hash.type -eq "Quickr")
+    {
+     	Invoke-DiscoverQuickr
+    }
+}
+-!|
+|eval|!- Get-Database ALL $hash.server $hash.place | ?{!$_.Title.ToLower().Contains("suite") } | Invoke-DeleteDatabaseFromRepository-!|
+
+!|scenario|FakeNotesObjectsData _ _ _ _ _ |Id,NotesLink,NotesURL,SharePointURL,Title|
+|eval| sqlcmd -S ${SQLINSTANCE} -d ${LinkDatabase} -Q "INSERT NotesObjects(ID,NotesLink,NotesURL,SharePointURL,Title) Values('@Id', '@NotesLink', '@NotesURL', '@SharePointURL', '@Title')"|
+
+!|scenario|FakeLinkageData _ _ |SourceID,TargetID|
+|eval| sqlcmd -S ${SQLINSTANCE} -d ${LinkDatabase} -Q "INSERT Linkage(SourceID,TargetID,info,record_status) VALUES('@SourceID','@TargetID','','migrated')"|
+
+!| scenario | CheckAnalysisResult | Id | From | Name | Value | Result |
+|eval| $Results=sqlcmd -S ${SQLINSTANCE} -d ${LinkDatabase} -Q "SELECT @Name From Analysis WHERE NotesID='@Id'"|
+|check|eval| $Results.Split(',')[2].Trim()|@Result|

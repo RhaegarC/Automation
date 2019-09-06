@@ -1,0 +1,33 @@
+!*> Defines
+!define APPNAME (Agile Reporting)
+!define APPTEMPLATE (doclbw7.ntf)
+!define TARGETLIST (CommandLine.DocLib2DocLib.${PAGE_NAME})
+!define JOBFILE (c:\CommandLine.DocLib2DocLib.${PAGE_NAME}.pmjob)
+
+*!
+!*> NMSP source
+#-!|script|Remote|${REMOTED}:86|
+#|Application|${APPNAME}|Template|${APPTEMPLATE}|
+#|New Document|Quest Web Parts for SharePoint|
+#|Add RichTextItem|Body|
+#|Append Table|('Status','Green'),('Remaining story points','9'),('Remaining sprints','2'),('Average velocity in story points (based on last 3 sprints)','3')|
+#|Append Table|('Sprint','Story Points'),('#5','0'),('#4','7'),('#3','2'),('#2','9'),('#1','1')|
+#|Save Document|
+*!
+!* Migrate
+!|script|Remote|${REMOTED}|
+|JobFile|${JOBFILE}|Template|DocLib2DocLibWikiPages|Web|${TARGETWEB}|List|${TARGETLIST}|Application|${APPNAME}|
+|RunJob|${JOBFILE}|
+*!
+!* Verify
+!|script|Remote|${REMOTESP}|
+|eval|$web = Get-SPWeb ${TARGETWEB}|
+|$URL=|eval|!-"$($web.url)/$(($web.Lists['CommandLine.DocLib2DocLib.MyTest'].Items | ? {$_.Name-eq 'NumbersTable.aspx'}).url)"-!|
+
+!|script|Remote|${REMOTESP}:30|
+|eval|$page = $null|
+|eval|$page = Invoke-WebRequest -Uri http://sharepoint/CommandLineDocLib2DocLibMyTest/NumbersTable.aspx -Credential $AdminCred|
+|eval|!-$el = $page.ParsedHtml.getElementById('ctl00_MSO_ContentDiv').getElementsByTagName('li') | % {$_.all} | ? {$_.innerText -eq 'aaaaaa'}-!|
+|check|eval|$el -ne $null|True|
+|check|eval|$el.parentElement.parentElement.parentElement.tagName|OL|
+*!

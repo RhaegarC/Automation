@@ -1,0 +1,18 @@
+!include -c .LabInstances.SingleInstance
+!include -c .NmSp.DeployLabs.GetLatestVersion
+!include -c .NmSp.DeployLabs.InstallClient
+!*> Disable firewall
+|script|Remote|${REMOTED}|
+|show|eval|netsh advfirewall set allprofiles state off|
+#|show|eval|netsh firewall set opmode DISABLE|
+*!
+!*> [[UI Automation !-PowerShell-! Extensions][http://uiautomation.codeplex.com/]]
+!|script|Remote|${REMOTED}|
+|eval|Remove-Item -Recurse -Force 'C:\UIAutomation'|
+|eval|new-item 'C:\UIAutomation' -itemtype Directory|
+|show|eval|Read-S3Object -BucketName velaskec -Key 'Tools\UIAutomation.0.8.5.NET40.zip' -File C:\msi\UIAutomation.0.8.5.NET40.zip|
+|eval|$shell_app = new-object -com shell.application|
+|eval|$zip_file = $shell_app.namespace("C:\msi\UIAutomation.0.8.5.NET40.zip")|
+|eval|$destination = $shell_app.namespace("C:\UIAutomation")|
+|eval|$destination.Copyhere($zip_file.items())|
+*!

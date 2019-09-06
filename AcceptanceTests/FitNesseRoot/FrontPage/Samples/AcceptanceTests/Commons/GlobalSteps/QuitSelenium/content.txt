@@ -1,0 +1,8 @@
+!|script|remote|${NMSP}:38|
+|eval|$driver.Close()|
+|eval|$driver.Dispose()|
+|eval|$driver.Quit()|
+
+!|script|
+|stopServer38|
+

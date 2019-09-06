@@ -1,0 +1,13 @@
+!define WEB (!-AutomaticallyZipFileAttachments-!)
+!define LIST (!-AutomaticallyZipFileAttachments-!)
+!define VIEW (!-AutomaticallyZipFileAttachments-!)
+!define APPNAME (!-ZipExclusion-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!contents -R2 -g -p -f -h
+|!img /files/nmsp/images/ZipAttachments/SourceDefinition.png|!img /files/nmsp/images/ZipAttachments/Options.png|
+''Start to watch [[this video][http://communities.quest.com/servlet/JiveServlet/download/14812-1-43490/NMSP%206.2%20training.wmv]] from the [9:00] for more information.''
+http://notes2sharepoint.org/2013/03/25/automatically-zip-file-attachments/
+
+
+
+

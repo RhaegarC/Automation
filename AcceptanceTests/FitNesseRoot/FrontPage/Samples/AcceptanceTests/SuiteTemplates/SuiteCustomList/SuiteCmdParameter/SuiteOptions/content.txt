@@ -1,0 +1,63 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate jobs with different options by NMSPCMD program
+So that I can view data migrated to !-SharePoint-! with correct options successfully
+
+!1 scenarios
+![
+Given the job for migration was prepared
+When I use NMSPCMD program to run a migration without any options name or options file path
+Then I can view data migrated to SharePoint with default options successfully
+
+Given the job for migration was prepared
+And multiple options file were prepared
+When I use NMSPCMD program to run a migration with a saved options name
+Then I can view data migrated to SharePoint with this saved options successfully
+
+Given the job for migration was prepared
+And multiple options file were prepared
+When I use NMSPCMD program to run a migration with a saved options main file path
+Then I can view data migrated to SharePoint with this saved options successfully
+
+Given the job for migration was prepared
+And multiple options file were prepared
+When I use NMSPCMD program to run a migration with a saved options non-main file path
+Then I can view an error shown in cmd console
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(another options set when scheduled task created, not loaded or default one) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options name
+Then I can view data migrated to SharePoint with the options set in scheduled task
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(loaded options set when scheduled task created) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options name
+Then I can view data migrated to SharePoint with the options set in scheduled task
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(default options set when scheduled task created) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options name
+Then I can view data migrated to SharePoint with the options set in scheduled task
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(another options set when scheduled task created, not loaded or default one) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options main file path
+Then I can view data migrated to SharePoint with the options set in scheduled task
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(loaded options set when scheduled task created) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options main file path
+Then I can view data migrated to SharePoint with the options set in scheduled task
+
+Given the job for migration was prepared
+And multiple options file were prepared
+And a scheduled task(default options set when scheduled task created) was perpared
+When I use NMSPCMD program to run this scheduled task with another saved options main file path
+Then I can view data migrated to SharePoint with the options set in scheduled task
+]!

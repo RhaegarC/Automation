@@ -1,0 +1,8 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",sourceFields:"<!-Column ColumnType='Formula' Alias='AlternateName'  Value='@Text(Subject)'-!/>",removeNodes:!-"//Mapping[@Destination='AltFileName']"-!,mapFields:"<!-Mapping Destination='AltFileName' SourceValue='AlternateName' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestSameImageSeveralTimes.aspx",tag:"img",selector:"src"}|
+!contents -R2 -g -p -f -h

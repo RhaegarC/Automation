@@ -1,0 +1,17 @@
+!|script|remote|${NMSP}|
+|eval|remove-item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Options.config" -force -ea silentlycontinue|
+
+|script|
+|startUiautomation|
+
+!|script|
+|startDesigner|
+|importUilib|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|click "Options"|
+|check|eval|getControlName "JobPath" $subtitutions|C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files|
+|check|eval|getControlName "DefinitionPath" $subtitutions|C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Data Definitions|
+|check|eval|getControlName "LogPath" $subtitutions|C:\ProgramData\Quest\Migrator for Notes to SharePoint\Log Files|
+
+|script|
+|stopUiautomation|

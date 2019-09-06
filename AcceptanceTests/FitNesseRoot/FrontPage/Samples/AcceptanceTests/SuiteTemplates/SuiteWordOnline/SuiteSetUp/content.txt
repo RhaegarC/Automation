@@ -1,0 +1,19 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <AcceptanceTests.IncludePages.RemoveList
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.WordOnlineFunctions
+!* Start Selenium Chrome Web Driver
+!|script|Remote|${NMSP}|
+|eval|$env:path += '; c:\Selenium'|
+|eval|Add-Type -path C:\Selenium\net40\WebDriver.dll|
+|eval|$driver = null|
+|eval|$driver = New-Object OpenQA.Selenium.chrome.ChromeDriver|
+|eval|$driver.Manage().Window.Maximize()|
+|eval|$driver.Url = "${LIST_URL}"|
+|eval|$driver.FindElementById("cred_userid_inputtext").sendKeys('user1.nmsp@questsoftware.onmicrosoft.com')|
+|eval|$driver.FindElementById("cred_password_inputtext").sendKeys('${O365_PASSWORD}')|
+|eval|$driver.FindElementById("credentials").Submit()|
+|eval|$driver.Manage().Timeouts().ImplicitlyWait(30)|
+*!

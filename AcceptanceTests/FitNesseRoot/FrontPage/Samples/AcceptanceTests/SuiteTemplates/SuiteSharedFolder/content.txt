@@ -1,0 +1,6 @@
+!define WEB (!-SharedFolder-!)
+!define APPNAME (!-SuiteAttachments-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define NotBlockedBySize (Attach4MB.xml)
+
+!contents -R2 -g -p -f -h

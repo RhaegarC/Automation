@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|▼ Standard Section|
+|CheckControlInSection|DisplayName[text() = 'EditBox_1']|ExpectedValue|True|

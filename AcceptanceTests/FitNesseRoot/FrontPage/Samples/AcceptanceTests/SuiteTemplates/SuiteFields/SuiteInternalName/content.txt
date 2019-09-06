@@ -1,0 +1,6 @@
+!define WEB {!-SuiteInternalName-!}
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!define DATABASE (!-DocLibrary-!)
+!contents -R2 -g -p -f -h
+
+|!img /files/nmsp/images/InternalNameForSPField.png|

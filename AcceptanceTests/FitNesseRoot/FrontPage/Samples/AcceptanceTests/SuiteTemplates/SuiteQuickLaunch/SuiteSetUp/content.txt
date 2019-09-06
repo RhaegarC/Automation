@@ -1,0 +1,9 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',allowClearList:'true'}|
+
+!include <SuiteCases.GlobalSteps.DisableServiceLinkTracking
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",clearListData:"true"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

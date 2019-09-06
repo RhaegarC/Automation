@@ -1,0 +1,4 @@
+!define LIST (SuiteFakeFileName)
+!define VIEW (Suite Embedded)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.SuiteAlternativeLib.SuiteFakeFileName.EditJob)
+!contents -R2 -g -p -f -h

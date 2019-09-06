@@ -1,0 +1,18 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName('Site Collection - ${SITE_COLLECTION}')|
+|eval|$termset = $group.TermSets.GetByName('${TAGGINGFIELD}')|
+|eval|$termset.DeleteObject()|
+|eval|try{ $ctx.ExecuteQuery() }catch {}|
+|eval|$group = $termstore.Groups.GetByName('Site Collection - ${SITE_COLLECTION}')|
+|eval|$ctx.Load($group)|
+|eval|$group.DeleteObject()|
+|eval|$termstore.CommitAll()|
+|eval|try{ $ctx.ExecuteQuery() }catch {}|
+|eval|sleep 3|

@@ -1,0 +1,8 @@
+!|script|Remote|${NMSP}|
+|SharePoint LinkTracking AutoRedirect|True|
+
+!|script|Remote|${SHAREPOINT}|
+|ActivateNMSPRedirectorFeature|
+
+!|script|Remote|${NMSP}|
+|SharePoint LinkTracking Use Windows Impersonation|velaskec\administrator|with|${Qwerty123}|

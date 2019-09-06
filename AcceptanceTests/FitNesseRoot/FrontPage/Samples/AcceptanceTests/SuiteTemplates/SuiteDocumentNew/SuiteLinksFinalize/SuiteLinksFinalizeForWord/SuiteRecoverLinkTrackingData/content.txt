@@ -1,0 +1,37 @@
+!define LIST (!-TestRecoverFinalized-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can recover link tracking data when the data were lost in Link Tracking DB
+So that I can be redirected to the current location of target when I clicking on the link of Link Tracking information page
+
+!1 scenarios
+![
+Given the source of migrated data was selected
+And same location of target was selected
+And same mappings as migration were added
+And "Use the Link Tracking Service" was selected
+And Link Tracking Service was enabled in Options
+
+When I run "Recover Link Tracking Data" in Designer or Console or CMD by command
+
+The recover LTD entrances of them list as below:
+>Designer:
+1.Select Recover Link Tracking Data in the drop down menu list of the Run Job button
+2.Select Recover Link Tracking Data under the top menu Run
+>Console:
+1.Right click on the DB, and select Recover Link Tracking Data in the menu list
+2.Select Recover Link Tracking Data in the Actions Pane
+>CMD:
+cd C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin\
+NMSPCMD.EXE -job jobname -mode RecoverLTS
+
+And test scenarios list as below:
+1.Notes to PDF/ Word/ Wiki/ Custom List/ Discussion with ‘Preserve Response/Reply hierachies’ Selected/ Discussion without ‘Preserve Response/Reply hierachies’ Selected/ single URL field
+2.Quickr to Custom List/ Wiki
+3.Import/ web service
+4.Migrate with previous version, delete data in LTS db, recover LTD with new version nmsp(same job)
+
+Then I can be redirected to the current location of target when I clicking on the link of Link Tracking information page
+]!

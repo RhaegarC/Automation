@@ -1,0 +1,43 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$web = $ctx.Site.OpenWeb('${WEB}')|
+|eval|$ctx.Load($web)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$fields = $web.Fields|
+|eval|$ctx.Load($fields)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-<pre>
+do{
+    $field = $fields.GetByTitle('-!${TAGGINGFIELD}!-')
+    $ctx.Load($field)
+    $field.DeleteObject()
+    try{ $ctx.ExecuteQuery() }catch [Microsoft.SharePoint.Client.ServerException] { $field = $null}
+}until($field -eq $null)
+</pre>-!|
+|eval|$fieldschema = "<Field Type='TaxonomyFieldType' Name='${TAGGINGFIELD}' DisplayName='${TAGGINGFIELD}' />"|
+|eval|$field = $fields.AddFieldAsXml($fieldschema, $false, 0)|
+|eval|$ctx.Load($field)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$taxonomyfield = [Microsoft.SharePoint.Client.ClientContext].GetMethod("CastTo").MakeGenericMethod([Microsoft.SharePoint.Client.Taxonomy.TaxonomyField]).Invoke($ctx, $field)|
+|eval|$taxonomyfield.SspId = $termstore.Id|
+|eval|$taxonomyfield.TermSetId = $termset.Id|
+|eval|$taxonomyfield.Update()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$list = $web.Lists.GetByTitle('${LIST}')|
+|eval|$ctx.Load($list )|
+|eval|$ctx.ExecuteQuery()|
+|eval|$contenttypes = $list.ContentTypes|
+|eval|$ctx.Load($contenttypes)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$contenttype = $contenttypes[0]|
+|eval|$fieldlink = new-object Microsoft.SharePoint.Client.FieldLinkCreationInformation|
+|eval|$fieldlink.Field = $field|
+|eval|$contenttype.FieldLinks.Add($fieldlink)|
+|eval|$contenttype.Update($false)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$view = $list.DefaultView|
+|eval|$view.ViewFields.Add('${TAGGINGFIELD}')|
+|eval|$view.Update()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|

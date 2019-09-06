@@ -1,0 +1,10 @@
+!* Uninstall previously installed
+-!|script|Remote|${SHAREPOINT}|
+|eval|$NMSPService = "${NMSP_Company_Name} ${NMSP_Product_Name} Services"|
+|eval|!-Get-WmiObject -Class Win32_Product | ? {$_.Name -like ($NMSPService+"*")} | % {$_.Uninstall()}-!|
+*!
+!* All solutions should be removed from !-SharePoint-!
+!|Query:Remote|${SHAREPOINT}|Get-SPSolution|
+|Name|SolutionId|Deployed|
+*!
+!include -c VerifyNoAppPool

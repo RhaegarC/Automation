@@ -1,0 +1,12 @@
+|script|
+|getListItemRolePermissions|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<!-View Scope='RecursiveAll'-!><!-Query-!><!-Where-!><!-Eq-!><!-FieldRef Name='FileLeafRef' -!/><!-Value Type='Text'-!>test author.aspx</!-Value-!></!-Eq-!></!-Where-!></!-Query-!></!-View-!>"}|
+
+!|Query:Remote|${NMSP}|$permissions["${USERMAPPING_USERLOGINNAME2}"] !-|-! select Name|
+|Name|
+|Read|
+|Edit|
+|Contribute|
+
+!|Query:Remote|${NMSP}|$permissions["${USERMAPPING_USERLOGINNAME1}"] !-|-! select Name|
+|Name|
+|Read|

@@ -1,0 +1,15 @@
+!include -c <SuiteManagedMetadata.SetUp
+
+!include -c <SharePoint2010New.IncludePages.CreateTerm
+!include -c <SharePointOnline.IncludePages.CreateTerm
+!include -c <SharePoint2013New.IncludePages.CreateTerm
+!include -c <SharePoint2016.IncludePages.CreateTerm
+!include -c <SharePoint2019.IncludePages.CreateTerm
+
+'''Add a term'''
+!|script|Remote|${TAXONOMY}|
+|CreateTerm|Document|
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",removeNodes:"TransferJob/Mapping",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget

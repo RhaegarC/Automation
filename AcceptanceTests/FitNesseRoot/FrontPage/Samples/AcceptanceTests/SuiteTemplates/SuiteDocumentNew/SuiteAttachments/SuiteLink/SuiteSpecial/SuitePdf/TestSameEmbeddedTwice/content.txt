@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestSameEmbeddedTwice-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/object0.docx!-|-!_Attachments/TestSameEmbeddedTwice.docx".]
+!style_green[Check the pdf content contains "_Attachments/object1.docx!-|-!_Attachments/TestSameEmbeddedTwice.docx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

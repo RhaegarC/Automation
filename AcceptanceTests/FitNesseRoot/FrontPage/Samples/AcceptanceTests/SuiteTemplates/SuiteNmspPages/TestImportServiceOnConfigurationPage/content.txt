@@ -1,0 +1,11 @@
+!define ID (ctl00_PlaceHolderMain_ctl00)
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval| $siteUrl = "${WEBAPP_URL}${SITE}${LAYOUTS}NMSPTestImportService.aspx" |
+|eval| $siteUrl += "?SiteCollection=&ISAddr=${WEBAPP_URL}:8088/ImportSession.svc"|
+|eval| $siteUrl += "&AppID=${Admin}&SFPath=&SFCPath="|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|$siteUrl|
+
+!include -c CheckImportServiceContent

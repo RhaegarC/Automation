@@ -1,0 +1,37 @@
+!|scenario|CreateTerm|term|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$termGroup = "@term".Split("/")|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName('Site Collection - ${SITE_COLLECTION}')|
+|eval|$termset = $group.TermSets.GetByName('${TAGGINGFIELD}')|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$culture = Get-Culture|
+|eval|$lcid = $culture.LCID|
+|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+  $isServerTermNull = $false
+  $term = $parent.Terms.GetByName($t)
+  $ctx.Load($term)
+  try{$ctx.ExecuteQuery()}catch{$isServerTermNull = $true}
+
+  if($isServerTermNull -eq $true) {
+    $term = $parent.CreateTerm($t,$lcid,[System.Guid]::NewGuid())
+    $termstore.CommitAll()
+    $ctx.Load($term)
+    $ctx.ExecuteQuery()
+  }
+  $parent = $term
+}
+-!|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|

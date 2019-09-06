@@ -1,0 +1,3 @@
+!define ENV_NAME (exportToFolder)
+!define APPNAME (${DATABASE})
+!contents -R2 -g -p -f -h

@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.DisableSetupWizard
+
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|

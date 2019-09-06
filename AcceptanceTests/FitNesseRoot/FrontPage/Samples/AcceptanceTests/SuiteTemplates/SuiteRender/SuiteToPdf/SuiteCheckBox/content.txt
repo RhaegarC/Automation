@@ -1,0 +1,32 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render checkboxes to documents
+So that I have documents migrated properly
+
+!1 scenarios
+![
+Given different combinations of checkboxes and text list as below
+1. Checkboxes in Section
+2. Table contains checkboxes in Section
+3. Checkboxes in tabbed tables
+4. "Number of column" of checkboxes is more than 2, two checkbox groups in one line
+5. Long/ short text in front of/behind checkboxes which "Number of column" is 1
+6. Long/ short text in front of/behind checkboxes which "Number of column" is more than 2
+7. Long/ short textfield in front of/behind checkboxes which "Number of column" is 1
+8. Long/ short textfield in front of/behind checkboxes which "Number of column" is more than 2
+9. Different font in same line text in front of/ behind checkboxes
+10. Tables contains 5.- 9.
+When I render the document and migrate them to document
+Then I can see the checkboxes are migrated properly
+
+Given keyword of checkboxes is text|value format
+And keyword only contains one '|'
+When I run a migration
+Then I can see the keyword of checkboxes displayed correctly in SharePoint and the selection of this keyword is correct
+
+Given keyword of checkboxes is text|value format
+And keyword contains more than one '|'
+When I run a migration
+Then I can see the keyword of checkboxes displayed correctly in SharePoint but the selection of this keyword is lost
+]!

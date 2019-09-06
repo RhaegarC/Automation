@@ -1,0 +1,5 @@
+!|script|
+|eval|cd "z:\fitnesse\nmsp\FitNesseRoot\NmSp\AcceptanceTests\"|
+|show|eval|copy-item SharePoint2010New\WebServices\properties.xml SharePoint2013New\WebServices\properties.xml|
+|show|eval|copy-item SharePoint2010New\ImportService\properties.xml SharePoint2013New\ImportService\properties.xml|
+

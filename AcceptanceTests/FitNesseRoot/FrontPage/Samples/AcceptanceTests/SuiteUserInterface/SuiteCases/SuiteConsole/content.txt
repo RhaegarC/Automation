@@ -1,0 +1,3 @@
+!define EXE (MigratorConsole.exe)
+!define PROCESS_NAME (mmc)
+!contents -R2 -g -p -f -h

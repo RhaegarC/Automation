@@ -1,0 +1,42 @@
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define LIST (!-TestEncryptWikiPage-!)
+!define DATABASE (!-SuiteAttachments-!)
+!define VIEW (!-Suite General-!)
+!define WEB (!-SuiteEncryptionInTurboMode-!)
+!define FILENAME (!-TestFileNameWithSpace-!)
+!define FILECONTENT (!-Space char.txt-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I encrypt the content during migration in Azure turbo mode
+So that I have a better protection for the migrated data
+
+!1 scenarios
+![
+Given Azure turbo mode and encryption are enabled
+When I migrate document to pdf
+Then I can view proper data in the target pdf file
+
+Given Azure turbo mode and encryption are enabled
+When I migrate document to word
+Then I can view proper data in the target word file
+
+Given Azure turbo mode and encryption are enabled
+When I migrate document to html
+Then I can view proper data in the target html file
+
+Given Azure turbo mode and encryption are enabled
+When I migrate document to wiki page
+Then I can view proper data in the target wiki page
+
+Given Azure turbo mode and encryption are enabled
+When I migrate document with attachments to wiki page
+Then I can view proper attachments through the links
+
+Given Azure turbo mode and encryption are enabled
+When I migrate document to pdf
+Then I can find the log contents from azure queue and job are correct.
+]!

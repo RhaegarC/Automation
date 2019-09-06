@@ -1,0 +1,6 @@
+|script|
+|download|!{file:"${TARGETFOLDER}\${FILENAME}.docx",url:"${LIST_URL}/${FILENAME}.docx"}|
+
+|script|Remote|${WEB_SCRAPER}|
+|newParseWordDoc|!{folder:"${TARGETFOLDER}",name:"${FILENAME}"}|
+|check|eval|$document.innerXml.contains("${FILECONTENT}")|True|

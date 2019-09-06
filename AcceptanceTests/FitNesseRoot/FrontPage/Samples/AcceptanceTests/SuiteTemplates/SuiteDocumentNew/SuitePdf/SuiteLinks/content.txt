@@ -1,0 +1,25 @@
+!define LIST (!-SuiteLinks-!) 
+!define VIEW (!-Suite Links-!)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can replace illigal characters with specific character
+So that I can specify the document names
+
+!1 scenarios
+![
+Given there is illigal characters in a document name and its path
+When I set to replace the characters with "_"
+And I run migration
+Then the illigal characters are replaced by "_"
+When I finalize the links
+Then the links are finalized successfully
+
+Given there is illigal characters in a document name and its path
+When I set to replace the characters with empty space
+And I run migration
+Then the illigal characters are removed
+When I finalize the links
+Then the links are finalized successfully
+]!

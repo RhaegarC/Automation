@@ -1,0 +1,23 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define LIST (!-SuiteLinks-!)
+!define VIEW (!-Suite Links-!)
+!* Suite parameters
+|'''Parameter'''|'''Possible values'''|'''Where to define?'''|Meaning|
+|!style_meta[LT_ENABLED]|!style_caps{!-False, True-!}|Mode Level|''Enable Link Tracking'' check-box at http://lab1_sp2010.nmsp.org/sites/ImportService/_layouts/NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices/_layouts/15/NMSPServicesConfig.aspx|
+*!
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate hotspot file links to !-SharePoint-!
+So that I can redirect to the correct file or file location when I click the migrated hotspot file links
+
+!1 scenarios
+![
+Given hotspot file links(local file, local folder, shared file, shared folder) were added in Notes
+When I run a migration
+Then I can redirect to the correct file or file location when I clicking the migrated hotspot file links
+
+Given picture with hotspot was added in Notes
+When I run a migration
+Then I can redirect to the correct file or file location when I clicking the migrated picture with hotspot
+]!

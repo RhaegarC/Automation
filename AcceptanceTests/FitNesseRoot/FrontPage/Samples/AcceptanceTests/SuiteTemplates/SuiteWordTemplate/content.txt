@@ -1,0 +1,11 @@
+!define WEB (WordTemplate)
+!define VIEW (Suite Word Template)
+!define APPNAME (SimpleObjectsLib)
+!define TEST_DOC (BasicDocumentForTemplate)
+!define SOURCE (${LIST_URL}/${TEST_DOC}.docx)
+!define TARGETFOLDER (${WORD_FOLDER}\${LIST})
+!define TARGET (${WORD_FOLDER}\${LIST}\${TEST_DOC}.docx)
+
+!contents -R2 -g -p -f -h
+
+

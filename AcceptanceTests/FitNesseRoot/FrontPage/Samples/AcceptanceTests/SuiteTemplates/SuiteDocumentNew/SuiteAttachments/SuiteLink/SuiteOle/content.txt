@@ -1,0 +1,4 @@
+!define VIEW (Suite Ole)
+!define LIST (SuiteLink_SuiteOle)
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!contents -R2 -g -p -f -h

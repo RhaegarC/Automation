@@ -1,0 +1,21 @@
+!define APPNAME (!-LinkTracking-!)
+!define LIST (!-SuiteLinksFinalize-!)
+!define MIGRATION (!-BasicList-!)
+!define FIELDNAME (testURL)
+
+!define SecondDocLink (=~/${SITE}/${LinkTrackPage}\?noteslink=notes:///85257b4f0055cd9c/=\<view with special characters\>=/ff16649c9a93dc4e85257b4f00606fb0/)
+!define ThirdDocLink (=~/${SITE}/${LinkTrackPage}\?noteslink=notes:///85257b4f0055cd9c/=\<view with special characters\>=/fbc9b80928303db585257b4f00607fec/)
+
+!define SecondDocLinkFinalized (${WEB_URL}/Lists/${LIST}/DispForm.aspx?ID=2)
+!define ThirdDocLinkFinalized (${WEB_URL}/Lists/${LIST}/DispForm.aspx?ID=3)
+
+!define FIRSTDOC (!-FirstDoc-!)
+!define SECONDDOC (!-SecondDoc-!)
+!define THIRDDOC (!-ThirdDoc-!)
+!define MAPDOC (!-TestImageMapLinks-!) 
+
+!define SOURCEFIELDS ("<!-Column Value='testURL' ReturnType='String'-! />")
+!define TARGETFIELDS ("<!-Field AddToViews='DefaultView' Name='testURL' Type='URL'-! />")
+!define MAPFIELDS ("<Mapping !-Destination='testURL' SourceValue='testURL' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+
+!contents -R2 -g -p -f -h

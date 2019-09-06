@@ -1,0 +1,46 @@
+!define LIST (!-SuiteFieldProvision-!)
+!define Field1Name (field)
+!define Field2Name (fie ld1)
+!define Field3Name (氏名(カナ))
+!define Field4Name (field1)
+!define Field4Name_New (field1_new)
+!define Fields (@{type="Text";name="${Field1Name}"},@{type="Text";name="${Field2Name}"},@{type="Text";name="${Field4Name}"})
+!define TARGETFIELDS ("<!-Field Name='-!${Field1Name}!-' Type='Text' -!/>","<!-Field Name='-!${Field2Name}!-' Type='Text' InternalName='-!${Field2InternalName}!-' -!/>","<!-Field Name='-!${Field4Name_New}!-' Type='Text' InternalName='-!${Field4InternalName}!-' -!/>","<!-Field Name='-!${Field3Name}!-' Type='Text' InternalName='-!${Field3InternalName}!-' -!/>")
+!define MAPFIELDS ("<!-Mapping Destination='-!${Field1Name}!-' SourceValue='Subject' FormatString =''-! />","<!-Mapping Destination='-!${Field2Name}!-' SourceValue='Subject' FormatString=''-! />","<!-Mapping Destination='-!${Field4Name_New}!-' SourceValue='Subject' FormatString=''-! />","<!-Mapping Destination='-!${Field3Name}!-' SourceValue='Subject' FormatString=''-! />")
+!define Field1InternalName (field)
+!define Field2InternalName (fie_x0020_ld1)
+!define Field2InternalName_new (fie_x0020__x0020_ld)
+!define Field3InternalName (_x6c0f__x540d__x0028__x30ab__x30ca__x0029_)
+!define Field4InternalName (field1)
+
+!contents -R2 -g -p -f -h
+
+As an administrator
+I have a list with a few columns, after migration i might provision new sharepoint column.
+
+!3 scenarios:
+![
+Given there is column in the list
+Given prepare a column with empty internal name and same name
+When I run the migration to SharePoint
+Then I can see no column is created in the list
+Then I can see data is migrated to the column
+
+Given there is column in the list
+Given prepare a column with same internal name and same name
+When I run the migration to SharePoint
+Then I can see no column is created in the list
+Then I can see data is migrated to the column
+
+Given there is column in the list
+Given prepare a column with same internal name and different name
+When I run the migration to SharePoint
+Then I can see no column is created in the list
+Then I can see data is migrated to the column
+
+Given there is column in the list
+Given prepare a column with different internal name and different name
+When I run the migration to SharePoint
+Then I can see a new column is created in the list
+Then I can see data is migrated to the new column
+]!

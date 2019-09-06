@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:!-"Subject='TestRadioButton'"-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

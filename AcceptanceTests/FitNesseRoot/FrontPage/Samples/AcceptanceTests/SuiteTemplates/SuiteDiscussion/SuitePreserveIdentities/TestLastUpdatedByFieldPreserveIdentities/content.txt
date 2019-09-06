@@ -1,0 +1,8 @@
+!|script|Remote|${NMSP}|
+|eval|$topic = QueryItems ${SITE_URL} ${WEB} ${LIST} '<View><Query><Where><Eq><FieldRef Name="Title" /><Value Type="Text">topic 6</Value></Eq></Where></Query></View>'|
+
+!|Query: Remote|${NMSP}|GetFiles $topic.FieldValues.FileRef ${SITE_URL} ${WEB} ${LIST}|
+|Editor|
+|=~/userkonstantin/|
+|=~/uservladimir/|
+

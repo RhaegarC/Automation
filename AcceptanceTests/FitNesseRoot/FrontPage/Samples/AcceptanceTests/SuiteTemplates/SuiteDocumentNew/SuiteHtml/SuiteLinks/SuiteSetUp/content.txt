@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",view:"!-Suite Links-!",formula:"@Contains(subject;'TestLinkSpecial')",linkConversionType:"UseLinkTracking"}|

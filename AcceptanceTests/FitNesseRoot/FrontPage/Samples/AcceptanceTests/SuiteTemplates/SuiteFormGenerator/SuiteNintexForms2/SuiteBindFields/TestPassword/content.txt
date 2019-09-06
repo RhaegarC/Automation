@@ -1,0 +1,2 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<div class="nf-filler-control-inner">•••••.*value="123456"/|

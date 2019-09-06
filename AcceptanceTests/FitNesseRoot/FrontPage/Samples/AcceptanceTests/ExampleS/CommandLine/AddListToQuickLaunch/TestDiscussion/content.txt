@@ -1,0 +1,8 @@
+!*> Defines
+!define APPNAME (Quick Launch Discussion)
+!define APPTEMPLATE (discussion8.ntf)
+!define MIGRATION (Discussion2Discussion)
+!define TARGETLIST (CommandLine.AddListToQuickLaunch.${MIGRATION})
+!define JOBFILE (c:\${TARGETLIST}.pmjob)
+*!
+!include -seamless TempLate

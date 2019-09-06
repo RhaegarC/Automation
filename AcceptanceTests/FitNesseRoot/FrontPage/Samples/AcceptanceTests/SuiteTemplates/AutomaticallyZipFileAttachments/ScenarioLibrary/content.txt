@@ -1,0 +1,9 @@
+!|scenario|ZipExclusions|extensions|
+|show|eval|$xml = [xml](Get-Content "$($env:AppData)\${NMSP_AppData_Path}\UserOptions.config")|
+|eval|$extensions = '@extensions' -replace ';','!-|-!'|
+|eval|!-<pre>if($xml.UserOptions.NotesQueryOptions.ZipExclusions -eq $null){
+  $el = $xml.CreateNode('element', 'ZipExclusions', '')
+  $xml.UserOptions.NotesQueryOptions.AppendChild($el)
+}</pre>-!|
+|eval|$xml.UserOptions.NotesQueryOptions.ZipExclusions = $extensions|
+|show|eval|$xml.Save("$($env:AppData)\${NMSP_AppData_Path}\UserOptions.config")|

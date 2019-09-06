@@ -1,0 +1,44 @@
+!define PLACE (!-UserAndGroupMapping-!)
+!define QRSERVER (!-quickr/O=ec2l-!)
+!define ROOM (!-Main.nsf-!)
+!define JOBFILE (c:\${MODE}\${AUTH}\${WEB}.${LIST}.qrjob)
+!define User (Reader1)
+!define PageName (TestReader)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can mapping Quickr users into !-SharePoint-! by Web Service or Import Service
+So that I can view these users in the migrated documents permissions page in !-SharePoint-!
+
+!1 scenarios
+![
+Given "nmsp-quickr.nmsp.wm.zhu.cn.qsft" was added in "Configure User/Group Resolution Server..." in Notes tab of Options
+And users were added in Members of Quickr
+And Web Service was selected
+And all the user mappings were added into UserMapping.xml
+And the xml file path was set in User Mapping tab of Options
+And with "ACL Entry Mapping""SharePoint Group Provisioning""Map Reader/Author fields" was checked in Advanced tab of Designer
+When I run migration
+Then I can these users in the migrated documents permissions page in !-SharePoint-!
+
+Given "nmsp-quickr.nmsp.wm.zhu.cn.qsft" was added in "Configure User/Group Resolution Server..." in Notes tab of Options
+And users were added in Members of Quickr
+And Import Service was selected
+And all the user mappings were added into UserMapping.xml
+And the xml file path was set in "Quest Migrator for Notes to SharePoint Services Configuration" page in SharePoint
+And with "ACL Entry Mapping""SharePoint Group Provisioning""Map Reader/Author fields" was checked in Advanced tab of Designer
+When I run migration
+Then I can these users in the migrated documents permissions page in !-SharePoint-!
+
+Given "nmsp-quickr.nmsp.wm.zhu.cn.qsft" was added in "Configure User/Group Resolution Server..." in Notes tab of Options
+And users were added in Members of Quickr
+And Import Service was selected
+And all the user mappings were added into UserMapping.xml
+And the xml file path was set in User Mapping tab of Options
+And with "ACL Entry Mapping""SharePoint Group Provisioning""Map Reader/Author fields" was checked in Advanced tab of Designer
+When I run migration
+Then I can these users in the migrated documents permissions page in !-SharePoint-!
+]!

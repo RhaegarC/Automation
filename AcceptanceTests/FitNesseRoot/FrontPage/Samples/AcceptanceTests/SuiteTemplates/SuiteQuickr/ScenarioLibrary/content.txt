@@ -1,0 +1,52 @@
+!|scenario|sourceDefinition|args|
+|convertHash|@args|
+|eval|!-
+if($hash.sourceFields)
+{
+$souceFields = @($hash.sourceFields)
+$souceFields | % {addChildNode "TransferJob/SourceDefinition/QuerySpec" $_}
+}
+-!|
+|eval|!-
+if($hash.formula)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/Formula"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<Formula>$($hash.formula)</Formula>"
+}
+-!|
+|eval|!-
+if($hash.view)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/From"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<From>$($hash.view)</From>"
+}
+-!|
+|eval|!-
+if($hash.forms)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/Forms"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<Forms>$($hash.forms)</Forms>"
+}
+-!|
+|eval|!-
+switch($hash.sourceVersions)
+{
+'current' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludeAllVersions = "false"}
+'all' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludeAllVersions = "true"}
+}
+-!|
+|eval|!-switch($hash.sourceSelect)
+{
+'published' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'unpublished' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'all' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'binders' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "true"}
+}
+-!|
+|eval|!-
+if($hash.unid)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/UNID"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<UNID>$($hash.unid)</UNID>"
+}
+-!|

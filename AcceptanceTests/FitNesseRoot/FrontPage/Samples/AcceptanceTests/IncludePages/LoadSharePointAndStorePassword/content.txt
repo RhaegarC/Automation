@@ -1,0 +1,13 @@
+!*> Load !-SharePoint-! API
+!|script|Remote|${REMOTESP}|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell|
+*!
+!*> Store administrator credentials
+!|script|Remote|${NMSP},${REMOTESP30}|
+|eval|$username = "${Admin}"|
+|eval|$password = "Qwerty123"|
+|eval|$secstr = New-Object -TypeName System.Security.SecureString|
+|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
+|eval|$AdminCred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr|
+|check|eval|$AdminCred|System.Management.Automation.PSCredential|
+*!

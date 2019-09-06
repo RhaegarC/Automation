@@ -1,0 +1,6 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") | ? {$_.GetAttribute("xml:space") -ne "preserve"} | -! ${WORDPROPERTYSELECT}|
+|${WORDPROPERTY}|
+|=~/SecondDoc.docx/|

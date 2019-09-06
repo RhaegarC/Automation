@@ -1,0 +1,2 @@
+!|script|Remote|${SHAREPOINT}|
+|eval|Add-PSSnapin "Microsoft.SharePoint.PowerShell" -PassThru -ErrorAction:SilentlyContinue|

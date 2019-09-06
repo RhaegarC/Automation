@@ -1,0 +1,27 @@
+!|scenario|WordMain|
+|eval|$main = $null|
+|eval|$main = $driver.FindElementsByClassName("OutlineGroup")|
+
+!|scenario|FindElementsByCssSelector|selector|
+|eval|$elements = $null|
+|eval|$result = $null|
+|eval|$driver.switchTo().frame("WACViewPanel_EditingFrame")|
+|eval|!-do{ $result = $driver.FindElementsByCssSelector('@selector') }while( ($result | ? Displayed -eq $null).Count )-!|
+|eval|!-$elements = @($result | ? Displayed | WordElement)-!|
+|eval|$driver.switchTo().DefaultContent()|
+|eval|$driver.switchTo().frame("WebApplicationFrame")|
+|WordMain|
+|eval|$result = $null|
+|eval|!-do{ $result = $main | % { $_.FindElementsByCssSelector('@selector') } }while( ($result | ? Displayed -eq $null).Count )-!|
+|eval|!-$elements += $result | ? Displayed | WordElement-!|
+
+!|scenario|FindElementsByClassName|class|
+|word main|
+|eval|$elements = $null|
+|eval|!-<pre>do{
+  $elements = $main | % { $_.FindElementsByClassName('@class')} | select `
+  Text, `
+  Displayed, `
+  @{ Name="ppppTag"; E={$_.FindElementByXPath('../../../..').TagName}}, `
+  @{ Name="pppppTag"; E={$_.FindElementByXPath('../../../../..').TagName}} `
+  }while( ($elements | ? Displayed -eq $null).Count )</pre>-!|

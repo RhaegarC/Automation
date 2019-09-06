@@ -1,0 +1,53 @@
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions
+!|scenario|Document|name|in|folder|
+|download|${SOURCE}|to|@folder\@name.${SAVE_AS}|
+|eval|$html = $null|
+|eval|$html = Get-Content '@folder\@name.${SAVE_AS}' -Encoding Utf8|
+
+!|script|Remote|${NMSP}|
+|eval|[regex]$tableCellRegex='<td.*?<p.*?style=\"(?<style>.*?)\".*?><span.*?>(?<text>.*?)</span>\s*?</p>\s*?</td>'|
+|eval|!-<pre>filter global:GetAllTableCellText {
+   $tableCellRegex.Matches($_) | % {
+     New-Object PSObject -Property @{
+       content = $_.Groups[0].Value
+       style = $_.Groups[1].Value
+       text = $_.Groups[2].Value
+     }
+   } 
+}</pre>-!|
+
+
+!|script|Remote|${NMSP}|
+|eval|[regex]$liRegex='<li.*?style=\"(?<style>.*?)\".*?><span.*?>(?<text>.*?)</span>'|
+|eval|!-<pre>filter global:GetAllLIText {
+   $liRegex.Matches($_) | % {
+     New-Object PSObject -Property @{
+       style = $_.Groups[1].Value
+       text = $_.Groups[2].Value
+     }
+   } 
+}</pre>-!|
+
+
+!|script|Remote|${NMSP}|
+|eval|[regex]$imgRegex='<img.*?alt=\"(?<alt>.*?)\".*?/>'|
+|eval|!-<pre>filter global:GetAllImgText {
+   $imgRegex.Matches($_) | % {
+     New-Object PSObject -Property @{
+       alt = $_.Groups[1].Value
+     }
+   } 
+}</pre>-!|
+
+
+!|script|Remote|${NMSP}|
+|eval|[regex]$spanRegex='<span.*?style=\"(?<style>.*?)\".*?>(?<text>.*?)</span>'|
+|eval|!-<pre>filter global:GetAllSpanText {
+   $spanRegex.Matches($_) | ? {$_.Groups[2].Value.trim() -ne '&#xa0;'} | % {
+     New-Object PSObject -Property @{
+       content = $_.Groups[0].Value
+       style = $_.Groups[1].Value
+       text = $_.Groups[2].Value.trim()
+     }
+   } 
+}</pre>-!|

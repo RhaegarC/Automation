@@ -1,0 +1,2 @@
+!define ENV_NAME (SPOnlineWS)
+!contents -R2 -g -p -f -h

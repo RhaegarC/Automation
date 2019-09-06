@@ -1,0 +1,8 @@
+!define NMSP (lab9.at-nmsp.com)
+!define SHAREPOINT (lab9_sp2019.at-nmsp.com)
+!define MODE (!-ImportService-!)
+!define LT_PSW (vAWXk74qVUi4HlhH4RWRnA==)
+!define MIGRATION_MODE (Import Service)
+!define IS_ENABLED (True)
+!define LT_ENABLED (True)
+!contents -R2 -g -p -f -h

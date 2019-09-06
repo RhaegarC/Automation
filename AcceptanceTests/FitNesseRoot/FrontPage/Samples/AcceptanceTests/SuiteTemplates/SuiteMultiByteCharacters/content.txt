@@ -1,0 +1,7 @@
+!define WEB (!-SuiteMultiByteCharacters-!)
+!define APPNAME (!-MultiByteCharacters-!)
+!define LIST (!-SuiteMultiByteCharacters-!)
+!define VIEW (!-SuiteMultiByteCharacters-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!contents -R2 -g -p -f -h
+

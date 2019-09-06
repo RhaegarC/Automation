@@ -1,0 +1,32 @@
+'''Disable Office parser'''
+
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 5|
+
+-!|script|Remote|${SHAREPOINT}:38|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+|eval|$webURL = '${SITE_URL}/${WEB}'|
+|eval|$web = Get-SPWeb $webURL|
+|eval|$web.ParserEnabled = $false|
+|eval|$web.Update()|
+
+'''Add source definition'''
+-!|script|Remote|${NMSP}|
+|Formula|!-subject="TestAttachmentIn2007Format" | subject="TestAttachmentIn2007FormatX" -!|for|${JOBFILE}|
+
+
+'''Mapping'''
+!|script|Remote|${NMSP}|
+|Add|TransferJob/Mapping|Attributes|@{Destination='Reviewers'; SourceValue='ReviewerList'; MultiValueDisposition='All'}|to|${JOBFILE}|
+|Add|TransferJob/SharePointTargetDefinition/Field|Attributes|@{Name='Reviewers'; Type='User'; MultipleValues='true'; AddToViews='AllViews'}|to|${JOBFILE}|
+
+'''User Mapping'''
+!|script|Remote|${NMSP}|
+|Add|Options/IdentityMappingOptions/IdentityLookupMode|InnerText|MappingFileLookup|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/NotesIdPassword|InnerText|ukxpoTKrlTn3ZvoGMUBv+w==|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile/Path|InnerText|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|identityMappings/userMappings/user|Attributes|@{notes='Test1'; sharePoint='VELASKEC\uservladimir'}|to|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|
+|Add|identityMappings/userMappings/user|Attributes|@{notes='Test2'; sharePoint='VELASKEC\userkonstantin'}|to|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|
+|Add|identityMappings/userMappings/user|Attributes|@{notes='Test3'; sharePoint='VELASKEC\administrator'}|to|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|

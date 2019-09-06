@@ -1,0 +1,3 @@
+!define SqlServer (NMSP)
+!define NmspDatabase (QuestLinkTracking)
+!contents -R2 -g -p -f -h

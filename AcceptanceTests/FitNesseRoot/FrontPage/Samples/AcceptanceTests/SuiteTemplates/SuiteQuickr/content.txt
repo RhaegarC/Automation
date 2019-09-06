@@ -1,0 +1,9 @@
+!define QADMIN (Konstantin Vlasenko)
+!define QRSERVER (!-quickr/O=ec2l-!)
+!define ROOM (!-Main.nsf-!)
+!define WEB (${PLACE})
+!define LIST (Pages)
+!define PLACE (suitequickr)
+!define TEMPLATE (!-QRPageToWikiPage-!)
+!define JOBFILE (c:\${MODE}\${AUTH}\${WEB}.${LIST}.qrjob)
+!contents -R2 -g -p -f -h

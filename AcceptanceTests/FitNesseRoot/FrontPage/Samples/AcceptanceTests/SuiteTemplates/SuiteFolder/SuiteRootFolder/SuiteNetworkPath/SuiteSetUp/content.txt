@@ -1,0 +1,6 @@
+!include -c <SuiteFolder.IncludePages.SuiteSetUp
+!|script|Remote|${NMSP}|
+|SharedFolder|${SHARENAME}|Path|${SHARED_FOLDER}|Grant|EVERYONE,FULL|
+|eval|Start-Sleep -s 2|
+!include -c <AcceptanceTests.SuiteFolder.IncludePages.EnableFolderLinkTracking
+!include -c <AcceptanceTests.IncludePages.CleanupLinkTrackingDatabase

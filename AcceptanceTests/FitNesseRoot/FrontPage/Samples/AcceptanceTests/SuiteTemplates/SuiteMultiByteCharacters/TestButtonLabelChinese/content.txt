@@ -1,0 +1,4 @@
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$page.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('div') | select innerText-!|
+|innerText|
+|=~/BUTTON: 中文信息BUTTON/|
+

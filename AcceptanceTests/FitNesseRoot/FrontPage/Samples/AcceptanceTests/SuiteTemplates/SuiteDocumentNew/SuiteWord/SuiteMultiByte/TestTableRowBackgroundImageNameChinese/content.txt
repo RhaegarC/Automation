@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestTableRowBackgroundImageNameChinese-!)
+
+!style_green[Check the word content contains text and tables(all the background image of cells is empty) displays as below:]
+----
+'''中文信息TAB_LABEL_AND_CAPTION'''
+| 　　　　　　　　　　　　　　　　　　　　 | 　　　　　　　　　　　　　　　　　　　　 |
+
+| 　　　　　　　　　　　　　　　　　　　　 | 　　　　　　　　　　　　　　　　　　　　 |
+----
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

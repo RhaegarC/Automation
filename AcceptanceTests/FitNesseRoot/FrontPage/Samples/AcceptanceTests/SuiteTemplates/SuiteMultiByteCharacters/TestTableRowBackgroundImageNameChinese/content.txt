@@ -1,0 +1,12 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|background|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|background| 
+|"#000000"|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese.JPG/|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|
+|"#000000"|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|
+

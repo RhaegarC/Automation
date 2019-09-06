@@ -1,0 +1,12 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$listInfo = New-Object Microsoft.SharePoint.Client.ListCreationInformation|
+|eval|$listInfo.TemplateType = 101|
+|eval|$listInfo.Description = '${LIST}'|
+|eval|$listInfo.Title = '${LIST}'|
+|eval|$list = $ctx.Site.OpenWeb('${WEB}').Lists.Add($listInfo)|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+

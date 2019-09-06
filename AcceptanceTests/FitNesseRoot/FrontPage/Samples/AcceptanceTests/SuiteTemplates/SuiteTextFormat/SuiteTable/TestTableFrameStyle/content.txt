@@ -1,0 +1,6 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'TABLE'|properties|'Style.borderStyle','Style.borderLeftWidth','Style.borderRightWidth','Style.borderTopWidth','Style.borderBottomWidth','Style.borderColor'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Style.borderStyle|Style.borderColor|Style.borderLeftWidth|Style.borderRightWidth|Style.borderTopWidth|Style.borderBottomWidth|
+|solid|=~/rgb\(255, 0, 0\)!-|-!#ff0000/|2px|2px|2px|2px|

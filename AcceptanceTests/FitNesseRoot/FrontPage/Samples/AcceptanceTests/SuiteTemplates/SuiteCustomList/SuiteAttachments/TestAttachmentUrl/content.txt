@@ -1,0 +1,8 @@
+!define URL (${WEB}/Lists/${LIST}/Attachments/\d)
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='Content'; E={$_['Content']} } |
+|Title|Content|
+|TestFileNameWithPlusSign|=~/${URL}/Special%20\+%20sign.txt/|
+|TestFileNameWithSpace|=~/${URL}/Space%20char.txt/|
+|TestFileNameWithSpecChars|=~/${URL}/Special______%27chars.txt/|
+|TestOutlookFile|=~/${URL}/|
+|TestImages|=~/${URL}/|

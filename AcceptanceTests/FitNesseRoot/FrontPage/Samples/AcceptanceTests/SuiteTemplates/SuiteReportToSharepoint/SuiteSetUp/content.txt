@@ -1,0 +1,18 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',sharepointReport:"true",reportSite:"${WEB_URL}",reportList:"${REPORT_LIST}",reportSummary:"${SUMMARY_LIST}"}|
+
+!include <SuiteCases.GlobalSteps.DisableServiceLinkTracking
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${REPORT_LIST}"}|
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SUMMARY_LIST}"}|
+
+
+
+
+
+
+
+

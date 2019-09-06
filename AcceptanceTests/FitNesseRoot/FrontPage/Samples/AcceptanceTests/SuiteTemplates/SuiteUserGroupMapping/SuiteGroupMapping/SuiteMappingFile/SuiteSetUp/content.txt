@@ -1,0 +1,5 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',groupIdentityLookupMode:'MappingFileLookup',groupNotesIdPassword:'ukxpoTKrlTn3ZvoGMUBv+w==',groupMappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!',identityLookupMode:'MappingFileLookup',notesIdPassword:'ukxpoTKrlTn3ZvoGMUBv+w==',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+
+|script|
+|makeMappingFile|!{target:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!',groups:'<group notes="[testgroup]" sharePoint="${GroupName}" />',clearGroups:"true",clearUsers:"true"}|

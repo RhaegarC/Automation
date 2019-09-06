@@ -1,0 +1,15 @@
+!define GROUP {!-SuiteBasicMigration-!}
+!define LIST {!-MigrateToExistingList-!}
+!define DATABASE {!-DocLibrary-!}
+!define MIGRATION {!-BasicList-!}
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",type:"CustomList"}|
+
+|script|
+|runMigrationToExistingList|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",autoCreateList:"false",autoCreateFields:"false"}|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/Lists/${LIST}/AllItems.aspx"}|
+|check|eval|$content.contains("Render_CheckBoxes")|True|
+

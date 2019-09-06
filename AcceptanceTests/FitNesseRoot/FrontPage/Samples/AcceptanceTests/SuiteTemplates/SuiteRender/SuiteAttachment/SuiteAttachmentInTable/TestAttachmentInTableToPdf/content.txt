@@ -1,0 +1,13 @@
+!define SAVE_AS (pdf)
+!define SOURCE (${LIST_URL}/!-TestAttachmentsInTable.pdf-!)
+!define LIST (render2pdfdoc)
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{template:"Render2DocLibPdfDoc",job:"${JOBFILE}",db:"SuiteAttachments",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:!-"subject='TestAttachmentsInTable'"-!,mapFields:${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!define PAGENAME (!-TestAttachmentInTable-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestFontStyleUnderlineWithTab-!)
+
+!style_green[Check the word content contains text "ABCD			E		F	G	H":
+All the words font is Arial, black, underline, 9;
+There is 3 tab space between 'ABCD' and 'E';
+There is 2 tab space between 'E' and 'F';
+There is 1 tab space between 'F' and 'G';
+There is 1 tab space between 'G' and 'H'.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

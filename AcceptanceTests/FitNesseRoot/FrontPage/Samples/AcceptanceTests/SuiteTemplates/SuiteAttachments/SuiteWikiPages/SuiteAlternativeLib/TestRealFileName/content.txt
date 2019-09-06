@@ -1,0 +1,11 @@
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${TEST_DOCUMENT}.aspx|
+|select|'IMG'|properties|src|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/Documents\/TestSameEmbeddedTwice.GIF/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|(Invoke-WebRequest -Uri ${WEB_URL}/Documents/TestSameEmbeddedTwice.gif -Credential $AdminCred).StatusCode|200|
+

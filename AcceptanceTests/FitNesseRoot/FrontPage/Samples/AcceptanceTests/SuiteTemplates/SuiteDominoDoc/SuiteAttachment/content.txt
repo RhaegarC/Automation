@@ -1,0 +1,17 @@
+!define LIST (!-SuiteDominoDocumentAttachment-!)
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate attachment to sharepoint
+So that I can view full content in sharepoint document
+
+!1 scenarios
+![
+Given there is attachment in domino.doc database
+When I run the migration to SharePoint
+Then I can see the attachment is migrated
+
+Given there is picture in domino.doc database
+When I run the migration to SharePoint
+Then I can see the picture is migrated
+]!

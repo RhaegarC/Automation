@@ -1,0 +1,4 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") | ? {$_.GetAttribute("xml:space") -ne "preserve"} | WordHyperLinkElement -!|
+|href|
+|http://Body/object0.pptx|
+|http://Body/object1.pptx|

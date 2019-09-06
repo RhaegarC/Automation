@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestAttachmentInSection-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+!style_blue[Check whether warning message "Failed to replace Attachment icon: ..." exist; Expected: No.]
+!|Query:Remote|${NMSP}|$warning !-|?-! message -Match !-'Failed to replace Attachment icon:'-! !-|-! select @{ N='message'; E={$_.message}} |
+|message|

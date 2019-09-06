@@ -1,0 +1,6 @@
+!define LIST (!-SuiteMultiValuedSource-!)
+!define TARGETFIELDS ("<!-Field Name='Category_Folder' Type='Folder'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Category_Folder' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define SOURCE (${LIST_URL}/category_1/TestMappingMultiValuedSource.pdf)
+!define TARGET (${TARGETFOLDER}\category_1\TestMappingMultiValuedSource.pdf)
+!contents -R2 -g -p -f -h

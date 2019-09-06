@@ -1,0 +1,2 @@
+!define SAVE_AS (PdfDocument)
+!include -seamless TestTemplate

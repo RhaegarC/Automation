@@ -1,0 +1,9 @@
+!* We shoudn't have embedded attachments in this case
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+*!
+!* We don't have even placeholder url like we do if we migrate as linked attachments (sounds like an inconsistent behavior? )
+!|Query: Remote|${WEB_SCRAPER}|$msgBody !-|-! GetAllHrefsFromText|
+|href|
+*!
+!include <SuiteOle.CheckCorruptedWarningMessage

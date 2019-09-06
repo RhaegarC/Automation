@@ -1,0 +1,11 @@
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|SubForm1|
+
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[text() = 'text1']|ExpectedValue|True|
+
+
+'''[[Valify Bug: can not process special font in Subform][http://tfs.prod.quest.corp:8080/Windows%20Management/Notes%20Migrator%20for%20SharePoint/_workitems#_a=edit&id=452688]]'''
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|color text|

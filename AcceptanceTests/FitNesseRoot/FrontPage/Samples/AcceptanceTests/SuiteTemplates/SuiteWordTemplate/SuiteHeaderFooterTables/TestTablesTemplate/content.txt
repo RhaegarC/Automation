@@ -1,0 +1,15 @@
+''Test case git #312''
+
+''Check table indentation in document's Header is null''
+!|Query: Remote|${WEB_SCRAPER}|!-$header.GetElementsByTagName("w:tblInd") | ? {{$_.w -ne $null} -or {$_.w -ne "0"}}-!|
+|w|
+
+''Test document's Body''
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|Basic text|
+
+''Check table indentation in document's Footer is null''
+!|Query: Remote|${WEB_SCRAPER}|!-$footer.GetElementsByTagName("w:tblInd") | ? {{$_.w -ne $null} -or {$_.w -ne "0"}}-!|
+|w|
+

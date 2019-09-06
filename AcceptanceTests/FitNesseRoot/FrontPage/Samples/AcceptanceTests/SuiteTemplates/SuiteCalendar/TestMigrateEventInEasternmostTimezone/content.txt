@@ -1,0 +1,25 @@
+'''Time Zone Description:(GMT+13:00) Nuku'alofa'''
+!define TimeZone (67)
+!define LIST (!-TestMigrateEventInEasternmostTimezone-!)
+!*> defines
+!define EVENT_1_START (26)
+!define EVENT_1_STOP (27)
+!define EVENT_2_START (27)
+!define EVENT_2_STOP (28)
+!define EVENT_3_START (28)
+!define EVENT_3_STOP (29)
+
+!define APPOINTMENT_START (12/3/2013 9:45:00 PM)
+!define APPOINTMENT_STOP (12/4/2013 1:30:00 PM)
+
+!define INVITATION_START (12/4/2013 9:45:00 PM)
+!define INVITATION_STOP (12/4/2013 10:00:00 PM)
+
+!define REMINDER_START (12/6/2013 6:45:00 AM)
+!define REMINDER_STOP (12/6/2013 6:45:00 AM)
+
+!define ANNIVERSARY_START (12/6/2013 12:00:00 AM)
+!define ANNIVERSARY_STOP (12/6/2013 11:59:00 PM)
+
+*!
+!include TestTemplate

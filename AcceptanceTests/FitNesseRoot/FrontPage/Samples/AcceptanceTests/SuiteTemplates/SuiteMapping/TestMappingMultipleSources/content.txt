@@ -1,0 +1,15 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'innerText','Style.textAlign','Style.Color','Style.fontFamily','Style.textDecoration','Style.fontSize'|limit to|Style.Color -ne $null|
+
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|innerText|Style.textAlign|Style.Color|Style.fontFamily|Style.fontSize|
+|Body content 1|left|${COLOR_BLUEBERRY}|Arial, san-serif|18pt|
+|Body content 2|left|${COLOR_BURGUNDY}|Arial, san-serif|36pt|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'U'|properties|'innerText'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|innerText|
+|Body content 1|

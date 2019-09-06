@@ -1,0 +1,12 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!* Finalize
+#!define LINKS (1) It should be 1 actually :)
+!define LINKS (1)
+!define DOCUMENTS (1)
+!include -c <SuiteLinksFinalize.DoFinalize
+*!
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${PAGE_NAME}.aspx|
+|main|
+|check|eval|$main.innerText|=~/<aaa   bbb ccc>/|

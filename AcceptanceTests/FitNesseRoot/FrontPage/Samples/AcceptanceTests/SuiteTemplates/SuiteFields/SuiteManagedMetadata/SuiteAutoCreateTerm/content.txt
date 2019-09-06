@@ -1,0 +1,4 @@
+!define DATABASE (!-SuiteMetadata-!)
+!define LIST (!-SuiteAutoCreateTerm-!)
+!define TARGETFIELDS (<Field Name=!-'SuiteAutoCreateTerm' Type='ManagedMetadata' NotesItems='Category' ProvisionNewTaxonomyTerms='true'-! />)
+!contents -R2 -g -p -f -h

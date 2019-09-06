@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestWordDocumentOle-!)
+
+!style_green[Check the word embedded files contains "object0.docx".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

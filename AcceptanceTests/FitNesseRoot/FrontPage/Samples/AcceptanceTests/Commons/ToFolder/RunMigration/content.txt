@@ -1,0 +1,30 @@
+|script|
+|removeItem|"${TARGETFOLDER}"|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|show|eval|(Get-ChildItem '$LogFolder' !-|-! select -last 1).Name|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|eval|$critical = ([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|eval|$warning = ([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+
+!|Query:Remote|${NMSP}|$critical|
+|context|message|stackTrace|
+*!
+!* Read should be less or equal to written
+!|script|Remote|${NMSP}|
+|eval|$results = ([xml]$log).Log.summary.results|
+|eval|$readCount=([int]$results.documentsRead)|
+|show|eval|$readCount|
+|eval|$writtenCount=([int]$results.documentsWritten)|
+|show|eval|$writtenCount|
+|check|eval|${READ_WRITTEN_PATTERN}|True|
+*!

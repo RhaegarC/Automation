@@ -1,0 +1,8 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement|
+|text|indLeft|
+|Top padding.(spacing)|0|
+|Indent Paragraph (2 tabs)|720|
+|1 Tab!- -!|1080|
+|2 Tab|1440|
+|End|720|
+|End|0|

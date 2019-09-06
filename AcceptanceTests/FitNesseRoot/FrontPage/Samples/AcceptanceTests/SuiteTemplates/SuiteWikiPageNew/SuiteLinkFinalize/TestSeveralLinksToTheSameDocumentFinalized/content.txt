@@ -1,0 +1,7 @@
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|FirstDoc|=~/${SITE}/${WEB}/${LIST}/SecondDoc.aspx/|
+|ThirdDoc|=~/${SITE}/${WEB}/${LIST}/SecondDoc.aspx/|

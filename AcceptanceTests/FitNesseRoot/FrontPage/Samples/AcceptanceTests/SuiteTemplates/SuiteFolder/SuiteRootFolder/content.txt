@@ -1,0 +1,5 @@
+!define LIST (SuiteFolder)
+!define APPNAME (LinkTracking)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteFolder.SuiteRootFolder.EditJob)
+
+!contents -R2 -g -p -f -h

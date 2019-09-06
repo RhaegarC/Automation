@@ -1,0 +1,6 @@
+!define GROUP {!-SuiteDocument-!}
+!define MIGRATION {!-DocLib2Document-!}
+!define SOURCE (${LIST_URL}/${PAGENAME}.${SAVE_AS})
+!define FOLDERLTLOCATION (!-C:\TargetFolder-!)
+
+!contents -R2 -g -p -f -h

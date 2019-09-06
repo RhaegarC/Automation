@@ -1,0 +1,18 @@
+!define LIST (!-SuiteBgColor-!)
+!define DATABASE (!-SimpleObjectsLib-!)
+
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render Notes document with background color to wiki page/customer list/PDF document/Word document
+So that I can view them migrated properly
+
+!1 scenarios
+![
+Given a Notes document with backgroudn color in form or document.
+And Render was selected as Source Data Definition
+Abd Target Data Definition could be wiki page/customer list/PDF document/Word document.
+
+When I run migration
+Then I can see migration result with the backgroud color as same as in source data.
+]!

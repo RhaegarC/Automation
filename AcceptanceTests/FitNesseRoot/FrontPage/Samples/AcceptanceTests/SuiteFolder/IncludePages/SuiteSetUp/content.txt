@@ -1,0 +1,10 @@
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions
+
+!include -c <ImportService.IncludePages.CleanupTarget
+!include -c <WebServices.IncludePages.CleanupTarget
+
+!include -c <AcceptanceTests.IncludePages.RemoveFolder
+!*> Close MMC to avoid "IBM Notes Notification Error while migration"
+!|script|Remote|${NMSP}|
+|eval|get-process mmc -ea silent !-|-! stop-process|
+*!

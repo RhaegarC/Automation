@@ -1,0 +1,3 @@
+!|Query:Remote|${NMSP36}|([xml]$result.RunningTaskRecord.LogXml).log.entry !-|-! ? { $_.message -like '*${DBNumber} databases found*'}|
+|severity|context|message|
+|General|Task stopped||

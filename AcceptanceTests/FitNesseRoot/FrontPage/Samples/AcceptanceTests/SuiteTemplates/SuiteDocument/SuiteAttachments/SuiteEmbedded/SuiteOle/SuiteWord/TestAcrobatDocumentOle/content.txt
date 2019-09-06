@@ -1,0 +1,5 @@
+!|Query:Remote|${WEB_SCRAPER}|$docOleObjects|
+|IconCaption|ProgId|OleIcon|
+||AcroExch.Document.7|False|
+
+!note !-ProgId-! does not reflect the original !-ProgId-! in Lotus Notes. In Lotus Notes it is '''Acrobat.Document.11'''

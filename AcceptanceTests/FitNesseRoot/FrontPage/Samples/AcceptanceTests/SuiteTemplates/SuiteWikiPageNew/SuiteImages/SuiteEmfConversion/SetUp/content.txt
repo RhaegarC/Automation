@@ -1,0 +1,4 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:!-"Subject='TestWindowsMetaFile'"-!,removeNodes:"//TransferJob/SourceDefinition/QuerySpec/EmfConversionFormat",addNodes:!-@{path="TransferJob/SourceDefinition/QuerySpec";node="<EmfConversionFormat>JPEG</EmfConversionFormat>"}-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

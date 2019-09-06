@@ -1,0 +1,49 @@
+!|scenario|GetExpression|control|
+|eval|if($object_xml -eq $null){$object_xml = [xml](Invoke-WebRequest('http://fitnesse.at-nmsp.com/files/nmsp/objects/${OBJECT_FILE}'))}|
+|eval|$control = $object_xml.SelectSingleNode('//@control')|
+|check|eval|$control -ne $null|True|
+|eval|$expression = ""|
+|eval|!-
+do 
+{
+$string = ""
+$string = $control.method
+foreach($a in $control.Attributes)
+{
+    if(!$a.Name.ToLower().Equals("method"))
+    {
+        $string = $string + " -" + $a.Name + " '" +$a.Value +"'"
+    }
+}
+$expression = $string + " |" +$expression
+$control= $control.ParentNode
+}
+while (!$control.Name.Equals("UIAutomation"))
+-!|
+|eval|$expression = $expression.Remove($expression.length-1,1)|
+
+!|scenario|GetObject|control|
+|GetExpression|@control|
+|eval|$object = $null|
+|eval|!-$object = Invoke-Expression "${expression}"-!|
+
+!|scenario|SetText|textbox|Value|value|
+|GetExpression|@textbox|
+|eval|$iex = ""|
+|eval|$iex = $expression + "!-|-! Set-UiaEditText -text '@value'"|
+|show|eval|$iex|
+|eval|Invoke-Expression $iex|
+
+!|scenario|Click|control|
+|GetExpression|@control|
+|eval|$iex = ""|
+|eval|$iex = $expression + "!-|-!Invoke-UIAControlClick"|
+|show|eval|$iex|
+|eval|Invoke-Expression $iex|
+
+!| scenario | CheckBox | box |Value|value|
+|GetExpression|@box|
+|eval|$iex = ""|
+|eval|$iex = $expression + "!-|-!Invoke-UIACheckBoxToggle" |
+|eval|$checked = Invoke-Expression ($expression +"!-|-!Get-UIACheckBoxToggleState")|
+|eval|if(!$checked.ToString().ToLower().Equals("@value".ToLower())){Invoke-Expression $iex}|

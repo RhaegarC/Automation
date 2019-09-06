@@ -1,0 +1,28 @@
+!include -c <SuiteManagedMetadata.SetUp
+
+!include -c <SharePoint2010New.IncludePages.CreateTerm
+!include -c <SharePoint2013New.IncludePages.CreateTerm
+!include -c <SharePoint2016.IncludePages.CreateTerm
+!include -c <SharePoint2019.IncludePages.CreateTerm
+!include -c <SharePointOnline.IncludePages.CreateTerm
+
+!include -c <SharePoint2010New.IncludePages.SetTermTagging
+!include -c <SharePoint2013New.IncludePages.SetTermTagging
+!include -c <SharePoint2016.IncludePages.SetTermTagging
+!include -c <SharePoint2019.IncludePages.SetTermTagging
+!include -c <SharePointOnline.IncludePages.SetTermTagging
+
+!|script|Remote|${TAXONOMY}|
+|CreateTerm|EnabledTermWithChild/ChildTerm1|
+|CreateTerm|EnabledTermWithoutChild|
+|CreateTerm|DisabledTermWithChild/ChildTerm2|
+|CreateTerm|DisabledTermWithoutChild|
+|CreateTerm|ParentTerm1/EnabledChildTerm|
+|CreateTerm|ParentTerm1/DisabledChildTerm|
+|SetTermTagging|DisabledTermWithChild|Value|$false|
+|SetTermTagging|DisabledTermWithoutChild|Value|$false|
+|SetTermTagging|ParentTerm1/DisabledChildTerm|Value|$false|
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget

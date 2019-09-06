@@ -1,0 +1,16 @@
+!include -c <ImportService.IncludePages.CleanupTarget
+!include -c <WebServices.IncludePages.CleanupTarget
+!include -c <AcceptanceTests.IncludePages.RemoveFolder
+!include -c <AcceptanceTests.IncludePages.ExecuteSystemUnderTest
+
+!|script|Remote|${NMSP}|
+|$FirstPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$FirstDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$FirstMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$FirstHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|
+
+
+!* !-Replace content of EditableAttachment.txt file in SharePoint/Folder-!
+!|script|Remote|${NMSP}|
+|EditFile|${EDITABLE_PATH}|
+*!

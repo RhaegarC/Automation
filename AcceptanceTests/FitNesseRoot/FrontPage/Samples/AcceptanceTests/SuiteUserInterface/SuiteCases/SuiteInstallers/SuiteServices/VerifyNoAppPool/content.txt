@@ -1,0 +1,2 @@
+!|Subset Query:Remote|${SHAREPOINT}|!-gwmi -ComputerName . -namespace "root/MicrosoftIISv2" -class IIsApplicationPool | ? {$_.Name -like '*Quest*'}-!|
+|Name|

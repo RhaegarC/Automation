@@ -1,0 +1,39 @@
+!contents -R2 -g -p -f -h
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false",scanLocations:"fordiscovery"}|
+
+|script|
+|remoteSharepointOptions|!{template:"${MODE}.${AUTH}",remoteSharePointSite:"SP2016/sites/Test"}|
+
+|script|
+|closeMainWindows|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|removeDiscoverDatabases|!{server:"(local)"}|
+
+|script|
+|stopServer86|
+
+
+|script|
+|jobDefinition|!{db:"SuiteDatabaseAnalysis",job:"${JOBFILE}",template:"DocLib2DocLibWikiPages",sp_site:"!-http://sp2016/sites/test-!",sp_list:"${LIST}",jobName:"DocLibrary to !-BasicPage-!"}|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|discoverLocalDatabases|
+|eval|$db=Get-Database ALL "(local)" "SuiteDatabaseAnalysis"|
+|eval|$db.TechnicalClassName = "Document Library"|
+|applyClassRule|!{class:"Document Library",removedJobs:"DocLibrary to !-BasicPage-!"!-,-!"DocLibrary to List",server:"(local)",addedJobs:"${JOBFILE}",site_url:"!-http://sp2016/sites/test-!",database:"SuiteDatabaseAnalysis"}|
+
+|script|
+|stopServer86|
+
+|script|
+|startUiautomation|

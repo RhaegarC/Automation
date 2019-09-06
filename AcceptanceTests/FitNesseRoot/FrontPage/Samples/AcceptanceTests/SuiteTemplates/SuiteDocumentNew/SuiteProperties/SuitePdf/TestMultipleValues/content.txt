@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestMultipleValues-!)
+
+!|script|remote|${NMSP}|
+|PDFDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|!-$pdf.info.GetEnumerator() | ? {[ Aspose.Pdf.DocumentInfo]::IsPredefinedKey($_.Key) -eq $false} | select key, value-!|
+|Key|Value|  
+|Category    |Category_1, Category_2|
+|ReviewerList|Reviwer_1, Reviwer_2|
+

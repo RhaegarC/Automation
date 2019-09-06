@@ -1,0 +1,17 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!* Finalize
+!include -c <SuiteLinksFinalize.DoFinalize
+*!
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|${FIRSTDOC}|=~/${SITE}/${WEB}/${LIST}/${SECONDDOC}.aspx/|
+|${THIRDDOC}|=~/${SITE}/${WEB}/${LIST}/${SECONDDOC}.aspx/|
+
+#|${THIRDDOC}|=~/${SITE}/${WEB}/${LIST}/${SECONDDOC}.aspx\(\.\)*${SITE}/${WEB}/${LIST}/${SECONDDOC}.aspx/|
+
+!* Test description
+!img files/nmsp/images/LinkTracking/SeveralLinksToTHeSameDocument.png
+*!

@@ -1,0 +1,6 @@
+!include <SuiteMappingToFolder.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",view:"${VIEW}",mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigration

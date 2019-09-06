@@ -1,0 +1,73 @@
+!define LIST (!-TestMultipleEnvironments_IS-!)
+!define TASKNAME (!-ISTask-!)
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",globalOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_Options.xml",userOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_UserOptions.xml"}|
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|jobDefinition|!{db:"${DATABASE}",job:"${TASKJOBFILE}",view:"Suite Special",jobName:"${TASKNAME}_${LIST}",template:"DocLib2DocLibPdfDoc",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!define LIST (!-TestMultipleEnvironments_FD-!)
+!define TASKNAME (!-FDTask-!)
+
+|script|
+|setOptions|!{template:"ExportToFolder.ClassicModeAuthentication",globalOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_Options.xml",userOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_UserOptions.xml"}|
+
+!|script|remote|${NMSP}|
+|eval|remove-item "${TARGETFOLDER}" -recurse -force -ea silentlycontinue|
+
+|script|
+|jobDefinition|!{db:"${DATABASE}",targetType:"Folder",job:"${TASKJOBFILE}",view:"Suite Special",jobName:"${TASKNAME}_${LIST}",template:"templates/folder/DocLib2DocLibPdfDoc",fd_location:"${TARGETFOLDER}"}|
+
+!define LIST (!-TestMultipleEnvironments_WS-!)
+!define TASKNAME (!-WSTask-!)
+
+|script|
+|setOptions|!{template:"WebServices.ClassicModeAuthentication",globalOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_Options.xml",userOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_UserOptions.xml"}|
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|jobDefinition|!{db:"${DATABASE}",job:"${TASKJOBFILE}",view:"Suite Special",jobName:"${TASKNAME}_${LIST}",template:"DocLib2DocLibPdfDoc",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|runScheduledTask|!{scheduledTaskName:"ISTask",taskTemplate:"${TASKTEMPLATE}",jobs:"!-$env:PROGRAMDATA\Quest\Migrator for Notes to SharePoint-!\Scheduler\Jobs\ISTask_TestMultipleEnvironments_IS.job"}|
+|runScheduledTask|!{scheduledTaskName:"FDTask",taskTemplate:"${TASKTEMPLATE}",jobs:"!-$env:PROGRAMDATA\Quest\Migrator for Notes to SharePoint-!\Scheduler\Jobs\FDTask_TestMultipleEnvironments_FD.job"}|
+|runScheduledTask|!{scheduledTaskName:"WSTask",taskTemplate:"${TASKTEMPLATE}",jobs:"!-$env:PROGRAMDATA\Quest\Migrator for Notes to SharePoint-!\Scheduler\Jobs\WSTask_TestMultipleEnvironments_WS.job"}|
+
+!define PAGE_URL (${WEB_URL}/TestMultipleEnvironments_IS)
+!include <SuiteCases.GlobalSteps.VerifyTargetItems
+
+!|Query:remote|${NMSP}|$elements !-|-!select Name|
+|Name|
+|_Attachments|
+|=~/TestAttachmentsWithMultiUsers(.pdf)?/|
+|=~/TestNameIdDifferent(.pdf)?/|
+|=~/TestSameEmbeddedTwice(.pdf)?/|
+|=~/TestSameTwiceInOneDocument(.pdf)?/|
+|=~/TestFileNameSpecial_ContorlASCII(.pdf)?/|
+
+#!include <SuiteCases.GlobalSteps.QuitSelenium
+
+!define PAGE_URL (${WEB_URL}/TestMultipleEnvironments_WS)
+!include <SuiteCases.GlobalSteps.VerifyTargetItems
+
+!|Query:remote|${NMSP}|$elements !-|-!select Name|
+|Name|
+|_Attachments|
+|=~/TestAttachmentsWithMultiUsers(.pdf)?/|
+|=~/TestNameIdDifferent(.pdf)?/|
+|=~/TestSameEmbeddedTwice(.pdf)?/|
+|=~/TestSameTwiceInOneDocument(.pdf)?/|
+|=~/TestFileNameSpecial_ContorlASCII(.pdf)?/|
+
+#!include <SuiteCases.GlobalSteps.QuitSelenium
+
+!|Query:remote|${NMSP}|Get-ChildItem C:\SharePoint\SuiteScheduledTask\SuiteAttachments\TestMultipleEnvironments_FD!-|-!select Name|
+|Name|
+|_Attachments|
+|=~/TestAttachmentsWithMultiUsers(.pdf)?/|
+|=~/TestNameIdDifferent(.pdf)?/|
+|=~/TestSameEmbeddedTwice(.pdf)?/|
+|=~/TestSameTwiceInOneDocument(.pdf)?/|
+|=~/TestFileNameSpecial_ContorlASCII(.pdf)?/|

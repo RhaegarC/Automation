@@ -1,0 +1,9 @@
+!|Ordered Query:remote|${NMSP}|!-$elements| ? {$_.InnerText -match "Formula4|Computed\d"} | select innerText-!|
+|innerText|
+|Content in Computed2:|
+|Content in Computed3:|
+|Formula4:|
+|Content in Computed6:|
+|End of computed subform of Formula4|
+|Content in Computed4:|
+|Content in Computed5:|

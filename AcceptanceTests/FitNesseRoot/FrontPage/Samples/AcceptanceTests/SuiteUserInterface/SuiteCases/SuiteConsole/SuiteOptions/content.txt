@@ -1,0 +1,122 @@
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can select my Quest Repository Database in Setup Wizard
+So that after the initialization , I can view the scanned information in Console( e.g. All Database And Templates)
+
+!1 scenarios
+![
+Given NMSP Client is installed first time
+When I open the Console
+Then the Setup Wizard pop up automatically
+When I finished the steps of Wizard, with the option "scan for my database" selected
+Then I can view the scanned information in Console
+
+Given QuestRepository Database is exist
+When I move it from default folder( C:\Program Files (x86)\IBM\Notes\Data) to another location( e.g. C:\Users\Administrator\Desktop)
+And I open the Console
+Then I can not view the scanned information in Console
+When I open the Setup Wizard of Console
+Then I select the QuestRepository Database in new location by the "Browse" button of "Select Notes Database" dialog, which was bringing up from the "Select you Repository Database" step
+When I finished the steps of Wizard, with the option "don't discover database at this time" selected
+And I restart the Console
+Then I can view the scanned information in Console
+
+]!
+
+!1 user story
+As an administrator
+I can load different option files
+So that I can change different options for different migration jobs easily
+
+!1 scenarios
+
+'''Apply Saved Options'''
+![
+Given some options files were saved
+When I right click on the root node of Console
+And choose "Apply Saved Options" on the context menu
+And select an options file
+Then I can view options in Advanced dialog are changed
+When I reopen Console and Advanced dialog
+Then I can view options turn back to the default
+
+When I choose "Load Options" in the drop down menu list of the "Options" button in Designer
+And select an options file
+Then I can view options in Options dialog are changed
+When I reopen Designer and Options dialog
+Then I can view options turn back to the default
+]!
+
+'''Save As Default'''
+![
+Given some modifications in Options dialog
+When I click "Save As Default" button
+And I reopen Console/Designer and Options dialog
+Then I can view the modifications were saved
+
+Given some modifications on a loaded options file in Options dialog
+When I click "Save As Default" button
+And I reopen Console/Designer and Options dialog
+Then I can view modifications and the loaded options were saved
+When I reload the loaded option file
+And open Options dialog
+Then I can view the loaded option file keep the same as before
+]!
+
+'''Save As'''
+![
+Given some modifications in Options dialog
+When I click "Save As" button
+And type a new name for the options file
+And I reopen Console/Designer and Options dialog
+Then I can view options turn back to the default
+When I load the option file just saved
+Then I can view options in Options dialog are changed
+
+Given some modifications on a loaded options file in Options dialog
+When I click "Save As" button
+And type a new name for the options file
+And I reopen Console/Designer and Options dialog
+Then I can view options turn back to the default
+When I load the option file just saved
+Then I can view options in Options dialog are changed
+When I reload the loaded option file
+And open Options dialog
+Then I can view the loaded option file keep the same as before
+
+When I click "Save As" button
+And type a duplicate name for the options file
+Then I can view a warning dialog pop out
+When I choose "Yes"
+Then this options file would be replaced
+When I choose "No"
+Then this warning dialog disappear
+]!
+
+'''Manage Options List'''
+![
+Given some options files were saved
+When I select a options file and click Delete button
+Then I can not view this options file exists in the Manage Options List
+]!
+
+!1 user story
+
+As an administrator
+I can set Email configuraion in Options
+So that I can see the migration results in the mail after migration completed
+
+!1 scenarios
+![
+Given Email configuration was set and enabled in Options
+When I click Test button
+And I set my email address as Recipient
+And click Send Now button
+Then I can receive the test mail in my mail box
+
+When I add my email address in "To"
+And I run a migration
+Then I can receive a migration results email after migration completed
+]!

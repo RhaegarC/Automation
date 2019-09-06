@@ -1,0 +1,40 @@
+!* Generate a form with Hidden html
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|CheckBox|HideRead|Value|true|
+|CheckBox|HideEdit|Value|true|
+|CheckBox|HideWeb|Value|true|
+|CheckBox|HideNotes|Value|true|
+|CheckBox|HideFormula|Value|true|
+|CheckBox|HideHtml|Value|true|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+|NintexFieldExist|Text[text() = 'This is Pass-Through text.']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'TextField']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'TextField2']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'AllowMultilineTextbox']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'ComputedWhenCompose']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'Computed']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'datetime']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'ComputedRadioButton']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'ComputedDatetime']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'MyCheckBox']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'Number']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'Percent']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'ComputedNumber']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'MyComputedText']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'ComputedDisplay']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'RichText']|ExpectedValue|True|
+*!
+
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|This Form List all type of Fields:|

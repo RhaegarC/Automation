@@ -1,0 +1,25 @@
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 3|
+
+|script|
+|removeUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USERLOGINNAME1}"}|
+
+!|script|Remote|${SHAREPOINT}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server38')) {$p[$_].Terminate()}
+}-!|
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:"From='CN=Stephen Walch/O=Proposion'",maxRecord:3}|
+
+!|script|Remote|${NMSP}|
+|eval|$mapuser = ([xml]$log).Log.entry !-|-! ? context -eq 'Map User'|
+
+!|Subset Query:Remote|${NMSP}|$mapuser |
+|message|
+|=~/User mapping failed/|
+|=~/Map Notes user 'CN=Stephen Walch/O=Proposion' to Windows user/|
+|=~/Found existing Principal from name/|

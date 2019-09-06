@@ -1,0 +1,4 @@
+!include -c <SuiteMaxNumberPerFolder.SetUp
+
+!define MaxItemsPerFolder (5)
+!include -c <NmSp.AcceptanceTests.IncludePages.CreateJobAndRunMigration

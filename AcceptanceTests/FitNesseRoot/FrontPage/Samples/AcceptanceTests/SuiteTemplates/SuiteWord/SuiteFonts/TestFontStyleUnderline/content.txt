@@ -1,0 +1,5 @@
+!|SubSet Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordFontElement |
+|text|underline|
+|ABCD|yes|
+|123456789|no|
+

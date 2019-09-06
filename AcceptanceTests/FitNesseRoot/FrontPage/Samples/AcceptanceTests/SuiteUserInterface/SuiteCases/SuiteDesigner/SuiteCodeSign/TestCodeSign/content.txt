@@ -1,0 +1,4 @@
+|script|Remote|${NMSP}|
+|getCodeSignError|!{path:"${NMSP_Install_Directory_Client}\Bin",expireDate:"10/16/2019",companyName:"!-Quest Software, Inc.-!"}|
+|show|eval|$signError|
+|check|eval|$signError -eq $null|True|

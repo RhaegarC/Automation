@@ -1,0 +1,5 @@
+!define AddMissingChoices (true)
+!define MultipleValues (false)
+!define MultiValueDisposition (Last)
+!define LIST (${TARGET_FIELD_TYPE}_TestSingleLastDisposition)
+!define LookupListName (!-LookupListTestSingleLastDisposition-!)

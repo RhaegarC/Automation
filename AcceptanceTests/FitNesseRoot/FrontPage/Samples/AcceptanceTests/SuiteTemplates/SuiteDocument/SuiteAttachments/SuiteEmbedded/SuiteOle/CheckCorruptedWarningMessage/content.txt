@@ -1,0 +1,6 @@
+'''We will show warning message below in case of corrupted Ole object'''
+!|Subset Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+|context|message|
+|Processing Attachments in: ${RUNNING_PAGE_NAME}.${SAVE_AS}|=~/Ensure your source document is not corrupted/|
+|Document Generation|Unable to embed file object0.pdf to ${RUNNING_PAGE_NAME}.${SAVE_AS}. object0.pdf is missing|
+!img http://fitnesse.at-nmsp.com/files/nmsp/images/EnsureFileNotCorrupted.png

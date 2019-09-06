@@ -1,0 +1,5 @@
+!define LIST (render2worddoc)
+!define SAVE_AS (docx)
+!define MIGRATION (!-Render2DocLibWordDoc-!)
+!define ORIGIN_SITE_URL (!-http://sp2013/sites/Test-!)
+!contents -R2 -g -p -f -h

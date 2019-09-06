@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestNameIdDifferent-!)
+
+!style_green[Check the html content contains "_Attachments/Test.xlsx".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

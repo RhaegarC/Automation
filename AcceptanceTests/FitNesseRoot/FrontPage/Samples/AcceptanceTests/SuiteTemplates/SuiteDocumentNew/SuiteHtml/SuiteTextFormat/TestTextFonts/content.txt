@@ -1,0 +1,17 @@
+!define PAGENAME (!-TestTextFonts-!)
+
+!style_green[Check the html content contains text "Text for existing font - Arial, red, 8", which font is Arial, font color is red, and font size is 8.]
+!style_green[Check the html content contains text "Text for existing font - Calibri, Blue, 12", which font is Calibri, font color is Blue, and font size is 12.]
+!style_green[Check the html content contains text "Text for existing font - Courier, 15, Italic", which font is Courier, font size is 15, and is Italic.]
+!style_green[Check the html content contains text "Text for existing font - Microsoft Sans Serif, Green, 10", which font is 'Microsoft Sans Serif', font color is Green, and font size is 10.]
+!style_green[Check the html content contains text "Text for existing font - Verdana, 18, Bold", which font is Verdana, font size is 18, and is Bold.]
+!style_green[Check the html content contains text "Text for missing font - Vladimir Script, Black, 18", which font is 'Vladimir Script', font color is Black, and font size is 18.]
+!style_green[Check the html content contains text "Text with mixed Arial, Calibri, Courier, MSS, Verdana, VScript fonts": 
+'Arial' is Arial, red, 8; 
+'Calibri' is Calibri, Blue, 12;
+'Courier' is Courier, 15, Italic;
+'MSS' is Microsoft Sans Serif, Green, 10; 
+'Verdana' is Verdana, 18, Bold;
+'VScript fonts' is Vladimir Script, black, 18.]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

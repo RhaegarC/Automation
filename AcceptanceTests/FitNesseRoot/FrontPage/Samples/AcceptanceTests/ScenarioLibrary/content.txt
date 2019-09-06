@@ -1,0 +1,378 @@
+!include -c IncludePages.ImportedLibrary
+!include -c IncludePages.SelectorsLibrary.WordScenarios
+!include -c IncludePages.SelectorsLibrary.WordOnlineScenarios
+!include -c IncludePages.SelectorsLibrary.HtmlScenarios
+!include -c IncludePages.SelectorsLibrary.PdfScenarios
+!include -c IncludePages.SelectorsLibrary.MsgScenarios
+!include -c IncludePages.SelectorsLibrary.NintexScenarios
+!include -c IncludePages.SelectorsLibrary.UiOperationScenarios
+!include -c IncludePages.SelectorsLibrary.HtmlFunctions
+
+!*> Open an url
+!|scenario|Open|url|
+|eval|$page = $null|
+|eval|$page = Invoke-WebRequest -Uri "@url" -${CREDENTIALS} -TimeoutSec 240|
+|check|eval|$page.StatusCode|200|
+
+!|scenario|OpenLocalPage|url|
+|eval|$exist = Test-Path -Path @url|
+|eval|$page = $null|
+|eval|$ie = new-object -com "InternetExplorer.Application"|
+|show|eval|if ($exist) { try { $ie.Navigate("@url") }catch{ $_.Exception.Message }}|
+|eval|$page = $ie.Document|
+|check not|eval|$page -eq $null|True|
+
+!|scenario|MissingPage|url|
+|eval|$page = $null|
+|check|eval|try { Invoke-WebRequest -Uri "@url" -${CREDENTIALS} }catch{ $_.Exception.Message }|=~/(?i)NOT FOUND!-|-!blocked by the administrator/|
+
+!|scenario|OpenLocal|filepath|
+|check|eval|Test-Path -Path @filepath|True|
+
+!|scenario|Url|url|RedirectsTo|target|
+|eval|$request = $null|
+|eval|$request = Invoke-WebRequest -Uri "@url" -Credential $AdminCred -TimeoutSec 240 -MaximumRedirection 0 -ErrorAction Ignore|
+|check|eval|$request.StatusCode|302|
+|check not|eval|$request.content|=~/Error/|
+|check|eval|[Web.Httputility]::UrlDecode($request.headers.location)|=~/@target/|
+
+!|scenario|Page|url|Contains|string|
+|eval|$request = $null|
+|eval|$request = Invoke-WebRequest -Uri "@url" -${CREDENTIALS} -TimeoutSec 240 -MaximumRedirection 0 -ErrorAction Ignore|
+|check|eval|$request.StatusCode|200|
+|eval|!-$pageContent = ""
+if ($request.content -is [Byte[]]){
+    $pageContent = [System.Text.UnicodeEncoding]::UTF8.GetString($request.content)
+}
+else{
+    $pageContent = $request.Content
+}-!|
+|check|eval|$pageContent|=~/@string/|
+*!
+
+!|scenario|SharePointEnvironmentType|Type|Settings|type|
+|show|eval|$xml = [xml](Get-Content "C:\ProgramData\${NMSP_AppData_Path}\Options.config")|
+|eval|$env = $xml.selectSingleNode("//SharePointEnvironment")|
+|eval|$env.EnvironmentType='@Type'|
+|eval|$env.Settings.type='@type'|
+|show|eval|$xml.Save("C:\ProgramData\${NMSP_AppData_Path}\Options.config")|
+
+!|scenario|RootWeb|url|Properties|props|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$web = $ctx.Site.RootWeb|
+|eval|(@props).GetEnumerator() !-|-! % {$web.AllProperties[$_.Name] = $_.Value}|
+|eval|$web.Update()|
+|eval|$ctx.Load($web)|
+|eval|$ctx.ExecuteQuery()|
+
+!*> !-LinkTracking-!
+!|scenario|LinkConversionType|type|job|path|
+|Remove|TransferJob/JobOptions/LinkConversionOptions/LinkConversionType|from|@path|
+|Add|TransferJob/JobOptions/LinkConversionOptions/LinkConversionType|InnerText|@type|to|@path|
+
+!|scenario|SharePoint LinkTracking|enabled|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.enabled'='@enabled'; 'proposion.linktracking.isconfigured'='true'; 'proposion.linktracking.WindowsAuthentication'='false'; 'proposion.linktracking.userid'='velaskec\administrator'; 'proposion.linktracking.encryptedpassword'='${LT_PSW}'}|
+
+!|scenario|MMC LinkTracking enabled|
+|Add|Options/SharePointEnvironments/SharePointEnvironment/Settings/LinkTrackingEnabled|InnerText|true|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/LinkTrackingOptions/Server|InnerText|${SQLINSTANCE}|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/LinkTrackingOptions/Database|InnerText|${LinkDatabase}|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+!|scenario|SharePoint LinkTracking AutoRedirect|enabled|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.isredirected'='@enabled'; 'proposion.linktracking.server'='${SQLINSTANCE}'; 'proposion.linktracking.database'='${LinkDatabase}';'proposion.linktracking.isconfigured'='True'; 'proposion.linktracking.encryptedpassword'='${LT_PSW}'}|
+
+!|scenario|ActivateNMSPRedirectorFeature|
+|eval|$guid = New-Object Guid("C0B7C0D0-6679-4e11-DADA-AABD13E2BE2B")|
+|eval|(Get-SPSite "${SITE_URL}").Features.add($guid, $True)| 
+
+!|scenario|SharePoint LinkTracking Use Windows Authentication|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.windowsauthentication'='True'; 'proposion.linktracking.windowsimpersonation'='False'}|
+
+!|scenario|SharePoint LinkTracking Use Windows Impersonation|user|with|password|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.windowsauthentication'='False'; 'proposion.linktracking.windowsimpersonation'='True'; 'proposion.linktracking.userid'='@user'; 'proposion.linktracking.encryptedpassword'='@password'}|
+
+!|scenario|Folder LinkTracking enabled|path|
+|Add|Options/FolderLinkTracking|InnerText|true|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/RootFolderLocation|InnerText|@path|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+#!|scenario|LinkTrackingEnabled|
+#|Add|Options/SharePointEnvironments/SharePointEnvironment/Settings/LinkTrackingEnabled|InnerText|true|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+#|Add|Options/LinkTrackingOptions/Server|InnerText|${LinkServer}|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+#|Add|Options/LinkTrackingOptions/Database|InnerText|${LinkDatabase}|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+#|Add|Options/LinkTrackingOptions/EncryptedPassword|InnerText|YaGCp8r986M=|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+!|scenario|CustomLinkTrackingRedirector|page|
+|Add|Options/SharePointEnvironments/SharePointEnvironment/UseDefaultLinkTrackingRedirectorUrl|InnerText|false|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/SharePointEnvironments/SharePointEnvironment/CustomLinkTrackingRedirectorUrl|InnerText|@page|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+!|scenario|DisableAutoRedirect|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.enabled'='True'; 'proposion.linktracking.isredirected'='False'; 'proposion.linktracking.encryptedpassword'='${LT_PSW}'}|
+
+!|scenario|AutoRedirectNotConfigured|
+|RootWeb|${SITE_URL}|Properties|@{'proposion.linktracking.enabled'='False'; 'proposion.linktracking.encryptedpassword'='${LT_PSW}'}|
+*!
+
+!|scenario|Application|name|Template|tmpl|
+|eval|$dbname = '@name' -replace ' ',''|
+|eval|$db= $lns.GetDatabase('',$dbname)|
+|check not|eval|if($db.IsOpen){$db.Remove()}|=~/Exception/|
+|eval|$template = $lns.GetDatabase('','@tmpl')|
+|eval|$db = $template.CreateFromTemplate('',$dbname,$true)|
+|eval|$db.Title = '@name'|
+
+!|scenario|New Document|title|
+|eval|$doc = $db.CreateDocument()|
+|eval|$doc.AppendItemValue('Subject','@title')|
+
+!|scenario|Save Document|
+|check|eval|$doc.Save( $false, $true)|True|
+
+!|scenario|Add RichTextItem|name|
+|eval|$item = $doc.CreateRichTextItem('@name')|
+
+!|scenario|Append Text|text|
+|eval|$item.AppendText('@text')|
+
+!|scenario|Append Table|raws|
+|eval|$nav = $item.CreateNavigator()|
+|eval|$isFirstTableInDocument = $nav.FindLastElement(7) -eq $false|
+|eval|$item.AppendTable((@raws).Count, (@raws)[0].Count)|
+|eval|if($isFirstTableInDocument){$nav.FindFirstElement(7)}else{$nav.FindNextElement(7)}|
+|eval|!-<pre>foreach($raw in (@raws)){
+  foreach($col in $raw){
+    $item.BeginInsert($nav)
+    $item.AppendText($col)
+    $item.EndInsert()
+    $nav.FindNextElement(7)
+  }
+}</pre>-!|
+
+!*> Edit Job File
+!|scenario|JobFile|template|Application|name|
+|eval|$dbname = "$('@name' -replace ' ','').nsf"|
+|eval|$xml = $null|
+|eval|$xml = [xml][System.Text.Encoding]::ASCII.GetString((new-object System.Net.WebClient).DownloadData('http://fitnesse.at-nmsp.com/files/nmsp/@template.xml'))|
+|check not|eval|$xml -eq $null|True|
+|eval|$xml.TransferJob.QuerySource.ConnectionString = "server='local'; database='$dbname'; zone=utc"|
+
+!|scenario|JobFile|path|Template|template|Web|web|List|list|Application|name|
+|JobFile|@template|Application|@name|
+|eval|$xml.TransferJob.SharePointConnection.Web = "@web"|
+|eval|$xml.TransferJob.SharePointConnection.List = "@list"|
+|eval|new-item (Split-Path @path) -type directory -force|
+|eval|$xml.Save("@path")|
+
+!|scenario|DominoDocJobFile|path|Template|template|Server|server|ServerPath|serverPath|Web|web|List|list|
+|eval|$xml = $null|
+|eval|$xml = [xml][System.Text.Encoding]::ASCII.GetString((new-object System.Net.WebClient).DownloadData('http://fitnesse.at-nmsp.com/files/nmsp/@template.xml'))|
+|check not|eval|$xml -eq $null|True|
+|eval|$xml.TransferJob.QuerySource.SetAttribute("Server","@server")|
+|eval|$xml.TransferJob.QuerySource.SetAttribute("Path","@serverPath")|
+|eval|$xml.TransferJob.SharePointConnection.Web = "@web"|
+|eval|$xml.TransferJob.SharePointConnection.List = "@list"|
+|eval|new-item (Split-Path @path) -type directory -force|
+|eval|$xml.Save("@path")|
+
+!|scenario|JobFile|path|Template|template|Folder|folder|Application|name|
+|JobFile|templates/folder/@template|Application|@name|
+|eval|$xml.TransferJob.FolderConnection.Location= "@folder"|
+|eval|new-item (Split-Path @path) -type directory -force|
+|eval|$xml.Save("@path")|
+
+!|scenario|EditJobFile|path|Compression|extension|
+|eval|$xml = [xml](Get-Content "@path")|
+|eval|$el = $xml.CreateNode('element', 'Compression', '')|
+|eval|$el.InnerText = '@extension'|
+|eval|!-$xml.TransferJob.SourceDefinition.QuerySpec.Column | ? ColumnType -eq 'Attachment' | % {$_.AppendChild($el)}-!|
+|eval|$xml.Save("@path")|
+
+!|scenario|Set|xpath|Attribute|attribute|Value|value|in|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|eval|$el = $xml.SelectSingleNode("@xpath")|
+|eval|$el."@attribute" = "@value"|
+|eval|$xml.Save("@xml")|
+
+!|scenario|Set|xpath|Attributes|attributes|in|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|eval|$el = $xml.SelectSingleNode("@xpath")|
+|eval|(@attributes).GetEnumerator() !-|-! % {$el.SetAttribute($_.Name,$_.Value)}|
+|eval|$xml.Save("@xml")|
+
+!|scenario|EditJobFile|path|SelectRecordsBasedOnView|view|
+|eval|$xml = [xml](Get-Content "@path")|
+|eval|$xml.TransferJob.SourceDefinition.QuerySpec.From= "@view"|
+|eval|$xml.Save("@path")|
+
+!|scenario|Lookup|field|From|list|
+|eval|$xml = [xml](Get-Content '${JOBFILE}')|
+|eval|$el_list = $xml.CreateNode('element', 'ListName', '')|
+|eval|$el_list.InnerText = '@list'|
+|eval|$el = $xml.CreateNode('element', 'LookupTarget', '')|
+|eval|$el.AppendChild($el_list)|
+|eval|!-$xml.TransferJob.SharePointTargetDefinition.Field | ? Name -eq '@field' | % {$_.AppendChild($el)}-!|
+|eval|$xml.Save('${JOBFILE}')|
+
+!|scenario|Add|xpath|to|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|show|eval|$split = "@xpath".split('/')|
+|show|eval|$parentXpath = $split[0..($split.Length-2)] -join '/'|
+|show|eval|$parent = $xml.SelectSingleNode($parentXpath)|
+|show|eval|$el = $xml.CreateNode('element', $split[-1], '')|
+|show|eval|$parent.AppendChild($el)|
+|show|eval|$xml.Save("@xml")|
+
+!|scenario|Add|xpath|InnerText|text|to|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|show|eval|$split = "@xpath".split('/')|
+|show|eval|$parentXpath = $split[0..($split.Length-2)] -join '/'|
+|show|eval|$parent = $xml.SelectSingleNode($parentXpath)|
+|show|eval|$el = $xml.CreateNode('element', $split[-1], '')|
+|show|eval|$el.InnerText = '@text'|
+|show|eval|$parent.AppendChild($el)|
+|show|eval|$xml.Save("@xml")|
+
+!|scenario|Add|xpath|Attributes|attributes|to|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|eval|$split = "@xpath".split('/')|
+|eval|$parentXpath = $split[0..($split.Length-2)] -join '/'|
+|eval|$parent = $xml.SelectSingleNode($parentXpath)|
+|eval|$el = $xml.CreateNode('element', $split[-1], '')|
+|eval|(@attributes).GetEnumerator() !-|-! % {$el.SetAttribute($_.Name,$_.Value)}|
+|eval|$parent.AppendChild($el)|
+|eval|$xml.Save("@xml")|
+
+!|scenario|Remove|xpath|from|xml|
+|eval|$xml = [xml](Get-Content "@xml")|
+|eval|$split = "@xpath".split('/')|
+|eval|$parentXpath = $split[0..($split.Length-2)] -join '/'|
+|eval|$parent = $xml.SelectSingleNode($parentXpath)|
+|eval|Select-Xml -Xml $xml -xpath "@xpath" !-|-! % {$parent.removechild($_.Node)}|
+|eval|$xml.Save("@xml")|
+
+!|scenario|Formula|formula|for|job|
+|Remove|TransferJob/SourceDefinition/QuerySpec/Formula|from|@job|
+|Add|TransferJob/SourceDefinition/QuerySpec/Formula|InnerText|@formula|to|@job|
+
+!|scenario|ConnectionString|string|for|job|
+|Remove|TransferJob/QuerySource/ConnectionString|from|@job|
+|Add|TransferJob/QuerySource/ConnectionString|InnerText|@string|to|@job|
+
+!|scenario|IncludeMajorVersions|string|for|job|
+|Remove|TransferJob/SourceDefinition/QuerySpec/IncludeMajorVersions|from|@job|
+|Add|TransferJob/SourceDefinition/QuerySpec/IncludeMajorVersions|InnerText|@string|to|@job|
+
+!|scenario|IncludeCurrentVersions|string|for|job|
+|Remove|TransferJob/SourceDefinition/QuerySpec/IncludeCurrentVersions|from|@job|
+|Add|TransferJob/SourceDefinition/QuerySpec/IncludeCurrentVersions|InnerText|@string|to|@job|
+
+#!|scenario|Source|attributes|
+#|eval|$xml = [xml](Get-Content '${JOBFILE}')|
+#|eval|$el = $xml.CreateNode('element', 'Column', '')|
+#|eval|$el.SetAttribute('ColumnType','Item')|
+#|eval|@attributes.GetEnumerator() !-|-! % {$el.SetAttribute($_.Name,$_.Value)}|
+#|eval|$xml.TransferJob.SourceDefinition.QuerySpec.AppendChild($el)|
+#|eval|$xml.Save('${JOBFILE}')|
+
+!|scenario|SourceColumn|attributes|
+|Add|TransferJob/SourceDefinition/QuerySpec/Column|Attributes|@attributes|to|${JOBFILE}|
+
+!|scenario|Source|attributes|
+|Add|TransferJob/SourceDefinition/QuerySpec/Column|Attributes|@attributes+@{ColumnType='Item'}|to|${JOBFILE}|
+
+!|scenario|Target|attributes|
+|Add|TransferJob/SharePointTargetDefinition/Field|Attributes|@attributes|to|${JOBFILE}|
+
+!|scenario|MaxRecords|max|
+|Add|TransferJob/JobOptions/MaxRecords|InnerText|@max|to|${JOBFILE}|
+
+!|scenario|MaxRecords|max|job|path|
+|Add|TransferJob/JobOptions/MaxRecords|InnerText|@max|to|@path|
+
+!|scenario|SkipRecords|skip|job|path|
+|Add|TransferJob/JobOptions/SkipRecords|InnerText|@skip|to|@path|
+
+!|scenario|Mapping|src|to|dest|MultiValueDisposition|disp|Transform|trans|FormatString|format|job|path|
+|eval|$xml = [xml](Get-Content '@path')|
+|eval|$el = $xml.CreateNode('element', 'Mapping', '')|
+|eval|$el.SetAttribute('Destination','@dest')|
+|eval|$el.SetAttribute('SourceValue','@src')|
+|eval|$el.SetAttribute('MultiValueDisposition','@disp')|
+|eval|$el.SetAttribute('Transform','@trans')|
+|eval|$el.SetAttribute('FormatString','@format')|
+|eval|$xml.TransferJob.AppendChild($el)|
+|eval|$xml.Save('@path')|
+
+!|scenario|Mapping|src|to|dest|MultiValueDisposition|disp|Transform|trans|job|path|
+|Mapping|@src|to|@dest|MultiValueDisposition|@disp|Transform|@trans|FormatString|{0}|job|@path|
+
+!|scenario|Mapping|src|to|dest|MultiValueDisposition|disp|job|path|
+|Mapping|@src|to|@dest|MultiValueDisposition|@disp|Transform|None|job|@path|
+
+!|scenario|Mapping|src|to|dest|FormatString|format|job|path|
+|Mapping|@src|to|@dest|MultiValueDisposition|Default|Transform|None|FormatString|@format|job|@path|
+
+!|scenario|Mapping|src|to|dest|job|path|
+|Mapping|@src|to|@dest|MultiValueDisposition|Default|Transform|None|job|@path|
+
+!|scenario|Mapping|src|to|dest|SourceType|type|job|path|
+|eval|$xml = [xml](Get-Content '@path')|
+|eval|$el = $xml.CreateNode('element', 'Mapping', '')|
+|eval|$el.SetAttribute('Destination','@dest')|
+|eval|$el.SetAttribute('SourceValue','@src')|
+|eval|$el.SetAttribute('SourceType','@type')|
+|eval|$xml.TransferJob.AppendChild($el)|
+|eval|$xml.Save('@path')|
+*!
+
+!|scenario|RunJob|path|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|eval|$process = start .\NMSPCMD.EXE '-job @path' -wait -PassThru|
+|eval|$process.WaitForExit()|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+
+#|check|eval|(start .\NMSPCMD.EXE '-job @path' -wait -PassThru).ExitCode|-1<=_<=0|
+
+!|scenario|reset options|
+|Remove|UserOptions/NotesQueryOptions/ZipExclusions|from|$($env:AppData)\${NMSP_AppData_Path}\UserOptions.config|
+#|Remove|Options/MaxAttachmentSize|from|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+#|Remove|Options/BlockedExtensions|from|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+#|Remove|Options/SharePointEnvironments/SharePointEnvironment/Settings/LinkTrackingEnabled|from|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+!|scenario|List|title|Template|tmpl|
+|eval|$spAssignment = Start-SPAssignment|
+|eval|$web_ = Get-SPWeb ${WEB_URL} -AssignmentCollection $spAssignment|
+|eval|$list = $web_.Lists['@title']|
+|eval|if($list -ne $null){ $list.Delete() }|
+|eval|$template = $web_.ListTemplates["@tmpl"]|
+|eval|$web_.Lists.Add("@title","created by !-PowerSlim-!",$template)|
+|eval|Stop-SPAssignment $spAssignment|
+
+'''create list with CSOM'''
+!|scenario|createList|title|Template|tmpl|
+|eval|$ListInfo = New-Object Microsoft.SharePoint.Client.ListCreationInformation|
+|eval|$ListInfo.Title = "@title"|
+|eval|$ListInfo.TemplateType = "@tmpl"|
+|eval|$List = $ctx.Web.Lists.Add($ListInfo)|
+|eval|$List.Description = "Created by powershell"|
+|eval|$List.Update()|
+|eval|try{$ctx.ExecuteQuery()}catch{}|
+
+!|scenario|add item|fields|to list|list|
+|eval|$spAssignment = Start-SPAssignment|
+|eval|$list = (Get-SPWeb ${WEB_URL} -AssignmentCollection $spAssignment).Lists["@list"]|
+|eval|$item = $list.Items.Add()|
+|eval|@fields.GetEnumerator() !-|-! % {$item[$_.Name] = $_.Value}|
+|eval|$item.Update()|
+|eval|Stop-SPAssignment $spAssignment|
+
+!|scenario|set time zone|id| to website | website |
+|eval|Get-SPWeb "@website" !-|-! % { $_.RegionalSettings.TimeZone.ID = @id; $_.Update() }|
+
+!|scenario|Copy|source|to|target|
+|eval|copy '@source' '@target'|
+
+!|scenario|SharedFolder|name|Path|path|Grant|grant|
+|eval|net share "@name" /delete /y|
+|eval|remove-item "@path" -force -recurse -confirm:$false|
+|eval|new-item @path -type directory|
+|check|eval|net share @name=@path /GRANT:"@grant"|@name was shared successfully.|

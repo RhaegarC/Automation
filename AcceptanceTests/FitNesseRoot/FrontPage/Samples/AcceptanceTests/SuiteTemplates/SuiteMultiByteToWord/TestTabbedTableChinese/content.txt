@@ -1,0 +1,42 @@
+#!|script|Remote|${WEB_SCRAPER}|
+#|eval|$word = new-object Aspose.Words.Document("${TARGET}")|
+#|eval|$doc = $word.Document|
+#|show|eval|$txt = $doc.GetText()|
+#|check|eval|$txt -ne $null|True|
+
+#!|Query: Remote|${WEB_SCRAPER}|$doc.GetText() !-|-! WordTextElement | 
+#|text|
+
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | select @{N='Label'; E={$_.innerText.Trim()}}-!|
+|Label|
+||
+|第一列|
+|(1.1)|
+|第二列|
+|(1.2)|
+|第三列|
+|(1.3)|
+||
+|第一列|
+|(2.1)|
+|第二列|
+|(2.2)|
+|第三列|
+|(2.3)|
+||
+|第一列|
+|(3.1)|
+|第二列|
+|(3.2)|
+|第三列|
+|(3.3)|
+|列表一|
+|列表二|
+|列表三|
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+!|script|remote|${NMSP}:36|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "ImportLicense" |
+|check|eval|getControlName "ImportLicenseWindow"|Install Migrator for Notes to SharePoint License|
+|eval|click "CancelImport" |

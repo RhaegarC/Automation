@@ -1,0 +1,5 @@
+!|Subset Query:Remote|${WEB_SCRAPER}|$page.Images|
+|src|
+|=~/_Attachments/TestWmfFile.GIF/|
+
+!define NUMBER_OF_BR (0)

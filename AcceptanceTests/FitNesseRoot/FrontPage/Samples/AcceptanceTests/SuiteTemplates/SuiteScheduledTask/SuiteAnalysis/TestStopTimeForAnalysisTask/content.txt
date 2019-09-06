@@ -1,0 +1,9 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',globalOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_Options.xml",userOptionTarget:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\-!${TASKNAME}_UserOptions.xml"}|
+
+|script|
+|runScheduledTaskIngoreLog|!{scheduledTaskName:"${TASKNAME}",taskTemplate:"${TASKTEMPLATE}",suspendedTime:"!-2016-10-06T14:15:16-!"}|
+
+|script|remote|${NMSP}|
+|eval|!-$log = [xml](Get-Content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Tasks\$($hash.scheduledTaskName).xml")-!|
+|check|eval|$log.NmspTask.Status|Stopped|

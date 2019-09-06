@@ -1,0 +1,5 @@
+!define GROUP {!-SuiteMapping-!}
+!define DATABASE {!-SimpleObjectsLib-!}
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!define VIEW (Suite Mapping) 
+!contents -R2 -g -p -f -h

@@ -1,0 +1,33 @@
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate values of fields to sharepoint (online using Azure Turbo Mode)
+So that I have full information of the documents on sharepoint
+
+!1 scenarios
+![
+Given there is already a text column in sharepoint
+When I map a field to the column
+And I deselect Add or upgrade List Field(if needed)
+And I run migration
+Then I can see the documents are migrated
+And the value of the field is migrated
+
+Given there is no text column in sharepoint
+When I map a field to the column
+And I select Add or upgrade List Field(if needed)
+And I run migration
+Then I can see the documents are migrated
+And the value of the field is migrated
+
+Given there is no text column in sharepoint
+When I map a lookup field to the column
+And I designate the field values to a list column
+And I run migration
+Then I can see the documents are migrated
+And the value of the field is migrated
+
+Given there are date time field and created, modified
+And I run migration
+Then I can see the date time fields are created and the time is correct with proper time zone
+]!

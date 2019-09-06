@@ -1,0 +1,12 @@
+!define FILE_NAME (32b53fd8dabef7bc85257ce0006e36d4)
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${TEST_DOCUMENT}.aspx|
+|select|'IMG'|properties|src|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/Documents\/${FILE_NAME}.GIF/|
+
+!|script|Remote|${WEB_SCRAPER}|$elements|
+|check|eval|(Invoke-WebRequest -Uri ${WEB_URL}/Documents/${FILE_NAME}.gif -Credential $AdminCred).StatusCode|200|

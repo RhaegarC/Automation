@@ -1,0 +1,12 @@
+!define TARGET_PAGE (${LIST_URL}/!-Render_CheckBoxes.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"input",filter:!-'$_.type -eq "checkbox"'-!,selector:!-"value","checked"-!,type:"wiki"}|
+
+!|Query:remote|${NMSP}|$elements|
+|value|checked|
+|Checkbox1_Item1|True|
+|Checkbox2_Item1|False|
+|Checkbox3_Item1|True|
+|Checkbox3_Item2|False|
+|Checkbox3_Item3|True|

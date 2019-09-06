@@ -1,0 +1,8 @@
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.HtmlScenarios
+
+
+#!|scenario|Document|name|in|folder|
+#|download|${SOURCE}|to|@folder\@name.${SAVE_AS}|
+#|eval|$html = $null|
+#|eval|$html = Get-Content '@folder\@name.${SAVE_AS}' -Encoding Utf8|

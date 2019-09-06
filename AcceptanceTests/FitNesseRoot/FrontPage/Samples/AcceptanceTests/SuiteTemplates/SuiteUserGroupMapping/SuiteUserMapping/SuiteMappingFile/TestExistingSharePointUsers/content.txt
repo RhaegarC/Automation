@@ -1,0 +1,15 @@
+|script|
+|ensureUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USER1}"!-,-!"${USERMAPPING_USER2}"}|
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:"From='CN=Vladimir Sementchouk/O=Vladimir Sementchouk'",maxRecord:3}|
+
+!|script|Remote|${NMSP}|
+|eval|$mapuser = ([xml]$log).Log.entry !-|-! ? context -eq 'Map User'|
+
+!|Subset Query:Remote|${NMSP}|$mapuser|
+|message|
+|Map Notes user 'CN=Vladimir Sementchouk/O=Vladimir Sementchouk' to Windows user '${USERMAPPING_USER1}' (NOT CACHED)|
+|=~/Found existing Principal from name 'VELASKEC\\uservladimir'!-|-!Found Windows Principal from name 'user2.nmsp@wsmzh.onmicrosoft.com'/|
+|Map Notes user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to Windows user '${USERMAPPING_USER2}' (NOT CACHED)|
+|=~/Found existing Principal from name 'VELASKEC\\userkonstantin'!-|-!Found Windows Principal from name 'user3.nmsp@wsmzh.onmicrosoft.com'/|

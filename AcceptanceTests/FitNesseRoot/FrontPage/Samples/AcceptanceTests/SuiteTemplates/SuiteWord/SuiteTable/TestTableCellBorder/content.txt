@@ -1,0 +1,15 @@
+!|Query: Remote|${WEB_SCRAPER}|!-<pre>$document.GetElementsByTagName("w:t") | select '#text',
+@{N='top';E={$_.parentNode.parentNode.parentNode.tcPr.tcBorders.top.val}},
+@{N='left';E={$_.parentNode.parentNode.parentNode.tcPr.tcBorders.left.val}},
+@{N='bottom';E={$_.parentNode.parentNode.parentNode.tcPr.tcBorders.bottom.val}},
+@{N='right';E={$_.parentNode.parentNode.parentNode.tcPr.tcBorders.right.val}}</pre>-!|
+|#text|top|left|bottom|right|
+|a|null|null|null|single|
+|b|single|single|single|single|
+|c|single|single|single|single|
+|d|null|single|single|single|
+|e|single|single|single|single|
+|f|single|single|null|single|
+|g|single|single|single|single|
+|h|single|single|single|null|
+|i|null|null|null|null|

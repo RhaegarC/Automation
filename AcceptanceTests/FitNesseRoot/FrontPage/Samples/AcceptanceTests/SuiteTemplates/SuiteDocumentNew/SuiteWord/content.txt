@@ -1,0 +1,12 @@
+!define WEB (!-SuiteWord-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWord.EditJob)
+!define TARGET (${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx)
+!define DATABASE (!-SimpleObjectsLib-!)
+!define SAVE_AS (docx)
+!* !-DrawAspect-!
+ * '''Icon''' if the Attachment opened in new Windows
+ * '''Content''' if the Attachment opened inside Word Document
+*!
+!contents -R2 -g -p -f -h

@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestImages-!)
+
+!style_green[Check the word content contains "_Attachments/CrazyTruck.jpg".]
+!style_green[Check the word content contains "_Attachments/123w.bmp".]
+!style_green[Check the word content contains "_Attachments/icon_yahoo.gif".]
+!style_green[Check the word content contains "_Attachments/iconWarning16.png".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

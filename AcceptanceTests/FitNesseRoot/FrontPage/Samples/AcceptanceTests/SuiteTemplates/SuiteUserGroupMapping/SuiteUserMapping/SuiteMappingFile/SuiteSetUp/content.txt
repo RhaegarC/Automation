@@ -1,0 +1,3 @@
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 3|

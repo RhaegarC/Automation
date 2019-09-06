@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestSameTwiceInOneDocument-!)
+
+!style_green[We should migrated attachment file only once as it is actually the same attachment. Check the html content contains "_Attachments/Test.xlsx" twice.]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

@@ -1,0 +1,37 @@
+!|script|Remote|${NMSP}|
+|SharePoint LinkTracking|True|
+
+!|script|Remote|${SQLHOST}|
+|eval|Set-Service SQLBrowser -StartupType Manual|
+|eval|Get-Service "SQL Server Browser" !-|-! ? {$_.Status -ne "Running"}!-|-! Start-Service|
+|eval|$count=0|
+|eval|!-while((Get-Service "SQL Server Browser").Status -ne "Running" -and $count -lt 5)
+{
+sleep 5
+$count++
+}-!|
+|show|eval|$count|
+
+!|script|Remote|${SHAREPOINT}|
+|show|eval|!-$count = 0
+do{
+$message = ""
+$SqlConnection = New-Object System.Data.SqlClient.SqlConnection
+$SqlConnection.ConnectionString = "Server = -!${SQLINSTANCE}!-; Database = -!${LinkDatabase}!-; Integrated Security=True"
+try{
+  $SqlConnection.Open() 
+}
+catch [exception]
+{
+  $message = $_.Exception.Message
+  $message
+}
+finally {
+   $SqlConnection.Close()
+}
+if($message -eq ""){break}
+$count++
+sleep 3
+}
+while($count -lt 10)-!|
+|show|eval|$count|

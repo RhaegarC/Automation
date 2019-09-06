@@ -1,0 +1,7 @@
+!* Preamble
+''Usually [[Allternate Access Mapping is used][http://technet.microsoft.com/en-us/library/cc263208(v=office.12).aspx]] is in use.
+We have to preserve the hostname part of the url''
+*!
+!include -c .NmSp.AcceptanceTests.IncludePages.LinkTrackingService.EnableAutoRedirect
+!|script|Remote|${SHAREPOINT30}|
+|Url|http://localhost${Link}|RedirectsTo|http://localhost${SITE}/${WEB}/${LIST}/${SECONDDOC}.aspx|

@@ -1,0 +1,5 @@
+!define GROUP {!-SuiteMultiByteCharacters-!}
+!define LIST {!-SuiteMultiByteCharacters-!}
+!define DATABASE {!-MultiByteCharacters-!}
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!contents -R2 -g -p -f -h

@@ -1,0 +1,7 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI','DIV'|properties|'parentElement.tagName'|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|Name|parentElement.tagName|
+|First number|LI|OL|
+|Text after list|DIV|DIV|

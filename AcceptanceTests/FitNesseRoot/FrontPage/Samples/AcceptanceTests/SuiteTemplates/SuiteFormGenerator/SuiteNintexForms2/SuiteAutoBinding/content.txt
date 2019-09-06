@@ -1,0 +1,9 @@
+!define JOBFILE (!-c:\ImportService\ClassicModeAuthentication\NintexForms.SuiteAutoBinding.pmjob-!)
+!define TARGET_PAGE (${WEB_URL}/Lists/${LIST}/DispForm.aspx?ID=5)
+!define WEB (!-SuiteNintex-!)
+!define TARGET_FOLDER (!-C:\Users\administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files-!)
+!define TARGET_FILE {${TARGET_FOLDER}\!-NintexForm_(local)_SuiteFormGenerator_ForBinding.xml-!}
+!define DATABASE (!-SuiteFormGenerator-!)
+!define LabComputerName (NMSP)
+
+!contents -R2 -g -p -f -h

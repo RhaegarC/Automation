@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestWindowsMetaFileLink.aspx",tag:"img",selector:"src"}|
+
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/TestWindowsMetaFileLink.EMF/|
+|=~/TestWindowsMetaFileLink-[0-9A-F]{15}.EMF/|

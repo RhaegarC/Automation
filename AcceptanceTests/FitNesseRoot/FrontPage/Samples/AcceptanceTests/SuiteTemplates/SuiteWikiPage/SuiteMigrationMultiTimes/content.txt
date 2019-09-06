@@ -1,0 +1,5 @@
+!define APPNAME (SimpleObjectsLib)
+!define LIST (SuiteMigrationMultiTimes)
+!define VIEW (Suite Standard Properties)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWikiPage.SuiteMigrationMultiTimes.EditJob)
+!contents -R2 -g -p -f -h

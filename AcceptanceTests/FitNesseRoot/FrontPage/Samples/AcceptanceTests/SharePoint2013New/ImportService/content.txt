@@ -1,0 +1,9 @@
+!define NMSP (lab4.at-nmsp.com)
+!define SHAREPOINT (lab4_sp2013.at-nmsp.com)
+!define QUICKR (lab4_quickr.at-nmsp.com)
+!define LT_PSW (DwMBaQmEUehkRgKM7Xf3EA==)
+!define MODE (!-ImportService-!)
+!define MIGRATION_MODE (Import Service)
+!define IS_ENABLED (True)
+!define LT_ENABLED (True)
+!contents -R2 -g -p -f -h

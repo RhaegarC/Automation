@@ -1,0 +1,28 @@
+!define LIST {!-TestSkip-!}
+!define DATABASE {!-SuiteDuplicate-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",duplicateHandle:"Skip"}|
+|runJob|!{job:"${JOBFILE}"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<!-View Scope='RecursiveAll'-!><!-Query-!><!-Where-!><!-Eq-!><!-FieldRef Name='FileDirRef' -!/><!-Value Type='Text'-!>/sites/nmspFitnesse/${WEB}/${LIST}</!-Value-!></!-Eq-!></!-Where-!></!-Query-!></!-View-!>"}|
+
+!|script|remote|${NMSP}|
+|$FIRST_1=|eval|($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document1.pdf'}).SMLastModifiedDate|
+|$FIRST_2=|eval|($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document2.pdf'}).SMLastModifiedDate|
+|$FIRST_3=|eval|($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document3.pdf'}).SMLastModifiedDate|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<!-View Scope='RecursiveAll'-!><!-Query-!><!-Where-!><!-Eq-!><!-FieldRef Name='FileDirRef' -!/><!-Value Type='Text'-!>/sites/nmspFitnesse/${WEB}/${LIST}</!-Value-!></!-Eq-!></!-Where-!></!-Query-!></!-View-!>"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Name';E={$_['FileLeafRef']}},@{N='LastModified';E={$_['SMLastModifiedDate']}}|
+|Name|LastModified|
+|_Attachments||
+|Document1.pdf|$FIRST_1|
+|Document2.pdf|$FIRST_2|
+|Document3.pdf|$FIRST_3|

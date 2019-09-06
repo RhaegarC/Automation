@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+|script|
+|makeMappingFile|!{clearUsers:"true",users:'<user notes="Amanda Tester/QuestNotes" sharePoint="VELASKEC\administrator" />',clearGroups :"true"}|
+
+|script|
+|setOptions|!{globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking",identityLookupMode:'MappingFileLookup',notesIdPassword:'ukxpoTKrlTn3ZvoGMUBv+w==',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+|cleanUpDatabase|

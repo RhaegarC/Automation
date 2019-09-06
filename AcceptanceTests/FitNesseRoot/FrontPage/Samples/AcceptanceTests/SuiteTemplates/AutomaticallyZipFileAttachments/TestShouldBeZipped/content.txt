@@ -1,0 +1,8 @@
+'<ZipExclusions>jpg|bmp|tiff|pptx</ZipExclusions>
+' .txt -> .zip -> .txt
+' .gif -> .zip -> .gif  
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|innerText|
+|=~/_Attachments/AttachFileTXT.zip/|AttachFileTXT.txt|
+|=~/_Attachments/splash.zip/|splash.gif|

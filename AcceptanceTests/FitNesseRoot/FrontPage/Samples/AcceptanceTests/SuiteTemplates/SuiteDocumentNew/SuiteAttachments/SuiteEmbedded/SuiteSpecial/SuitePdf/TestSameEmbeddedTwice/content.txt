@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestSameEmbeddedTwice-!)
+
+!style_green[Check the pdf embedded files contains "object0.docx".]
+!style_green[Check the pdf embedded files contains "object1.docx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

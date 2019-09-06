@@ -1,0 +1,3 @@
+!define APPNAME (!-DiscussionBoard-!)
+!define LIST (!-SuiteReply-!)
+!contents -R2 -g -p -f -h

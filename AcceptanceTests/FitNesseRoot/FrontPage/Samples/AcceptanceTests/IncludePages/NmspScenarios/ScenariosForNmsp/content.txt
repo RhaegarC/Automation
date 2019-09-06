@@ -1,0 +1,957 @@
+!|scenario|startDesigner|
+|start|remote|${NMSP}:36|
+|eval|Get-Process 'nmsp'!-|-!Stop-Process|
+|eval|Start-Process '${NMSP_Install_Directory_Client}\Bin\NMSP.exe'|
+
+!*> Job Definition
+|comment: parameters for !style_blue['''jobDefinition''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[template]|yes|string|"basicList"|check templates on http://fitnesse.at-nmsp.com/files/nmsp/|
+|!style_blue[job]|yes|string|"!-${JOBFILE}-!"||
+|!style_blue[db]|yes|string|"DocLibrary"|works when the target is notes|
+|!style_blue[server]|yes|string|"QUICKR/ec2l"|works when the target is domino.doc or Quickr|
+|!style_blue[path]|yes|string|"domdoc/KVLO-A3CAC8"|works when the target is domino.doc|
+|!style_blue[place]|yes|string|"Place1"|works when the target is Quickr|
+|!style_blue[room]|yes|string|"Main.nsf"|works when the target is Quickr|
+|!style_blue[fd_location]|yes|string|"C:\targetfolder"|required when the type is "Folder"|
+|!style_blue[sp_site]|yes|string|"http://sp2010"|required when the type is "SharePoint"|
+|!style_blue[sp_web]|yes|string|"SuiteDocuments"|required when the type is "SharePoint"|
+|!style_blue[sp_list]|yes|string|"SuiteVersion"|required when the type is "SharePoint"|
+
+!|scenario|jobDefinition|args|
+|start|remote|${NMSP}|
+|loadTemplate|@args|
+|removeNodes|@args|
+|addNodes|@args|
+|jobSource|@args|
+|jobTarget|@args|
+|mapData|@args|
+|advancedOptions|@args|
+|properties|@args|
+|saveJob|@args|
+
+|comment: parameters for !style_blue['''loadTemplate''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[template]|yes|string|"basicList"|check templates on http://fitnesse.at-nmsp.com/files/nmsp/|
+
+!|scenario|loadTemplate|args|
+|convertHash|@args|
+|show|eval|"http://fitnesse.at-nmsp.com/files/nmsp/"+$hash.template+".xml"|
+|eval|!- if($hash.editExistJob -eq "true")
+{
+$xml=  [xml](Get-Content $hash.job)
+}
+else
+{
+$xml = [xml][System.Text.Encoding]::ASCII.GetString((new-object System.Net.WebClient).DownloadData("http://fitnesse.at-nmsp.com/files/nmsp/"+$hash.template+".xml"))
+}
+-!|
+|eval|!-if($hash.jobName -ne $null)
+{
+editNodeProperty "TransferJob" "Name" $hash.jobName
+}
+-!|
+
+|comment: parameters for !style_blue['''removeNodes''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[removeNodes]|no|array|"TransferJob/SharePointConnection","TransferJob/JobOptions/AutoCreateList"||
+
+!|scenario|removeNodes|args|
+|convertHash|@args|
+|eval|!-
+if($hash.removeNodes)
+{
+$removeNodes = @($hash.removeNodes)
+foreach($xpath in $removeNodes)
+{
+$xml.SelectNodes($xpath) | % {$_.ParentNode.RemoveChild($_)} 
+}
+}
+-!|
+
+|comment: parameters for !style_blue['''addNodes''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[addNodes]|no|array|@{path="TransferJob/SharePointConnection";node="<sharepoint web=!-''http://sp2010/sites/test''-! />"}||
+
+!|scenario|addNodes|args|
+|convertHash|@args|
+|eval|!-
+if($hash.addNodes)
+{
+@($hash.addNodes) | % {addChildNode $_.path $_.node} 
+}
+-!|
+
+|comment: parameters for !style_blue['''properties''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[properties]|no|array|@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Doc']";name="SaveAs";value="HtmlDocument"}||
+
+!|scenario|properties|args|
+|convertHash|@args|
+|eval|!-
+if($hash.properties)
+{
+@($hash.properties) | % {editNodeProperty $_.path $_.name $_.value} 
+}
+-!|
+
+|comment: parameters for !style_blue['''saveJob''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[job]|yes|string|"c:\ImportService\ClassicModeAuthentication\SuiteRender.TestCheckBoxes.pmjob"||
+
+!|scenario|saveJob|args|
+|convertHash|@args|
+|eval|new-item (Split-Path $hash.job) -type directory -force|
+|eval|$xml.Save($hash.job)|
+
+!* Job Source
+!img /files/nmsp/images/Designer/source.png
+!|scenario|jobSource|args|
+|sourceConnection|@args|
+|sourceDefinition|@args|
+|sourceRecord|@args|
+
+|comment: parameters for !style_blue['''sourceConnection''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[sourceType]|yes|string|"Domdoc"|"DominoDoc","Notes","Quickr","Quickplace"|
+|!style_blue[db]|yes|string|"DocLibrary"|works when the target is notes|
+|!style_blue[useMetafileIcons]|no|string|"true"|"true","false"|
+|!style_blue[server]|yes|string|"QUICKR/ec2l"|works when the target is domino.doc|
+|!style_blue[path]|yes|string|"domdoc/KVLO-A3CAC8"|works when the target is domino.doc|
+|!style_blue[place]|yes|string|"Place1"|works when the target is Quickr|
+|!style_blue[room]|yes|string|"Main.nsf"|works when the target is Quickr|
+
+!|scenario|sourceConnection|args|
+|convertHash|@args|
+|eval|!-
+switch($hash.sourceType)
+{
+'DominoDoc' {
+$xml.TransferJob.QuerySource.Server = $hash.server
+$xml.TransferJob.QuerySource.Path = $hash.path
+$xml.TransferJob.QuerySource.SetAttribute("Type","DominoDoc")
+}
+'Quickr' {
+$xml.TransferJob.QuerySource.Server = $hash.server
+$xml.TransferJob.QuerySource.Place = $hash.place
+$xml.TransferJob.QuerySource.Room = $hash.room
+$xml.TransferJob.QuerySource.SetAttribute("Type","Quickr")
+}
+default {
+$dbname = ($hash.db -replace " ","") + ".nsf"
+if($hash.useMetafileIcons)
+{
+$xml.TransferJob.QuerySource.ConnectionString = "server='local'; database='$dbname'; zone=utc; useMetafileIcons=$($hash.useMetafileIcons.ToLower())"
+}
+else
+{
+$xml.TransferJob.QuerySource.ConnectionString = "server='local'; database='$dbname'; zone=utc"
+}
+}
+}
+-!|
+
+|comment: parameters for !style_blue['''sourceDefinition''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[sourceFields]|no|array|"<Column ColumnType='Item' Value='Textbox1' ReturnType='String' />","<Column ColumnType='Item' Value='Textbox2' ReturnType='String' />"||
+|!style_blue[formula]|no|string|"@contains(title,'TestAbc')"||
+|!style_blue[view]|no|string|"AllDocuments"||
+|!style_blue[forms]|no|string|"Document;Response"||
+|!style_blue[sourceVersions]|no|string|"all"|"all","current"|
+|!style_blue[sourceSelect]|no|string|"binders"|"binders","all","unpublished"|
+
+!|scenario|sourceDefinition|args|
+|convertHash|@args|
+|eval|!-
+if($hash.sourceFields)
+{
+$souceFields = @($hash.sourceFields)
+$souceFields | % {addChildNode "TransferJob/SourceDefinition/QuerySpec" $_}
+}
+-!|
+|eval|!-
+if($hash.formula)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/Formula"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<Formula>$($hash.formula)</Formula>"
+}
+-!|
+|eval|!-
+if($hash.view)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/From"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<From>$($hash.view)</From>"
+}
+-!|
+|eval|!-
+if($hash.forms)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/Forms"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<Forms>$($hash.forms)</Forms>"
+}
+-!|
+|eval|!-
+if($hash.unid)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/UNID"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<UNID>$($hash.unid)</UNID>"
+}
+-!|
+|eval|!-
+if($hash.folderOnly -ne $null)
+{
+removeNodes "TransferJob/SourceDefinition/QuerySpec/FoldersOnly"
+addChildNode "TransferJob/SourceDefinition/QuerySpec" "<FoldersOnly>$($hash.folderOnly)</FoldersOnly>"
+}
+-!|
+|eval|!-
+switch($hash.sourceVersions)
+{
+'current' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludeMajorVersions = "false";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeCurrentVersions = "true"}
+'major' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludeMajorVersions = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeCurrentVersions = "false"}
+'all' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludeMajorVersions = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeCurrentVersions = "true"}
+}
+-!|
+|eval|!-switch($hash.sourceSelect)
+{
+'published' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'unpublished' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'all' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "true";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "false"}
+'binders' {$xml.TransferJob.SourceDefinition.QuerySpec.IncludePublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.IncludeUnpublishedDocuments = "false";$xml.TransferJob.SourceDefinition.QuerySpec.ExtractBinders = "true"}
+}
+-!|
+
+|comment: parameters for !style_blue['''sourceRecord''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[maxRecord]|no|int|100||
+|!style_blue[skipRecord]|no|int|10||
+
+!|scenario|sourceRecord|args|
+|convertHash|@args|
+|eval|!-if($hash.maxRecord)
+{
+removeNodes "TransferJob/JobOptions/MaxRecords"
+addChildNode "TransferJob/JobOptions" "<MaxRecords>$($hash.maxRecord)</MaxRecords>"
+}
+-!|
+|eval|!-if($hash.skipRecord)
+{
+removeNodes "TransferJob/JobOptions/SkipRecords"
+addChildNode "TransferJob/JobOptions" "<SkipRecords>$($hash.skipRecord)</SkipRecords>"
+}
+-!|
+
+*!
+
+!* Job target
+!img /files/nmsp/images/Designer/target.png
+!|scenario|jobTarget|args|
+|dataTarget|@args|
+|targetDefinition|@args|
+|handleItems|@args|
+
+|comment: parameters for !style_blue['''dataTarget''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[targetType]|no|string|"Folder"|"Folder","SharePoint"(default)|
+|!style_blue[fd_location]|yes|string|"C:\targetfolder"|required when the type is "Folder"|
+|!style_blue[sp_site]|yes|string|"http://sp2010"|required when the type is "SharePoint"|
+|!style_blue[sp_web]|yes|string|"SuiteDocuments"|required when the type is "SharePoint"|
+|!style_blue[sp_list]|yes|string|"SuiteVersion"|required when the type is "SharePoint"|
+|!style_blue[autoCreateList]|no|string|"true"|"true","false"|
+|!style_blue[quickLaunch]|no|string|"true"|"true","false"|
+|!style_blue[autoCreateFields]|no|string|"true"|"true","false"|
+|!style_blue[enableVersioning]|no|string|"true"|"true","false"|
+|!style_blue[clearListData]|no|string|"true"|"true","false"|
+
+!|scenario|dataTarget|args|
+|convertHash|@args|
+|eval|!-
+switch($hash.targetType)
+{
+'Folder' {
+removeNodes "TransferJob/SharePointConnection","TransferJob/FolderConnection"
+addChildNode "TransferJob" "<FolderConnection><Location>$($hash.fd_location)</Location></FolderConnection>"
+}
+'SQL'{}
+default {
+$xml.TransferJob.SharePointConnection.Web = ($hash.sp_site+'/'+$hash.sp_web)
+$xml.TransferJob.SharePointConnection.List = $hash.sp_list
+}
+
+}
+-!|
+|eval|!-
+if($hash.autoCreateList)
+{
+removeNodes "TransferJob/JobOptions/AutoCreateList"
+addChildNode "TransferJob/JobOptions" "<AutoCreateList>$($hash.autoCreateList.ToLower())</AutoCreateList>"
+}
+-!|
+|eval|!-
+if($hash.quickLaunch)
+{
+removeNodes "TransferJob/JobOptions/AddListToQuickLaunch"
+addChildNode "TransferJob/JobOptions" "<AddListToQuickLaunch>$($hash.quickLaunch.ToLower())</AddListToQuickLaunch>"
+}
+-!|
+|eval|!-
+if($hash.autoCreateFields)
+{
+removeNodes "TransferJob/JobOptions/AutoCreateFields"
+addChildNode "TransferJob/JobOptions" "<AutoCreateFields>$($hash.autoCreateFields.ToLower())</AutoCreateFields>"
+}
+-!|
+|eval|!-
+if($hash.clearListData)
+{
+removeNodes "TransferJob/JobOptions/ClearListData"
+addChildNode "TransferJob/JobOptions" "<ClearListData>$($hash.clearListData.ToLower())</ClearListData>"
+}
+-!|
+|eval|!-
+if($hash.enableVersioning)
+{
+removeNodes "TransferJob/SharePointTargetDefinition/EnableVersioning"
+addChildNode "TransferJob/SharePointTargetDefinition" "<EnableVersioning>$($hash.enableVersioning.ToLower())</EnableVersioning>"
+}
+-!|
+
+|comment: parameters for !style_blue['''targetDefinition''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[targetFields]|no|array|"<Field Name='Column1' Type='Text' />","<Field Name='Column2' Type='Text' />"||
+|!style_blue[targetItemType]|no|string|"Folders"|"Folders","DocumentSets","ListItems"|
+
+!|scenario|targetDefinition|args|
+|convertHash|@args|
+|eval|!-
+if($hash.targetFields)
+{
+$targetFields= @($hash.targetFields)
+if($xml.SelectNodes("TransferJob/SharePointTargetDefinition").Count -eq 1)
+{
+	$targetFields| % {addChildNode "TransferJob/SharePointTargetDefinition" $_}
+}
+else
+{
+	$targetFields| % {addChildNode "TransferJob/FolderTargetDefinition" $_}
+}
+}
+-!|
+|eval|!-
+if($hash.targetItemType)
+{
+removeNodes "TransferJob/SharePointTargetDefinition/TargetItemType"
+addChildNode "TransferJob/SharePointTargetDefinition" "<TargetItemType>$($hash.targetItemType)</TargetItemType>"
+}
+-!|
+
+|comment: parameters for !style_blue['''handleItems''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[duplicateHandle]|no|string|"CreateDuplicate"|"CreateDuplicate","Replace","CreateNewVersion","Skip"|
+
+!|scenario|handleItems|args|
+|convertHash|@args|
+|eval|!-
+if($hash.duplicateHandle)
+{
+removeNodes "TransferJob/JobOptions/DuplicateDocumentHandling"
+addChildNode "TransferJob/JobOptions" "<DuplicateDocumentHandling>$($hash.duplicateHandle)</DuplicateDocumentHandling>"
+}
+-!|
+*!
+
+!* Map Data
+!img /files/nmsp/images/Designer/MapData.png
+!|scenario|mapData|args|
+|mappingFields|@args|
+|handleData|@args|
+
+|comment: parameters for !style_blue['''mappingFields''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[mapFields]|no|array|"<Mapping Destination='Column1' SourceValue='Textbox1' />","<Mapping Destination='Column2' SourceValue='Textbox2' />"||
+
+!|scenario|mappingFields|args|
+|convertHash|@args|
+|eval|!-
+if($hash.mapFields)
+{
+$mapFields= @($hash.mapFields)
+$mapFields| % {addChildNode "TransferJob" $_}
+}
+-!|
+
+|comment: parameters for !style_blue['''handleData''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[preserveIdentities]|no|string|"true"|"true","false"|
+|!style_blue[preserveDates]|no|string|"true"|"true","false"|
+
+!|scenario|handleData|args|
+|eval|!-
+if($hash.preserveIdentities)
+{
+removeNodes "TransferJob/JobOptions/PreserveIdentities"
+addChildNode "TransferJob/JobOptions" "<PreserveIdentities>$($hash.preserveIdentities.ToLower())</PreserveIdentities>"
+}
+-!|
+|eval|!-
+if($hash.preserveDates)
+{
+removeNodes "TransferJob/JobOptions/PreserveDates"
+addChildNode "TransferJob/JobOptions" "<PreserveDates>$($hash.preserveDates.ToLower())</PreserveDates>"
+}
+-!|
+|eval|!-
+if($hash.preserveParent)
+{
+removeNodes "TransferJob/JobOptions/PreserveParent"
+addChildNode "TransferJob/JobOptions" "<PreserveParent>$($hash.preserveDates.ToLower())</PreserveParent>"
+}
+-!|
+*!
+
+!* Advanced Options
+!img /files/nmsp/images/Designer/advanced.png
+!|scenario|advancedOptions|args|
+|userMapping|@args|
+|securityMapping|@args|
+|linkHandling|@args|
+
+!|scenario|userMapping|args|
+|eval|"to do"|
+
+!|scenario|securityMapping|args|
+|convertHash|@args|
+|eval|!-
+if($hash.securityMapping)
+{
+$xml.TransferJob.SecurityMapping.Enabled = $hash.securityMapping
+}
+-!|
+|eval|!-
+if($hash.mapDocumentLevelSecurity)
+{
+removeNodes "TransferJob/SecurityMapping/MapDocumentLevelSecurity"
+addChildNode "TransferJob/SecurityMapping" "<MapDocumentLevelSecurity>$($hash.mapDocumentLevelSecurity)</MapDocumentLevelSecurity>"
+}
+-!|
+|eval|!-
+if($hash.mapACLGroupsAsRoles)
+{
+removeNodes "TransferJob/SecurityMapping/MapACLGroupsAsRoles"
+addChildNode "TransferJob/SecurityMapping" "<MapACLGroupsAsRoles>$($hash.mapACLGroupsAsRoles)</MapACLGroupsAsRoles>"
+}
+-!|
+|eval|!-
+if($hash.mapACLRoles)
+{
+removeNodes "TransferJob/SecurityMapping/MapACLRoles"
+addChildNode "TransferJob/SecurityMapping" "<MapACLRoles><MapACLRoles>$($hash.mapACLRoles)</MapACLRoles></MapACLRoles>"
+}
+-!|
+|eval|!-
+if($hash.mapGroups)
+{
+$mapGroups= @($hash.mapGroups)
+$mapGroups| % {addChildNode "TransferJob/SecurityMapping" $_}
+}
+-!|
+
+|comment: parameters for !style_blue['''linkHandling''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[linkConversionType]|no|string|"UseLinkTracking"|"UseLinkTracking"|
+
+!|scenario|linkHandling|args|
+|eval|!-
+if($hash.linkConversionType)
+{
+removeNodes "TransferJob/JobOptions/LinkConversionOptions/LinkConversionType"
+addChildNode "TransferJob/JobOptions/LinkConversionOptions" "<LinkConversionType>$($hash.linkConversionType)</LinkConversionType>"
+}
+-!|
+*!
+
+*!
+
+!*> Run Job
+|comment: parameters for !style_blue['''runMigration''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[template]|yes|string|"basicList"|check templates on http://fitnesse.at-nmsp.com/files/nmsp/|
+|!style_blue[job]|yes|string|"c:\ImportService\ClassicModeAuthentication\SuiteRender.TestCheckBoxes.pmjob"||
+|!style_blue[db]|yes|string|"DocLibrary"|works when the target is notes|
+|!style_blue[server]|yes|string|"QUICKR/ec2l"|works when the target is domino.doc|
+|!style_blue[path]|yes|string|"domdoc/KVLO-A3CAC8"|works when the target is domino.doc|
+|!style_blue[fd_location]|yes|string|"C:\targetfolder"|required when the type is "Folder"|
+|!style_blue[sp_site]|yes|string|"http://sp2010"|required when the type is "SharePoint"|
+|!style_blue[sp_web]|yes|string|"SuiteDocuments"|required when the type is "SharePoint"|
+|!style_blue[sp_list]|yes|string|"SuiteVersion"|required when the type is "SharePoint"|
+
+!|scenario|runMigration|args|
+|start|remote|${NMSP}|
+|cleanUpTarget|@args|
+|jobDefinition|@args|
+|runJob|@args|
+|checkLog|@args|
+
+!|scenario|runMigrationToExistingList|args|
+|jobDefinition|@args|
+|runJob|@args|
+|checkLog|@args|
+
+!|scenario|runJob|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|Set-Location "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin"|
+|eval|$try = 0|
+|eval|$msgInd = 0|
+|eval|$cmdPar= '${CMDPARAMETER}'|
+|eval|!-
+do{
+	if($hash.mode -ne $null)
+    {
+    	$process = start .\NMSPCMD.EXE ("-job "+ $hash.job + " -mode "+ $hash.mode) -NoNewWindow -wait -PassThru
+    }
+    elseif($cmdPar -ne "null")
+    {
+    	$process = start .\NMSPCMD.EXE ("-job "+ $hash.job+" "+ $cmdPar) -NoNewWindow -wait -PassThru
+    }
+    else
+    {
+		$process = start .\NMSPCMD.EXE ("-job "+ $hash.job) -NoNewWindow -wait -PassThru
+    }
+    $process.WaitForExit()
+    $try = $try + 1
+    $log= Get-ChildItem "c:\ProgramData\Quest\Migrator for Notes to SharePoint\Log Files" | select -last 1 | Get-Content
+    if($log[-1] -ne '</log>'){sleep 5;continue;}
+    $ctrtical = (([xml]$log).Log.entry | ? severity -eq 'Critical')
+    if([String]::IsNullOrEmpty($ctrtical)){
+        $msgInd = -1;
+    }
+    elseif($ctrtical.GetType().ToString() -eq "System.Xml.XmlElement"){
+        $msgInd = $ctrtical.Message.IndexOf("unable to connect to the Link Tracking SQL Server");
+    }
+    else
+    {
+        $msgInd = -1;
+        foreach($node in $ctrtical){
+            $msgInd = $node.Message.IndexOf("unable to connect to the Link Tracking SQL Server")
+            if ($msgInd -gt -1){
+                break;
+            }
+        }
+    }
+}while ($msgInd -gt -1 -and $try -lt 4)
+-!|
+|show|eval|$try|
+|show|eval|$msgInd|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+
+!|scenario|checkLog|args|
+|start|remote|${NMSP}|
+|eval|$log = Get-ChildItem "$env:ProgramData\${NMSP_AppData_Path}\Log Files" !-|-! sort LastWriteTime !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|eval|$critical = ([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|eval|$warning = ([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+|eval|$results = ([xml]$log).Log.summary.results|
+|check|eval|$critical.count|0|
+|eval|$readCount=[int]$results.documentsRead|
+|show|eval|$readCount|
+|eval|$writtenCount=[int]$results.documentsWritten|
+|show|eval|$writtenCount|
+|check not|eval|$writtenCount|0|
+|check|eval|${READ_WRITTEN_PATTERN}|True|
+|show|eval|$critical.stackTrace|
+*!
+
+!*> Run Scheduled Task
+!|scenario|taskDefinition|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|$xml = [xml][System.Text.Encoding]::ASCII.GetString((new-object System.Net.WebClient).DownloadData("http://fitnesse.at-nmsp.com/files/nmsp/"+$hash.taskTemplate+".xml"))|
+|eval|!-if($hash.scheduledTaskName -ne $null)
+{
+removeNodes "NmspTask/Name"
+removeNodes "NmspTask/OptionFile"
+removeNodes "NmspTask/UserOptionFile"
+addChildNode "NmspTask" "<Name>$($hash.scheduledTaskName)</Name>"
+addChildNode "NmspTask" "<OptionFile>$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\$($hash.scheduledTaskName)_Options.xml</OptionFile>"
+addChildNode "NmspTask" "<UserOptionFile>$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Options\$($hash.scheduledTaskName)_UserOptions.xml</UserOptionFile>"
+}
+-!|
+|eval|!-if($hash.scheduledTaskType -ne $null)
+{
+	if($hash.databases -ne $null)
+	{
+		removeNodes "NmspTask/Databases/string"
+		$hash.databases | %{addChildNode "NmspTask/Databases" "<string>$_</string>"}
+	}
+    
+    if($hash.dataAnalysisType -ne $null)
+    {
+    	removeNodes "NmspTask/DataAnalysisType"
+        addChildNode "NmspTask" "<DataAnalysisType>$($hash.dataAnalysisType)</DataAnalysisType>"
+    }
+    
+    if($hash.scanDoclink -ne $null)
+    {
+    	removeNodes "NmspTask/ScanDoclink"
+        addChildNode "NmspTask" "<ScanDoclink>$($hash.scanDoclink)</ScanDoclink>"
+    }
+
+    if($hash.scanDesign -ne $null)
+    {
+    	removeNodes "NmspTask/ScanDesign"
+        addChildNode "NmspTask" "<ScanDesign>$($hash.scanDesign)</ScanDesign>"
+    }
+
+	if($hash.scanDesignScript -ne $null)
+    {
+    	removeNodes "NmspTask/ScanDesignScript"
+        addChildNode "NmspTask" "<ScanDesignScript>$($hash.scanDesignScript)</ScanDesignScript>"
+    }    
+    
+}
+-!|
+|eval|!-if($hash.jobs -ne $null)
+{
+$jobnode=$xml.NmspTask.Jobs.Job.Clone()
+removeNodes "NmspTask/Jobs/Job"
+$hash.jobs | %{$job=$jobnode.Clone();
+$job.FilePath="$_";
+$xml.SelectSingleNode("NmspTask/Jobs").AppendChild($job)}
+}
+-!|
+|eval|!-if($hash.sites -ne $null)
+{
+$sitenode=$xml.NmspTask.SiteCreations.Site.Clone()
+removeNodes "NmspTask/SiteCreations/Site"
+$hash.sites | %{ 
+$siteparam = $_.ToString().Split(',');
+$site=$sitenode.Clone();
+$site.Uri=$siteparam[0]+'/'+$siteparam[1];
+$site.UriXML = $site.UriXML.Replace('{Uri}',$siteparam[0]);
+$site.UriXML = $site.UriXML.Replace('{Site}',$siteparam[1]);
+$xml.SelectSingleNode("NmspTask/SiteCreations").AppendChild($site)}
+}
+-!|
+|eval|!-if($hash.suspendedTime -ne $null)
+{
+removeNodes "NmspTask/SuspendedTime"
+addChildNode "NmspTask" "<SuspendedTime>$($hash.suspendedTime)</SuspendedTime>"
+}
+-!|
+|eval|new-item (Split-Path "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Tasks\$($hash.scheduledTaskName).xml") -type directory -force|
+|eval|$xml.Save("$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Tasks\$($hash.scheduledTaskName).xml")|
+
+!|scenario|runScheduledTask|args|
+|start|remote|${NMSP}|
+|taskDefinition|@args|
+|runTask|@args|
+|checkTaskLog|@args|
+
+!|scenario|runScheduledTaskIngoreLog|args|
+|start|remote|${NMSP}|
+|taskDefinition|@args|
+|runTask|@args|
+
+!|scenario|continueRunScheduledTaskIngoreLog|args|
+|start|remote|${NMSP}|
+|continueRunTask|@args|
+
+!|scenario|runTask|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|Set-Location "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin"|
+|eval|!-
+do {
+   $process = start .\NMSPCMD.EXE ("-taskname "+ $hash.scheduledTaskName) -NoNewWindow -wait -PassThru
+   $process.WaitForExit()
+}
+while($process.ExitCode -eq 1)
+-!|
+|check|eval|$process.ExitCode|${MigrationExitCode}|
+
+!|scenario|continueRunTask|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|Set-Location "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin"|
+|eval|!-
+do {
+   $process = start .\NMSPCMD.EXE ("-taskname "+ $hash.scheduledTaskName + " -continuerun") -NoNewWindow -wait -PassThru
+   $process.WaitForExit()
+}
+while($process.ExitCode -eq 1)
+-!|
+
+!|scenario|checkTaskLog|args|
+|start|remote|${NMSP}|
+|eval|$log = [xml](Get-Content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Scheduler\Tasks\$($hash.scheduledTaskName).xml")|
+|check|eval|$log.NmspTask.Status|Succeeded|
+*!
+
+!*> Set Options
+!|scenario|setOptions|args|
+|start|remote|${NMSP}|
+|globalOptions|@args|
+|userOptions|@args|
+
+|comment: parameters for !style_blue['''globalOptions''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[template]|yes|string|"!-${MODE}.${AUTH}-!"||
+|!style_blue[sharepointReport]|no|string|"true"||
+|!style_blue[reportSite]|no|string|""||
+|!style_blue[reportList]|no|string|""||
+|!style_blue[reportSummary]|no|string|""||
+|!style_blue[showSetupWizard]|no|string|"false"||
+
+!|scenario|globalOptions|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|!- if($hash.globalOptionSource -eq $null)
+{
+download "http://fitnesse.at-nmsp.com/files/nmsp/options/Options.config.default.$($hash.template)" "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint" "Options.config"
+$xml = [xml](get-content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config")
+}
+else
+{
+$xml= [xml](get-content $hash.globalOptionSource)
+}
+-!|
+|eval|!-if($hash.linkTrackingDb)
+{
+removeNodes "Options/SharePointEnvironments/SharePointEnvironment/Settings/LinkTrackingEnabled"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<LinkTrackingEnabled>true</LinkTrackingEnabled>"
+removeNodes "Options/LinkTrackingOptions/Server"
+addChildNode "Options/LinkTrackingOptions" "<Server>$($hash.linkTrackingServer)</Server>"
+removeNodes "Options/LinkTrackingOptions/Database"
+addChildNode "Options/LinkTrackingOptions" "<Database>$($hash.linkTrackingDb)</Database>"
+}
+-!|
+|eval|!-if($hash.executionTimeoutSeconds)
+{
+removeNodes "Options/LinkTrackingOptions/ExecutionTimeoutSeconds"
+addChildNode "Options/LinkTrackingOptions" "<ExecutionTimeoutSeconds>$($hash.executionTimeoutSeconds)</ExecutionTimeoutSeconds>"
+}
+-!|
+|eval|!-if($hash.identityLookupMode)
+{
+removeNodes "Options/IdentityMappingOptions/IdentityLookupMode"
+addChildNode "Options/IdentityMappingOptions" "<IdentityLookupMode>$($hash.identityLookupMode)</IdentityLookupMode>"
+}
+-!|
+|eval|!-if($hash.notesIdPassword)
+{
+removeNodes "Options/IdentityMappingOptions/NotesIdPassword"
+addChildNode "Options/IdentityMappingOptions" "<NotesIdPassword>$($hash.notesIdPassword)</NotesIdPassword>"
+}
+-!|
+|eval|!-if($hash.mappingFilePath)
+{
+removeNodes "Options/IdentityMappingOptions/MappingFile/Path"
+addChildNode "Options/IdentityMappingOptions/MappingFile" "<Path>$($hash.mappingFilePath)</Path>"
+}
+-!|
+|eval|!-if($hash.groupIdentityLookupMode)
+{
+removeNodes "Options/GroupIdentityMappingOptions/IdentityLookupMode"
+addChildNode "Options/GroupIdentityMappingOptions" "<IdentityLookupMode>$($hash.groupIdentityLookupMode)</IdentityLookupMode>"
+}
+-!|
+|eval|!-if($hash.logQueryEngineEvent)
+{
+removeNodes "Options/LogQueryEngineEvent"
+addChildNode "Options" "<LogQueryEngineEvent>$($hash.logQueryEngineEvent)</LogQueryEngineEvent>"
+}
+-!|
+|eval|!-if($hash.groupNotesIdPassword)
+{
+removeNodes "Options/GroupIdentityMappingOptions/NotesIdPassword"
+addChildNode "Options/GroupIdentityMappingOptions" "<NotesIdPassword>$($hash.groupNotesIdPassword)</NotesIdPassword>"
+}
+-!|
+|eval|!-if($hash.groupMappingFilePath)
+{
+removeNodes "Options/GroupIdentityMappingOptions/MappingFile/Path"
+addChildNode "Options/GroupIdentityMappingOptions/MappingFile" "<Path>$($hash.groupMappingFilePath)</Path>"
+}
+-!|
+|eval|!-if($hash.turboMode)
+{
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureTurboModeEnabled>$($hash.turboMode)</AzureTurboModeEnabled>"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureStorageName>$($hash.storageName)</AzureStorageName>"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureStorageAccessKey>$($hash.accessKey)</AzureStorageAccessKey>"
+}
+-!|
+|eval|!-if($hash.encryptionEnabled)
+{
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<EncryptionEnabled>$($hash.encryptionEnabled)</EncryptionEnabled>"
+}
+-!|
+|eval|!-if($hash.azureTurboTimeOut)
+{
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<AzureTurboTimeOut>$($hash.azureTurboTimeOut)</AzureTurboTimeOut>"
+}
+-!|
+|eval|!-if($hash.credentialsExpirationInterval -ne $null)
+{
+removeNodes "Options/SharePointEnvironments/SharePointEnvironment/Settings/CredentialsExpirationInterval"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<CredentialsExpirationInterval>$($hash.credentialsExpirationInterval)</CredentialsExpirationInterval>"
+}
+-!|
+|eval|!-if($hash.sharedFolderForDataTransferEnabled -ne $null)
+{
+removeNodes "Options/SharePointEnvironments/SharePointEnvironment/Settings/SharedFolderForDataTransferEnabled"
+addChildNode "Options/SharePointEnvironments/SharePointEnvironment/Settings" "<SharedFolderForDataTransferEnabled>$($hash.sharedFolderForDataTransferEnabled)</SharedFolderForDataTransferEnabled>"
+}
+-!|
+|eval|!-if($hash.replacementCharacter -ne $null)
+{
+removeNodes "Options/ReplacementCharacter"
+addChildNode "Options" "<ReplacementCharacter>$($hash.replacementCharacter)</ReplacementCharacter>"
+}
+-!|
+|eval|!-if($hash.illegalReplaceMappings -ne $null)
+{
+removeNodes "Options/IllegalReplaceMappings"
+addChildNode "Options" "<IllegalReplaceMappings>$($hash.illegalReplaceMappings)</IllegalReplaceMappings>"
+}
+-!|
+|eval|!-if($hash.sharepointReport)
+{
+removeNodes "Options/MigrationReportOptions"
+addChildNode "Options" "<MigrationReportOptions Enabled='$($hash.sharepointReport)' SiteUrl='$($hash.reportSite)' ListName='$($hash.reportList)' BriefListName='$($hash.reportSummary)'></MigrationReportOptions>"
+}
+-!|
+|eval|!-if($hash.httpLinkTranslations -ne $null)
+{
+removeNodes "Options/EnableLinkTranslations"
+addChildNode "Options" "<EnableLinkTranslations>true</EnableLinkTranslations>"
+removeNodes "Options/LinkTranslations/HttpLinkTranslation"
+foreach($hlt in @($hash.httpLinkTranslations)){
+addChildNode "Options/LinkTranslations" "<HttpLinkTranslation>$hlt</HttpLinkTranslation>"
+}
+}
+-!|
+|eval|!-if($hash.maxAttachmentSize -ne $null)
+{
+if($xml.Options.MaxAttachmentSize -eq $null){
+  $el = $xml.CreateNode('element', 'MaxAttachmentSize','')
+  $xml.Options.AppendChild($el)
+}
+$xml.Options.MaxAttachmentSize = "$($hash.maxAttachmentSize)"
+}
+-!|
+|eval|!-if($hash.blockedExtensions -ne $null)
+{
+if($xml.Options.BlockedExtensions -eq $null){
+  $el = $xml.CreateNode('element', 'BlockedExtensions','')
+  $xml.Options.AppendChild($el)
+}
+$xml.Options.BlockedExtensions = "$($hash.blockedExtensions)"
+}
+-!|
+|eval|!-if($hash.showSetupWizard -ne $null)
+{
+removeNodes "Options/ShowSetupWizardOnStartup"
+addChildNode "Options" "<ShowSetupWizardOnStartup>$($hash.showSetupWizard)</ShowSetupWizardOnStartup>"
+}
+-!|
+|eval|!-if($hash.folderLinkTracking -ne $null)
+{
+removeNodes "Options/FolderLinkTracking"
+addChildNode "Options" "<FolderLinkTracking>$($hash.folderLinkTracking)</FolderLinkTracking>"
+}
+-!|
+|eval|!-if($hash.rootFolderLocation -ne $null)
+{
+removeNodes "Options/RootFolderLocation"
+addChildNode "Options" "<RootFolderLocation>$($hash.rootFolderLocation)</RootFolderLocation>"
+}
+-!|
+|eval|!-if($hash.scanLocations -ne $null)
+{
+removeNodes "Options/ScanLocations/ScanLocation"
+@($hash.scanLocations) |% { addChildNode "Options/ScanLocations" "<ScanLocation><ScanServer /><ScanPath>$_</ScanPath></ScanLocation>"}
+}
+-!|
+|eval|!-if($hash.sqlServerEnabled -ne $null)
+{
+removeNodes "Options/SqlServerEnabled"
+addChildNode "Options/SqlServerEnabled" "true"
+}
+-!|
+|eval|!-if($hash.globalOptionTarget -ne $null)
+{
+new-item (Split-Path $hash.globalOptionTarget) -type directory -force
+$xml.save($hash.globalOptionTarget)
+} else
+{
+$xml.save("$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config")
+}
+-!|
+
+!|scenario|userOptions|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|download "http://fitnesse.at-nmsp.com/files/nmsp/options/UserOptions.config.${AUTH}" "$($env:APPDATA)\Quest\Migrator for Notes to SharePoint" "UserOptions.config"|
+|eval|$xml = [xml](get-content "$($env:APPDATA)\Quest\Migrator for Notes to SharePoint\UserOptions.config")|
+|eval|!-if($hash.allowClearList -ne $null)
+{
+removeNodes "UserOptions/AllowClearList"
+addChildNode "UserOptions" "<AllowClearList>$($hash.allowClearList)</AllowClearList>"
+}
+-!|
+|eval|!-if($hash.userOptionTarget -ne $null)
+{
+new-item (Split-Path $hash.userOptionTarget) -type directory -force
+$xml.save($hash.userOptionTarget)
+} else
+{
+$xml.save("$($env:APPDATA)\Quest\Migrator for Notes to SharePoint\UserOptions.config")
+}
+-!|
+
+!|scenario|remoteSharepointOptions|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|download "http://fitnesse.at-nmsp.com/files/nmsp/options/RemoteSharePointSites.config.${MODE}.${AUTH}" "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint" "RemoteSharePointSites.config"|
+|eval|$xml = [xml](get-content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\RemoteSharePointSites.config")|
+|eval|!-if($hash.remoteSharePointSite -ne $null)
+{
+removeNodes "RemoteSharePointSitesForEnvironments/RemoteSharePointSitesForEnvironment/RemoteSharePointSites"
+addChildNode "RemoteSharePointSitesForEnvironments/RemoteSharePointSitesForEnvironment" "<RemoteSharePointSites><RemoteSharePointSite Url='http://$($hash.remoteSharePointSite)' /></RemoteSharePointSites>"
+}
+-!|
+|show|eval|$xml|
+|eval|!-if($hash.remoteSharepointOptionsTarget -ne $null)
+{
+new-item (Split-Path $hash.remoteSharepointOptionsTarget) -type directory -force
+$xml.save($hash.remoteSharepointOptionsTarget)
+} else
+{
+$xml.save("$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\RemoteSharePointSites.config")
+}
+-!|
+
+*!
+
+!*> Code Sign
+!|scenario|getCodeSignError|args|
+|convertHash|@args|
+|eval|$signError=$null|
+|eval|!-$files= Get-ChildItem $hash.path -Include "Proposion*.dll","Quest.NMSP.*.dll","Quest.NSP.*.dll","*.exe" -Exclude "AutoExec.exe" -Recurse
+$signError =$null
+if($files.Count -eq 0) 
+{
+    $signError +="no file in bin folder"
+}
+foreach($file in $files)
+{
+$signInfo=Get-AuthenticodeSignature -FilePath $file.FullName
+if($signInfo.SignerCertificate.NotAfter.ToString() -notmatch $hash.expireDate -or $signInfo.SignerCertificate.Subject -notmatch $hash.companyName)
+{
+$signError += "File "+ $file.Name+" hasn't been singed! "
+}
+}
+-!|
+
+*!

@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}|
+|check|eval|Test-Path ${TARGETFOLDER}\_Attachments\TestFileName.*|False|

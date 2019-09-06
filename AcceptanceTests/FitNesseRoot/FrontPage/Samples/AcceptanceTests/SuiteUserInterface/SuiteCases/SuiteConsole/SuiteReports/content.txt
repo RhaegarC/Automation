@@ -1,0 +1,28 @@
+!define NMSP_Report_Path (${NMSP_Install_Directory_Client}\Standard Reports)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can create a custom report
+So that I can have my own reports
+
+I can refresh data in general reports in Console 
+So that I can view new data in report without any error
+
+!1 scenarios
+![
+Given NMSP is installed
+When I click "create custom report" on the context menu of report node
+And I fill the name for it and click OK
+Then I can see the custom report is generated
+
+Given SQLSysClrTypes.msi and ReportViewer.msi were installed
+When I right click on a report content in Console, then click "Refresh" in context menu
+Then I can view new data in report without any error
+When I click the "Refresh" button on the report toolbar which is on the top of the Results View
+Then I can view new data in report without any error
+When I right click the report tree node, then click "Refresh" in context menu
+Then I can view new data without any error
+]!

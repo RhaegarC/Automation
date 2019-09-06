@@ -1,0 +1,22 @@
+!define LIST {!-TestMigratingCurrentVersions-!}
+
+|script|
+|runMigration|!{job:"${DOMINODOCJOBFILE}",template:"${MIGRATION}",sourceType:"DominoDoc",server:"${DOMINODOC_SERVER}",path:"${DOMINODOC_PATH}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",duplicateHandle:"CreateDuplicate",sourceVersions:"current",targetFields:"<!-Field Name='domdocVersion' Type='Text'-!/>",mapFields:"<!-Mapping Destination='domdocVersion' SourceValue='{VersionMajor}'-!/>"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['Title0']}},@{N='domdocVersion';E={$_['domdocVersion']}}|
+|Title|domdocVersion|
+|Basic Document|1|
+|Document with Multiple Versions|3|
+|_Attachments||
+|TestPictureAndAttachment|1|
+|DocumentStartingWithMinorVersion|1|
+|DocumentWithMajorAndMinorVersions|5|
+|DocumentLeaveCheckOut - (New)|0|
+
+!|script|Remote|${NMSP}| 
+|get file versions|${WEB}|list|${LIST}|caml|<View><Query><Where><Eq><FieldRef Name = 'Title0'/><Value Type='Text'>Document with Multiple Versions</Value></Eq></Where></Query></View>|
+|check|eval|$fileVersions.Count|0| 
+|check|eval|$items[0].FieldValues._UIVersionString|1.0| 

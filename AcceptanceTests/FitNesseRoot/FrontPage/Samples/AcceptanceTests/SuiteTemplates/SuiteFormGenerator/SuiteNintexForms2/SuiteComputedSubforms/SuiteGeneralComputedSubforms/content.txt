@@ -1,0 +1,5 @@
+!define DATABASE (!-SuiteFormGenerator-!)
+!define FORM (!-ComputedSubforms-!)
+!define TARGET_FOLDER (!-C:\Users\administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files-!)
+!define TARGET_FILE {${TARGET_FOLDER}\!-NintexForm_(local)_SuiteFormGenerator_ComputedSubforms.xml-!}
+!contents -R2 -g -p -f -h

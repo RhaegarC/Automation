@@ -1,0 +1,5 @@
+!define AddMissingChoices (true)
+!define MultipleValues (false)
+!define MultiValueDisposition (Default)
+!define LIST (${TARGET_FIELD_TYPE}_TestSingleDefaultDisposition)
+!define LookupListName (!-LookupListTestSingleDefaultDisposition-!)

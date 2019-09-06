@@ -1,0 +1,41 @@
+!*> Start !-PowerShell-!
+!|script|Remote|${NMSP}|
+|eval|$server = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 36 server36' -PassThru|
+|eval|sleep 5|
+*!
+
+!* FInalize trough MMC
+!|script|Remote|${NMSP}:36|
+|eval|get-process mmc -ea silent !-|-! stop-process|
+|eval|Start-Process '${NMSP_Install_Directory_Client}\Bin\MigratorConsole.exe'|
+
+!|script|Remote|${NMSP}:36|
+|eval|Import-Module C:\UIAutomation|
+|eval|$window=$null|
+|eval|$count=0|
+|eval|do{try{$window = Get-UIAWindow -Name "Quest Migrator for Notes to SharePoint Console" -Seconds 60} catch [exception] {};sleep 3;$count++}while($window -eq $null -and $count -lt 3)|
+|show|eval|$count|
+|eval|!-$window | Get-UIATreeItem -Name 'Tools' | Invoke-UIATreeItemExpand | Get-UIATreeItem -Name 'Link Analyzer/Updater/Finalizer' | Set-UIAFocus-!|
+|eval|!-$window | Get-UIATabItem -Name 'Link Finalization' | Invoke-UIATabItemSelectItem -ItemName 'Link Finalization'-!|
+|eval|!-Get-UIAButton -AutomationId 'FinalizeButton' | Invoke-UIAButtonClick-!|
+|eval|!-Get-UIAButton -Name 'OK' | Invoke-UIAButtonClick-!|
+|eval|!-Get-UIAButton -AutomationId 'FinalizeButton' | Wait-UIAButtonIsEnabled -Seconds 90-!|
+|check|eval|(Get-UIAText -AutomationId 'LTSubStatusMessageLabel').Current.Name|Successfully finalized ${LINKS} links in ${DOCUMENTS} documents|
+*!
+
+!*> There is an option to do finalize by using !-PowerShell-!
+!|comment|
+|script|Remote|${NMSP}:36|
+|eval|Import-Module "${NMSP_Install_Directory_Client}\PowerShell\discovery.psm1"|
+|check|eval|Invoke-LinkFinalizer|Finalize completed.  Successfully finalized ${LINKS} links in ${DOCUMENTS} documents|
+*!
+!*> Kill !-PowerShell-!
+!|script|Remote|${NMSP}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server36')) {$p[$_].Terminate()}
+}-!|
+*!
+
+#|eval|$server.kill()|

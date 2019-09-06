@@ -1,0 +1,6 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <WebServices.IncludePages.EnableLinkTracking
+!include -c <ImportService.IncludePages.EnableLinkTracking
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions

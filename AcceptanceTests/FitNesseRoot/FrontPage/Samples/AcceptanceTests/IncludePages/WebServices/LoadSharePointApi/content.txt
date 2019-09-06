@@ -1,0 +1,12 @@
+!* Load !-SharePoint-! Client API
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\bin"|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.dll")|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Runtime.dll")|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+*!
+
+!*> Load !-SharePoint-! API
+!|script|Remote|${SHAREPOINT}|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+*!

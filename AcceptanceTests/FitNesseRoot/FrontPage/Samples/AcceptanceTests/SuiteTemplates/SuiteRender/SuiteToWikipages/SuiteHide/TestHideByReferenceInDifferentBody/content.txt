@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideByReferenceInDifferentBody.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|This is sub form:|
+|Used Formula from Ref 1.(Current element is in Second 'Body'.)| 
+|Subject: TestHideByReferenceInDifferentBody|

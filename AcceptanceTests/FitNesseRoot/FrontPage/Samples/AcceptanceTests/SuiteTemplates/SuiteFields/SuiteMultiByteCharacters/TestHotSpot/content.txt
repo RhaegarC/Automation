@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestHotSpot.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"A",selector:!-"href"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|href|
+|file://local/unicodetest/english%20space.txt|

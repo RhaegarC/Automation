@@ -1,0 +1,8 @@
+!|script|Remote|${NMSP}|
+|Mapping|author@email.net|to|MSG.From|SourceType|Constant|job|${JOBFILE}|
+|Mapping|TO_A@email.net|to|MSG.To|SourceType|Constant|job|${JOBFILE}|
+|Mapping|TO_B@email.net|to|MSG.To|SourceType|Constant|job|${JOBFILE}|
+|Mapping|CC_A@email.net|to|MSG.Cc|SourceType|Constant|job|${JOBFILE}|
+|Mapping|CC_B@email.net|to|MSG.Cc|SourceType|Constant|job|${JOBFILE}|
+|Mapping|BCC_A@email.net|to|MSG.Bcc|SourceType|Constant|job|${JOBFILE}|
+|Mapping|BCC_B@email.net|to|MSG.Bcc|SourceType|Constant|job|${JOBFILE}|

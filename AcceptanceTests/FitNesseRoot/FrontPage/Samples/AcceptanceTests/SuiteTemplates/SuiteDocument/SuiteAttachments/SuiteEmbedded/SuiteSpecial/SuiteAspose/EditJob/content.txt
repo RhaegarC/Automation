@@ -1,0 +1,6 @@
+!|script|Remote|${NMSP}|
+|Formula|subject="${DOCUMENT_NAME}"|for|${JOBFILE}|
+|Mapping|BodyEmbeddedObjects|to|Word.EmbeddedObjects|job|${JOBFILE}|
+
+
+

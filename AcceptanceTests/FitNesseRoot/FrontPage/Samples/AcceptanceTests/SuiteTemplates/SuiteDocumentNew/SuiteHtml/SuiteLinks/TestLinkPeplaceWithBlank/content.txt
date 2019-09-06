@@ -1,0 +1,23 @@
+!define PAGENAME (!-TestLinkSpecialUrl-!)
+!define ORIGIN_SITE_URL (!-http://sp2010/sites/Test-!)
+!define TARGET_FILE (${TARGETFOLDER}\TestLinkPeplaceWithBlank.${SAVE_AS})
+
+|script|
+|globalOptions|!{replacementCharacter:"",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!style_green[Check the html content contains a link, which is linking to a Notes files "TestLinkSpecial#%Name".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc
+
+
+!define LINKS (1)
+!define DOCUMENTS (1)
+!define TARGET_FILE (${TARGETFOLDER}\TestLinkPeplaceWithBlankFinalization.${SAVE_AS})
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+!style_green[Check the html content contains a link, which is linking to a sharepoint page "TestLinkSpecialName".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

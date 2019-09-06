@@ -1,0 +1,13 @@
+!|script|Remote|${SHAREPOINT}:38|
+|SelectListItemsName|test role.aspx|attribute|Name|user|${TestRole}|
+
+!|Query:Remote|${SHAREPOINT}:38|$listItems !-|-! select Name|
+|Name|
+|Read|
+|Contribute|
+
+
+#!|Query:Remote|${SHAREPOINT}|$list.Items !-|-! ?{$_.Name -eq 'test role.aspx'} !-|-! %{$_.RoleAssignments} !-|-! ?{$_.Member.Name -eq '${TestRole}'} !-|-! %{$_.RoleDefinitionBindings} !-|-! select Name |
+#|Name|
+#|Read|
+#|Contribute|

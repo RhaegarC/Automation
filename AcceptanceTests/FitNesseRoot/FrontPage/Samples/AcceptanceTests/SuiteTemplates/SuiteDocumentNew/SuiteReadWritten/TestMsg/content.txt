@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"subject='${DOCUMENT_NAME}'",properties:!-@{path="//Field[@Name='Doc']";name="SaveAs";value="MsgDocument"}-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+!|script|Remote|${NMSP}|
+|check|eval|$results.documentsRead|1|
+|check|eval|$results.documentsWritten|1|

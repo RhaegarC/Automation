@@ -1,0 +1,11 @@
+!include -c <WebServices.IncludePages.DownloadDocument
+!include -c <ImportService.IncludePages.DownloadDocument
+
+!define WORDPROPERTY (href)
+!define WORDPROPERTYSELECT (WordHyperLinkElement)
+
+
+!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+

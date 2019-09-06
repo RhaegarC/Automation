@@ -1,0 +1,7 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideByReferenceWithoutHideReading.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Used Formula from Ref 1.| 
+|Subject: TestHideByReferenceWithoutHideReading|

@@ -1,0 +1,21 @@
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|click "HelpButton"|
+|eval|$window = $null|
+|eval|$window = Get-UIAWindow -Name ${HelpCaption}|
+|check|eval|$window.Current.IsEnabled|True|
+
+!|script|
+|startDesigner|
+|eval|expandMenu "HelpMenu"|
+|eval|clickMenu "ContentsMenu"|
+|eval|$window = $null|
+|eval|$window = Get-UIAWindow -Name ${HelpCaption}|
+|check|eval|$window.Current.IsEnabled|True|
+
+|script|
+|stopUiautomation|

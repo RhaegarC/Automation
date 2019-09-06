@@ -1,0 +1,7 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|$exist = Test-Path -Path ${TARGETFOLDER}|
+|eval| if (-not $exist) {New-Item -path ${TARGETFOLDER} -type directory}|
+|download|${SOURCE}|to|${TARGET}|
+
+
+#|eval|New-Item -path ${TARGETFOLDER} -type directory|

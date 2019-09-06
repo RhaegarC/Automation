@@ -1,0 +1,10 @@
+!include -c >JobDefinition
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigration
+!* Check field type. Should be ${TARGET_FIELD_TYPE}
+!|Subset Query:Remote|${NMSP}|GetFields ${SITE_URL} ${WEB} ${LIST}|
+|InternalName|TypeAsString|
+|Category|=~/${TARGET_FIELD_TYPE}/|
+*!

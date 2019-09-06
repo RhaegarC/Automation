@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}|
+|eval|$fileInfo = ls ${TARGETFOLDER}\${TARGETFILENAME}.${TARGETFILTYPE}|

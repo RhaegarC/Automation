@@ -1,0 +1,7 @@
+!* Get feature Description
+!|Query: Remote|${SHAREPOINT}|!-Get-SPFeature | ?{$_.Scope -eq "Farm" -and $_.DisplayName -like "NMSP*"} | select @{N="Description";E={$_.GetDescription([System.Globalization.CultureInfo]::CurrentCulture)}}-!|
+|Description|
+|${NMSP_Company_Name} ${NMSP_Product_Name} Services Configuration|
+|Site Configuration and Import Service bootstrapping pages for ${NMSP_Company_Name} ${NMSP_Product_Name}.  This is part of the ${NMSP_Company_Name} Front-End Services solution.|
+*!
+

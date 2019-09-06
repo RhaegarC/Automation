@@ -1,0 +1,33 @@
+!define VIEW (!-Suite PathTooLong-!)
+!define LIST (SuiteLink_SuitePathTooLong)
+!contents -R2 -g -p -f -h
+
+
+!1 user story
+
+As an administrator
+I can migrate the documents with long name attachments
+So that I can complete the migrations successfully
+and view these attachments in Sharepoint
+
+
+!1 scenarios
+![
+Given documents in Notes with long name attachments was ready
+And Target Data Definition was set to Html
+When I run migration
+Then the migration task completed without exceptions
+And I can view these attachments in SharePoint
+
+Given documents in Notes with long name attachments was ready
+And Target Data Definition was set to Pdf
+When I run migration
+Then the migration task completed without exceptions
+And I can view these attachments in SharePoint
+
+Given documents in Notes with long name attachments was ready
+And Target Data Definition was set to Word
+When I run migration
+Then the migration task completed without exceptions
+And I can view these attachments in SharePoint
+]!

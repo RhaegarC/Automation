@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestSectionInsideTableCell-!)
+
+!style_green[Check the word content contains text and tables as following image:]
+!img files/nmsp/images/CheckpointImages/TestSectionInsideTableCell.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

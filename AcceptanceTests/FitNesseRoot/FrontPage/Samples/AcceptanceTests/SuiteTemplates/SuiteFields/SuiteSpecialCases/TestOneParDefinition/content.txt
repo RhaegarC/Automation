@@ -1,0 +1,4 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|eval|$main = $request.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('div') !-|-! ? {$_.className -eq 'ms-wikicontent ms-rtestate-field'}|
+|check not|eval|$main.innerText|=~/^$/|
+

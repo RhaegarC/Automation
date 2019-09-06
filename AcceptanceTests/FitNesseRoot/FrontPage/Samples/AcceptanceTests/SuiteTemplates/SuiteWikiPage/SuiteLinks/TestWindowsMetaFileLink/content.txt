@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$page.Images !-|-! ? {$_.src.StartsWith('${SITE}/${WEB}/${LIST}')}|
+|src|
+|${SITE}/${WEB}/${LIST}/_Attachments/TestWindowsMetaFileLink.EMF|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/TestWindowsMetaFileLink-[0-9A-F]{15}.EMF/|

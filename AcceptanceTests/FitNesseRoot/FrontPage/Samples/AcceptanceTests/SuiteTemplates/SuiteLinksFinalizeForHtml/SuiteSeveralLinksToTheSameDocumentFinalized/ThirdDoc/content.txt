@@ -1,0 +1,4 @@
+!|Subset Query:Remote|${WEB_SCRAPER}|$html !-|-! GetAllHrefsFromText|
+|href|
+|=~/SecondDoc.html/|
+|=~/SecondDoc.html/|

@@ -1,0 +1,3 @@
+!define LIST (!-SuiteLinksPlainText-!)
+
+!contents -R2 -g -p -f -h

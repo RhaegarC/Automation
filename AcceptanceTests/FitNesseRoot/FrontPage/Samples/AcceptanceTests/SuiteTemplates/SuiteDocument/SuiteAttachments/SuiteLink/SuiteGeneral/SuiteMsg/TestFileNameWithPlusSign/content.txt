@@ -1,0 +1,3 @@
+!|Query: Remote|${WEB_SCRAPER}|$msgBody !-|-! GetAllHrefsFromText|
+|href|
+|=~/_Attachments${SLASH}Special${SPACE}\+${SPACE}sign.txt/|

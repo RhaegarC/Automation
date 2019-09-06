@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestSimpleParagraphForWord-!)
+
+!style_green[Check the word content contains 3 paragraphs displays as below:]
+!img files/nmsp/images/CheckpointImages/TestSimpleParagraphForWord.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

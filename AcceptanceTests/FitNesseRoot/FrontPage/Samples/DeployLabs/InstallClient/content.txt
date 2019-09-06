@@ -1,0 +1,21 @@
+!*> Copy msi
+!|script|Remote|${REMOTED}|
+|eval|Import-Module 'C:\Program Files\AWS Tools\PowerShell\AWSPowerShell.psd1'|
+|show|eval|Read-S3Object -BucketName NMSP -Key $VERSION/NotesMigratorForSharePoint-Clients-$VERSION.msi -File c:\msi\nmsp.msi|
+|show|eval|Read-S3Object -BucketName NMSP -Key license.asc -File c:\msi\license.asc|
+*!
+!*> Install product
+!|script|Remote|${REMOTED}|
+|check|eval|(start c:\msi\nmsp.msi '/qn NDPROG="C:\Program Files (x86)\IBM\Lotus\Notes" NDDATA="C:\Program Files (x86)\IBM\Lotus\Notes\Data" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+|eval|[Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable("Path","Machine"), "Process")|
+*!
+!*> License
+!|script|Remote|${REMOTED}|
+|eval|$pi_manager = New-Object -ComObject  QuestLicense.AeCreateProductInfo2|
+|eval|$pi_manager.SetProductName('Notes Migrator for SharePoint')|
+|eval|$pi_manager.SetVersionNumber("$VERSION")|
+|eval|$pi = $pi_manager.CreateProductInfo()|
+|eval|$qll = New-Object -ComObject QuestLicense.AeProductManager|
+|show|eval|$qll.CreateLicenseInfoFromFile('c:\msi\license.asc', $pi, 0)|
+*!
+!include -c SetupWizard

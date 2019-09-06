@@ -1,0 +1,6 @@
+|script|
+|newParsePdfDoc|!{url:"${SOURCE}",file:"${TARGET}",findText:"Content!-: TestMappingFieldsToFolder-!"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Content: TestMappingFieldsToFolder|

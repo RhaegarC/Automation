@@ -1,0 +1,26 @@
+!define MMC_MAIN_FRAME_NAME (${NMSP_Company_Name} ${NMSP_Product_Name} Console)
+!define FILE_PATH (${NMSP_Install_Directory_Client}\Bin\Resources\html\ReportViewErrorPage.html)
+!define FILE_URI (file://${FILE_PATH})
+!define NAME (ReportView Error Page)
+!define MSI_PATH (C:\msi\ReportViewer.msi)
+!define MSI_NAME (Microsoft Report Viewer 2012 Runtime)
+
+!*> Uninstall Report Viewer Component
+!| script | Remote | ${NMSP} |
+| eval | Get-WmiObject -Class Win32_Product !-|-! Where-Object {$_.Name -eq "${MSI_NAME}"} !-|-! foreach-object -process {$_.Uninstall()}|
+*!
+
+|script|
+|startConsole|
+
+!|script|remote|${NMSP}:36|
+|eval|expandTreeItem "Reports"|
+
+!|script|remote|${NMSP}:36|
+| check | eval | (Get-UIAWindow -Class 'MMCMainFrame' -Name '${MMC_MAIN_FRAME_NAME}' !-|-! Get-UIAPane -Class 'Internet Explorer_Server' -Name '${NAME}').Value | ${FILE_URI} |
+| check | eval | Test-Path -Path '${FILE_PATH}' | True |
+
+!*> Install Report Viewer Component
+!| script | Remote | ${NMSP} |
+| eval | Start-Process "${MSI_PATH}" /qn -Wait |
+*!

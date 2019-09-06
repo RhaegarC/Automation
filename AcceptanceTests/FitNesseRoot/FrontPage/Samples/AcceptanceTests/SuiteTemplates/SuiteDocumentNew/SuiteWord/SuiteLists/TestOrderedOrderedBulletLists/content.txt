@@ -1,0 +1,16 @@
+!define PAGENAME (!-TestOrderedOrderedBulletLists-!)
+
+!style_green[Check the word content contains text shown as below (the font is Arial, black, 9):]
+-------------
+1.   First number
+2.   Second number
+
+
+1.   First Number again
+2.   Second Number again
+
+
+•   First bullet
+•   Second bullet
+------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

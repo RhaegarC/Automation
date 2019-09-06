@@ -1,0 +1,6 @@
+!define MIGRATION (DocLib2DocLibWordDoc)
+!define LIST (SuiteLinkInControl)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteLinksFinalizeForWord.SuiteLinkInControl.EditJob)
+!define LINKS (7)
+!define DOCUMENTS (6)
+!contents -R2 -g -p -f -h

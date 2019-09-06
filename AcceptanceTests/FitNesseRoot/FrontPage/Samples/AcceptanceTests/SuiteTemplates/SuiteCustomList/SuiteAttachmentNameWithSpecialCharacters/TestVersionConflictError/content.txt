@@ -1,0 +1,8 @@
+!|Subset Query:Remote|${NMSP}|$informational|
+|context|message|
+|Failed to Update List Item: TestVersionConflictError|=~/Version conflict/|
+|Reload and Update List Item|TestVersionConflictError|
+
+!|Query:Remote|${NMSP}|$critical|
+|context|message|
+|Error writing List item|=~/New Text DocumentHlá!-|-!ení vzniku !-|-!kody.txt/|

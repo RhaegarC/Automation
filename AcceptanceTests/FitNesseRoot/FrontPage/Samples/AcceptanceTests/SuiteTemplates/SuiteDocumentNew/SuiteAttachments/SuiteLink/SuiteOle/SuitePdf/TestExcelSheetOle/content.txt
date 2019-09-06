@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestExcelSheetOle-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/TestExcelSheetOle.xlsx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,6 @@
+!note can be any document
+!|script|Remote|${NMSP}|
+|Formula|subject="${DOCUMENT_NAME}"|for|${JOBFILE}|
+
+!|script|Remote|${NMSP}|
+|Set|TransferJob/${TARGET_DEFINITION}/Field[@Name='Doc']|Attribute|SaveAs|Value|${SAVE_AS}|in|${JOBFILE}|

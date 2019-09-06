@@ -1,0 +1,19 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define MIGRATION (!-BasicList-!)
+!define VIEW (!-Suite SignatureBlock-!)
+!define LIST (!-SignatureBlock-!)
+!define RESULT2013 ("\u003cpre\u003eWEINGARTEN REALTY INVESTORS,\u003cbr\u003ea Texas real estate investment trust\u003cbr\u003e\u003cbr\u003e\u003cbr\u003eBy\u0026#58;\t__________________________________\u003cbr\u003eName\u0026#58;\t__________________________________\u003cbr\u003eTitle\u0026#58;\t__________________________________\u003cbr\u003e\u003cbr\u003e\u003cbr\u003e\u003cbr\u003eWS ATLANTIC WEST, LLC,\u003cbr\u003ea Delaware limited liability company\u003cbr\u003e\u003cbr\u003eBy\u0026#58;\tWeingarten Sleiman, LLC,\u003cbr\u003e\ta Delaware limited liability company,\u003cbr\u003e\tIts Sole Member\u003cbr\u003e\u003cbr\u003e\tBy\u0026#58;\tWeingarten Realty Investors,\u003cbr\u003e\t\ta Texas real estate investment trust,\u003cbr\u003e\t\tIts Managing Member\u003cbr\u003e\u003cbr\u003e\u003cbr\u003e\t\tBy\u0026#58;\t________________________________\u003cbr\u003e\t\tName\u0026#58;\t________________________________\u003cbr\u003e\t\tTitle\u0026#58; ___________________________________\u003cbr\u003e\u003c/pre\u003e")
+!define RESULT2010 ("\u003cpre\u003eWEINGARTEN REALTY INVESTORS,\u003cbr /\u003ea Texas real estate investment trust\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eBy:\t__________________________________\u003cbr /\u003eName:\t__________________________________\u003cbr /\u003eTitle:\t__________________________________\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003eWS ATLANTIC WEST, LLC,\u003cbr /\u003ea Delaware limited liability company\u003cbr /\u003e\u003cbr /\u003eBy:\tWeingarten Sleiman, LLC,\u003cbr /\u003e\ta Delaware limited liability company,\u003cbr /\u003e\tIts Sole Member\u003cbr /\u003e\u003cbr /\u003e\tBy:\tWeingarten Realty Investors,\u003cbr /\u003e\t\ta Texas real estate investment trust,\u003cbr /\u003e\t\tIts Managing Member\u003cbr /\u003e\u003cbr /\u003e\u003cbr /\u003e\t\tBy:\t________________________________\u003cbr /\u003e\t\tName:\t________________________________\u003cbr /\u003e\t\tTitle: ___________________________________\u003cbr /\u003e\u003c/pre\u003e")
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' ReturnType='String' Value='SignatureBlock'-! />","<!-Column ColumnType='Render' Alias='RenderHtml' Option='Html'-! />","<!-Column ColumnType='Item' Option='Multi' ReturnType='String' Value='ReviewerList'-! />")
+!define TARGETFIELDS ("<!-Field MultiLine='true' Name='SignatureBlock' NotesItems='SignatureBlock' Type='Note'-! />","<!-Field Name='Body' NotesItems='BodyHtml; RenderHtml' Type='Note' AllowMultiple='true'-! />","<!-Field Name='ReviewerList' NotesItems='ReviewerList' Type='Text'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='SignatureBlock' SourceValue='SignatureBlock' MultiValueDisposition='Default' Transform='None' FormatString='-!&lt`;pre&gt`;!-{0}-!&lt`;/pre&gt`;!-'-! />","<!-Mapping Destination='ReviewerList' SourceValue='ReviewerList' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Body' SourceValue='RenderHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|runMigration|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/lists/${LIST}/AllItems.aspx"}|

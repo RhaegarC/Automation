@@ -1,0 +1,17 @@
+|script|
+|startConsole|
+
+!|script|remote|${NMSP}:36|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "SetupWizardMenuItem"|
+|eval|click "NextStep"|
+|eval|setText "NotesPwd" "Nmsp.123!@#"|
+|eval|click "NextStep"|
+|eval|click "NextStep"|
+|eval|click "NextStep"|
+|eval|click "NextStep"|
+|eval|click "NextStep"|
+|check|eval|getControlName "RbSP"|I want to migrate to SharePoint sites using:|
+|check|eval|getControlName "AccessMethod1"|SharePoint web services (Classic Mode Authentication)|
+|check|eval|getControlName "AccessMethod2"|SharePoint web services (Forms Based Authentication)|
+|check|eval|getControlName "AccessMethod3"|SharePoint web services (Office 365 Authentication)|

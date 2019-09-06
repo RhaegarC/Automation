@@ -1,0 +1,8 @@
+!|Query:Remote|${NMSP}|GetFiles ${GET_ATTACHMENTS} !-|-! ? Name -ne NMSPMapping.json|
+|Name|
+|same_attachment.txt|
+|SameTitleDifferentContent.txt|
+|=~/SameTitleDifferentContent${DUPLICATION_SUFFIX}.txt/|
+|=~/SameTitleDifferentContent${DUPLICATION_SUFFIX}.txt/|
+|EditableAttachment.txt|
+|=~/EditableAttachment${DUPLICATION_SUFFIX}.txt/|

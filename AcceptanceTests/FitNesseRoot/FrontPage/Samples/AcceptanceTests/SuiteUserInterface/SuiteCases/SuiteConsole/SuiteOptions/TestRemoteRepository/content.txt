@@ -1,0 +1,19 @@
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|click "NotesTab" $subtitutions|
+|eval|click "BtnCfgRepository" $subtitutions|
+|eval|setText "CBServer" "nmsp-quickr"|
+|eval|setText "TxtDbPath" "QuestRepository.nsf"|
+|eval|click "BtnPathOK"|
+|eval|click "RepositoryErrorOK"|
+|eval|click "BtnPathCancel"|
+|eval|click "OptionOK" $subtitutions|
+|eval|click "NotesConnectionYes"|
+
+|script|
+|closeMainWindows|

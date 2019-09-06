@@ -1,0 +1,10 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 5|
+
+!|script|Remote|${SHAREPOINT}:38|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists

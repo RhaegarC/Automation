@@ -1,0 +1,11 @@
+!define GROUP {!-SuiteFields2-!}
+!define LIST {!-MigrateFieldToAutoCreateColumn-!}
+!define DATABASE {!-DocLibrary-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",autoCreateList:"true",autoCreateFields:"true",targetFields:"<!-Field Name='field1' Type='Text' -!/>",mapFields:"<!-Mapping Destination='field1' SourceValue='Subject' -!/>"}|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/${LIST}/Forms/DispForm.aspx?ID=1"}|
+|check|eval|$content.contains('"field1":"Render_CheckBoxes"')|True|

@@ -1,0 +1,8 @@
+!| script | remote | ${NMSP}:36 |
+|eval|click "Support"|
+|eval|$pageUri=getControlValue "InternalExplorerServer"|
+|eval|if($pageUri.Contains("?")){$pageUri= $pageUri.Substring(0,$pageUri.IndexOf('?'))}|
+|eval|$htmlContent= Invoke-WebRequest $pageUri|
+|check|eval|$htmlContent.RawContent.Contains("MinorVersion")|False|
+|check|eval|$pageUri.Contains("SupportPage.htm")|True|
+|check|eval|$htmlContent.RawContent.Contains("Support")|True|

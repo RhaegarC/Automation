@@ -1,0 +1,6 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:tblPr").GetElementsByTagName("w:tblW")|select @{N='value';E={$_.w}}-!|
+|value|
+|9330|
+|9690|
+|9330|
+|5745|

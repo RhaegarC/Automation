@@ -1,0 +1,9 @@
+!|script|remote|${NMSP}|
+|eval|!-get-process explorer| where-object {$_.MainWindowTitle -ne ""}|foreach-object {$_.CloseMainWindow()} -!|
+
+!|script|remote|${NMSP36}|
+|Click|ViewFolder|
+
+!|script|remote|${NMSP}|
+|eval|sleep 2|
+|check|eval|!-get-process | where-object {$_.mainwindowhandle -ne 0 -and $_.MainWindowTitle -eq "Target Files" } -!|System.Diagnostics.Process (explorer)|

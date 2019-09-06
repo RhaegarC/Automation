@@ -1,0 +1,8 @@
+!include -c BaseLibrary
+!include -c NmspScenarios.ScenariosForNmsp
+!include -c NmspScenarios.ScenariosForSharepoint
+!include -c NmspScenarios.ScenariosForSystem
+!include -c NmspScenarios.ScenariosForFormGenerator
+!include -c NmspScenarios.ScenariosForConsole
+!include -c NmspScenarios.ScenariosForDocuments
+!contents -R2 -g -p -f -h

@@ -1,0 +1,21 @@
+|script|remote|${NMSP}|
+|eval|Remove-Item "${JOBFILE}"|
+|eval|New-Item "C:\jobs" -ItemType Directory -force|
+|jobDefinition|!{db:"SuiteRender",job:"${JOBFILE}",template:"Render2HTMLFiles",sp_site:"!-http://sp2016/sites/test-!",sp_list:"${LIST}"}|
+
+!|script|
+|startUiautomation|
+!|script|
+|importUilib|
+|startDesigner|
+|eval|click "LoadTransferJob"|
+|eval|setText "JobFile" "${JOBFILE}"|
+|eval|click "OpenFile"|
+|eval|click "MapDataTab"|
+|eval|click "BodyHtmlMap"|
+|eval|$uiaName = getControlName "ReadOnlyCus"|
+|check|eval|$uiaName|Read-only|
+|eval|!-Get-Process 'NMSP'|Stop-Process-!|
+
+!|script|
+|stopUiautomation|

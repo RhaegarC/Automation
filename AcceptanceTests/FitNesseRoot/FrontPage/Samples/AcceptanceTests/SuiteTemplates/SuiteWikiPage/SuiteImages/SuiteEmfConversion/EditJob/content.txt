@@ -1,0 +1,3 @@
+!|script|Remote|${NMSP}|
+|Add|TransferJob/SourceDefinition/QuerySpec/EmfConversionFormat|InnerText|JPEG|to|${JOBFILE}|
+

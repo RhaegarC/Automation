@@ -1,0 +1,26 @@
+!*> Generate Nintex Form using default control sizes 
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+*!
+
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+
+!|script|remote|${NMSP}|
+|ControlSize|DisplayName[text() = 'MyComputedText']|Height|30|Width|200|
+|ControlSize|DisplayName[text() = 'AllowMultilineTextbox']|Height|50|Width|200|
+|ControlSize|DisplayName[text() = 'RichText']|Height|50|Width|200|
+|ControlSize|DisplayName[text() = 'MyCheckBox']|Height|75|Width|200|
+|ControlSize|DisplayName[text() = 'EditableDialogList']|Height|30|Width|200|
+|ControlSize|DisplayName[text() = 'AuthorBox']|Height|35|Width|300|
+
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|This Form List all type of Fields:|

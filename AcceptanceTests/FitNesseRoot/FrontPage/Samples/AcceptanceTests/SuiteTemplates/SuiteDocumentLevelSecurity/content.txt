@@ -1,0 +1,10 @@
+!define WEB (!-SuiteDocumentLevelSecurity-!)
+!define APPNAME (!-SuiteDocumentLevelSecurity-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define LIST (!-TestDocumentLevelSecurity-!)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocumentLevelSecurity.EditJob)
+!define TestUser (VELASKEC\userkonstantin)
+!define TestManager (VELASKEC\uservladimir)
+!define TestNonExistingUser (VELASKEC\userkonstantin1)
+!define TestRole (testgroup)
+!contents -R2 -g -p -f -h

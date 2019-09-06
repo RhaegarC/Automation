@@ -1,0 +1,15 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|eval|$mapuser = ([xml]$log).Log.entry !-|-! ? context -eq 'Map User'|
+
+!|Ordered Query:Remote|${NMSP}|$mapuser|
+|rec|message|
+|1|Map Notes user 'CN=Vladimir Sementchouk/O=Vladimir Sementchouk' to Windows user 'VELASKEC\uservladimir' (NOT CACHED)|
+|1|Found Windows Principal from name 'VELASKEC\uservladimir' with email='', display name='VELASKEC\uservladimir', type='User'|
+|1|=~/Creating new Site Collection User 'VELASKEC\\uservladimir'/|
+|1|=~/Created Site Collection User number/|
+|1|Map Notes user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to Windows user 'VELASKEC\userkonstantin' (NOT CACHED)|
+|1|Found Windows Principal from name 'VELASKEC\userkonstantin' with email='', display name='VELASKEC\userkonstantin', type='User'|
+|1|=~/Creating new Site Collection User 'VELASKEC\\userkonstantin'/|
+|1|=~/Created Site Collection User number/|

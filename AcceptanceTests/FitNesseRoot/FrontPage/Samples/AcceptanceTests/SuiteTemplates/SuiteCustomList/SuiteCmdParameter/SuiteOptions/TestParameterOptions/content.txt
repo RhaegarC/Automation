@@ -1,0 +1,6 @@
+|script|Remote|${NMSP}|
+|eval|$path = "!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\-!"|
+|eval|if(-not (Test-Path ($path + "Saved Options"))){New-Item -ItemType "directory" -Path ($path + "Saved Options") -Force} |
+|eval|Copy-Item -Path ($path + "Options.config") -Destination ($path + "\Saved Options\newoption.config")|
+
+!include <SuiteCases.GlobalSteps.RunMigration

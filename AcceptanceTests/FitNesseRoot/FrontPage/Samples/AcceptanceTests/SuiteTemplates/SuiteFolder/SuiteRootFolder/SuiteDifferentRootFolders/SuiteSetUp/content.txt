@@ -1,0 +1,3 @@
+!include -c <SuiteFolder.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.SuiteFolder.IncludePages.EnableFolderLinkTracking
+!include -c <AcceptanceTests.IncludePages.CleanupLinkTrackingDatabase

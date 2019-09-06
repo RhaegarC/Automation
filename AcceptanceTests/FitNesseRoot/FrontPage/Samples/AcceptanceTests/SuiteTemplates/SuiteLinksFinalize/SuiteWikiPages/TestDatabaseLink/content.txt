@@ -1,0 +1,10 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!* Finalize
+!include -c <SuiteLinksFinalize.DoFinalize
+*!
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${RUNNING_PAGE_NAME}.aspx|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$page.Links|
+|href|
+|=~/${LIST}/${SECONDDOC}.aspx/|

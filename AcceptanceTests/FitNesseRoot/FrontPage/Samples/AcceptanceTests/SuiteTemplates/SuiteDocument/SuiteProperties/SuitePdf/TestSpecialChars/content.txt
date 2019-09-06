@@ -1,0 +1,4 @@
+!|Subset Query:Remote|${WEB_SCRAPER}|!-$pdf.info.GetEnumerator() | ? {[ Aspose.Pdf.DocumentInfo]::IsPredefinedKey($_.Key) -eq $false} | select key, value-!|
+|Key|Value|  
+|Category    |~!@#$%^&*()_+{}!-|-!:"<>?[]\;'|
+|ReviewerList|~!@#$%^&*()_+{}!-|-!:"<>?[]\;'|

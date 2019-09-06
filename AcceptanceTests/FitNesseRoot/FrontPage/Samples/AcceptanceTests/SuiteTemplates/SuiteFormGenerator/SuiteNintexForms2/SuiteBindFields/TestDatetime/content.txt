@@ -1,0 +1,8 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<div class="nf-filler-control-inner">11/4/2013 7:00:00 PM<input.*value="2013-11-04 19:00:00Z"/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<div class="nf-filler-control-inner">9/16/2015 4:32:00 AM<input.*value="2015-09-16 04:32:00Z"/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<div class="nf-filler-control-inner">11/5/2013<input.*value="2013-11-05 00:00:00Z"/|

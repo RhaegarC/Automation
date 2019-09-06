@@ -1,0 +1,10 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|'parentElement.tagName'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|parentElement.tagName|
+|Cell (1,1)|TR|
+|=~/Text outside list item but in Cell/|TR|
+|Cell (2,1)|TR|
+|Cell (2,2)|TR|
+!include -c NoExtraIndentForTable

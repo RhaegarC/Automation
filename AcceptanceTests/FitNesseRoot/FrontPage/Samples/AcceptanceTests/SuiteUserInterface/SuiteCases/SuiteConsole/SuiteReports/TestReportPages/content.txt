@@ -1,0 +1,13 @@
+!|script|Remote|${NMSP}|
+|eval|remove-item "${NMSP_Report_Path}\_AllTasksReport__EXEC.rdlc" |
+
+|script|
+|startConsole|
+
+!|script|remote|${NMSP}:36|
+|eval|expandTreeItem "Reports"|
+|eval|click "AllTasksReport"|
+
+!|script|Remote|${NMSP}|
+|eval|sleep 6|
+|check|eval|Test-Path "${NMSP_Report_Path}\_AllTasksReport__EXEC.rdlc" |True|

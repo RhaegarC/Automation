@@ -1,0 +1,8 @@
+|script|
+|globalOptions|!{credentialsExpirationInterval:"0",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|remote|${NMSP}|
+|eval|!- $refreshItems= ([xml]$log).Log.entry.context|Where-Object {$_ -eq "Refreshing Credentials"} -!|
+|check|eval|$refreshItems.count -lt 2|True|

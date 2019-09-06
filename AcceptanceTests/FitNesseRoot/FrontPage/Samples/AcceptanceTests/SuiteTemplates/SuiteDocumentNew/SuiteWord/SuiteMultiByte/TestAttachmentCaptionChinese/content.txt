@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestAttachmentCaptionChinese-!)
+
+!style_green[Check the word content contains attached "中文文档资料.jpg".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

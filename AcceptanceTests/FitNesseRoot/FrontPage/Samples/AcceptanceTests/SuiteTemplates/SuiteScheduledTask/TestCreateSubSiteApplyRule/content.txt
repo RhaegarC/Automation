@@ -1,0 +1,89 @@
+!define LIST (createSubSiteByRule)
+!define TASKNAME (!-TaskCreateSubSiteByRule-!)
+!define WEB (!-SuiteDuplicate-!)
+
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false"}|
+
+|script|remote|${NMSP}|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Tasks\${TASKNAME}.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TASKNAME}_Options.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TASKNAME}_UserOptions.xml" -Force|
+
+|comment:target|
+|env:exportToFolder|
+|!{sp_site:"",template:"templates/folder/DocLib2DocLibPdfDoc",fd_location:"${TARGETFOLDER}"}|
+
+|comment:target|
+|env:default|
+|!{template:"DocLib2DocLibPdfDoc",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|closeMainWindows|
+
+|script|
+|cleanUpTarget|!{multiEnv:"target"}|
+|jobDefinition|!{db:"${WEB}",multiEnv:"target",job:"${JOBFILE}",duplicateHandle:"Skip",formula:"@Contains(subject;'Document1')"}|
+
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|loadDatabaseIntoConsole|!{server:"(local)",database:"${WEB}",type:"Local"}|
+
+|script|
+|stopServer86|
+
+|script|
+|startServer86|
+
+
+|script|
+|loadDiscoveryApi|
+|eval|$db=Get-Database ALL "(local)" "${WEB}"|
+|eval|$db.TechnicalClassName = "Document Library"|
+|applyClassRule|!{class:"Document Library",removedJobs:"DocLibrary to List"!-,-!"${WEB}.${LIST}",server:"(local)",addedJobs:"${JOBFILE}",subsite:"!-{0}-!",database:"${WEB}"}|
+
+
+|script|
+|stopServer86|
+
+|script|
+|startUiautomation|
+
+|script|
+|importUilib|
+|startConsole|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+|eval|sleep 10|
+|eval|displayContextMenu "SuiteDuplicateDb"|
+|eval|sleep 5|
+|eval|clickMenu "MigrateToSharePoint"|
+|eval|sleep 10|
+|eval|click "CreateScheduledTask"|
+|eval|sleep 5|
+|eval|click "TaskOK"|
+|eval|sleep 5|
+|eval|setText "NewTaskName" "${TASKNAME}"|
+|eval|!-Set-Date (Get-Date).AddHours(-1)-!|
+|eval|click "NewTaskOK"|
+|eval|!-Set-Date (Get-Date).AddHours(1).AddMinutes(-1)-!|
+
+!|script|remote|${NMSP}|
+|show|eval|Get-Date|
+
+|script|
+|stopUiautomation|
+|eval|sleep 180|
+
+#|script|
+#|runTask|!{scheduledTaskName:"${TASKNAME}"}|
+!include <SuiteCases.GlobalSteps.VerifyTargetItems
+
+!|Query:remote|${NMSP}|$elements !-|-!select Name|
+|Name|
+|_Attachments|
+|Document1.pdf|

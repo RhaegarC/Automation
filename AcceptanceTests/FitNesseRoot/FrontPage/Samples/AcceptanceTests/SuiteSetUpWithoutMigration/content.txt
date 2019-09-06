@@ -1,0 +1,27 @@
+!include -c .NmSp.AcceptanceTests.IncludePages.LoadSharePointAndStorePassword
+!*> Load helpers
+!|script|Remote|${REMOTESP}|
+|eval|Add-Type -AssemblyName System.Web|
+
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\bin"|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.dll")|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Runtime.dll")|
+|show|eval|$username, $secstr|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SiteCollectionUrl}')|
+|eval|$ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr)|
+*!
+!*> Create web if needed
+!|script|Remote|${NMSP}|
+|eval|$webs = $ctx.Web.Webs|
+|eval|$webInfo = new-object Microsoft.SharePoint.Client.WebCreationInformation|
+|eval|$webInfo.Title = '${MODE}${GROUP}'|
+|eval|$webInfo.Url = '${MODE}${GROUP}'|
+|eval|$webInfo.UseSamePermissionsAsParentSite = $true|
+|eval|$webInfo.WebTemplate = 'STS#1'|
+|eval|$webs.Add($webInfo)|
+|eval|$ctx.Load($webs)|
+|eval|$ctx.ExecuteQuery()|
+
+*!
+${SETUP_OPTIONS}

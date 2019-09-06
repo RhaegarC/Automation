@@ -1,0 +1,11 @@
+!define LIST {!-TestBindersOnly-!}
+|script|
+|runMigration|!{job:"${DOMINODOCJOBFILE}",template:"${MIGRATION}",server:"${DOMINODOC_SERVER}",sourceType:"DominoDoc",path:"${DOMINODOC_PATH}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",sourceSelect:"binders",removeNodes:!-"//Mapping[@Destination='WikiField']","//Mapping[@Destination='Files']"-!,properties:!-@{path="TransferJob/SourceDefinition/QuerySpec";name="BinderId";value="0"}-!}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:remote|${NMSP}|$items!-|-! select @{N='Title';E={$_['Title0']}}|
+|Title|
+|Default Binder|
+|AttachmentVersions|

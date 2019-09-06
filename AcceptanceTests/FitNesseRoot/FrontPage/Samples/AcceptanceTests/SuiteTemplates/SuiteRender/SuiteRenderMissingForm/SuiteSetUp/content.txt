@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{template:"Render2DocLibPdfDoc",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"@Contains(Subject;'TestForm')",sourceFields:"<!-Column ColumnType='Render' Alias='RenderHtml2' Value='NotExistForm' Option='Html'-!/>",targetFields:"<!-Field Name='MyText' Type='Note'-!/>",mapFields:"<!-Mapping Destination='MyText' SourceValue='RenderHtml2' FormatString='' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

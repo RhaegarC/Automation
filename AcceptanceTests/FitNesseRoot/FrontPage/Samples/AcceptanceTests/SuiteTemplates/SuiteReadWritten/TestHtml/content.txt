@@ -1,0 +1,2 @@
+!define SAVE_AS (HtmlDocument)
+!include -seamless TestTemplate

@@ -1,0 +1,42 @@
+!*> Verify 2 section headers
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.tagName'|limit to|className -like 'sectionheader*'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|TD|
+|TD|
+|TD|
+|TD|
+*!
+!*> Verify 2 sections
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.tagName'|limit to|className -eq 'section'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|TD|
+|TD|
+|TD|
+|TD|
+*!
+!*> Verify 2 list elements
+!|script|Remote|${WEB_SCRAPER}|
+|select|'OL','UL'|properties|'Style.marginLeft','parentElement.className'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|parentElement.className|
+|UL|${LIST_FIVE_INDENT}|section|
+|OL|${LIST_SIX_INDENT}|section|
+|OL|${LIST_ONE_INDENT}|section|
+|UL|${LIST_NO_INDENT}|section|
+*!
+!*> Check for extra table indent
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TABLE'|properties|'Style.marginLeft'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Style.marginLeft|
+|null|
+|null|
+*!

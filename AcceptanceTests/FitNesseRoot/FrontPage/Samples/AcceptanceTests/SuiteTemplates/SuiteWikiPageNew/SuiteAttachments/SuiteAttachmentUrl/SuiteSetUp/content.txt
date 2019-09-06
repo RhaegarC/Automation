@@ -1,0 +1,8 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:“${LIST}”,template:"${MIGRATION}", formula:"subject='TestFileNameWithSpecChars'",properties:!-@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Files']";name="AlternateFolder";value="_#Attachments"}-!}|
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|globalOptions|!{illegalReplaceMappings:"<!-IllegalReplaceMapping IllegalChar='p' ReplaceChar='b' -!/>",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|
+

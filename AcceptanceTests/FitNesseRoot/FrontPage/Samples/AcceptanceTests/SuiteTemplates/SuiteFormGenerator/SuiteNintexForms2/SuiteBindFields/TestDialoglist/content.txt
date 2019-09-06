@@ -1,0 +1,2 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<option selected="selected" value="OptionB" data-nfChoiceValue="OptionB">OptionB</option>/|

@@ -1,0 +1,10 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',groupIdentityLookupMode:'MappingFileLookup',identityLookupMode:'MappingFileLookup',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!',groupMappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+
+|script|
+|makeMappingFile|!{clearGroups:"true",groups:'<group notes="CN=group1/OU=userandgroupmapping/OU=QP/O=ec2l" sharePoint="velaskec\adgroup1" />',clearUsers:"true",users:'<user notes="CN=Reader1/OU=userandgroupmapping/OU=QP/O=ec2l" sharePoint="VELASKEC\userkonstantin" />'}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}",targetFields:'<Field Name="readers" Type="User" !-AddToViews-!="AllViews" />',mapFields:'<Mapping Destination="readers" !-SourceValue-!="!-{Readers}-!" !-FormatString-!="" />'}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

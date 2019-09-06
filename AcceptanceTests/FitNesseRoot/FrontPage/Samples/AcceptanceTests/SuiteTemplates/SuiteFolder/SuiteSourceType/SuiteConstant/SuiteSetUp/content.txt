@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",mapFields:"<!-Mapping Destination='Folder' SourceType='Constant' SourceValue='TestFolder' FormatString=''-!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,30 @@
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.ScomFunctions
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions
+
+!|scenario|JobFile|path|Template|template|Root|root|Folder|folder|Application|name|
+|JobFile|@template|Application|@name|
+|eval|$xml.TransferJob.SharePointConnection.Web = "@root"|
+|eval|$xml.TransferJob.SharePointConnection.List = "@folder"|
+|eval|new-item (Split-Path @path) -type directory -force|
+|eval|$xml.Save("@path")|
+
+!|scenario|download|url|to|target|
+|show|eval|New-Item (Split-Path @target) -type directory -force|
+|show|eval|try { Invoke-WebRequest -Uri "@url" -OutFile "@target" -${CREDENTIALS} }catch{ $_.Exception.Message }|
+|eval|$exist = Test-Path -Path "@target"|
+|eval|if ($exist) {Unblock-File "@target"}|
+
+#|show|eval| Unblock-File "@target"|
+
+!|scenario|attachment|path|
+|eval|$page = $null|
+|eval|$page = Invoke-WebRequest -Uri "@path" -${CREDENTIALS} -TimeoutSec 240|
+|check|eval|$page.StatusCode|200|
+
+!|scenario|EditFile|path|
+|eval|$stream = new-object System.IO.MemoryStream|
+|eval|$writeStream = New-Object System.IO.StreamWriter $stream|
+|eval|$writeStream.WriteLine('Hello')|
+|eval|$writeStream.Flush()|
+|eval|$stream.Seek(0, 'Begin')|
+|eval|[Microsoft.SharePoint.Client.File]::SaveBinaryDirect($ctx, '@path', $stream, $true)|

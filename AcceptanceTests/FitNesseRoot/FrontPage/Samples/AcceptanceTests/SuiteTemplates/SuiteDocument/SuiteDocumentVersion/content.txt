@@ -1,0 +1,7 @@
+!define WEB (SuiteDocumentVersion)
+!define LIST (${RUNNING_PAGE_NAME})
+!define APPNAME (SuiteImages)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteDocumentVersion.EditJob)
+!define MIGRATION (DocLib2HtmlDoc)
+
+!contents -R2 -g -p -f -h

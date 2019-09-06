@@ -1,0 +1,6 @@
+!include -c <SuiteLinksFinalize.SuiteSetUp
+#!include -c <AcceptanceTests.SuiteSetUpWithoutMigration
+#!include -c <ImportService.IncludePages.LinkTracking.SuiteSetUp
+#!include -c <WebServices.IncludePages.LinkTracking.SuiteSetUp
+#!include -c <SharePointOnline.IncludePages.LinkTracking.SuiteSetUp
+#!include -c <SharePointOnline.IncludePages.GetSession

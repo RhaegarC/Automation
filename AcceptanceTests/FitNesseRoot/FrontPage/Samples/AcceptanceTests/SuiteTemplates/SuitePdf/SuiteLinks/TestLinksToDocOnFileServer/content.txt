@@ -1,0 +1,15 @@
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|$numberOfLinks|10|
+
+!|Query:Remote|${WEB_SCRAPER}|$list.Action.URI|
+|Value|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|
+|http://www.slashdot.org/|
+|http://www.slashdot.org/|
+|https://slashdot.org/|
+|https://slashdot.org/|
+|http://www.slashdot.org/|
+|http://www.slashdot.org/|
+|ftp://www.slashdot.org/|
+|ftp://www.slashdot.org/|

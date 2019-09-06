@@ -1,0 +1,68 @@
+!define LIST (!-MigrateFailedItems-!)
+!define GROUP {!-SuiteMigrateFailedItems-!}
+!define MIGRATION {!-DocLib2HtmlDoc-!}
+!define APPNAME (!-SimpleObjectsLib-!)
+!contents -R2 -g -p -f -h
+
+
+
+!1 user story
+
+As an administrator
+I can migrate failed items based on previous logs
+So that I can have complete migrations
+
+!1 scenarios
+![
+Given I have a failed migration
+When I open designer and load from the failed log
+Then the job is loaded that will process the failed items
+When I run migration with the job
+Then the failed items are processed
+
+Given I have failed migration logs in task history of console
+When I click migrate failed items in the context menu
+Then the designer appears with a job that can migrate failed items
+When I click save job
+Then the job can be saved
+When I click run migration
+Then the failed items are processed.
+
+Given I have failed migration logs in migration history of the database properties
+When I click migrate failed items in the context menu
+Then the designer appears with a job that can migrate failed items
+When I click save job
+Then the job can be saved
+When I modify the jobs and click run migration
+Then the failed items are processed.
+
+Given I have failed migration
+And I open designer and load from the failed log or I click migrate failed items in the context menu
+When I set "Max records" and "Skip"
+And I run migration
+Then I can view the UNID of items which met the conditions in the log details.
+
+Given I have a migration that is failed before it process the items
+When I open designer and load from the log
+Then no job is loaded
+
+Given I have a successful migration
+When I open designer and load from the log
+Then no job is loaded
+
+Given I have successful migration logs in task history of console
+When I check the context menu
+Then I can NOT see the item to migrate failed items
+
+Given I have migration log that is failed before any item is processed in task history of console
+When I check the context menu
+Then I can NOT see the item to migrate failed items
+
+Given I have successful migration logs in migration history of the database properties
+When I check the context menu
+Then I can NOT see the item to migrate failed items
+
+Given I have migration log that is failed before any item is processed in migration history of the database properties
+When I check the context menu
+Then I can NOT see the item to migrate failed items
+]!

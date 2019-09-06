@@ -1,0 +1,6 @@
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+|CrazyTruck.jpg|
+|123w.bmp|
+|icon_yahoo.gif|
+|iconWarning16.png|

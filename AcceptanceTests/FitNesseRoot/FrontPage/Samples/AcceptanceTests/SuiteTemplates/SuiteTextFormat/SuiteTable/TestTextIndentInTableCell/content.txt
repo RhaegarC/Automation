@@ -1,0 +1,10 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.tagName','Style.marginLeft' |limit to|Style.marginLeft -ne $null|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|parentElement.tagName|Style.marginLeft|
+|Paragraph1,1!- -!|TD|20px|
+|!- -!aaaaaaaaaaaaaaa!- -!|TD|20px|
+|!- -!aaaaaaaaaaaaaaa!- -!|TD|20px|
+|!- -!aaaaaaaaaaaaaaa!- -!|TD|20px|
+!include -c NoExtraIndentForTable

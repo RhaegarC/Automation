@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestRenderTableWithBulletList-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,45 @@
+!include -c .NmSp.AcceptanceTests.IncludePages.LoadSharePointAndStorePassword
+!*> Load helpers
+!|script|Remote|${REMOTESP}|
+|eval|Add-Type -AssemblyName System.Web|
+*!
+!*> Create web if needed
+!|script|Remote|${REMOTESP}|
+|eval|New-SPWeb ${TARGETWEB} -Template "STS#1" -UseParentTopNav|
+*!
+!*> Delete list if exists
+!|script|Remote|${REMOTESP}|
+|eval|Get-SPWeb ${TARGETWEB} !-|-! % {$_.Lists['${TARGETLIST}'].Delete()}|
+*!
+#!*> !-Disable SharePoint LinkTracking-!
+#-!|script|Remote|${REMOTESP}|
+#|SharePoint LinkTracking|false|
+#*!
+${SETUP_OPTIONS}
+!*> Migrate
+''Create job file''
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${TARGETWEB}|List|${TARGETLIST}|Application|${APPNAME}|
+
+''Edit job file''
+${EditJob}
+
+''Run job''
+!|script|Remote|${NMSP}|
+|eval|stop-service UI0Detect|
+|RunJob|${JOBFILE}|
+
+*!
+!*> Verify migration log file
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Critical'|
+|context|message|stackTrace|
+
+*!

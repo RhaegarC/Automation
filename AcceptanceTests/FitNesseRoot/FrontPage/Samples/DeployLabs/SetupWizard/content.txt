@@ -1,0 +1,15 @@
+'''This file is the result of embedded into MMC snapin Setup Wizard'''
+''It is better to move Setup Wizard logic into external tool:
+ * UI can be still in the MMC (accumulation settings)
+ * Call external '''options.cmd/exe''' on Save event
+ * In that case we will be able to use this '''options.cmd/exe''' in the tests'''
+'''Right now I have duplicated production logic in test'''
+
+#!*> Fix for Windows x86 (remove it if the table below is RED)
+#!|script|Remote|${REMOTED}|
+#|check|eval|$env:APPDATA|=~/^$/|
+#|check|eval|$env:PROGRAMDATA|=~/^$/|
+#|eval|$env:APPDATA = 'C:\Documents and Settings\Administrator\Application Data'|
+#|eval|$env:PROGRAMDATA = 'C:\Documents and Settings\All Users\Application Data'|
+#*!
+!include -c CreateRepository

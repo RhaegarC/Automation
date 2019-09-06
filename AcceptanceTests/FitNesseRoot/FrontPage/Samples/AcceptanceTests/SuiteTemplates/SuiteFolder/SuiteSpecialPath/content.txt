@@ -1,0 +1,6 @@
+!define LIST (SuiteSpecialPath)
+!define FOLDER (SuiteSpecialPath)
+!define SHARED_FOLDER (C:\TargetFolder\mysharedfolder)
+!define NOT_EXISTING_FOLDER (C:\notexistingfolder)
+!define JOBNAME (${RUNNING_PAGE_NAME})
+!contents -R2 -g -p -f -h

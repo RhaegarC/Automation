@@ -1,0 +1,61 @@
+!|scenario|Unzip|file|to|folder|
+|eval|$exist = Test-Path -Path  "@folder"|
+|eval|if (-not $exist) {new-item -ItemType directory -Path "@folder"}|
+|eval|$shell_app = new-object -com shell.application|
+|eval|$zip_file = $shell_app.namespace("@file")|
+|eval|remove-item '@folder/*' -recurse -confirm:$false|
+|eval|$file = $shell_app.namespace("@folder")|
+|eval|$file.Copyhere($zip_file.items())|
+|eval|remove-item "@file"|
+
+!|scenario|ParseWordDoc|name|in|folder|
+|Copy|@folder\@name.docx|to|@folder\@name.zip|
+|Unzip|@folder\@name.zip|to|@folder\@name|
+|show|eval|$file = "@folder\@name\word\document.xml"|
+|eval|[xml]$document = Get-Content $file|
+|eval|$file = "@folder\@name\word\numbering.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$numbering = Get-Content $file}|
+
+!|scenario|WordDocument|name|in|folder|
+|download|${LIST_URL}/@name.${SAVE_AS}|to|@folder\@name.${SAVE_AS}|
+|Copy|@folder\@name.docx|to|@folder\@name.zip|
+|Unzip|@folder\@name.zip|to|@folder\@name|
+|eval|[xml]$document = Get-Content "@folder\@name\word\document.xml"|
+|eval|$file = "@folder\@name\word\numbering.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$numbering = Get-Content $file}|
+|eval|${LOAD_ASPOSE_WORDS}|
+|eval|$doc = new-object Aspose.Words.Document('@folder\@name.${SAVE_AS}')|
+|eval|$docOleObjects = $doc.GetChildNodes([Aspose.Words.NodeType]::Shape, $true) !-|-! % {  New-Object PSObject -Property @{ ProgId = $_.OleFormat.ProgId; OleIcon = $_.OleFormat.OleIcon; IconCaption = [System.Web.HttpUtility]::UrlDecode($_.OleFormat.IconCaption) } }|
+|eval|$file = "@folder\@name\word\_rels\document.xml.rels"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$rels = Get-Content $file}|
+|eval|$target = $rels.Relationships.Relationship|
+
+!|scenario|TabBetweenText|
+|eval|$i = 0|
+|eval|$outputs = @()|
+|eval|$tab = $document.GetElementsByTagName("w:tabs").tab|
+|eval|$rows = $document.GetElementsByTagName("w:r")|
+|eval|!-<pre>foreach($row in $rows){
+    if($row.tab -ne $null)
+    {
+      $prop1 = "tabstop_position"
+      $prop2 = $tab.pos[$i]
+      $i = $i + 1
+    }
+    elseif($row.t -ne $null)
+    {
+       $prop1 = "text"
+       $prop2 = $row.t
+    }
+    $output = New-Object PSObject -Property @{
+      item = $prop1
+      context = $prop2
+    }
+    $outputs += $output
+   }
+</pre>-!|
+
+

@@ -1,0 +1,5 @@
+!define APPNAME (SuiteImages)
+!define LIST (SuiteAlternateFileName)
+!define ALT_SUFFIX (-AlternateName)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWikiPage.SuiteAlternateFileName.EditJob)
+!contents -R2 -g -p -f -h

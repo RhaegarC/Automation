@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestWmfFile-!)
+
+!style_green[Check the word content contains text "Case WMF file" and a picture, which is under the text "Case WMF file".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

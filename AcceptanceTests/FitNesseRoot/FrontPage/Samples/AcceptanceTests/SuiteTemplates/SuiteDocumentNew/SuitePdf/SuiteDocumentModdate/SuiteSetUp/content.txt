@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}", view:"${VIEW}",formula:"@Contains(subject;'TestTextFonts')“,removeNodes:"!-//Mapping[@Destination='Doc.Modified']-!"}|

@@ -1,0 +1,18 @@
+|script|
+|startUiautomation|
+
+|script|
+|importUilib|
+
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|expandTreeItem "Tools"|
+|eval|click "LinkHandle"|
+|eval|click "AnalyzeTab"|
+|eval|click "AnalyzeButton"|
+|eval|click "AnalyzeOk"|
+|eval|sleep 10|
+|eval|$result = getGridData "AnalyseResultTable"|
+|check|eval|$result.SharePointURL|Found|

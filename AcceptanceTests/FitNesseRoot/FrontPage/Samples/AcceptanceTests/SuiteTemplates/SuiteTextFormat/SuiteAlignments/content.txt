@@ -1,0 +1,20 @@
+!define VIEW (!-Suite Alignments-!)
+!define LIST (!-SuiteAlignments-!)
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate text with different reading order and alignment to !-SharePoint-!
+So that I view them migrated properly in !-SharePoint-!
+
+!1 scenarios
+![
+Given text with different reading order and alignment as below:
+1. Reading order: Left to Right, Alignment: Left margin
+2. Reading order: Left to Right, Alignment: Right margin
+3. Reading order: Right to Left, Alignment: Left margin
+4. Reading order: Right to Left, Alignment: Right margin
+5. 1.-4. with Numbered bulleted list
+
+When I migrate/render these text to Wiki
+Then I can view them migrated properly in SharePoint
+]!

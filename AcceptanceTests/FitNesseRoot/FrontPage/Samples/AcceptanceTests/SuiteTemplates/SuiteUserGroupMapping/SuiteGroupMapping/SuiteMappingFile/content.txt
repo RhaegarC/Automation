@@ -1,0 +1,42 @@
+!define DATABASE {!-SuiteDocumentLevelSecurity-!}
+!define LIST {!-SuiteMappingGroupField-!}
+!contents -R2 -g -p -f -h
+
+!1 Security Group Mapping
+
+As an administrator
+I can choose to expand or not to expand Notes Roles/Groups to !-SharePoint-! Groups 
+So that I can view those users were expanded or not expanded in !-SharePoint-! correctly
+
+!1 scenarios
+![
+Given users and groups are added in Domino Admin
+And added in the ACL of source Domino Doc Cabinet
+And target users are prepared in AD users
+And user mappings were added in xml file
+And this xml file was selected in Options
+And "Expand Notes Groups to SharePoint Groups" was enabled in MNSP Advanced tab
+When I click "Advanced Security Options" link in Advanced tab
+And I click "Group name mappings" button in Advanced Security Settings window
+And I add the mappings in Security Group Mapping table as the scenarios listed below
+Then I can view those users were expanded or not expanded as the corresponding results listed as below
+]!
+
+|'''Mappings in Table'''|'''Expand Group'''|'''!-Prevent creation of 
+new SharePoint Groups
+if no mapping found-!'''|'''Expected Results'''|
+|No|\|Disable|!-These Notes groups will be created in sharePoint with the same name that was used in Notes (including users expanded), 
+and all the users of these groups will be expanded to the corresponding sharePoint Roles groups-!|
+|No|\|Enable|These groups would not be created, but users of these groups will be expanded to the corresponding sharePoint Roles groups|
+|Yes|True|Disable|!-Users of these groups will be expanded to the corresponding sharePoint Roles groups, and:
+1. Target sharePoint group name = standard group: this group would not be created, but all the users of this group will be expanded to this sharePoint standard group
+2. Target sharePoint group name = existing group: this group would not be created, but all the users of this group will be expanded to this sharePoint existing group
+3. Target sharePoint group name = customized group: this group will be created, and all the users of this group will be expanded to this sharePoint customized group
+-! |
+|Yes|True|Enable|!-Users of these groups will be expanded to the corresponding sharePoint Roles groups, and:
+1. Target sharePoint group name = standard group: this group would not be created, but all the users of this group will be expanded to this sharePoint standard group
+2. Target sharePoint group name = existing group: this group would not be created, but all the users of this group will be expanded to this sharePoint existing group
+3. Target sharePoint group name = customized group: this group would not be created
+-! |
+|Yes|False|Disable|These groups would not be created, and users of these groups would not be expanded to the corresponding sharePoint Roles groups|
+|Yes|False|Enable|These groups would not be created, and users of these groups would not be expanded to the corresponding sharePoint Roles groups|

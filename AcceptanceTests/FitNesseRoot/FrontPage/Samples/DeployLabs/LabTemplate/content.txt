@@ -1,0 +1,54 @@
+!include -c .LabInstances.RunInstances
+!*> Load !-SharePoint-! CMDlets
+!|script|Remote|!-$lab | select -skip 1 | % {$_.name}-!|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell|
+*!
+!*> Disable firewall
+|script|Remote|$lab !-|-! % {$_.name}|
+|show|eval|netsh advfirewall set allprofiles state off|
+#|show|eval|netsh firewall set opmode DISABLE|
+*!
+!*> Disable IE Enhanced Security
+!|script|Remote|!-$lab | select -skip 1 | % {$_.name}-!|
+|Disable IEESC|
+*!
+
+!*> Allowing Task Scheduler Service to Interact with Desktop
+!|script|Remote|${REMOTED}|
+|eval|$svcKey = Get-Item HKLM:\SYSTEM\CurrentControlSet\Services\Schedule|
+|eval|$newType = $svcKey.GetValue('Type') -bor 0x100|
+|eval|Set-ItemProperty $svcKey.PSPath -Name Type -Value $newType|
+*!
+!*> Get [[!-PowerQuickr-!][https://github.com/konstantinvlasenko/PowerQuickr/]]
+!|script|Remote|${REMOTED}|
+|eval|cd c:\|
+|eval|git clone https://github.com/konstantinvlasenko/PowerQuickr.git|
+*!
+!include -c .NmSp.DeployLabs.GetLatestVersion
+!include -c .NmSp.DeployLabs.InstallClient
+!include -c .NmSp.DeployLabs.InstallService
+!*> [[UI Automation !-PowerShell-! Extensions][http://uiautomation.codeplex.com/]]
+!|script|Remote|${REMOTED}|
+|eval|Remove-Item -Recurse -Force 'C:\UIAutomation'|
+|eval|new-item 'C:\UIAutomation' -itemtype Directory|
+|show|eval|Read-S3Object -BucketName velaskec -Key 'Tools\UIAutomation.0.8.5.NET40.zip' -File C:\msi\UIAutomation.0.8.5.NET40.zip|
+|eval|$shell_app = new-object -com shell.application|
+|eval|$zip_file = $shell_app.namespace("C:\msi\UIAutomation.0.8.5.NET40.zip")|
+|eval|$destination = $shell_app.namespace("C:\UIAutomation")|
+|eval|$destination.Copyhere($zip_file.items())|
+*!
+!*> [[!-WatiN-!][http://watin.org/]]
+!|script|Remote|$lab !-|-! % {$_.name}|
+|eval|Remove-Item -Recurse -Force 'C:\WatiN'|
+|eval|new-item 'C:\WatiN' -itemtype Directory|
+|show|eval|Read-S3Object -BucketName velaskec -Key 'Tools\WatiN.net40.zip' -File C:\msi\WatiN.net40.zip|
+|eval|$shell_app = new-object -com shell.application|
+|eval|$zip_file = $shell_app.namespace("C:\msi\WatiN.net40.zip")|
+|eval|$destination = $shell_app.namespace("C:\WatiN")|
+|eval|$destination.Copyhere($zip_file.items())|
+*!
+!include -c .NmSp.DeployLabs.CreateTestAccounts
+!include -c .LabInstances.SetAlternateUrl
+!include -c .LabInstances.ConfigureImportService
+!include -c .LabInstances.ConfigureLinkTrackingService
+${GIT}

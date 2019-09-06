@@ -1,0 +1,2 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM.*<label class="nf-label-control">This is a text containing hotspot</label>/|

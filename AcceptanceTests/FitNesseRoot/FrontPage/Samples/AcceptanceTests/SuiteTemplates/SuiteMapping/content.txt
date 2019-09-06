@@ -1,0 +1,11 @@
+!define WEB (!-SuiteMapping-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define LIST (!-SuiteMapping-!)
+!define VIEW (!-Suite Mapping-!) 
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Option='Html' Alias='Body_1Html' Value='Body_1'-! />","<!-Column ColumnType='RichText' Option='Html' Alias='Body_2Html' Value='Body_2'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='WikiField' SourceValue='Body_1Html' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='WikiField' SourceValue='Body_2Html' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define COLOR_BLUEBERRY [=~/rgb\(0, 65, 194\)|#0041c2/]
+!define COLOR_BURGUNDY [=~/rgb\(245, 43, 151\)|#f52b97/]
+!contents -R2 -g -p -f -h
+

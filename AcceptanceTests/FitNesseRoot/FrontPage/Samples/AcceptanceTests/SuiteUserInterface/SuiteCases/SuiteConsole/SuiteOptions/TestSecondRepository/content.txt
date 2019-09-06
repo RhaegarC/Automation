@@ -1,0 +1,36 @@
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false",scanLocations:"fordiscovery"}|
+
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|!-
+if(-NOT (Test-Path "C:\Program Files (x86)\IBM\Lotus\Notes\Data\QuestSecondRepository.nsf")){
+    Copy-Item "C:\Program Files (x86)\IBM\Lotus\Notes\Data\QuestRepository.nsf" 'C:\Program Files (x86)\IBM\Lotus\Notes\Data\QuestSecondRepository.nsf'
+}
+-!|
+
+|script|remote|${NMSP}:36|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|click "NotesTab" $subtitutions|
+|eval|click "BtnCfgRepository" $subtitutions|
+|eval|click "TaskHistoryRepositoryTab" $subtitutions|
+|eval|setText "TxtDbPath" "QuestSecondRepository.nsf"|
+|eval|click "BtnPathOK"|
+|eval|click "BtnChangeOK"|
+|eval|click "OptionOK" $subtitutions|
+|eval|click "NotesConnectionYes"|
+
+|script|remote|${NMSP}:36|
+|eval|!-
+[Xml]$c = Get-Content "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Options.config"
+$node = $c.SelectSingleNode("Options/PendingSecondCatalog/CatalogPath")-!|
+|check|eval|$node.InnerText|!-QuestSecondRepository.nsf-!|
+|eval|$node = $c.SelectSingleNode("Options/SecondCatalog/CatalogPath")|
+|check|eval|$node.InnerText|!-QuestRepository.nsf-!|
+
+|script|
+|closeMainWindows|

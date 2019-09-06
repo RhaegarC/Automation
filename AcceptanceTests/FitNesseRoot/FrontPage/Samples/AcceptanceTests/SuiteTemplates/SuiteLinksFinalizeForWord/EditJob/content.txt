@@ -1,0 +1,4 @@
+!|script|Remote|${NMSP}|
+|MaxRecords|${MAXRECORD}|job|${JOBFILE}|
+|Mapping|BodyAttachments|to|Files|job|${JOBFILE}|
+|LinkConversionType|UseLinkTracking|job|${JOBFILE}|

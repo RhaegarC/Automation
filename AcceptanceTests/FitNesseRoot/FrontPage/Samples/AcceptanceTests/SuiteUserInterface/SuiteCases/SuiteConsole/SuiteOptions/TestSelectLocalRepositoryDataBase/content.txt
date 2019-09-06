@@ -1,0 +1,27 @@
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|Move-Item "C:\Program Files (x86)\IBM\Lotus\Notes\Data\QuestRepository.nsf" 'c:\QuestRepository.nsf'|
+
+|script|remote|${NMSP}:36|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "SetupWizardMenuItem"|
+|eval|click "NextStep"|
+|eval|setText "NotesPwd" "Nmsp.123!@#"|
+|eval|click "NextStep"|
+|eval|click "RdSelectRepository"|
+|eval|click "NextStep"|
+|eval|click "BtnSelectRepository"|
+|eval|click "BtnSelectNotesDb"|
+|eval|setText "LocalDbPath" "c:\QuestRepository.nsf"|
+|eval|click "LocalDbPathOpen"|
+|eval|click "NextStep"|
+|eval|click "BtnWizardCancel"|
+|eval|click "BtnNotSave"|
+
+|script|remote|${NMSP}:36|
+|eval|Move-Item 'c:\QuestRepository.nsf' "C:\Program Files (x86)\IBM\Lotus\Notes\Data\QuestRepository.nsf"|
+
+|script|
+|closeMainWindows|

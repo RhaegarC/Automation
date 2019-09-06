@@ -1,0 +1,14 @@
+!define PAGENAME (!-TestOleForAsposeWord-!)
+
+|script|
+|newWordDoc|!{url:"${SOURCE}",file:"${TARGETFOLDER}\${PAGENAME}.${SAVE_AS}",targetFolder:"${TARGETFOLDER}\${PAGENAME}"}|
+
+''Git #282 - Aspose issue''
+
+''Git #279 - Word 8 case 2811929-1''
+!* We will show warning message below in case of corrupted Ole object
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? severity -eq 'Warning'|
+|message|
+|=~/object0./|
+
+*!

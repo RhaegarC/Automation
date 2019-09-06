@@ -1,0 +1,93 @@
+!|scenario|removeItem|item|
+|start|remote|${NMSP}|
+|eval|remove-item @item -force -recurse -confirm:$false|
+
+!|scenario|closeMainWindows|
+|start|remote|${NMSP}|
+|eval|!-'nmsp','mmc','FormGenerator' | % {get-process $_} | stop-process-!|
+
+!|scenario|startUiautomation|
+|start|remote|${NMSP}|
+|eval|$server = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 36 server' -PassThru|
+|eval|sleep 3|
+
+!|scenario|importUilib|
+|start|remote|${NMSP36}|
+|eval|Import-Module C:\UIAutomation|
+|eval|New-Item C:\UIAutomation\screenshot -ItemType Directory -Force|
+|eval|[UIAutomation.Preferences]::ScreenShotFolder = "C:\UIAutomation\screenshot"|
+|loadUilib|
+
+!|scenario|stopUiautomation|
+|start|remote|${NMSP}|
+|eval|if(!$server.WaitForExit(5000)){if(!$server.HasExited){$server.Kill();}}|
+
+!|scenario|startServer86|
+|start|remote|${NMSP}|
+|eval|$server86 = start C:\Windows\syswow64\Windowspowershell\v1.0\powershell.exe '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 86 server86' -PassThru|
+|show|eval|!-$times=0
+do{
+try{
+(new-object Net.Sockets.TcpClient).Connect("localhost", 86)
+}
+catch [Exception]{
+$_.Exception.message
+$times++
+sleep 3
+continue
+}
+break
+}while($times -lt 6)
+-!|
+|show|eval|$times|
+
+!|scenario|loadDiscoveryApi|
+|start|remote|${NMSP}:86|
+|eval|Import-Module "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\PowerShell\discovery.psm1"|
+
+!|scenario|stopServer86|
+|start|Remote|${NMSP}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server86')) {$p[$_].Terminate()}
+}-!|
+
+!|scenario|startServer38|
+|start|remote|${NMSP}|
+|eval|$server38 = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 3|
+
+!|scenario|stopServer38|
+|start|Remote|${NMSP}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server38')) {$p[$_].Terminate()}
+}-!|
+
+!|scenario|stopServer37|
+|start|Remote|${NMSP}|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server37')) {$p[$_].Terminate()}
+}-!|
+
+!|scenario|startSqlService|
+|start|remote|${NMSP}|
+|eval|Set-Service SQLBrowser -StartupType Manual|
+|eval|Get-Service "SQL Server Browser" !-|-! ? {$_.Status -ne "Running"}!-|-! Start-Service|
+|eval|$count=0|
+|eval|!-while((Get-Service "SQL Server Browser").Status -ne "Running" -and $count -lt 5)
+{
+sleep 5
+$count++
+}-!|
+|show|eval|$count|
+
+!|scenario|cleanUpDatabase|
+|start|remote|${SQLHOST}|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM NotesObjects"'|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM Linkage"'|
+|eval|start sqlcmd '-S ${SQLINSTANCE} -d ${LinkDatabase} -Q "DELETE FROM Links"'|

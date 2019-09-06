@@ -1,0 +1,7 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <AcceptanceTests.IncludePages.RemoveList
+#!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+#!include -c .NmSp.AcceptanceTests.IncludePages.DoMigration
+!contents -R2 -g -p -f -h

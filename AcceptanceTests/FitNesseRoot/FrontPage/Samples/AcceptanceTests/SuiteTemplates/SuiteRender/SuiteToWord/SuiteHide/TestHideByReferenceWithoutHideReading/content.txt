@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestHideByReferenceWithoutHideReading-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

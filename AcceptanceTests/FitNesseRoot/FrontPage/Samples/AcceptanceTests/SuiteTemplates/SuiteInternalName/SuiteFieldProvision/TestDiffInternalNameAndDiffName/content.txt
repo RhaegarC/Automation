@@ -1,0 +1,2 @@
+!|Script|Remote|${NMSP}|
+|check|eval|@(([xml]$log).Log.entry !-|-! ? { $_.message -like '*Provisioned new list column ${Field3Name}*'}).Count|1|

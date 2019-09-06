@@ -1,0 +1,4 @@
+!include <SuiteLookupFields.SharePointSetUp
+'''Add choice'''
+!|script|Remote|${NMSP}|
+|eval|AddItem ${SITE_URL} ${WEB} ${LookupListName} @{Title ="Canada"}|

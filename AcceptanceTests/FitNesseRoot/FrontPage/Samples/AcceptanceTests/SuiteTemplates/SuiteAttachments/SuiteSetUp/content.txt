@@ -1,0 +1,8 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <AcceptanceTests.IncludePages.RemoveList
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|

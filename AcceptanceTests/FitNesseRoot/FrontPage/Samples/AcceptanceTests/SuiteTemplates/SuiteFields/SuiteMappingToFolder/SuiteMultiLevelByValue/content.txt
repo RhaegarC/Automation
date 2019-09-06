@@ -1,0 +1,5 @@
+!define LIST (!-SuiteMultiLevelByValue-!)
+!define FILE (!-TestMappingFieldWithSlashes-!)
+!define SOURCE (${LIST_URL}/Folder1/Folder2/${FILE}/Folder1Folder2${FILE}.pdf)
+!define TARGET (${TARGETFOLDER}\Folder1\Folder2\${FILE}\Folder1Folder2${FILE}.pdf)
+!contents -R2 -g -p -f -h

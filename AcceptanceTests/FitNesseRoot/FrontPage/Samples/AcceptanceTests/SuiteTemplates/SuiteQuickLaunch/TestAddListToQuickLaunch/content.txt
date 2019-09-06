@@ -1,0 +1,29 @@
+!|script|Remote|${NMSP}|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext("${SITE_URL}")|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb("${WEB}").Lists.GetByTitle("${LIST}")|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|Load-CSOMProperties -object $list -propertyNames @('Title', 'Id', 'OnQuickLaunch')|
+|eval|$ctx.ExecuteQuery()|
+|check|eval|$list.OnQuickLaunch|True|
+|eval|$ctx.Dispose()|
+
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget
+
+!|script|Remote|${NMSP}|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext("${SITE_URL}")|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb("${WEB}").Lists.GetByTitle("${LIST}")|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|Load-CSOMProperties -object $list -propertyNames @('Title', 'Id', 'OnQuickLaunch')|
+|eval|$ctx.ExecuteQuery()|
+|check|eval|$list.OnQuickLaunch|True|
+|eval|$ctx.Dispose()|
+
+
+
+

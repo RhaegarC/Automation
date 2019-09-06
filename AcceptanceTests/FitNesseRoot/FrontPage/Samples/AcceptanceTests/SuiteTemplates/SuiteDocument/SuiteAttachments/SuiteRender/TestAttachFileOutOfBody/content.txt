@@ -1,0 +1,2 @@
+|script|Remote|${WEB_SCRAPER}|
+|check|eval|$document.innerXml.contains("dealer")|True|

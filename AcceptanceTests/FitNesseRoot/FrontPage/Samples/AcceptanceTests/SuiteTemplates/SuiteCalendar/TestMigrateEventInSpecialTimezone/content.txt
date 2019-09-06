@@ -1,0 +1,24 @@
+'''Time Zone Description : (GMT+05:30) Calcutta, Chennai, Mumbai, New Delhi'''
+!define TimeZone (23)
+!define LIST (!-TestMigrateEventInSpecialTimezone-!)
+!*> defines
+!define EVENT_1_START (26)
+!define EVENT_1_STOP (27)
+!define EVENT_2_START (27)
+!define EVENT_2_STOP (28)
+!define EVENT_3_START (27)
+!define EVENT_3_STOP (28)
+
+!define APPOINTMENT_START (12/3/2013 2:15:00 PM)
+!define APPOINTMENT_STOP (12/4/2013 6:00:00 AM)
+
+!define INVITATION_START (12/4/2013 2:15:00 PM)
+!define INVITATION_STOP (12/4/2013 2:30:00 PM)
+
+!define REMINDER_START (12/5/2013 11:15:00 PM)
+!define REMINDER_STOP (12/5/2013 11:15:00 PM)
+
+!define ANNIVERSARY_START (12/6/2013 12:00:00 AM)
+!define ANNIVERSARY_STOP (12/6/2013 11:59:00 PM)
+*!
+!include TestTemplate

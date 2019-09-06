@@ -1,0 +1,18 @@
+!include -c <WebServices.IncludePages.DownloadDocument
+!include -c <ImportService.IncludePages.DownloadDocument
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|${LOAD_ASPOSE_PDF}|
+|eval|(new-object Aspose.Pdf.License).SetLicense('c:\msi\Aspose.Pdf.lic')|
+|eval|$pdf = new-object Aspose.pdf.Document("${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf")|
+|eval|$list = $pdf.Pages[1].Annotations|
+|eval|$numberOfLinks = $list.Count|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|$textAbsorber = New-Object Aspose.Pdf.Text.TextAbsorber|
+|eval|$pdf.Pages.Accept($textAbsorber)|
+|eval|$extractedText = $textAbsorber.Text|
+|eval|$numberOfLines = $extractedText.Split('\n').Length|
+
+
+#!include -seamless <AcceptanceTests.SuiteTemplates.SuitePdf.SetUp

@@ -1,0 +1,7 @@
+!|script|remote|${NMSP}|
+|SharePoint LinkTracking|true|
+|cleanUpDatabase|
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}"}|
+|startSqlService|

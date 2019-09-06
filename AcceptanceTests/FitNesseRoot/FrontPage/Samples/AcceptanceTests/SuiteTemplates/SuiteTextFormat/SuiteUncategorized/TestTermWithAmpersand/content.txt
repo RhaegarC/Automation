@@ -1,0 +1,8 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|innerHTML|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|innerHTML|
+|=~/The term I used was My&amp;TermWithAmpersands&amp;/|
+
+!define NUMBER_OF_BR (0)

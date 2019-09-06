@@ -1,0 +1,66 @@
+|comment: !style_red['''IMPORTANT!''']|
+|Parameter|Mandatory|Remark|Example|
+|PAGENAME|Yes||!-!define PAGENAME (TestAlignedColored)-!|
+|ORIGIN_SITE_URL|No|Specifiy where the standard files are generated when there are links in documents|!-!define ORIGIN_SITE_URL (http://sp2010/sites/test)-!|
+|TARGET_FILE|No|redefine it if you want different standard file names|!-!${TARGETFOLDER}\file1.${SAVE_AS}-!|
+|SCREENSHOT|No||!-!define SCREENSHOT (http://fitnesse.at-nmsp.com/files/nmsp/compareFiles\SuiteCases.SuiteDocument.SuiteAttachments.SuiteIcon\TestAttachmentIconWithMetafile.docx_screenshot.png)-!|
+
+!|script|remote|${NMSP}|
+|eval|Add-Type -Path C:\msi\Aspose.Words.dll|
+|eval|(new-object Aspose.Words.License).SetLicense('c:\msi\Aspose.Words.lic')|
+|eval|$targetFile_fullPath="${TARGET_FILE}"|
+|eval|!- if(!(Test-Path $targetFile_fullPath))
+{
+Copy-Item -!"${TARGETFOLDER}\${PAGENAME}.${SAVE_AS}" !-$targetFile_fullPath
+}
+-!|
+|eval|$targetFile=$targetFile_fullPath.split("\")[-1]|
+|eval|$docFolder="undefined"|
+|eval|if("${RUNNING_PAGE_PATH}".indexof("SuiteCases") -gt -1){$docFolder="${RUNNING_PAGE_PATH}".substring("${RUNNING_PAGE_PATH}".indexof("SuiteCases"))+"_${ENV_NAME}"}|
+|eval|if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder")){New-Item "\\fitnesse.at-nmsp.com\shared\$docFolder" -ItemType Directory}|
+|eval|$message=""|
+|eval|!-if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.docx")){
+Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile"
+$message="compare file does not exist, check the files in \\fitnesse.at-nmsp.com\shared\$docFolder\ and turn it to $targetFile.standard.docx if it is OK"
+}
+else{
+$result=$true
+$path=Split-Path $targetFile_fullPath
+copy $targetFile_fullPath "$($targetFile_fullPath).source.zip" -Force -ErrorAction SilentlyContinue
+copy "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.docx" "$($targetFile_fullPath).target.zip" -Force -ErrorAction SilentlyContinue
+$shell_app = new-object -com shell.application
+Remove-Item "$($targetFile_fullPath)_source" -recurse -Force -Confirm:$false -ErrorAction SilentlyContinue
+Remove-Item "$($targetFile_fullPath)_target" -recurse -Force -Confirm:$false -ErrorAction SilentlyContinue
+new-item -ItemType Directory -Path "$($targetFile_fullPath)_source" -Force -Confirm:$false
+new-item -ItemType Directory -Path "$($targetFile_fullPath)_target" -Force -Confirm:$false
+$zip_file = $shell_app.namespace("$($targetFile_fullPath).source.zip")
+$destination = $shell_app.namespace("$($targetFile_fullPath)_source")
+$destination.Copyhere($zip_file.items())
+$zip_file=$null
+$zip_file = $shell_app.namespace("$($targetFile_fullPath).target.zip")
+$destination = $shell_app.namespace("$($targetFile_fullPath)_target")
+$destination.Copyhere($zip_file.items())
+Remove-Item "$($targetFile_fullPath).source.zip" -Confirm:$false -Force -ErrorAction SilentlyContinue
+Remove-Item "$($targetFile_fullPath).target.zip" -Confirm:$false -Force -ErrorAction SilentlyContinue
+$xmlfiles = Get-ChildItem "$($targetFile_fullPath)_source\word" | ? {$_.Name.EndsWith(".xml")}
+foreach($file in $xmlfiles){
+$s=(Get-Content $file.FullName) -replace "-!${SITE_URL}!-","siteurl" -replace "<w:name w:val="".{8}-.{4}-.{4}-."" />","" -replace "<w:bookmarkStart w:id=""."" w:name="".{8}-.{4}-.{4}-.{4}-.{12}"" />",""
+$t=(Get-Content $file.FullName.Replace("$($targetFile_fullPath)_source","$($targetFile_fullPath)_target"))  -replace "-!${ORIGIN_SITE_URL}!-","siteurl" -replace "<w:name w:val="".{8}-.{4}-.{4}-."" />","" -replace "<w:bookmarkStart w:id=""."" w:name="".{8}-.{4}-.{4}-.{4}-.{12}"" />",""
+if(Compare-Object $s $t){
+$result=$false
+}
+}
+if($result){
+        $message="Successful"
+        
+}
+else{
+       $message="Comparing files failed,check the documents in folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"
+       Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.failed_-!${ENV_NAME}!-.docx"    
+}
+}-!|
+|show|eval|"Target Folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"|
+|check|eval|$message|Successful|
+
+'''Screen Shot for the document'''
+${SCREENSHOT}

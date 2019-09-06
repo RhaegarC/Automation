@@ -1,0 +1,17 @@
+!|script|Remote|${WEB_SCRAPER}|
+|TabBetweenText|
+
+!|Ordered Query: Remote|${WEB_SCRAPER}|$outputs|
+|item|context|
+|text|Text1|
+|tabstop_position|2880|
+|text|Text2|
+|tabstop_position|10080|
+|text|Text3|
+
+
+
+
+
+
+

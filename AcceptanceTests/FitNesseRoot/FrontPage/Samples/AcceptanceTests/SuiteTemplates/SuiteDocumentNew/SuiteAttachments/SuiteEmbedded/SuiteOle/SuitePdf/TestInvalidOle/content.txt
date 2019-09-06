@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestInvalidOle-!)
+
+!style_green[We shoudn't have embedded attachments in this case.]
+!style_green[We don't have even placeholder url like we do if we migrate as linked attachments (sounds like an inconsistent behavior? ).]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

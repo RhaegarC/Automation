@@ -1,0 +1,3 @@
+!|script|Remote|${WEB_SCRAPER}|
+|download|${SOURCE}|to|${TARGET}|
+|ParsePdfDoc|${TARGET}|

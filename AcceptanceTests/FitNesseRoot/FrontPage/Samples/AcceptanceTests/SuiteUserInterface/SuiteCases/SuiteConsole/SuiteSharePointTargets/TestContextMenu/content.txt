@@ -1,0 +1,12 @@
+|script|
+|importUilib|
+|startConsole|
+
+!|script|remote|${NMSP}:36|
+|eval|sleep 5|
+|eval|expandTreeItem "SPTargets"|
+|eval|sleep 5|
+|eval|displayContextMenu "ConsoleSite" @{"SITE"="http://SP2016/sites/Test"}|
+|eval|expandTreeItem "DataBaseTargetingThisSite"|
+|eval|clickMenu "ApplyClassRules"|
+|eval|click "ApplyCancel"|

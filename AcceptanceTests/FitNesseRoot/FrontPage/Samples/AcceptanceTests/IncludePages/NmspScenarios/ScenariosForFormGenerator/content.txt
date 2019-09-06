@@ -1,0 +1,82 @@
+!*> Nintex Form
+!|scenario|generateNintexForm|args|
+|start|remote|${NMSP36}|
+|openFormGenerator|@args|
+|migrationOptions|@args|
+|formElements|@args|
+|choiceSubform|@args|
+|mappingOptions|@args|
+|controlSizes|@args|
+|readyToMigrate|@args|
+
+!|scenario|openFormGenerator|args|
+|removeItem|"${TARGET_FOLDER}"|
+|closeMainWindows|
+|convertHash|@args|
+|eval|Start-Process 'C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin\FormGenerator.exe' -ArgumentList ('-Server local -DB '+$hash.db)|
+
+!|scenario|migrationOptions|args|
+|convertHash|@args|
+|eval|selectListItem "FormList" $hash.form|
+|eval|!-if($hash.job) {
+click "SelectJob"
+click "LoadJob"
+setText "JobFile" $hash.job
+click "OpenFile"
+}-!|
+|eval|click "Next"|
+
+!|scenario|formElements|args|
+|eval|click "Next"|
+
+!|scenario|choiceSubform|args|
+|convertHash|@args|
+|eval|!-if($hash.computed) {
+$computed = @($hash.computed)
+foreach($a in $computed)
+{
+switch($a)
+{
+"_cancel" {click "CancelSubform"}
+"_default" {click "ConfirmSubform"}
+Default {selectListItem "SubFormList" $a;click "ConfirmSubform"}
+}
+}
+}
+-!|
+
+!|scenario|mappingOptions|args|
+|convertHash|@args|
+|eval|!-if($hash.bind) {
+$keys = $hash.bind.keys
+foreach($key in $keys)
+{
+selectGridCell "SharePointColumnCell" $key
+setCellText "SharePointColumnEdit" $hash.bind[$key]
+}
+}-!|
+|eval|click "Next"|
+
+!|scenario|controlSizes|args|
+|eval|click "Next"|
+
+!|scenario|readyToMigrate|args|
+|eval|click "Next"|
+
+*!
+
+!|scenario|PublishNintexForm|args|
+|start|remote|${SHAREPOINT}|
+|eval|[System.Reflection.Assembly]::LoadFrom("${PublishFormDll}") !-|-! Out-null|
+|eval|$import=new-object NFPublishLib.PublishForm|
+|eval|$file = invoke-command -ComputerName NMSP -Script {[System.IO.File]::ReadAllText(@args.targetFile,[System.Text.Encoding]::Unicode)}|
+|check|eval|!-
+if("-!${SHAREPOINT_HOST}!-" -eq "SP2010")
+{
+$import.Publish(@args.url,@args.listName,@args.contentType,$file)
+}
+else
+{
+$import.Publish(@args.url,@args.listName,@args.contentType,$file,-!"${Admin}","${AdminPassword}")!-
+}
+-!|True|

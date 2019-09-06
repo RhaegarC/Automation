@@ -1,0 +1,3 @@
+!define APPNAME (${DATABASE})
+!define MIGRATION (!-Render2DocLibWikiPages-!)
+!contents -R2 -g -p -f -h

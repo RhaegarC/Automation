@@ -1,0 +1,23 @@
+'''Check Ediable Combo box field'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MyComboBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Combobox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedComboBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Multi Choice Combobox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MyComboBox_1']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Formula Choice Combobox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'FormulaChoiceComboBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

@@ -1,0 +1,16 @@
+|script|
+|removeUsers|!{sp_site:"${SITE_URL}",users:"${USERMAPPING_USERLOGINNAME2}"}|
+
+#|script|
+#|ensureUsers|!{sp_site:"${SITE_URL}",users:"${TestUser}"}|
+
+|script|
+|makeMappingFile|!{clearUsers:"true",users:'<user notes="CN=${User}/OU=${PLACE}/OU=QP/O=ec2l" sharePoint="${USERMAPPING_USER2}" />'}|
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',identityLookupMode:'MappingFileLookup',notesIdPassword:'ukxpoTKrlTn3ZvoGMUBv+w==',mappingFilePath:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}",securityMapping:"true",mapDocumentLevelSecurity:"true"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

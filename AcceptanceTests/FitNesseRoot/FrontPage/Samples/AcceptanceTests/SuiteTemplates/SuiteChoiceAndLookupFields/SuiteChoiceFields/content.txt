@@ -1,0 +1,7 @@
+!*> References
+|[[Pivotal Tracker][https://www.pivotaltracker.com/story/show/46746177]]|
+|[[Description/Discussion][https://commons.quest.com/docs/DOC-8660]]|
+*!
+!define TARGET_FIELD_TYPE (Choice)
+!define TARGETFIELDS ("<!-Field MultipleValues='-!${MultipleValues}!-' Name='Category' AddToViews='-!${AddToViews}!-' Type='-!${TARGET_FIELD_TYPE}!-' AddMissingChoices='-!${AddMissingChoices}!-' IsRequired='false'-!></Field>")
+!contents -R1 -g -p -f -h

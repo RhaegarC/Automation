@@ -1,0 +1,3 @@
+!define VIEW (!-Suite Lists-!)
+!define LIST (!-SuiteLists-!)
+!contents -R2 -g -p -f -h

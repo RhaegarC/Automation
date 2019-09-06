@@ -1,0 +1,4 @@
+!define LabName (lab3)
+!define SharePoint (lab3_sp2010)
+!define LabSchema (${SP2010})
+!contents -R2 -g -p -f -h

@@ -1,0 +1,8 @@
+!* No EMF images
+!|Query:Remote|${WEB_SCRAPER}|$page.Images !-|-! select src !-|-! ? {$_.src -like '*/${LIST}/_Attachments/*.EMF'}|
+|src|
+*!
+!* We have converted 2 images to the JPEG images
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|($page.Images !-|-! ? {$_.src -like '*/${LIST}/_Attachments/*.JPG'}).Count|2|
+*!

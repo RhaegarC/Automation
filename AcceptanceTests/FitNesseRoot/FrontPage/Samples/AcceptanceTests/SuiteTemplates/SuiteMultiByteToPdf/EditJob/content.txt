@@ -1,0 +1,5 @@
+!*> Uncomment if want to use prior 6.4.0 
+!|Comment|
+|script|Remote|${NMSP}|
+|Remove|TransferJob/SharePointTargetDefinition/MigrateCustomProperties|from|${JOBFILE}|
+*!

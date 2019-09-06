@@ -1,0 +1,15 @@
+|script|remote|${NMSP}|
+|loadSqlLib|
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "SELECT COUNT(*) FROM tbl_vw_SECTION_blank_MAIL"|
+|eval|$count=ExecuteScalar $con $comStr|
+|eval|$comStr = "SELECT MAIL_blank_ADDRESS FROM tbl_vw_SECTION_blank_MAIL WHERE MAIL_blank_ADDRESS='Malik Dechambenoit'"|
+|eval|$m=ExecuteScalar $con $comStr|
+|eval|$comStr = "SELECT MAIL_blank_ADDRESS FROM tbl_vw_SECTION_blank_MAIL WHERE MAIL_blank_ADDRESS='Ugo Solinas'"|
+|eval|$u=ExecuteScalar $con $comStr|
+|check|eval|$count|2|
+|check|eval|$m|Malik Dechambenoit|
+|check|eval|$u|Ugo Solinas|

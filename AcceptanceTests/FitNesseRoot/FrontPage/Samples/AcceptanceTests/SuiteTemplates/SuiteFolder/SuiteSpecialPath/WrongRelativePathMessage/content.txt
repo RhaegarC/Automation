@@ -1,0 +1,18 @@
+!define SHARENAME (mysharedfolder1)
+!define MigrationExitCode (-1)
+!define TARGETFOLDER (C:\)
+!define EXPECTED_ERROR (The folder '${TARGETFOLDER}' should be located under the root folder 'C:\TargetFolder'.)
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+!include -c <AcceptanceTests.SuiteTemplates.SuiteFolder.SuiteRootFolder.EnableShareFolder
+!include -c <AcceptanceTests.SuiteFolder.IncludePages.EnableFolderLinkTracking
+
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Folder|${TARGETFOLDER}|Application|${APPNAME}|
+
+''Edit job file''
+!|script|Remote|${NMSP}|
+|LinkConversionType|UseLinkTracking|job|${JOBFILE}|
+
+!include .NmSp.AcceptanceTests.IncludePages.DoErrorMigration

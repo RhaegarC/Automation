@@ -1,0 +1,8 @@
+|script|
+|openSharePointPage|!{url:"${LIST_URL}/TestImageMapLinks.aspx"}|
+
+|Query:remote|${NMSP}|$request.ParsedHtml.getElementsByTagName('area') !-|-! select href, shape|
+|href|shape|
+|=~/FirstDoc.aspx/|=~/(?i)RECT/|
+|=~/SecondDoc.aspx/|=~/(?i)POLY/|
+|=~/ThirdDoc.aspx/|=~/(?i)CIRCLE/|

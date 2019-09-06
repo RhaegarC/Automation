@@ -1,0 +1,9 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${VERIFY_DOCUMENT}",tag:"A",selector:!-"href"-!}|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|href|
+|=~/${VERIFY_FILENAME}/|
+
+|script|
+|openSharePointPage|!{url:"${LIST_URL}/${VERIFY_FOLDER}/${VERIFY_FILENAME}"}|

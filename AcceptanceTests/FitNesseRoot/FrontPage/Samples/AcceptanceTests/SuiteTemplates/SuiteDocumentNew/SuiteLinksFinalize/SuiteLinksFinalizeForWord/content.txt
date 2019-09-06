@@ -1,0 +1,15 @@
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!define WEB (!-LinksFinalizeForWord-!)
+!define LinkConversionType (!-UseLinkTracking-!)
+!define DATABASE (!-LinkTracking-!)
+!define MAXRECORD (9999)
+!define WORDPROPERTY (href)
+!define WORDPROPERTYSELECT (WordHyperLinkElement)
+!define LIST (!-TestFinalized-!)
+!define LINKS (7)
+!define DOCUMENTS (6)
+!define SAVE_AS (docx)
+!define SOURCE (${LIST_URL}/${PAGENAME}.docx)
+!define TARGET (${TARGETFOLDER}\${PAGENAME}.docx)
+
+!contents -R2 -g -p -f -h

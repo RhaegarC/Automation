@@ -1,0 +1,8 @@
+'' Git #433''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement| 
+|text|indLeft|
+|Cell1WithIndent|720|
+|Cell2|null|
+|Cell3WithIndent|1800|
+|Cell4|null|
+|Cell5|null|

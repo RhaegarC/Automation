@@ -1,0 +1,5 @@
+!|script|Remote|${BUILDER}|
+|eval|Set-Location '${SetupRootDir}'|
+|eval|Read-S3Object -BucketName velaskec -Key 'Setup Tools\signtool_v6.0.6000.16384.exe' -File C:\NMSP\setup\signtool_v6.0.6000.16384.exe|
+|eval|Read-S3Object -BucketName velaskec -Key 'Setup Tools\capicom.dll' -File C:\NMSP\setup\capicom.dll|
+|eval|!-Get-Childitem -filter *.msi | % {.\signtool_v6.0.6000.16384.exe sign /f quest_software_code_signing_2018.pfx /p YaBuBttjY8oUilLMu5qT /v /t http://timestamp.verisign.com/scripts/timstamp.dll $_.Name}-!|

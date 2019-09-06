@@ -1,0 +1,17 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestLinksToDocOnFileServer.aspx",tag:"a",selector:!-"href","innerText"-!}|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|innerText|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|Link to external image|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|Link to backslash|
+|http://www.slashdot.org/|www.slashdot.org|
+|http://www.slashdot.org/|Slashdot|
+|https://slashdot.org/|https://slashdot.org|
+|https://slashdot.org/|Slashdot|
+|http://www.slashdot.org/|http://www.slashdot.org|
+|http://www.slashdot.org/|Slashdot|
+|ftp://www.slashdot.org/|ftp://www.slashdot.org|
+|ftp://www.slashdot.org/|Slashdot|
+|file:///c:/1.txt|path(c:\1.txt)|
+|file:///c:/1.txt|path(c:/1.txt)|

@@ -1,0 +1,5 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestRenderTables.aspx",tag:"td"}|
+
+|script|remote|${NMSP}|
+|check|eval|$elements.length|37|

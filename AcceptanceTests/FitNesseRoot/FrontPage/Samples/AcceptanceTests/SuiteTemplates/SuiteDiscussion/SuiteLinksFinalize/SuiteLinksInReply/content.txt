@@ -1,0 +1,20 @@
+!define APPNAME (!-DiscussionBoard-!)
+!define LIST (!-SuiteLinksInReply-!)
+!define LINKS (2)
+!define DOCUMENTS (2)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can finalize !-DocLinks-! of Topic response in Discussion board
+So that I can redirect to the migrated !-DocLinks-! page directly
+
+!1 scenarios
+![
+Given a Topic response with DocLinks exists in Discussion board
+When I run a migration
+Then I can not redirect to the migrated DocLinks page directly
+When I run a finalization
+Then I can redirect to the migrated DocLinks page directly
+]!

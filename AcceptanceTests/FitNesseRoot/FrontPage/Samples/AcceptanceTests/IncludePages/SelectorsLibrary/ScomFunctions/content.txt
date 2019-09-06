@@ -1,0 +1,224 @@
+!|script|Remote|${NMSP}|
+|eval|Set-Location "C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI"|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Taxonomy.dll")|
+
+!|script|Remote|${NMSP}|
+|eval|!-<pre>function QueryItems($site, $web, $list, $viewXml) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  # this row for sharepoint online cases.
+  $ctx.Credentials = $AdminCred
+  $caml = New-Object Microsoft.SharePoint.Client.CamlQuery
+  $caml.ViewXml = $viewXml
+  $items = $ctx.Site.OpenWeb($web).Lists.GetByTitle($list).GetItems($caml)
+  $ctx.Load($items)
+  $ctx.ExecuteQuery()
+  $items
+}</pre>-!|
+|eval|!-<pre>function GetFieldValue($fieldValue) {
+  if($fieldValue -is [Microsoft.SharePoint.Client.FieldLookupValue])
+  {
+    $fieldValue.LookupValue
+  }
+  elseif($fieldValue -is [Microsoft.SharePoint.Client.FieldLookupValue[]])
+  {
+    $fieldValue.LookupValue -join ';'
+  }
+  elseif($fieldValue -is [Microsoft.SharePoint.Client.Taxonomy.TaxonomyFieldValue])
+  {
+    $fieldValue.Label
+  }
+  else
+  {
+    $fieldValue | ?{$_ -ne $null} | %{$_.Split('|')[0]}
+  }
+}</pre>-!|
+|eval|!-<pre>function GetItems($site, $web, $list) {
+  $items = QueryItems $site $web $list '<View><Query><Where></Where></Query></View>'
+  $items | % {
+    New-Object PSObject -Property @{
+      Title  = $_.FieldValues.Title
+      Name  = $_.FieldValues.FileLeafRef
+      Reviewers  = GetFieldValue $_.FieldValues.Reviewers
+      Category  = GetFieldValue $_.FieldValues.Category
+      $list = GetFieldValue $_.FieldValues.$list
+    }
+  }
+}</pre>-!|
+|eval|!-<pre>function GetFiles($folder, $site, $web, $list) {
+  $items = QueryItems $site $web $list "<View Scope='RecursiveAll'><Query><Where><Eq><FieldRef Name='FileDirRef' /><Value Type='Text'>$folder</Value></Eq></Where></Query></View>"
+  $items | % {
+    New-Object PSObject -Property @{
+      Name  = $_.FieldValues.FileLeafRef
+      File  = $_.FieldValues.FileRef
+      Size  = $_.FieldValues.File_x0020_Size
+      Modified = $_.FieldValues.Modified
+      Editor = $_.FieldValues.Editor.LookupValue
+    }
+  }
+}</pre>-!|
+|eval|!-<pre>function GetFields($site, $web, $list) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $fields = $ctx.Site.OpenWeb($web).Lists.GetByTitle($list).Fields
+  $ctx.Load($fields)
+  $ctx.ExecuteQuery()
+  $fields | select InternalName, TypeAsString
+}</pre>-!|
+|eval|!-<pre>function GetList($site, $web, $listName) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $list = $ctx.Site.OpenWeb($web).Lists.GetByTitle($listName)
+  $ctx.Load($list)
+  $ctx.ExecuteQuery()
+  $list
+}</pre>-!|
+|eval|!-<pre>function GetContentType($site, $web, $list, $contentTypeId) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $contentType = $ctx.Site.OpenWeb($web).Lists.GetByTitle($list).ContentTypes.GetById($contentTypeId)
+  $ctx.Load($contentType)
+  $ctx.ExecuteQuery()
+  $contentType.Name
+}</pre>-!|
+
+!*> '''CREATE'''
+!|script|Remote|${NMSP}|
+|eval|!-<pre>function CreateList($site, $web, $list, $template = 'GenericList') {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $listInfo = New-Object Microsoft.SharePoint.Client.ListCreationInformation
+  $listInfo.Title = $list
+  $listInfo.TemplateType = [Microsoft.SharePoint.Client.ListTemplateType]::$template
+  $list = $ctx.Site.OpenWeb($web).Lists.Add($listInfo)
+  $list.Description = "Created by PowerSlim"
+  $list.Update()
+  $ctx.ExecuteQuery()
+}</pre>-!|
+|eval|!-<pre>function AddItem($site, $web, $list, $fields) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $list = $ctx.Site.OpenWeb($web).Lists.GetByTitle($list)
+  $itemInfo = New-Object Microsoft.SharePoint.Client.ListItemCreationInformation
+  $item = $list.AddItem($itemInfo)
+  $fields.GetEnumerator() | % {$item[$_.Name] = $_.Value}
+  $item.Update()
+  $ctx.ExecuteQuery()
+}</pre>-!|
+*!
+!* '''DELETE'''
+!|script|Remote|${NMSP}|
+|eval|!-<pre>function DeleteList($site, $web, $list) {
+  $ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)
+  $ctx.Site.OpenWeb($web).Lists.GetByTitle($list).DeleteObject()
+  try { $ctx.ExecuteQuery() } catch { $_.Exception.Message }
+}</pre>-!|
+*!
+
+!* '''Load-CSOMProperties'''
+!|script|Remote|${NMSP}|
+|eval|!-<pre>
+<#
+.Synopsis
+    Facilitates the loading of specific properties of a Microsoft.SharePoint.Client.ClientObject object or Microsoft.SharePoint.Client.ClientObjectCollection object.
+.DESCRIPTION
+    Replicates what you would do with a lambda expression in C#. 
+    For example, "ctx.Load(list, l => list.Title, l => list.Id)" becomes
+    "Load-CSOMProperties -object $list -propertyNames @('Title', 'Id')".
+.EXAMPLE
+    Load-CSOMProperties -parentObject $web -collectionObject $web.Fields -propertyNames @("InternalName", "Id") -parentPropertyName "Fields" -executeQuery
+    $web.Fields | select InternalName, Id
+.EXAMPLE
+   Load-CSOMProperties -object $web -propertyNames @("Title", "Url", "AllProperties") -executeQuery
+   $web | select Title, Url, AllProperties
+#>
+function global:Load-CSOMProperties {
+    [CmdletBinding(DefaultParameterSetName='ClientObject')]
+    param (
+        # The Microsoft.SharePoint.Client.ClientObject to populate.
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0, ParameterSetName = "ClientObject")]
+        [Microsoft.SharePoint.Client.ClientObject]
+        $object,
+
+        # The Microsoft.SharePoint.Client.ClientObject that contains the collection object.
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0, ParameterSetName = "ClientObjectCollection")]
+        [Microsoft.SharePoint.Client.ClientObject]
+        $parentObject,
+
+        # The Microsoft.SharePoint.Client.ClientObjectCollection to populate.
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 1, ParameterSetName = "ClientObjectCollection")]
+        [Microsoft.SharePoint.Client.ClientObjectCollection]
+        $collectionObject,
+
+        # The object properties to populate
+        [Parameter(Mandatory = $true, Position = 1, ParameterSetName = "ClientObject")]
+        [Parameter(Mandatory = $true, Position = 2, ParameterSetName = "ClientObjectCollection")]
+        [string[]]
+        $propertyNames,
+
+        # The parent object's property name corresponding to the collection object to retrieve (this is required to build the correct lamda expression).
+        [Parameter(Mandatory = $true, Position = 3, ParameterSetName = "ClientObjectCollection")]
+        [string]
+        $parentPropertyName,
+
+        # If specified, execute the ClientContext.ExecuteQuery() method.
+        [Parameter(Mandatory = $false, Position = 4)]
+        [switch]
+        $executeQuery
+    )
+
+    begin { }
+    process {
+        if ($PsCmdlet.ParameterSetName -eq "ClientObject") {
+            $type = $object.GetType()
+        } else {
+            $type = $collectionObject.GetType() 
+            if ($collectionObject -is [Microsoft.SharePoint.Client.ClientObjectCollection]) {
+                $type = $collectionObject.GetType().BaseType.GenericTypeArguments[0]
+            }
+        }
+
+        $exprType = [System.Linq.Expressions.Expression]
+        $parameterExprType = [System.Linq.Expressions.ParameterExpression].MakeArrayType()
+        $lambdaMethod = $exprType.GetMethods() | ? { $_.Name -eq "Lambda" -and $_.IsGenericMethod -and $_.GetParameters().Length -eq 2 -and $_.GetParameters()[1].ParameterType -eq $parameterExprType }
+        $lambdaMethodGeneric = Invoke-Expression "`$lambdaMethod.MakeGenericMethod([System.Func``2[$($type.FullName),System.Object]])"
+        $expressions = @()
+
+        foreach ($propertyName in $propertyNames) {
+            $param1 = [System.Linq.Expressions.Expression]::Parameter($type, "p")
+            try {
+                $name1 = [System.Linq.Expressions.Expression]::Property($param1, $propertyName)
+            } catch {
+                Write-Error "Instance property '$propertyName' is not defined for type $type"
+                return
+            }
+            $body1 = [System.Linq.Expressions.Expression]::Convert($name1, [System.Object])
+            $expression1 = $lambdaMethodGeneric.Invoke($null, [System.Object[]] @($body1, [System.Linq.Expressions.ParameterExpression[]] @($param1)))
+ 
+            if ($collectionObject -ne $null) {
+                $expression1 = [System.Linq.Expressions.Expression]::Quote($expression1)
+            }
+            $expressions += @($expression1)
+        }
+
+
+        if ($PsCmdlet.ParameterSetName -eq "ClientObject") {
+            $object.Context.Load($object, $expressions)
+            if ($executeQuery) { $object.Context.ExecuteQuery() }
+        } else {
+            $newArrayInitParam1 = Invoke-Expression "[System.Linq.Expressions.Expression``1[System.Func````2[$($type.FullName),System.Object]]]"
+            $newArrayInit = [System.Linq.Expressions.Expression]::NewArrayInit($newArrayInitParam1, $expressions)
+
+            $collectionParam = [System.Linq.Expressions.Expression]::Parameter($parentObject.GetType(), "cp")
+            $collectionProperty = [System.Linq.Expressions.Expression]::Property($collectionParam, $parentPropertyName)
+
+            $expressionArray = @($collectionProperty, $newArrayInit)
+            $includeMethod = [Microsoft.SharePoint.Client.ClientObjectQueryableExtension].GetMethod("Include")
+            $includeMethodGeneric = Invoke-Expression "`$includeMethod.MakeGenericMethod([$($type.FullName)])"
+
+            $lambdaMethodGeneric2 = Invoke-Expression "`$lambdaMethod.MakeGenericMethod([System.Func``2[$($parentObject.GetType().FullName),System.Object]])"
+            $callMethod = [System.Linq.Expressions.Expression]::Call($null, $includeMethodGeneric, $expressionArray)
+            
+            $expression2 = $lambdaMethodGeneric2.Invoke($null, @($callMethod, [System.Linq.Expressions.ParameterExpression[]] @($collectionParam)))
+
+            $parentObject.Context.Load($parentObject, $expression2)
+            if ($executeQuery) { $parentObject.Context.ExecuteQuery() }
+        }
+    }
+    end { }
+}</pre>-!|
+*!

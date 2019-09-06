@@ -1,0 +1,6 @@
+|script|
+|openSharePointPage|!{url:"${LIST_URL}/TestDatabaseLink.aspx"}|
+
+|Subset Query:remote|${NMSP}|$request.Links|
+|href|
+|=~/${LIST}/SecondDoc.aspx/|

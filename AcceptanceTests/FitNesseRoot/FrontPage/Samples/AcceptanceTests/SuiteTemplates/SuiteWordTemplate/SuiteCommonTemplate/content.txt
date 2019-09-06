@@ -1,0 +1,4 @@
+!define MIGRATION (DocLib2DocLibWordDocTemplateCommon)
+!define LIST (SuiteCommonTemplate)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWordTemplate.SuiteCommonTemplate.EditJob)
+!contents -R2 -g -p -f -h

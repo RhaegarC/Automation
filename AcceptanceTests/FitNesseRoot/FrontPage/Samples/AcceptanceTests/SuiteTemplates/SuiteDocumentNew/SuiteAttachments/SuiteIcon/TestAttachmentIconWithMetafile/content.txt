@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestAttachmentIconWithMetafile-!)
+!define SOURCE_FILE (${SOURCE})
+!define TARGET_FILE (${TARGETFOLDER}\!-TestAttachmentIconWithMetafile.docx-!)
+!define SCREENSHOT (http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/SuiteCases.SuiteDocument.SuiteAttachments.SuiteIcon/TestAttachmentIconWithMetafile.docx_screenshot.png)
+
+!style_green[Check the word content contains "image1.png" with hyperlink "http://body/design study list.doc".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

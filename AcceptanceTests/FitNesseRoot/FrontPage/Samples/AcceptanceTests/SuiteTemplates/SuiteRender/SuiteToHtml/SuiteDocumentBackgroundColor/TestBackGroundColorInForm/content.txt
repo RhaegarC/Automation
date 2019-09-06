@@ -1,0 +1,2 @@
+!define PAGENAME (!-TestBgColorInForm-!)
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

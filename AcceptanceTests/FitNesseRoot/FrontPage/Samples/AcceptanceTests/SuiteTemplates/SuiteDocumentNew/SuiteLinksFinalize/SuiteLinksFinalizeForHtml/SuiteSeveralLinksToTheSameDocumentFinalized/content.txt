@@ -1,0 +1,6 @@
+!define LIST (!-FinalizedLinksToSameDocument-!)
+!define LINKS (7)
+!define DOCUMENTS (6)
+!define MIGRATION (!-DocLib2HtmlDoc-!)
+!define ORIGIN_SITE_URL (http://sp2010/sites/test)
+!contents -R2 -g -p -f -h

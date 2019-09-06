@@ -1,0 +1,15 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking",httpLinkTranslations:"<!-HttpServerPrefix-!>!-http://quickr-!</!-HttpServerPrefix-!><!-DominoServer-!>CN=quickr/O=ec2l<!-/DominoServer-!>"!-,-!"<!-HttpServerPrefix-!>!-http://quickr.velaskec.ec2l.com-!</!-HttpServerPrefix-!><!-DominoServer-!>CN=quickr/O=ec2l<!-/DominoServer-!>"}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!define LINKS (1)
+!define DOCUMENTS (1)
+!include <SuiteCases.GlobalSteps.LinkFinalization

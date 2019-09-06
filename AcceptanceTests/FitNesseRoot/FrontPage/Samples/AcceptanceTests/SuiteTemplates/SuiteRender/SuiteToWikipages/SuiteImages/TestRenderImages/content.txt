@@ -1,0 +1,10 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestRenderImages.aspx",tag:"img",selector:"src"}|
+
+|Query:Remote|${NMSP}|$elements|
+|src|
+|=~/\/_Attachments\/TestRenderImages.*\.GIF/|
+|=~/\/_Attachments\/TestRenderImages.*\.GIF/|
+|=~/\/_Attachments\/TestRenderImages.*\.JPG/|
+|=~/\/_Attachments\/TestRenderImages.*\.JPG/|
+|=~/\/_Attachments\/TestRenderImages.*\.JPG/|

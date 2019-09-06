@@ -1,0 +1,11 @@
+!|script|Remote|${SHAREPOINT}:38|
+|SelectListItemsName|test non-existent reader.aspx|attribute|DisplayName|user|${TestNonExistingUser}|
+
+!|Query:Remote|${SHAREPOINT}:38|$listItems !-|-! select Name|
+|Name|
+|Read|
+
+
+#!|Query:Remote|${SHAREPOINT}|$list.Items !-|-! ?{$_.Name -eq 'test non-existent reader.aspx'} !-|-! %{$_.RoleAssignments} !-|-! ?{$_.Member.DisplayName -eq '${TestNonExistingUser}'} !-|-! %{$_.RoleDefinitionBindings} !-|-! select Name |
+#|Name|
+#|Read|

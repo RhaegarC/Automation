@@ -1,0 +1,8 @@
+!|Query:Remote|${WEB_SCRAPER}|[regex]::matches( $page.Content,'(Test \d*)')|
+|Value|
+|Test 1|
+|Test 2|
+|Test 3|
+|Test 4|
+
+!define NUMBER_OF_BR (0)

@@ -1,0 +1,3 @@
+!|Query:Remote|${NMSP36}|$db.DataTally|
+|Count|DocsWithAttachments|
+|${DocNumber}|${AttachmentNumber}|

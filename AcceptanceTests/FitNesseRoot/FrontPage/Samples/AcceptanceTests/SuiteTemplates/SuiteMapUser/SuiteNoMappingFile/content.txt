@@ -1,0 +1,3 @@
+!define LIST (SuiteExistingUsers)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteMapUser.SuiteNoMappingFile.EditJob)
+!contents -R2 -g -p -f -h

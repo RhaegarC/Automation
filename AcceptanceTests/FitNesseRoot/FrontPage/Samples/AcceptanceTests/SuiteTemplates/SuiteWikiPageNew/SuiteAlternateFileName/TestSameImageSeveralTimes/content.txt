@@ -1,0 +1,6 @@
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}.GIF/|
+|=~/${SITE}/${WEB}/${LIST}/_Attachments/${RUNNING_PAGE_NAME}.GIF/|

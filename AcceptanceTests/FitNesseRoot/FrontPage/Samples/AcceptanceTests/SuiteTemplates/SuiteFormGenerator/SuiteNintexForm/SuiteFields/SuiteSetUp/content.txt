@@ -1,0 +1,38 @@
+!include -c <SuiteNintexForm.SuiteSetUp
+!* Delete target folder
+!|script|Remote|${NMSP}|
+|eval|remove-item "${TARGET_FOLDER}" -force -recurse -confirm:$false|
+*!
+!* Start process
+!|script|Remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE}'!-|-! out-null|
+*!
+
+!* Un-check all hide fields and general the xml
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|CheckBox|HideRead|Value|false|
+|CheckBox|HideEdit|Value|false|
+|CheckBox|HideWeb|Value|false|
+|CheckBox|HideNotes|Value|false|
+|CheckBox|HideFormula|Value|false|
+|CheckBox|HideHtml|Value|false|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+*!
+
+!* Load the xml
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+*!
+
+!* Publish and check
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|This Form List all type of Fields:|
+*!

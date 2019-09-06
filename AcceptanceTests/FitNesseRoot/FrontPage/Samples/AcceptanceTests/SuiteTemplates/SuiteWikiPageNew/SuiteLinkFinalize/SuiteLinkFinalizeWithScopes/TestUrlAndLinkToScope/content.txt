@@ -1,0 +1,6 @@
+!define SCOPE ('${SITE_URL}')
+!define LINKSTOSCOPE ('${SITE_URL}/${WEB}/${LIST}')
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalizationWithScopes

@@ -1,0 +1,16 @@
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 0)
+!include -c ReRunMigration
+
+!|script|Remote|${NMSP}|
+|check|eval|(Date '$SecondPdf') -eq (Date '$FirstPdf')|True|
+|check|eval|(Date '$SecondDocx') -eq (Date '$FirstDocx')|True|
+|check|eval|(Date '$SecondMsg') -eq (Date '$FirstMsg')|True|
+|check|eval|(Date '$SecondHtml') -eq (Date '$FirstHtml')|True|
+
+!* Original content of this document is replaced by "Hello" in !-SharePoint/Folder-!. Read [[Dangerous finding: we are removing the customer's content while migration][https://commons.quest.com/thread/32539]] for more information
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${EDITABLE_PATH}|Contains|Hello|
+*!
+
+!include -c VerifyAttachmentsSkipReplace
+

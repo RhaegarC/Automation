@@ -1,0 +1,7 @@
+!define NMSP (lab8.at-nmsp.com)
+!define SHAREPOINT (lab8_sp2019.at-nmsp.com)
+!define MODE (!-WebServices-!)
+!define MIGRATION_MODE (Web Services)
+!define IS_ENABLED (False)
+!define LT_ENABLED (False)
+!contents -R2 -g -p -f -h

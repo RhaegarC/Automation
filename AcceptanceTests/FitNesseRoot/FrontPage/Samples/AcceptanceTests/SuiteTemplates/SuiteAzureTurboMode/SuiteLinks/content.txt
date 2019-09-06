@@ -1,0 +1,19 @@
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate links in the documents to sharepoint online (using Azure Turbo Mode)
+So that I have full information of the documents on sharepoint
+
+!1 scenarios
+![
+Given there are 3 attachments in the documents, all have the same name but one has different content
+When I run migration using Azure turbo mode
+Then I can see 2 attachments are migrated
+And the links point to the right attachments
+
+Given there is doc links in the documents
+When I run migration (using Azure turbo mode)
+Then I can see the mix links in the target documents
+When I finalize the links
+Then I can see the sharepoint links in the target documents
+]!

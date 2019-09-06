@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Edit>true</Edit>
+<Files>true</Files>
+<Help/>
+<Properties>true</Properties>
+<RecentChanges>true</RecentChanges>
+<Refactor>true</Refactor>
+<Search>true</Search>
+<Suites/>
+<SymbolicLinks>
+<DisableServiceLinkTracking>.NmSp.AcceptanceTests.Commons.ImportService.DisableServiceLinkTracking</DisableServiceLinkTracking>
+<ImportMultiTarget>.NmSp.AcceptanceTests.Commons.GlobalSteps.ImportMultiTarget</ImportMultiTarget>
+<LinkFinalization>.NmSp.AcceptanceTests.Commons.ImportService.LinkFinalization</LinkFinalization>
+<QuitSelenium>.NmSp.AcceptanceTests.Commons.GlobalSteps.QuitSelenium</QuitSelenium>
+<RunMigration>.NmSp.AcceptanceTests.Commons.GlobalSteps.RunMigration</RunMigration>
+<RunMigrationToExistingTarget>.NmSp.AcceptanceTests.Commons.GlobalSteps.RunMigrationToExistingTarget</RunMigrationToExistingTarget>
+<RunRecoverLinkTracking>.NmSp.AcceptanceTests.Commons.GlobalSteps.RunRecoverLinkTracking</RunRecoverLinkTracking>
+<SetUpForLinkFinalization>.NmSp.AcceptanceTests.Commons.ImportService.SetUpForLinkFinalization</SetUpForLinkFinalization>
+<SuiteSetUp>.NmSp.AcceptanceTests.Commons.ImportService.SuiteSetUp</SuiteSetUp>
+<VerifyHtmlDoc>.NmSp.AcceptanceTests.Commons.GlobalSteps.VerifyHtmlDoc</VerifyHtmlDoc>
+<VerifyPdfDoc>.NmSp.AcceptanceTests.Commons.GlobalSteps.VerifyPdfDoc</VerifyPdfDoc>
+<VerifyWordDoc>.NmSp.AcceptanceTests.Commons.GlobalSteps.VerifyWordDoc</VerifyWordDoc>
+</SymbolicLinks>
+<Versions>true</Versions>
+<WhereUsed>true</WhereUsed>
+</properties>

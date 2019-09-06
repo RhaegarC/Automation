@@ -1,0 +1,9 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",view:"!-Suite Links-!",formula:"@Contains(subject;'TestLinkSpecial')",linkConversionType:"UseLinkTracking"}|
+
+|script|
+|globalOptions|!{illegalReplaceMappings:"<!-IllegalReplaceMapping IllegalChar='p' ReplaceChar='b' -!/>",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|

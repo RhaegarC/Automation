@@ -1,0 +1,27 @@
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define LIST (!-SuiteAttachmentsSpeUrl-!)
+!define DATABASE (!-SuiteAttachments-!)
+!define URL (${WEB}/${LIST})
+!contents -R2 -g -p -f -h
+
+
+!1 user story
+
+As an administrator
+I can replace the illigal character of the url with a specific character
+So that I can specify the url as I want
+
+!1 scenarios
+![
+Given there are illigal characters in attachment name and the folder containing the attachment
+When I choose to replace the illigal character with "-"
+And I run migration
+Then the url is migrated properly
+And the url is linked to the target attachment
+
+Given there are illigal characters in attachment name and the folder containing the attachment
+When I choose to replace the illigal character with empty space
+And I run migration
+Then the url is migrated properly
+And the url is linked to the target attachment
+]!

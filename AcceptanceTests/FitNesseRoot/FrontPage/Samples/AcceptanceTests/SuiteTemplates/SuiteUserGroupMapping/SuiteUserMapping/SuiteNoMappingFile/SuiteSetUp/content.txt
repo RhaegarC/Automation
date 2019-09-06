@@ -1,0 +1,5 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",turboMode:'${TURBO_MODE}',storageName:'${STORAGE_ACCOUNT}',accessKey:'${ACCESS_KEY}',!-UserMapping-!:'${USERMAPPING_FILE}'}|
+
+|script|
+|makeMappingFile|!{target:'!-C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml-!'}|

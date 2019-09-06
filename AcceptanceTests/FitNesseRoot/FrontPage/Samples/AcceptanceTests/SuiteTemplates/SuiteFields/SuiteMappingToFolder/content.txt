@@ -1,0 +1,10 @@
+!define WEB (!-SuiteMappingToFolder-!)
+!define FOLDER (PDF)
+!define APPNAME (SimpleObjectsLib)
+!define DATABASE (!-SimpleObjectsLib-!)
+!define LIST (!-SuiteMappingToFolder-!)
+!define MIGRATION (!-DocLib2DocLibPdfDoc-!)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define VIEW (Suite Mapping)
+
+!contents -R2 -g -p -f -h

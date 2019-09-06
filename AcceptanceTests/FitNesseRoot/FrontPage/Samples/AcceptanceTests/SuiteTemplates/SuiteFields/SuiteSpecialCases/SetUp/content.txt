@@ -1,0 +1,2 @@
+|script|Remote|${WEB_SCRAPER}|
+|openSharePointPage|!{url:"${LIST_URL}/!-TestOneParDefinition-!.aspx"}|

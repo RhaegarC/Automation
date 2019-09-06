@@ -1,0 +1,7 @@
+!define WEB (!-SuiteRender-!)
+!define DATABASE (!-DocLibrary-!)
+!define VIEW (Render)
+!define APPNAME (${DATABASE})
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define SOURCE (${LIST_URL}/${PAGENAME}.${SAVE_AS})
+!contents -R2 -g -p -f -h

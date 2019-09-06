@@ -1,0 +1,12 @@
+!define LIST (!-SuiteDisableVersion-!)
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",maxRecord:"1"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|checkList|!{sp_site:"${WEB_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|script|remote|${NMSP}|
+|check|eval|$list.EnableVersioning|False|

@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|innerText|
+|=~/_Attachments/AttachFilePPTX.pptx/|AttachFilePPTX.pptx|
+|=~/_Attachments/java.jpg/|java.jpg|

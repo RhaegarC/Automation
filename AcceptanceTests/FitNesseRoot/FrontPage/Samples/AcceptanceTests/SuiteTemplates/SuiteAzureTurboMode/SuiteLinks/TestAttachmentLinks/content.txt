@@ -1,0 +1,24 @@
+!define GROUP {!-SuiteLinks-!}
+!define LIST {!-TestAttachmentLinks-!}
+!define DATABASE {!-SuiteDuplicate-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}"}|
+
+|script|
+|newParsePdfDoc|!{url:"${LIST_URL}/Document1.pdf",file:"${WORD_FOLDER}\Document1.pdf"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$pdfPage.Annotations.Action.URI!-|-!?{$_.StartsWith("http")}|
+|Value|
+|${LIST_URL}/_Attachments/same_attachment.txt|
+|${LIST_URL}/_Attachments/SameTitleDifferentContent.txt|
+|${LIST_URL}/_Attachments/EditableAttachment.txt|
+
+|script|
+|newParsePdfDoc|!{url:"${LIST_URL}/Document3.pdf",file:"${WORD_FOLDER}\Document3.pdf"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$pdfPage.Annotations.Action.URI!-|-!?{$_.StartsWith("http")}|
+|Value|
+|${LIST_URL}/_Attachments/same_attachment.txt|
+|=~/${LIST_URL}/_Attachments/SameTitleDifferentContent-\S*.txt/|

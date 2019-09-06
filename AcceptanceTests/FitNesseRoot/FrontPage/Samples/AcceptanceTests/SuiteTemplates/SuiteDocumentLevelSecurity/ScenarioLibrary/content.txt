@@ -1,0 +1,3 @@
+!|scenario|SelectListItemsName|page|attribute|attr|user|name|
+|eval|$listItems = $null|
+|eval|$listItems = $list.Items !-|-! ?{$_.Name -eq '@page'} !-|-! %{$_.RoleAssignments} !-|-! ?{$_.Member.@attr -eq '@name'} !-|-! %{$_.RoleDefinitionBindings}| 

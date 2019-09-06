@@ -1,0 +1,59 @@
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|!-
+if(Test-Path "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\MailOptions.config"){
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\MailOptions.config"
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\MailOptions_UserOptions.config"
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\MailOptions_RemoteSpSites.config"
+}
+-!|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|click "BtnForward" $subtitutions|
+|eval|click "BtnForward" $subtitutions|
+|eval|click "BtnForward" $subtitutions|
+|eval|click "BtnForward" $subtitutions|
+|eval|click "BtnForward" $subtitutions|
+|eval|click "EmailTab" $subtitutions|
+|eval|checkBox "EnableMail" "true" $subtitutions|
+|eval|checkBox "EnableMailSSL" "true" $subtitutions|
+|eval|setText "EmailServer" "TestEmailServer" $subtitutions|
+|eval|setText "EmailPort" "25" $subtitutions|
+|eval|setText "EmailUser" "TestEmailUserName" $subtitutions|
+|eval|setText "EmailPwd" "TestEmailPassword" $subtitutions|
+|eval|setText "EmailSender" "sender@test.com" $subtitutions|
+|eval|setControlText "EmailTo" "mailto@test.com" $subtitutions|
+|eval|setControlText "EmailCC" "mailcc@test.com" $subtitutions|
+|eval|displayContextMenu "OptionOK" $subtitutions|
+|eval|clickMenu "OptionSaveAs" $subtitutions|
+|eval|setText "OptionsName" "MailOptions"|
+|eval|click "SaveAsOK"|
+|eval|click "NotesConnectionYes"|
+
+|script|remote|${NMSP}:36|
+|eval|!-
+[Xml]$c = Get-Content "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\MailOptions.config"
+$node = $c.SelectSingleNode("Options/MailConfig/EnableSendMail")-!|
+|check|eval|$node.InnerText|true|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/Server")-!|
+|check|eval|$node.InnerText|!-TestEmailServer-!|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/Port")-!|
+|check|eval|$node.InnerText|25|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/UserName")-!|
+|check|eval|$node.InnerText|!-TestEmailUserName-!|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/Password")-!|
+|check|eval|$node.InnerText|8ldVaQX0ybPNAC6IVRU+qH2YyYixqiZk|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/Sender")-!|
+|check|eval|$node.InnerText|!-sender@test.com-!|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/EnableSSL")-!|
+|check|eval|$node.InnerText|true|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/CC")-!|
+|check|eval|$node.InnerText|!-mailcc@test.com-!|
+|eval|!-$node = $c.SelectSingleNode("Options/MailConfig/To")-!|
+|check|eval|$node.InnerText|!-mailto@test.com-!|
+
+|script|
+|closeMainWindows|

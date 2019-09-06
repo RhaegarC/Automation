@@ -1,0 +1,13 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+!include <SuiteCases.GlobalSteps.RunRecoverLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View Scope='Recursive'><Query></Query></View>"}|  
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='Body'; E={$_['Body']} } |
+|Title|Body|
+|TopicDoclinkInReply-replyone|=~/Discussion/Lists/${LIST}/TopicDoclinkInReply/|
+|TopicDoclinkInReply-replyone-replyone|=~/Discussion/Lists/${LIST}/DispForm.aspx\?ID=2/|

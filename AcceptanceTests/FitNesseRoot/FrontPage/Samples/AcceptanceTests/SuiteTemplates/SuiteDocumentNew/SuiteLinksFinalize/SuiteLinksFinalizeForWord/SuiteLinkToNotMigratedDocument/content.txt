@@ -1,0 +1,7 @@
+!define MAXRECORD (1)
+!define LINKS (0)
+!define DOCUMENTS (0)
+!define LIST (!-SuiteLinkToNotMigratedDocument-!)
+!define Link (notes:///85257B4F0055CD9C/0/FF16649C9A93DC4E85257B4F00606FB0)
+
+!contents -R2 -g -p -f -h

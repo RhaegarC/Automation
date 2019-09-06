@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestPopupTextChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"A",selector:!-"title","outerText"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|title|outerText|
+|中文信息POPUP|Pop-up|

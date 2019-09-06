@@ -1,0 +1,22 @@
+!contents -R2 -g -p -f -h
+!include -c <AcceptanceTests.ScenarioLibrary
+
+|script|remote|${NMSP}|
+|loadSqlLib|
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='tbl_vw_SECTION_blank_MAIL') DROP TABLE [tbl_vw_SECTION_blank_MAIL]"|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "CREATE TABLE tbl_vw_SECTION_blank_MAIL(MAIL_blank_ADDRESS varchar(max) NULL)"|
+|eval|ExecuteNonQuery $con $comStr|
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",sqlServerEnabled:"true"}|
+
+|script|
+|jobDefinition|!{template:"SqlSpecialCharacter",db:"SRSG Tracking03",targetType:"SQL",job:"${JOBFILE}"}|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|

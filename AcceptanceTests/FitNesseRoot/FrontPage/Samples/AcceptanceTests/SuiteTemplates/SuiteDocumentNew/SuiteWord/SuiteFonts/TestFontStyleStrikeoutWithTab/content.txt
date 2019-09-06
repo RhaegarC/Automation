@@ -1,0 +1,12 @@
+!define PAGENAME (!-TestFontStyleStrikeoutWithTab-!)
+
+!style_green[Check the word content contains text "ABCD                        EF                G        H":
+All the words font is Arial, black, strikethrough, 9;
+There is 3 tab space between 'ABCD' and 'EF';
+There is 2 tab space between 'EF' and 'G';
+There is 1 tab space between 'G' and 'H'.
+
+Displays as below:]
+--ABCD--                                    --EF--                        --G--            --H--
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

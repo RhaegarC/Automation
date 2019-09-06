@@ -1,0 +1,9 @@
+!|Subset Query:Remote|${SHAREPOINT}|Get-Content c:\msi\setup.log !-|-! select-string EnumIISAppPools|
+|Line|
+|=~/Doing action: EnumIISAppPools/|
+|=~/Entrypoint: EnumIISAppPools/|
+|=~/Action start (\d+:){3} EnumIISAppPools./|
+|Calling custom action CustomActions!CustomActions.CustomActions.EnumIISAppPools|
+|=~/Action ended (\d+:){3} EnumIISAppPools. Return value 1./|
+|=~/\(EnumIISAppPools\) Record: ISPOOLNAME-\d+-DefaultAppPool/|
+|=~/\(EnumIISAppPools\) Record: ISPOOLNAME-\d+-Classic .NET AppPool/|

@@ -1,0 +1,5 @@
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|Section is Hidden from Notes R4.6 or above|
+
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[text() = 'Section is Hidden from Notes R4.6 or above']|ExpectedValue|True|

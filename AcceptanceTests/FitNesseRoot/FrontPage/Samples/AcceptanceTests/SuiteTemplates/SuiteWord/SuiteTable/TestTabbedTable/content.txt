@@ -1,0 +1,15 @@
+#!|Subset Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t")| select '#text', @{N='color';E={$_.parentNode.parentNode.pPr.shd.fill}}, @{N='font-weight';E={if($_.parentNode.rPr.b.val -eq $null){'bold'} else{'normal'}}}-!|
+
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordFontElement|
+|text|bgcolor|weight|
+|Tab #1!- -!|null|bold|
+|This is all about the first tab|null|normal|
+|second column|null|normal|
+||null|bold|
+|This is a tab with no label|null|normal|
+|Tab #2!- -!|FFFF00|bold|
+|This is the second tab.|FFFF00|normal|
+|Tab #3!- -!|null|bold|
+|This is all about the third tab.|null|normal|
+|Some info|00FF00|normal|
+

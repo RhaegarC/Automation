@@ -1,0 +1,32 @@
+!define LIST (!-RenderTables-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can render table and migrate to sharepoint
+So that I have full content migrated
+
+!1 scenarios
+![
+Given I have a table with row span and column in document
+When I run migration
+Then the table is migrated properly
+
+Given I have a table with removed rows and columns in document
+When I run migration
+Then the table is migrated properly
+
+Given I have a table with sections in document
+When I run migration
+Then the table is migrated properly
+
+Given I have a table with sections in document
+When I run migration
+Then the table is migrated properly
+
+Given I have different types of tables in document
+When I run migration
+Then the table is migrated properly
+]!

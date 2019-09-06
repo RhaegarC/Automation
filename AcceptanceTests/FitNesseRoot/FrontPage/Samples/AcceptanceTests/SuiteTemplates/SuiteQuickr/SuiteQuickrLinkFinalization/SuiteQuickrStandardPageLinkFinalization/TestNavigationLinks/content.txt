@@ -1,0 +1,22 @@
+!define PAGE_URL (${WEB_URL}/SitePages/Home.aspx)
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|SubSet Query:remote|${NMSP}:38|($driver.FindElementById("zz16_RootAspMenu").FindElementsByTagName("a"))!-|-!select @{ N='text'; E={$_.text} }, @{ N='href'; E={$_.GetAttribute("href")} }|
+|text|href|
+|Home|=~/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|Library|=~/sites\/Test\/suitequickr\/Lists\/Pages\/Library/|
+|FolderInLibrary|=~/sites\/Test\/suitequickr\/Lists\/Pages\/Library\/FolderInLibrary/|
+|Forums|=~/sites\/Test\/suitequickr\/Lists\/Team%20Discussion/|
+|Calendar|=~/sites\/Test\/suitequickr\/Lists\/Calendar/|
+|Tasks|=~/sites\/Test\/suitequickr\/Lists\/Tasks/|
+|suitesubroom|=~/sites\/Test\/QuestLinkTracking.aspx\?noteslink=notes:\/\/\/85257fef0042efc6\&orig=Quickr%7cSubsite/|
+|FolderInToc|=~/sites\/Test\/suitequickr\/Lists\/Pages\/FolderInToc/|
+|Members|=~/sites\/Test\/suitequickr\/_layouts\/user.aspx/|
+|Link in Toc|=~/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|List in Toc|=~/sites\/Test\/QuestLinkTracking.aspx\?noteslink=notes:\/\/\/85257fef0042efc3\/a103b66752dd6eed85257fef002fc33c\&orig=Quickr%7cFolder/|
+|imported file in toc|=~/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|page in toc|=~/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+|upload file in toc|=~/sites\/Test\/suitequickr\/Lists\/Pages\/DispForm.aspx\?ID=\d+/|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

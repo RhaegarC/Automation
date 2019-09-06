@@ -1,0 +1,28 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking"}|
+|removeWeb|!{sp_site:"${SITE_URL}",sp_web:"suitesubroom"}|
+|createWeb|!{sp_site:"${SITE_URL}",sp_web:"suitesubroom"}|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|removeDiscoverDatabases|!{server:"QUICKR/ec2l"}|
+
+|script|
+|stopServer86|
+
+!|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|discoverQuickrDatabases|
+|applyClassRule|!{class:"Quickr Subroom",database:"${DATABASE}",site_url:"${SITE_URL}/suitesubroom"}|
+|runDatabaseMigration|!{database:"${DATABASE}"}|
+
+|script|
+|stopServer86|

@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestPackagerObject-!)
+
+!style_green[Check the word content contains a package object icon, when click the icon, it can open object0.obj. ]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+
+
+

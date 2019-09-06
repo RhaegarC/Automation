@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"!-@Contains(subject;'TestAttachment') | @Contains(subject;'TestAttachmentCaptionChinese') | @Contains(subject;'TestImageNameChinese')| @Contains(subject;'TestTabbedTableChinese')| @Contains(subject;'TestTableCellBackgroundImageNameChinese')| @Contains(subject;'TestTableNameChinese')| @Contains(subject;'TestTableRowBackgroundImageNameChinese')| @Contains(subject;'TestTableRowLabelChinese')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

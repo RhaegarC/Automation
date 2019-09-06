@@ -1,0 +1,2 @@
+!define LIST (render2wikipage)
+!contents -R2 -g -p -f -h

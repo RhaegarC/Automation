@@ -1,0 +1,33 @@
+!*> Defines
+!define APPNAME (Simple Discussion)
+!define APPTEMPLATE (discussion8.ntf)
+!define TARGETLIST (CommandLine.Discussion2Discussion.${PAGE_NAME})
+!define JOBFILE (c:\CommandLine.Discussion2Discussion.${PAGE_NAME}.pmjob)
+
+*!
+!*> NMSP source
+-!|script|Remote|${REMOTED}:86|
+|Application|${APPNAME}|Template|${APPTEMPLATE}|
+
+-!|script|Remote|${REMOTED}:86|
+|New Document|Topic 1|
+|Add RichTextItem|Body|
+|Append Text|I want you to reply here!|
+|Save Document|
+|eval|$topic1 = $doc|
+
+-!|script|Remote|${REMOTED}:86|
+|New Document|Reply 1|
+|Add RichTextItem|Body|
+|Append Text|You wanna get the reply? You will get it right now!|
+|eval|$reply1 = $doc|
+|eval|$reply1.MakeResponse( $topic1 )|
+|eval|$reply1.Form = "Response"|
+|Save Document|
+
+*!
+!* Migrate
+-!|script|Remote|${REMOTED}|
+|JobFile|${JOBFILE}|Template|Discussion2Discussion|Web|${TARGETWEB}|List|${TARGETLIST}|Application|${APPNAME}|
+|RunJob|${JOBFILE}|
+*!

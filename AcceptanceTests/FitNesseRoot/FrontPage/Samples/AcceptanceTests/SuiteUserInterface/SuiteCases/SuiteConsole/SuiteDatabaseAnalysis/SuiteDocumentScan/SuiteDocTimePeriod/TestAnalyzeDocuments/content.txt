@@ -1,0 +1,6 @@
+!|Query:remote|${NMSP}:36|$gridData!-|-!?{$_.'Form Used' -like "Form[1-5]"}|
+|30 Days Count|30 Days Size (KB)|60 Days Count|60 Days Size (KB)|90 Days Count|90 Days Size (KB)|120 Days Count|120 Days Size (KB)|365 Days Count|365 Days Size (KB)|Total Count|Total Size (KB)|
+|1|1|1|1|2|1|2|1|3|1|3|1|
+|0|0|1|1|1|1|2|1|2|1|3|1|
+|0|0|1|1|1|1|2|1|2|1|2|1|
+|0|0|0|0|1|1|1|1|2|1|2|1|

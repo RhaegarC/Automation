@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestSameTwiceInOneDocument-!)
+
+!style_green[Check the word content contains "_Attachments/Test.xlsx" twice.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

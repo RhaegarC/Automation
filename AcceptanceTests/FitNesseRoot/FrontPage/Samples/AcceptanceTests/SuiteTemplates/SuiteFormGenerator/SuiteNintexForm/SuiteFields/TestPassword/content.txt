@@ -1,0 +1,6 @@
+'''Check Password'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MyPassword']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:TextBoxFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+|NintexFieldProperty|IsPassword|ExpectedValue|true|

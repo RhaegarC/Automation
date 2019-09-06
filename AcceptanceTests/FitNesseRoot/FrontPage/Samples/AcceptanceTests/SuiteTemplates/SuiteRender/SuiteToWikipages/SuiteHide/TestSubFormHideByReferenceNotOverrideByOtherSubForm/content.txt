@@ -1,0 +1,9 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestSubFormHideByReferenceNotOverrideByOtherSubForm.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|The Second sub form hide formula result should not override the First sub form hide formula reference result.|
+|Sub Form 1: Used Formula from Ref 1(The Pab Hide id is 1).|
+|Sub Form 2: Set 'Hide paragraph if formula is False(1 = 2)'. (The Pab Hide id is 1.)|
+|Subject: TestSubFormHideByReferenceNotOverrideByOtherSubForm|

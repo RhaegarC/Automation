@@ -1,0 +1,23 @@
+!define LIST (!-SuiteInternalNameMaintain-!)
+!define DATABASE (!-DocLibrary-!)
+!define Field1Name (fie ld1)
+!define Field2Name (!-氏名(カナ)-!)
+!define Fields (@{type='Text';name='${Field1Name}'},@{type='Text';name='${Field2Name}'})
+!define Field1InternalName (fie_x0020_ld1)
+!define Field2InternalName (_x6c0f__x540d__x0028__x30ab__x30ca__x0029_)
+!define TARGETFIELDS ("<!-Field Name='-!${Field1Name}!-' Type='Text' -!/>","<!-Field Name='-!${Field2Name}!-' Type='Text' -!/>")
+!define MAPFIELDS ("<!-Mapping Destination='-!${Field1Name}!-' SourceValue='Subject' FormatString='' -!/>","<!-Mapping Destination='-!${Field2Name}!-' SourceValue='Subject' FormatString='' -!/>")
+
+!contents -R2 -g -p -f -h
+
+As an administrator
+after migration to sharepoint, I need to keep the current internal name for mapping field.
+
+!3 scenarios:
+![
+Given there is column in the list
+Given prepare a mapping for the column with empty internal name
+When I run the migration to SharePoint
+When I save the job file
+Then I can see internal name is saved in the job(we just check the log file. because we don't save the job automatically)
+]!

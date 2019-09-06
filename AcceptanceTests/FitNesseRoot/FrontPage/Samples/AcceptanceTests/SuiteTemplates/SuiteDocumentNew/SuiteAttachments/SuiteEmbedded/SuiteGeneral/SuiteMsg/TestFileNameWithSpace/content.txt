@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestFileNameWithSpace-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|Space char.txt|

@@ -1,0 +1,79 @@
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 14)
+!include -c ReRunMigration
+
+!define TARGET_FOLDER (C:\TargetFolder\SuiteDuplicate\SuiteDuplicate\TestCreateDuplicate)
+
+!|Query:Remote|${NMSP}|GetFiles ${GET_FILES}|
+|Name|
+|Document1.pdf|
+|=~/Document1${DUPLICATION_SUFFIX}.pdf/|
+|Document2.pdf|
+|=~/Document2${DUPLICATION_SUFFIX}.pdf/|
+|Document3.pdf|
+|=~/Document3${DUPLICATION_SUFFIX}.pdf/|
+|Document1.docx|
+|=~/Document1${DUPLICATION_SUFFIX}.docx/|
+|Document2.docx|
+|=~/Document2${DUPLICATION_SUFFIX}.docx/|
+|Document3.docx|
+|=~/Document3${DUPLICATION_SUFFIX}.docx/|
+|Document1.msg|
+|=~/Document1${DUPLICATION_SUFFIX}.msg/|
+|Document2.msg|
+|=~/Document2${DUPLICATION_SUFFIX}.msg/|
+|Document3.msg|
+|=~/Document3${DUPLICATION_SUFFIX}.msg/|
+|Document1.html|
+|=~/Document1${DUPLICATION_SUFFIX}.html/|
+|Document2.html|
+|=~/Document2${DUPLICATION_SUFFIX}.html/|
+|Document3.html|
+|=~/Document3${DUPLICATION_SUFFIX}.html/|
+|_Attachments|
+
+!*> Verify links in documents
+!|${SHAREPOINT_ONLY}|
+|start|Remote|${NMSP}|
+|eval|New-Item -path ${TARGET_FOLDER} -type directory|
+|$target_file=|eval|(GetFiles /sites/Test/SuiteDuplicate/TestCreateDuplicate ${WEBAPP_URL}/sites/Test SuiteDuplicate TestCreateDuplicate !-|-! ? {$_.Name -match 'Document1-[0-9A-F]{1,15}.docx'}).Name|
+|download|${LIST_URL}/$target_file|to|${TARGET_FOLDER}/document1(1).docx|
+
+!|script|Remote|${NMSP}|
+|ParseWordDoc|document1(1)|in|${TARGET_FOLDER}|
+
+!|Query: Remote|${NMSP}|!-$document.GetElementsByTagName("w:instrText") |? {$_.innerText -like "*Attachments*"}|select InnerText-!|
+|InnerText|
+|=~/_Attachments/same_attachment.txt/|
+|=~/_Attachments/SameTitleDifferentContent.txt/|
+|=~/_Attachments/EditableAttachment${DUPLICATION_SUFFIX}.txt/|
+
+!|${SHAREPOINT_ONLY}|
+|start|Remote|${NMSP}|
+|eval|New-Item -path ${TARGET_FOLDER} -type directory|
+|$target_file=|eval|(GetFiles /sites/Test/SuiteDuplicate/TestCreateDuplicate ${WEBAPP_URL}/sites/Test SuiteDuplicate TestCreateDuplicate !-|-! ? {$_.Name -match 'Document2-[0-9A-F]{1,15}.docx'}).Name|
+|download|${LIST_URL}/$target_file|to|${TARGET_FOLDER}/document2(1).docx|
+
+!|script|Remote|${NMSP}|
+|ParseWordDoc|document2(1)|in|${TARGET_FOLDER}|
+
+!|Query: Remote|${NMSP}|!-$document.GetElementsByTagName("w:instrText") |? {$_.innerText -like "*Attachments*"}|select InnerText-!|
+|InnerText|
+|=~/_Attachments/same_attachment.txt/|
+|=~/_Attachments/SameTitleDifferentContent.txt/|
+
+!|${SHAREPOINT_ONLY}|
+|start|Remote|${NMSP}|
+|eval|New-Item -path ${TARGET_FOLDER} -type directory|
+|$target_file=|eval|(GetFiles /sites/Test/SuiteDuplicate/TestCreateDuplicate ${WEBAPP_URL}/sites/Test SuiteDuplicate TestCreateDuplicate !-|-! ? {$_.Name -match 'Document3-[0-9A-F]{1,15}.docx'}).Name|
+|download|${LIST_URL}/$target_file|to|${TARGET_FOLDER}/document3(1).docx|
+
+!|script|Remote|${NMSP}|
+|ParseWordDoc|document3(1)|in|${TARGET_FOLDER}|
+
+!|Query: Remote|${NMSP}|!-$document.GetElementsByTagName("w:instrText") |? {$_.innerText -like "*Attachments*"}|select InnerText-!|
+|InnerText|
+|=~/_Attachments/same_attachment.txt/|
+|=~/_Attachments/SameTitleDifferentContent${DUPLICATION_SUFFIX}.txt/|
+*!
+
+!include -c VerifyAttachmentsCreateDuplicate

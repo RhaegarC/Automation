@@ -1,0 +1,3 @@
+!define LIST (render2htm)
+!define SAVE_AS (htm)
+!contents -R2 -g -p -f -h

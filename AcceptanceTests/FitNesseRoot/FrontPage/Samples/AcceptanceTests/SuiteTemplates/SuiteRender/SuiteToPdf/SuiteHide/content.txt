@@ -1,0 +1,18 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can choose to hide a field by formula
+So that I can make the content consistent
+
+!1 scenarios
+![
+Given there is a section hidden by formula containing '@ClientType!="Notes"'
+When I run migration
+Then there is warning in the log that @client is always equal to Notes
+
+Given there is a text field hidden by formula containing '@ClientType!="Notes"'
+When I run migration
+Then there is warning in the log that @client is always equal to Notes
+]!

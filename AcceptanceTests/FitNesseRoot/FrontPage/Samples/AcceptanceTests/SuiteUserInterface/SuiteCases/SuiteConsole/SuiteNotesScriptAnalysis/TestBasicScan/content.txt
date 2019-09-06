@@ -1,0 +1,6 @@
+!* Original file in fitnesse C:\fitnesse\FitNesseRoot\files\nmsp\NotesScriptScanSummary.xml
+
+!|script|Remote|${NMSP}:86|
+|eval|$db = Get-Database ALL '(local)' '${DATABASE}' !-|-! Invoke-DBScanDesignScript|
+|check|eval|([xml]$db.ScriptScanSummary).NotesScriptScanSummary.NotesDatabase.totalLinesOfCode|3027|
+*!

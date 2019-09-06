@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestWordDocumentOle-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/TestWordDocumentOle.docx".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,14 @@
+!define MAP_FIELDS {<!-Mapping Destination='Files' SourceValue='BodyAttachments'/>-!}
+
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|globalOptions|!{logQueryEngineEvent:"true",globalOptionSource:"!-$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\Options.config-!"}|
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",maxRecord:${MAXRECORD},mapFields:"${MAP_FIELDS}",linkConversionType:"${LinkConversionType}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization

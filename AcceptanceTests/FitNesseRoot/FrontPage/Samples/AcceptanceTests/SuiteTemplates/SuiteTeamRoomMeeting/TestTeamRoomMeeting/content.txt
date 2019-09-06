@@ -1,0 +1,7 @@
+!define LIST (!-TestTeamRoomMeeting-!)
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",template:"TeamroomCalendar",DB:"TeamRoom",sp_site:"${SITE_URL}",sp_web:"",sp_list:"${LIST}"}|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|

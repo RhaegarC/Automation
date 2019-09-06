@@ -1,0 +1,22 @@
+'''Check the items'''
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Name|${LIST}|
+|CrazyTruck.jpg|Document|
+|123w.bmp|Document|
+|icon_yahoo.gif|Document|
+|iconWarning16.png|Document|
+|Outlook.msg|Document|
+|Special______'chars.txt|Document|
+|Space char.txt|Document|
+|prepare.txt|Document|
+|Merrimac Software w-9.pdf|Document|
+|1.xml|Document|
+|Book1.xlsx|Document|
+|Special + sign.txt|Document|
+|中文文档资料.jpg|Document|
+|Presentation_ppt.ppt|Document|
+|Book_xlsx.xlsx|Document|
+|Book_xls.xls|Document|
+|Test Docx.docx|Document|
+|Test Doc.doc|Document|
+|Presentation_pptx.pptx|Document|

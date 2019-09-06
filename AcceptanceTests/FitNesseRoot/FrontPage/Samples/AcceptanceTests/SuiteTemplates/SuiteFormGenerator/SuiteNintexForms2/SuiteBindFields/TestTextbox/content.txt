@@ -1,0 +1,11 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>Text in Textbox1</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>Text in Textbox2</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<div style="" class="ms-rtestate-field" >Text in Textbox3\s?<br />Line2\s?<br />Line3</div>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>display computed text</DIV>/|

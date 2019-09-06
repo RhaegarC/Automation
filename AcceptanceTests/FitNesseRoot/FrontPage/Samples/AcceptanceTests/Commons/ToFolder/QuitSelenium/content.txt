@@ -1,0 +1,4 @@
+'''This step is only applied in !-SharePoint-!'''
+
+!|script|
+|stopServer38|

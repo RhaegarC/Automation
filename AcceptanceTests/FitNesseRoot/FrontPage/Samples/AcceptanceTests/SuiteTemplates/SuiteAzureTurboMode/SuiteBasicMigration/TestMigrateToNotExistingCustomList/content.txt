@@ -1,0 +1,11 @@
+!define GROUP {!-SuiteBasicMigration-!}
+!define LIST {!-MigrateToNonExistingCustomList-!}
+!define DATABASE {!-DocLibrary-!}
+!define MIGRATION {!-BasicList-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}"}|
+
+|script|
+|openSharePointPage|!{url:"${WEB_URL}/Lists/${LIST}/AllItems.aspx"}|
+|check|eval|$content.contains("Render_CheckBoxes")|True|

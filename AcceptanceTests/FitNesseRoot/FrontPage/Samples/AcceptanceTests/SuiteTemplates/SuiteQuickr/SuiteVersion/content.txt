@@ -1,0 +1,21 @@
+!define PLACE (suiteversions)
+!define TEMPLATE (!-QRPageToCustomList-!)
+!define LIST (!-TestVersions-!)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate pages with multiple versions in Quickr to !-SharePoint-!
+So that I can view version history of these migrated pages in !-SharePoint-!
+
+!1 scenarios
+![
+Given pages in Quickr have multiple versions created before
+And "All versions" was selected in "Document Selection" tab of Source Data Definition
+And "When creating List, enable versioning" on the SharePoint tab was enabled
+And "Create new version (if modified)" in "If duplicate found:" was selected
+And Default Custom List template was selected as target data definition
+And "Preserve Created/Modified dates" was enabled
+When I run a migration
+Then I can view version history of these migrated pages in SharePoint
+]!

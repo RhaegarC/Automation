@@ -1,0 +1,5 @@
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteAttachments.SuiteIcon.EditJob)
+!define VIEW (Suite Icon)
+!define LIST (SuiteAttachment_SuiteIcon)
+!define SAVE_AS (docx)
+!contents -R2 -g -p -f -h

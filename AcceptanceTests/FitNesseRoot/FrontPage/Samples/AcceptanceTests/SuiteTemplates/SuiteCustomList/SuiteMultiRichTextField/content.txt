@@ -1,0 +1,25 @@
+!define APPNAME (!-SuiteAttachments-!)
+!define LIST (!-SuiteMultiRichTextField-!)
+!define MIGRATION (!-BasicList-!)
+!define FORMULA (!-subject='TestMultiRichTextField'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' Value='Categories' Alias='Category' ReturnType='String' Option='Multi'-! />","<!-Column ColumnType='RichText' Value='Body1' Alias='Body1Html' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='Body1' Alias='Body1Attachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='Body1' Alias='Body1Images' Option='Multi'-! />","<!-Column ColumnType='RichText' Value='body2' Alias='Body2Html' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='body2' Alias='Body2Attachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='body2' Alias='Body2Images' Option='Multi'-! />")
+!define TARGETFIELDS ("<!-Field Name='Category' Type='Text' NotesItems='Categories;Category' InternalName='Category'-! />","<!-Field AddToViews='DefaultView' Name='Body' Type='Note' NotesItems='BodyHtml; RenderHtml; {BodyHtml}' AllowMultiple='true' InternalName='Body'-! />","<!-Field Name='Attachments' Type='Attachments' NotesItems='Attachments; BodyAttachments; RenderAttachments; {Attachments}; Images; BodyImages; RenderImages; {BodyImages}; BodyEmbeddedObjects; RenderEmbeddedObjects;' AllowMultiple='true' InternalName=''-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Category' SourceValue='Category' FormatString=''-! />","<!-Mapping Destination='Body' SourceValue='Body1Html' FormatString=''-! />","<!-Mapping Destination='Attachments' SourceValue='Body1Attachments' FormatString=''-! />","<!-Mapping Destination='Attachments' SourceValue='Body1Images' FormatString=''-! />","<!-Mapping Destination='Body' SourceValue='Body2Html' FormatString=''-! />","<!-Mapping Destination='Attachments' SourceValue='Body2Attachments' FormatString=''-! />","<!-Mapping Destination='Attachments' SourceValue='Body2Images' FormatString=''-! />")
+!define CAML ("<View><Query></Query></View>")
+!contents -R2 -g -p -f -
+!1 user story
+As an administrator
+I can migrate multiple rich text fields to !-SharePoint-!
+So that I view them migrated and displayed properly
+
+!1 scenarios
+![
+Given multiple rich text fields in Notes contain different images and documents
+And make sure the order of images and documents are same in these rich text fields
+And these rich text fields were added in Source Data Definition
+And Custom list was selected as Target Data Definition
+And mappings for these rich text fields were added
+And "Preserve Created/Modified dates" was checked
+When I run a migration
+Then I can view them were migrated to SharePoint and displayed properly
+]!

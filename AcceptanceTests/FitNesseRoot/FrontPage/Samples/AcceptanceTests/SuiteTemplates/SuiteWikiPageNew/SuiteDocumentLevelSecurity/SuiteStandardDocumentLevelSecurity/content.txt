@@ -1,0 +1,16 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can implement document level security
+So that I can control the access of different users
+
+!1 scenarios
+![
+Given I ensure a user can read a document
+When I map the user to a sharepoint user
+And I run migration
+Then the sharepoint user can read the target document
+
+]!

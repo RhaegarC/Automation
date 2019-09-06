@@ -1,0 +1,8 @@
+!define WEB (SuiteDuplicate)
+!define LIST (${RUNNING_PAGE_NAME})
+!define APPNAME (SuiteDuplicate)
+!define TARGETFILENAME (Document1)
+!define TARGET (C:\TargetFolder\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.zip)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteDuplicate.EditJob)
+
+!contents -R2 -g -p -f -h

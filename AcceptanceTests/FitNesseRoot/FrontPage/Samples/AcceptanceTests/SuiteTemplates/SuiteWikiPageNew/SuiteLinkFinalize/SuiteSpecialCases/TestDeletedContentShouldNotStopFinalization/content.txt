@@ -1,0 +1,22 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|DeleteSPListItem|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",itemId:2}|
+
+!define LINKS (2)
+!define DOCUMENTS (2)
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|Document1|=~/${SITE}/${WEB}/${LIST}/Document2.aspx/|
+|Document3|=~/${SITE}/${WEB}/${LIST}/Document1.aspx/|

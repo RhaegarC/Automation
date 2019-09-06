@@ -1,0 +1,11 @@
+!|script|remote|${NMSP}|
+|eval|$xml = $null|
+|eval|$xml = [xml](Get-Content "${TARGET_FOLDER}\${DEFAULT_NAME}\Log_${DEFAULT_NAME}.log")|
+
+!|Query:remote|${NMSP}|!-$xml.SelectNodes("//message")|select @{N='Text'; E={$_.InnerText}}-!|
+|Text|                                                                                                                                                                                        
+|Generate Nintex form.|
+|Fields|
+|Notes Form XML successfully generated. (File path: C:\Users\Administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files\NintexForm_(local)_SuiteFormGenerator_Fields\NotesForm_NintexForm_(local)_SuiteFormGenerator_Fields.xml)|
+|Nintex Form XML successfully generated. (File path: C:\Users\Administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files\NintexForm_(local)_SuiteFormGenerator_Fields.xml)|
+|Generator completed.|

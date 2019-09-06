@@ -1,0 +1,5 @@
+!define VIEW (Suite Icon)
+!define LIST (SuiteAttachment_SuiteIcon)
+!define SAVE_AS (docx)
+!define FORMULA (!-subject='TestAttachmentIconWithMetafile'-!)
+!contents -R2 -g -p -f -h

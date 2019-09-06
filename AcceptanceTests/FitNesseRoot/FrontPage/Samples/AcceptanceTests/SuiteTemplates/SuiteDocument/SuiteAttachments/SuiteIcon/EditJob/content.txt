@@ -1,0 +1,11 @@
+'''Add source and target definitions'''
+-!|script|Remote|${NMSP}|
+|Formula|subject="TestAttachmentIconWithMetafile"|for|${JOBFILE}|
+
+#'''Replace Connecting String'''
+#-!|script|Remote|${NMSP}|
+#|ConnectionString|server="local"; database="SuiteAttachments.nsf"; zone=utc; useMetafileIcons=true|for|${JOBFILE}|
+
+
+#|Remove|TransferJob/QuerySource/ConnectionString|from|${JOBFILE}|
+#|Add|TransferJob/QuerySource/ConnectionString|InnerText|server="local"; database="SuiteAttachments.nsf"; zone=utc; useMetafileIcons=true|to|${JOBFILE}|

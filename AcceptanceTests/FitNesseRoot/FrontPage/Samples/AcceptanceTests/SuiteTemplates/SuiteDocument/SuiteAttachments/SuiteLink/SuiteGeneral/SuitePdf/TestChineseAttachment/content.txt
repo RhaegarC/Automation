@@ -1,0 +1,3 @@
+!|Query:Remote|${WEB_SCRAPER}|$list !-|-! % {[Web.Httputility]::UrlDecode($_.Action.URI)}|
+|Value|
+|=~/_Attachments/中文文档资料.jpg/|

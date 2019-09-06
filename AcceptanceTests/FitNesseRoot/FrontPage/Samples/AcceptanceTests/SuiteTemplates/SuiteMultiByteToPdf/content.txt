@@ -1,0 +1,11 @@
+!define WEB (SuiteMultiByteToPdf)
+!define APPNAME (MultiByteCharacters)
+!define MIGRATION (DocLib2DocLibPdfDoc)
+!define LIST (SuiteMultiByteToPdf)
+!define VIEW (SuiteMultiByteToPdf)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.pdf)
+!define TARGET (${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteMultiByteToPdf.EditJob)
+
+!contents -R2 -g -p -f -h

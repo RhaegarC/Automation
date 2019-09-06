@@ -1,0 +1,36 @@
+!define LIST (!-SuiteDocumentSetProvision-!)
+!define DATABASE (!-DocLibrary-!)
+!define Field1Name (Description)
+!define Field1DsInternalName (DocumentSetDescription)
+!define Field2Name (Name)
+!define Field2DsInternalName (FileLeafRef)
+!define TargetFields (<Field Name=!-'DocSet' Type='DocumentSet' InternalName=''-!><DocumentSetTemplate><DocSetContentType>NewDocumentSet</DocSetContentType><DocSetField><MappableName>Description</MappableName><InternalName>DocumentSetDescription</InternalName><Type>Note</Type><AutomapNames>DocumentSetDescription;Description</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>Gender</MappableName><InternalName>Gender</InternalName><Type>Choice</Type><AutomapNames>Gender</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>FTP Site</MappableName><InternalName>FTPSite</InternalName><Type>URL</Type><AutomapNames>FTPSite</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>Date Created</MappableName><InternalName>_DCDateCreated</InternalName><Type>DateTime</Type><AutomapNames>_DCDateCreated;DateCreated</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>Actual Work</MappableName><InternalName>ActualWork</InternalName><Type>Number</Type><AutomapNames>ActualWork</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>Assigned To</MappableName><InternalName>AssignedTo</InternalName><Type>User</Type><AutomapNames>AssignedTo</AutomapNames><Required>false</Required></DocSetField><DocSetField><MappableName>Wiki Categories</MappableName><InternalName>Wiki_x0020_Page_x0020_Categories</InternalName><Type>ManagedMetadata</Type><AutomapNames>WikiPageCategories;WikiCategories</AutomapNames><Required>false</Required><ProvisionNewTaxonomyTerms>true</ProvisionNewTaxonomyTerms></DocSetField><DocSetField><MappableName>Name</MappableName><Type>Text</Type><AutomapNames>Subject;Title;{Name}</AutomapNames><Required>true</Required></DocSetField></DocumentSetTemplate></Field>-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate a Document Library to Document Set
+So that I can view those documents in Document Set in Office365
+
+!1 scenarios:
+![
+Given there is field in the Document Set
+Given prepare a field with empty internal name and same name
+When I run the migration to SharePoint
+Then I can see no field is created in the Document Set
+Then I can see data is migrated to the field
+
+Given Windows Identity Foundation 3.5 was installed
+And the type of SharePoint Environments was set to "SharePoint web services (Office 365 Authentication)"
+And the Azure Turbo Mode was enabled
+And Custom Document Set was added in SharePoint: Site settings -> Site content types
+And Custom Document Set was added and set in the Data Fields of Target Data Definition (Designer)
+And the source values mapping to the fields of Custom Document Set was added in Map Data tab (Designer)
+When I run a migration
+Then I can view those documents in Document Set in SharePoint
+When I click into a document set
+And I click the link "View All Properties"
+Then I can view all the mapped property values in the properties page
+]!

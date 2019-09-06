@@ -1,0 +1,3 @@
+!|Query:remote|${NMSP}|Get-ChildItem "${NMSP_Install_Directory_Client}\Bin\Target Files\New Folder\${FORM_NAME}" !-| select Name-!|
+|Name|
+|NotesForm_${FORM_NAME}.xml|

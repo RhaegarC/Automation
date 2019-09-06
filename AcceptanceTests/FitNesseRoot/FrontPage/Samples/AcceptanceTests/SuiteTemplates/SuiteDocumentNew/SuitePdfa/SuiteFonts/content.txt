@@ -1,0 +1,4 @@
+!define VIEW (!-Suite Fonts-!)
+!define LIST (!-SuiteFonts-!)
+!define UNIQUE_ENV (false) 
+!contents -R2 -g -p -f -h

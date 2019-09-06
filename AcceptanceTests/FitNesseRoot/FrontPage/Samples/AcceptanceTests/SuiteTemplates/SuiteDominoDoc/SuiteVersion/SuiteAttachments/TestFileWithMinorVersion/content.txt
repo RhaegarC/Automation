@@ -1,0 +1,6 @@
+|script|
+|getVersionItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View Scope='RecursiveAll'><Query><Where><Eq><FieldRef Name='FileLeafRef' /><Value Type='Text'>UserMappings.xml</Value></Eq></Where></Query></View>"}|
+
+!|Query:remote|${NMSP}|$items.fieldValues !-|-! select @{N='IsCurrentVersion';E={$_['_IsCurrentVersion']}},@{N='VersionNumber';E={$_['_UIVersionString']}}|
+|IsCurrentVersion|VersionNumber|
+|true|0.1|

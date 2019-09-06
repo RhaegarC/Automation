@@ -1,0 +1,6 @@
+!|Query:Remote|${NMSP}|$html !-|-! GetAllHrefsFromText|
+|href|content|
+|http://dell.com/||
+|http://quest.com/||
+
+

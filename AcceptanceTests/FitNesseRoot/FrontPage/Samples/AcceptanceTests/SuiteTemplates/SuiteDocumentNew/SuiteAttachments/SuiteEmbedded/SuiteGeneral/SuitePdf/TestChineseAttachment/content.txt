@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestChineseAttachment-!)
+
+!style_green[Check the pdf embedded files contains "中文文档资料.jpg".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

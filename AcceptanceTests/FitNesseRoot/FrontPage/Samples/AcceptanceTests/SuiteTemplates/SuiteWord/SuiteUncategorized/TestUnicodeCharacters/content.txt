@@ -1,0 +1,14 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|beginĂ|
+|Σ|
+|end|
+|=~/Arial uppercase A with little U over it:/|
+|Ă|
+|=~/Century font with summation symbol:/|
+|Σ|
+|=~/MS Sans Serif font: cap A with tilde over it:/|
+|Ã|
+|Special unicode characters that are not valid in InfoPath (pasted from customer support request #950564):|
+|(the Fund)|
+|(Vehicle)|

@@ -1,0 +1,12 @@
+!define CAML (!-"<View Scope='RecursiveAll'><Query><Where><Contains><FieldRef Name ='BaseName'/><Value Type = 'Note'>CreatedBy</Value></Contains></Where></Query></View>"-!)
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:${CAML}}|
+
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['FileLeafRef']} }, @{ N='Author'; E={$_['Author'].LookupValue} }, @{ N='Editor'; E={$_['Editor'].LookupValue} }|
+|Title|Author|Editor|
+|CreatedByEditor1|VELASKEC\uservladimir|VELASKEC\uservladimir|
+|CreatedByEditor11|VELASKEC\uservladimir|VELASKEC\userkonstantin|
+|CreatedByAdmin|VELASKEC\userkonstantin|VELASKEC\userkonstantin|
+

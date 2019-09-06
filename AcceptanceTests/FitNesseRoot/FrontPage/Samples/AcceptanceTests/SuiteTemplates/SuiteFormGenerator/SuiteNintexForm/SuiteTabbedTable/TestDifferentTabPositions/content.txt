@@ -1,0 +1,50 @@
+!*> Check tab on the buttom
+!|script|remote|${NMSP}|
+|GetTabInfo|3|
+
+'''Check the controls exist'''
+!|script|remote|${NMSP}|
+|GetNintexFormControl|$ele.Id|controlType|d2p1:PanelFormControlProperties|
+|GetNintexFormControl|$ele.TabbedId|controlType|d2p1:ChoiceFormControlProperties|
+
+'''Check the rules'''
+!|Query:remote|${NMSP}|$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$ele.TabbedId+'*'} !-|-! select ExpressionValue|
+|ExpressionValue|
+|=~/\{Control:\S*\}\s*!= "Tab1_Bottom"/|
+|=~/\{Control:\S*\}\s*!= "Tab2"/|
+|=~/\{Control:\S*\}\s*!= "Tab3"/|
+*!
+
+!*> Check tab on the left
+!|script|remote|${NMSP}|
+|GetTabInfo|4|
+
+'''Check the controls exist'''
+!|script|remote|${NMSP}|
+|GetNintexFormControl|$ele.Id|controlType|d2p1:PanelFormControlProperties|
+|GetNintexFormControl|$ele.TabbedId|controlType|d2p1:ChoiceFormControlProperties|
+
+'''Check the rules'''
+!|Query:remote|${NMSP}|$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$ele.TabbedId+'*'} !-|-! select ExpressionValue|
+|ExpressionValue|
+|=~/\{Control:\S*\}\s*!= "Tab1"/|
+|=~/\{Control:\S*\}\s*!= "Tab2_left"/|
+|=~/\{Control:\S*\}\s*!= "Tab3"/|
+*!
+
+!*> Check tab on the right
+!|script|remote|${NMSP}|
+|GetTabInfo|5|
+
+'''Check the controls exist'''
+!|script|remote|${NMSP}|
+|GetNintexFormControl|$ele.Id|controlType|d2p1:PanelFormControlProperties|
+|GetNintexFormControl|$ele.TabbedId|controlType|d2p1:ChoiceFormControlProperties|
+
+'''Check the rules'''
+!|Query:remote|${NMSP}|$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$ele.TabbedId+'*'} !-|-! select ExpressionValue|
+|ExpressionValue|
+|=~/\{Control:\S*\}\s*!= "Tab1"/|
+|=~/\{Control:\S*\}\s*!= "Tab2"/|
+|=~/\{Control:\S*\}\s*!= "Tab3_right"/|
+*!

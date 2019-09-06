@@ -1,0 +1,6 @@
+'' Git #433''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement| 
+|text|indLeft|
+|Cell1|null|
+|=~/This is a test for merged cell with font style 1/|null|
+|=~/This is a test for merged cell with font style 2/|null|

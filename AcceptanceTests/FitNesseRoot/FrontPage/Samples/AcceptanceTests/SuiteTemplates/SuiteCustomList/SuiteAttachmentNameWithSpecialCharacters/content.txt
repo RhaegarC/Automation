@@ -1,0 +1,22 @@
+!define MIGRATION (!-BasicList-!)
+!define LIST (!-SuiteAttachmentNameWithSpecialCharacters-!)
+!define APPNAME (!-SuiteAttachments-!)
+!define FORMULA (!-subject='TestVersionConflictError'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Value='Body' Alias='BodyHtml' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='Body' Alias='BodyAttachments' Option='Multi'-! />")
+!define TARGETFIELDS ("<!-Field AddToViews='DefaultView' Name='Content' Type='Note'-! />","<!-Field AlternateFolder='_attachments' Name='Attachments' Type='Attachments' AllowMultiple='true'-! />")
+!define MAPFIELDS ("<Mapping !-Destination='Content' SourceValue='BodyHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can run a migration with attachments which have special characters
+So that after migration completed, a version conflict Information log can be found in Log Details instead of an Error
+
+!1 scenarios
+![
+Given attachements with special characters was selected in Data Source
+And "Preserve Created/Modified dates" was enabled in Map Data tab
+When I run a migration
+Then I can not view any version conflict error in Log dialog
+And I can view version conflict Information log in Log Details tab
+]!

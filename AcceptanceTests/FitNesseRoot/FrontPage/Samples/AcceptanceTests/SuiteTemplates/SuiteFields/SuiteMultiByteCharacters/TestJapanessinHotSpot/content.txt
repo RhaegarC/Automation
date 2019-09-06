@@ -1,0 +1,8 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestJapanessinHotSpot.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"A",selector:!-"href"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|href|
+|file://local/unicodetest/日本語.txt|

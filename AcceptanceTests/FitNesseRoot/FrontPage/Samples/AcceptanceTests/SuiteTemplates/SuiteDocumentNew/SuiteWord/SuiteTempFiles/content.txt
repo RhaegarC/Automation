@@ -1,0 +1,24 @@
+!define DATABASE (!-SuiteRender-!)
+!define WEB (!-SuiteTempFiles-!)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST}) 
+!define LIST (!-SuiteRenderForTempFiles-!)
+!define MIGRATION (!-Render2WordDoc-!)
+
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate icons to the target no matter how many documents are migrated
+So that there is a complete view of the documents
+
+!3 scenarios:
+![
+Given 65535 temp files are generated during migration
+Given I have documents with radio buttons to migrate
+When I run the migration
+Then the radio buttons are migrated successfully
+
+Given 65535 temp files are generated during migration
+Given I have documents with link icons to migrate
+When I run the migration
+Then the icons are migrated successfully
+]!

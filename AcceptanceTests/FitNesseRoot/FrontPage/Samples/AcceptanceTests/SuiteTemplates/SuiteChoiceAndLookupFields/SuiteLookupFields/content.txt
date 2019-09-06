@@ -1,0 +1,7 @@
+!* References
+|[[Description/Discussion][https://commons.quest.com/docs/DOC-8659]]|
+|[[Review][https://commons.quest.com/message/43903]]|
+*!
+!define TARGET_FIELD_TYPE (Lookup)
+!define TARGETFIELDS ("<!-Field MultipleValues='-!${MultipleValues}!-' Name='Category' AddToViews='-!${AddToViews}!-' LookupColumn='Title' Type='-!${TARGET_FIELD_TYPE}!-' AddMissingChoices='-!${AddMissingChoices}!-' IsRequired='false'-!><LookupTarget><ListName>${LookupListName}</ListName></LookupTarget></Field>")
+!contents -R2 -g -p -f -h

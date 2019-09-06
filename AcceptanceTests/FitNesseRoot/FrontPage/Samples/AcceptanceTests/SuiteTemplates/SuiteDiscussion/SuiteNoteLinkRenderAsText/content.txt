@@ -1,0 +1,3 @@
+!define LIST (!-DiscussionListPlainText-!)
+!define DATABASE (!-SimpleObjectsLib-!)
+!contents -R2 -g -p -f -h

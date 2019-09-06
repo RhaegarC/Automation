@@ -1,0 +1,22 @@
+!define DATABASE (!-pouch_empty-!)
+!define LIST (SuiteRender_RenderInvalidForm)
+!define SAVE_AS (pdf)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can select a database which contains invalid forms in Notes tab
+So that I can preview the source data of this database without Notes crash
+ 
+!1 scenarios
+![
+Given a database which contains invalid forms in Notes tab was selected
+When I Load a Source Data Definition and clicking Preview button
+And I click the Test button on the Preview Data Query tab of Source Data Definition(Notes) dialog
+Then I can see the queried results appears without Notes crash
+
+When I Load "Render" as Source Data Definition
+And I run a migration
+Then I can see the migrated data in !-SharePoint-!
+]!

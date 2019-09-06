@@ -1,0 +1,3 @@
+!|Ordered Query:Remote|${SHAREPOINT}|Get-Content c:\msi\setup.log !-|-! select-string EnumIISAppPools|
+|Line|
+|=~/Skipping action: EnumIISAppPools/|

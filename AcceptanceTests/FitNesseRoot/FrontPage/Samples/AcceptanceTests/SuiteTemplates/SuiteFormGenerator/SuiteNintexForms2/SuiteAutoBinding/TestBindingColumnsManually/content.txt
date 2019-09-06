@@ -1,0 +1,16 @@
+!define LIST (!-BindingManually-!)
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"basicList",sourceFields:"<!-Column ColumnType='Item' Value='Textbox1' ReturnType='String' -!/>"!-,-!"<!-Column ColumnType='Item' Value='Textbox2' ReturnType='String' -!/>",targetFields:"<!-Field Name='Column1' Type='Text' -!/>"!-,-!"<!-Field Name='Column2' Type='Text' -!/>",mapFields:"<!-Mapping Destination='Column1' SourceValue='Textbox1' -!/>"!-,-!"<!-Mapping Destination='Column2' SourceValue='Textbox2' -!/>"}|
+
+|script|
+|generateNintexForm|!{db:"${DATABASE}",form:"!-ForBinding-!",bind:!-@{"Row 3"="Column1";"Row 4"="Column2"}-!}|
+
+|script|
+|!-PublishNintexForm-!|!{targetFile:"${TARGET_FILE}",url:"${WEB_URL}",listName:"${LIST}",contentType:"item"}|
+
+|script|
+|openSharePointPage|!{url:"${TARGET_PAGE}"}|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>content in textbox1</DIV>.*<DIV class='ms-rtestate-field'>content in textbox2</DIV>/|

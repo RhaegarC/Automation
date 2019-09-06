@@ -1,0 +1,19 @@
+!define LIST (!-SuiteHideFormulaLost-!)
+!define SAVE_AS (htm)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate documents which was set as hide formula to sharePoint
+So that I can view these documents just like the normal documents in sharePoint
+
+!1 scenarios
+![
+Given a normal Notes Data Source( not contains hide formula settings documents) was selected
+When I render the source field type as Render and run migration
+Then I can view these documents in sharePoint
+
+Given a Notes Data Source which contains hide formula settings documents was selected
+When I render the source field type as Render and run migration
+Then I can view these documents in sharePoint 
+]!

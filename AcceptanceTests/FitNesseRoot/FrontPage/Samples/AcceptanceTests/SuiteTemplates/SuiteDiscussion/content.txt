@@ -1,0 +1,4 @@
+!define WEB (Discussion)
+!define APPNAME (Discussionjs)
+!define MIGRATION (!-Discussion2Discussion-!)
+!contents -R2 -g -p -f -h

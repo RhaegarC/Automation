@@ -1,0 +1,7 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'TABLE'|properties|'parentElement.className'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|parentElement.className|
+|section|
+!include -c NoExtraIndentForTable

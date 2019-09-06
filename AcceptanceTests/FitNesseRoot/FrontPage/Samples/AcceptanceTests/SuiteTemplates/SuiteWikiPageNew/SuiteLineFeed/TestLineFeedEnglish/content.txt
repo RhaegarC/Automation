@@ -1,0 +1,19 @@
+!define PAGENAME (!-TestLineFeedEnglish-!)
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"DIV",filter:"!-`$_.Style.cssText -and `$_.Style.cssText.ToLower().Contains('text-align: left')-!",selector:"innerText"}|
+
+!* Document has 9 <BR> tags
+!define NUMBER_OF_BR (6)
+*!
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|=~/AAAAAA/|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"BR"}|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-$tags = @($elements | select tagName)-!|
+|check|eval|$tags.Count|${NUMBER_OF_BR}|

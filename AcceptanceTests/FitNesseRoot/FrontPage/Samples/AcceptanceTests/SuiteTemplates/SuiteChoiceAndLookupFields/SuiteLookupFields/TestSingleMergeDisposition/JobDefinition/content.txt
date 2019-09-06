@@ -1,0 +1,5 @@
+!define AddMissingChoices (true)
+!define MultipleValues (false)
+!define MultiValueDisposition (Merge)
+!define LIST (${TARGET_FIELD_TYPE}_TestSingleMergeDisposition)
+!define LookupListName (!-LookupListTestSingleMergeDisposition-!)

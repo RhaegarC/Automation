@@ -1,0 +1,6 @@
+'''Case 2533754-1'''
+!define LIST (!-SuiteLineFeedList-!)
+!define VIEW (!-SuiteLineFeed-!)
+!define APPNAME (!-discp1-!)
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!contents -R2 -g -p -f -h

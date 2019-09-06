@@ -1,0 +1,7 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | select @{N='Label'; E={$_.innerText.Trim()}}-!|
+|Label|
+|中文信息|
+|TAB_LABEL_AND_CAPTION|
+|| 
+
+

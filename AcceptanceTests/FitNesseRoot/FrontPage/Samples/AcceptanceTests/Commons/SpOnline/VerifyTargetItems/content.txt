@@ -1,0 +1,53 @@
+#|comment: !style_red['''IMPORTANT!''']|
+#|1. require variable PAGE_URL, example: !-!define PAGE_URL (${WEB_URL}/SitePages/Home.aspx")-!|
+#|2. !-copy the powershell script to the powershell ise in your local machine to check how to get the content for the verification:
+#Add-Type -Path C:\selenium\WebDriver.dll
+#$driver = New-Object OpenQA.Selenium.IE.InternetExplorerDriver
+#replace the host of the url with -!${SHAREPOINT}!- in your local environment
+#$driver.Url="-!${PAGE_URL}"|
+#|3. all the verification runs at '''{NMSP}:38'''|
+#|4. put the query table after this step, e.g:!-
+#|Query:Remote|${NMSP}|$driver.FindElementByClassName("ms-rtestate-field").FindElementsByTagName("a")|select @{ N='text'; E={$_.text} }, @{ N='href'; E={$_.GetAttribute("href")} |
+#|text|href|-!|
+#|5. DO NOT forget to quit selenium after verification: !- !include -!<!-SuiteCases.GlobalSteps.QuitSelenium-!|
+
+#|script|
+#|startServer38|
+
+
+#!|script|remote|${NMSP}:38|
+#|eval|Add-Type -Path C:\selenium\WebDriver.dll|
+#|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+#|eval|$driver = New-Object OpenQA.Selenium.Chrome.ChromeDriver|
+#|eval|$driver.Url="${PAGE_URL}"|
+
+#|script|
+#|waitElementExists|!{by:"Name",value:"login"}|
+
+#!|script|remote|${NMSP}:38|
+#|eval|$driver.FindElementByName("login").SendKeys("${Admin}")|
+#|eval|$driver.FindElementByName("passwd").SendKeys("${O365_PASSWORD}")|
+#|eval|sleep 5|
+#|eval|$driver.FindElementById("cred_sign_in_button").Click()|
+
+#|script|
+#|waitElementExists|!{by:"className",value:"StandaloneList-listView"}|
+
+#!|script|remote|${NMSP}:38|
+#|eval|$rows=$driver.FindElementsByClassName("ms-DetailsRow-fields")|
+#|eval|$titles=$driver.FindElementsByClassName("ms-DetailsHeader-cellWrapper").text !-|-! ?{$_.trim() -ne ""} |
+#|eval|!-$elements=@()
+#foreach($r in $rows){
+#$element=New-Object PSObject
+#$tds=$r.FindElements([OpenQA.Selenium.By]::CssSelector("div[data-automationid='DetailsRowCell']")).text | ?{$_.trim() -ne ""}
+#0..($titles.Count-1)|%{$element | add-member -NotePropertyName $titles[$_] -NotePropertyValue $tds[$_]}
+#$elements+=$element
+#}-!|
+#|show|eval|$elements !-|-! out-string|
+
+!|script|remote|${NMSP}|
+|eval|$elements = GetItems ${SITE_URL} ${WEB} ${LIST}|
+
+
+
+

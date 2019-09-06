@@ -1,0 +1,24 @@
+!define DUPLICATE (!-Skip-!)
+
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}", view:"${VIEW}", properties:!-@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Files']";name="MaxItemsPerFolder";value="-!${MaxItemsPerFolder}!-"}-!, duplicateHandle:"${DUPLICATE}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 0)
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+!|script|Remote|${NMSP}|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|$results = ([xml]$log).Log.summary.results|
+|eval|$readCount=([int]$results.documentsRead)|
+|show|eval|$readCount|
+|eval|$writtenCount=([int]$results.documentsWritten)|
+|show|eval|$writtenCount|
+|check|eval|${READ_WRITTEN_PATTERN}|True|
+
+!include -c <SuiteMaxNumberPerFolder.VerifyDuplciateInMultiFolders

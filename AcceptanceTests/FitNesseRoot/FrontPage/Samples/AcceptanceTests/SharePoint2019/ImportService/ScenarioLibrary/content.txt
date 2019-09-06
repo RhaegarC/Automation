@@ -1,0 +1,14 @@
+|comment: parameters for !style_blue['''linkFinalize''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[linkNumber]|yes|int|6||
+|!style_blue[docNumber]|yes|int|3||
+
+!|scenario|linkFinalize|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|Add-Type -Path C:\WatiN\WatiN.Core.dll|
+|eval|$browser = new-object WatiN.Core.IE("${CA}/_admin/${NMSP_Company_Name}/NMSP_LinkFinalizer.aspx?SiteCollection=${SITE_URL}",$true)|
+|eval|$browser.Button([WatiN.Core.Find]::ById('ctl00_PlaceHolderMain_ButtonSection_Buttons_FinalizeButton')).click()|
+|show|eval|$browser.WaitUntilContainsText('Finalization complete')|
+|check|eval|$browser.Span([WatiN.Core.Find]::ById('ctl00_PlaceHolderMain_ResultsSection_Results_lblRecords')).Text -eq "Successfully finalized $($hash.linkNumber) links in $($hash.docNumber) documents"|True|
+|eval|$browser.close()|

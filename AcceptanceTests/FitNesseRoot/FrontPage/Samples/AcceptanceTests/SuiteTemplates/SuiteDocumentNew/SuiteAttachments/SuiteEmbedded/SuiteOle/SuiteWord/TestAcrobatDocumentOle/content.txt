@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestAcrobatDocumentOle-!)
+
+!note !-ProgId-! does not reflect the original !-ProgId-! in Lotus Notes. In Lotus Notes it is '''Acrobat.Document.11'''
+!style_green[Check the word embedded files contains "object0.pdf".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

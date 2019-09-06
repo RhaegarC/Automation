@@ -1,0 +1,50 @@
+!|script|Remote|${NMSP}|
+|eval|remove-item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Options.config" -force -ea silentlycontinue|
+|eval|Remove-Item -Recurse -Force "${PARENT_PATH}"|
+
+!|script|remote|${NMSP}|
+|eval|New-Item -ItemType directory -Path "${PARENT_PATH}${EXIST_JOB_FILE_PATH_NAME}"|
+|eval|New-Item -ItemType directory -Path "${PARENT_PATH}${EXIST_DATA_DEFINITION_PATH_NAME}"|
+|eval|New-Item -ItemType directory -Path "${PARENT_PATH}${EXIST_LOG_FILE_PATH_NAME}"|
+
+|script|
+|startUiautomation|
+
+!|script|
+|startDesigner|
+|importUilib|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|click "Options"|
+|eval|click "NotesTab" $subtitutions|
+|eval|setText "NotesPassword" "111" $subtitutions|
+|eval|click "GeneralTab" $subtitutions|
+|eval|click "BrowseJobPath" $subtitutions|
+|eval|expandTreeItem "Computer"|
+|eval|expandTreeItem "DiskC"|
+|eval|expandTreeItem "OptionsFolder"|
+|eval|click "OptionSubFolder" @{"OPTIONSUBFOLDER"="${EXIST_JOB_FILE_PATH_NAME}"}|
+|eval|click "FolderOK"|
+|eval|click "BrowseDefinitionPath" $subtitutions|
+|eval|expandTreeItem "DiskC"|
+|eval|expandTreeItem "OptionsFolder"|
+|eval|click "OptionSubFolder" @{"OPTIONSUBFOLDER"="${EXIST_DATA_DEFINITION_PATH_NAME}"}|
+|eval|click "FolderOK"|
+|eval|click "BrowseLogPath" $subtitutions|
+|eval|expandTreeItem "DiskC"|
+|eval|expandTreeItem "OptionsFolder"|
+|eval|treeScroll "FolderTree" 100 20|
+|eval|click "OptionSubFolder" @{"OPTIONSUBFOLDER"="${EXIST_LOG_FILE_PATH_NAME}"}|
+|eval|click "FolderOK"|
+|eval|click "OptionOK" $subtitutions|
+|eval|sleep 2|
+
+
+!|script|
+|startDesigner|
+|eval|click "Options"|
+|check|eval|getControlName "JobPath" $subtitutions|${PARENT_PATH}${EXIST_JOB_FILE_PATH_NAME}|
+|check|eval|getControlName "DefinitionPath" $subtitutions|${PARENT_PATH}${EXIST_DATA_DEFINITION_PATH_NAME}|
+|check|eval|getControlName "LogPath" $subtitutions|${PARENT_PATH}${EXIST_LOG_FILE_PATH_NAME}|
+
+|script|
+|stopUiautomation|

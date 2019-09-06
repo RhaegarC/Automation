@@ -1,0 +1,5 @@
+!|script|Remote|${NMSP}|
+|show|eval|$list = $ctx.Site.OpenWeb('${WEB}').Lists.GetByTitle('${LIST}')|
+|show|eval|$list.DeleteObject()|
+|show|eval|$ctx.Load($list)|
+|check|eval|try{ $ctx.ExecuteQuery()}catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message }|=~/List .*does not exist!-|-!^$/|

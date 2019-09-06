@@ -1,0 +1,21 @@
+!define DATABASE {!-LinkTracking-!}
+!define LIST {!-SuiteLinkFinalize-!}
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!define SqlServer {NMSP}
+!define NmspDatabase {QuestLinkTracking}
+
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can finalize the links in the migrated list items 
+So that I can redirect to the target list items in !-SharePoint-!
+And the URL of the custom list item in the finalization log is the same as expected
+
+!1 scenarios:
+![
+Given list items with links were migrated
+When I finalize them
+Then I can redirect to the target list items in SharePoint
+And the URL of the custom list item in the finalization log is the same as expected
+]!

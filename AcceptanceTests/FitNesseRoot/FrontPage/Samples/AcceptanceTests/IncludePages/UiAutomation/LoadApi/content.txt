@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP36}|
+|eval|Import-Module C:\UIAutomation|

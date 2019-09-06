@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestWindowsMetaFile-!)
+
+!style_green[Check the word content contains two pictures.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

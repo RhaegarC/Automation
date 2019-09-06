@@ -1,0 +1,17 @@
+|script|
+|deleteTaxonomyTermSet|!{sp_site:"${SITE_URL}",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+
+|script|
+|createTaxonomyTermSet|!{sp_site:"${SITE_URL}",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|addCategoryColumn|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",taggingField:"${TAGGINGFIELD}"}|
+
+|script|
+|addSPListFields|!{web:"${WEB_URL}",list:"${LIST}",fields:"<!-Field Type='TaxonomyFieldType' Name='SuiteAutoCreateTerm' DisplayName='SuiteAutoCreateTerm' -!/>"}|
+
+|script|
+|runMigrationToExistingList|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",addNodes:!-@{path="TransferJob/SharePointTargetDefinition";-!node="${TARGETFIELDS}"!-}-!,mapFields:"<Mapping !-Destination='SuiteAutoCreateTerm' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />"}|

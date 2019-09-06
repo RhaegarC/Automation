@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestHideFormulaLost-!)
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

@@ -1,0 +1,7 @@
+!include -c <AcceptanceTests.IncludePages.RunMigration
+
+!|script|Remote|${NMSP}|
+|$SecondPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$SecondDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$SecondMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$SecondHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|

@@ -1,0 +1,6 @@
+!define LIST (!-SuiteImages-!)
+!define SAVE_AS (docx)
+!define MIGRATION (!-DocLib2Document-!)
+!define APPNAME (!-SuiteImages-!)
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,21 @@
+|script|
+|startUiautomation|
+
+|script|
+|remoteSharepointOptions|!{template:"${MODE}.${AUTH}",remoteSharePointSite:"SP2016/sites/Test"}|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|click "Options"|
+|eval|click "SharePointTab" $subtitutions|
+|eval|clickMenu "TestLink" $subtitutions|
+|eval|sleep 5|
+|check|eval|(getDocumentRangeText "ValResult").IndexOf("The SharePoint client web services can be used to migrate to the site at")|0|
+|eval|click "BtnTestOK"|
+|eval|click "OptionCancel" $subtitutions|
+|eval|click "BtnClose"|
+
+|script|
+|stopUiautomation|

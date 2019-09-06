@@ -1,0 +1,13 @@
+!define PAGENAME (!-TestOrderedList-!)
+
+!style_green[Check the word content contains text shown as below (the font is Arial, black, 11):]
+-------------
+The steps 1 - 5.
+
+1.   Select 1.
+2.   Select 2.
+3.   Select 3.
+4.   Select 4.
+5.   Select 5.
+-------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

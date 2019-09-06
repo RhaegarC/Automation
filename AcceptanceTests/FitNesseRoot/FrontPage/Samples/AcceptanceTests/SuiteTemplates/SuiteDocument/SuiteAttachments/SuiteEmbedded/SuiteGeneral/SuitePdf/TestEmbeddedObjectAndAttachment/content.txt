@@ -1,0 +1,9 @@
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+|object0.xlsx|
+|prepare.txt|
+
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles.Params|
+|CreationDate|ModDate|
+|2/4/2013 4:35:13 PM|2/5/2013 10:12:33 AM|
+|1/1/0001 12:00:00 AM|1/1/0001 12:00:00 AM|

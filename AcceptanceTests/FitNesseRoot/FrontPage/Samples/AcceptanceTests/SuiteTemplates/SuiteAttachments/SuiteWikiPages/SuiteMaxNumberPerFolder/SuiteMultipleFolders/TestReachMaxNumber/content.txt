@@ -1,0 +1,24 @@
+!define MaxItemsPerFolder (7)
+!include -c <NmSp.AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|Query:Remote|${NMSP}|GetFiles ${GET_FILES}|
+|Name|
+|${FOLDERNAME}|
+|TestAttachmentCountInAlternateFolder2.aspx|
+|TestAttachmentCountInAlternateFolder1.aspx|
+
+!define ATTACHMENTFOLDER (${FOLDERNAME})
+!|Query:Remote|${NMSP}|GetFiles ${GET_ATTACHMENTFILES}|
+|Name|
+|Attachment1.txt|
+|Attachment2.txt|
+|Attachment3.txt|
+|Attachment4.txt|
+|Attachment5.txt|
+|Attachment6.txt|
+|same attachment.txt|
+
+!define VERIFY_FILENAME (Attachment1.txt)
+!define VERIFY_DOCUMENT (TestAttachmentCountInAlternateFolder1.aspx)
+!define VERIFY_FOLDER (${FOLDERNAME})
+!include -c <SuiteMaxNumberPerFolder.VerifyAttachmentLink

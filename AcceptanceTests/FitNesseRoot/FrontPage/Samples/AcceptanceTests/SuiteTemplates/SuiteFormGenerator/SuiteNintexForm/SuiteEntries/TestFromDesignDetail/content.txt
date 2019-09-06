@@ -1,0 +1,15 @@
+!* Simulate Starting the program from design detail
+!|script|remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE} -Form ${FORM_NAME}'!-|-! out-null|
+*!
+
+!|script|remote|${NMSP36}|
+|GetObject|ConnectionString|
+|check|eval|$object.Current.IsEnabled|False|
+|check|eval|$object !-|-! Get-UIAEditText|server="local"; database="${DATABASE}"; zone=utc|
+
+!|script|remote|${NMSP36}|
+|GetObject|Fields|
+|check|eval|$object.Current.IsEnabled|False|
+|check|eval|$object !-|-! Get-UIAListItemSelectionItemState|True|
+

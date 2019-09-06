@@ -1,0 +1,23 @@
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|click "LoadTransferJob"|
+|eval|setText "JobFile" "'C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files\DocLibrary to InfoPath.pmjob'"|
+|eval|click "OpenFile"|
+|eval|expandMenu "ToolsMenu"|
+|eval|clickMenu "InfoPathMenu"|
+|check|eval|(getControlName "LbFormLibrary").Trim().IndexOf("SharePoint Form Library.")|107|
+|eval|$data = getControlName "LbList"|
+|check|eval|$data.IndexOf("existing SharePoint List.")|91|
+|check|eval|$data.IndexOf("SharePoint Enterprise Edition")|139|
+|eval|click "RbList"|
+|eval|click "BtnOK"|
+|check|eval|(getControlName "LbInfoPath").Trim().IndexOf("SharePoint List.")|108|
+|eval|click "BtnCancel"|
+|eval|click "BtnClose"|
+
+|script|
+|stopUiautomation|

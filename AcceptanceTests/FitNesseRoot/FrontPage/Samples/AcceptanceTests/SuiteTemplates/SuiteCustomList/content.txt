@@ -1,0 +1,2 @@
+!define WEB (!-SuiteCustomList-!)
+!contents -R2 -g -p -f -h

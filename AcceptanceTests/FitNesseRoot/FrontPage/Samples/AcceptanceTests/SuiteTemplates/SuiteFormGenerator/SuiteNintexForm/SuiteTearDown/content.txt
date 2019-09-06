@@ -1,0 +1,6 @@
+!include -c .NmSp.AcceptanceTests.IncludePages.StopServer
+
+!*> Close all processes
+!|script|Remote|${NMSP}|
+|eval|!-'nmsp','mmc','FormGenerator' | % {get-process $_} | stop-process-!|
+*!

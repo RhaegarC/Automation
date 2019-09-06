@@ -1,0 +1,3 @@
+!define EXE (NMSP.exe)
+!define PROCESS_NAME (nmsp)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,4 @@
+!define TARGET_FIELD {""}
+!define MAPPING_FIELD {<!-Mapping Destination='Folder' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}' -!/>}
+
+!include <SuiteMappingToFolder.SuiteSetUp

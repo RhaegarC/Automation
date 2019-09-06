@@ -1,0 +1,7 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$web = Get-SPWeb '${WEB_URL}'|
+|eval|$docTemp = [Microsoft.SharePoint.SPListTemplateType]::DocumentLibrary|
+|eval|$listDescription = '${LIST}'|
+|eval|$listName = '${LIST}'|
+|eval|$web.Lists.Add($listName,$listDescription,$docTemp)|
+|eval|$web.Update()|

@@ -1,0 +1,19 @@
+!|Query:Remote|${NMSP}|$html !-|-! GetAllSpanText|
+|text|style|content|
+|Text for existing font - Arial, red, 8|color:#ff0000; font-family:Arial; font-size:8pt||
+|Text for existing font -|color:#0000ff; font-family:Calibri; font-size:12pt||
+|Calibri, Blue, 12|color:#0000ff; font-family:Calibri; font-size:12pt||
+|Text for existing font |font-family:Courier; font-size:15pt; font-style:italic||
+|- Courier, 15, Italic|font-family:Courier; font-size:15pt; font-style:italic||
+|Text for existing font - Microsoft Sans Serif, Green, 10|color:#00c200; font-family:'Microsoft Sans Serif'; font-size:10pt||
+|Text for existing font - Verdana, 18, Bold|color:#0000ff; font-family:Verdana; font-size:18pt; font-weight:bold||
+|Text for missing font|font-family:'Vladimir Script'; font-size:18pt||
+|- Vladimir Script, Black, 18|font-family:'Vladimir Script'; font-size:18pt||
+|Text with mixed |font-family:'Times New Roman'; font-size:18pt||
+|Arial|color:#ff0000; font-family:Arial; font-size:8pt||
+|,|color:#ff0000; font-family:Arial; font-size:8pt||
+|Calibri,|color:#0000ff; font-family:Calibri; font-size:12pt||
+|Courier,|font-family:Courier; font-size:15pt; font-style:italic||
+|MSS,|color:#00ff00; font-family:'Microsoft Sans Serif'; font-size:10pt||
+|Verdana,|font-family:Verdana; font-size:18pt; font-weight:bold||
+|VScript fonts|font-family:'Vladimir Script'; font-size:18pt||

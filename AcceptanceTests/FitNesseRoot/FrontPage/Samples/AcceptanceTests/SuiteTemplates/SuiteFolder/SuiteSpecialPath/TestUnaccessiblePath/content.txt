@@ -1,0 +1,16 @@
+!define BASEFOLDER (\\localhost\mysharedfolder)
+!define TARGETFOLDER (\\localhost\mysharedfolder)
+
+!*> Create shared folder without permission to write
+!|script|Remote|${NMSP}|
+|SharedFolder|mysharedfolder|Path|${SHARED_FOLDER}|Grant|EVERYONE,READ|
+*!
+
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Folder|${TARGETFOLDER}|Application|${APPNAME}|
+
+''Edit job file''
+${EditJob}
+
+!define EXPECTED_ERROR (You do not have permission to the specified path '${TARGETFOLDER}' to create files.)
+!include .NmSp.AcceptanceTests.IncludePages.DoErrorMigration

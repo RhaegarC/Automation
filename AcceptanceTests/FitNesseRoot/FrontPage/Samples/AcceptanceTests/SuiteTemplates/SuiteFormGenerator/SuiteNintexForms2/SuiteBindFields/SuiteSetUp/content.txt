@@ -1,0 +1,18 @@
+!define LIST (!-SuiteBindFields-!)
+| script |
+| startUiautomation |
+
+| script |
+| importUilib |
+
+| script |
+| runMigration| !{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"templates/NintexBindFields"}|
+
+| script |
+| generateNintexForm| !{db:"${DATABASE}",form:!-"ContentForm"-!,job:"${JOBFILE}"} |
+
+| script |
+| !-PublishNintexForm-! | !{targetFile:"${TARGET_FILE}",url:"${WEB_URL}",listName:"${LIST}",contentType:"item"} |
+
+| script |
+| openSharePointPage | !{url:"${TARGET_PAGE}"}|

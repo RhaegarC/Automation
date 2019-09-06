@@ -1,0 +1,12 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!* Set all Attachments to be compressed except bmp;jpg;pptx;tiff
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Compression|Zip|
+|ZipExclusions|bmp;jpg;pptx;tiff|
+*!
+
+!include <SuiteCases.GlobalSteps.RunMigration

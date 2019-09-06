@@ -1,0 +1,6 @@
+!define DATABASE (!-SuiteMetadata-!)
+!define LIST (!-TermTagging-!)
+!define TERMFIELD (!-TermTagging-!)
+!define MAPFIELDS (<!-Mapping Destination='TermTagging' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />)
+!define TARGERFIELDS (<!-Field Name='TermTagging' Type='ManagedMetadata' NotesItems='Category' ProvisionNewTaxonomyTerms='false'-! />)
+!contents -R2 -g -p -f -h

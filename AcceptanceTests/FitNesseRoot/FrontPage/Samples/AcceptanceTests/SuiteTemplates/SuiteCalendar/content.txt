@@ -1,0 +1,12 @@
+!define WEB (!-SuiteCalendar-!)
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 7)
+
+!define GROUP (Calendar)
+!define VIEW (Calendar)
+!define APPNAME (Calendar)
+!define MIGRATION (!-Events2Events-!)
+!define TARGETLISTURL (${TARGETWEB}${TARGETLIST}/)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' ReturnType='String' Value='Subject'-! />","<!-Column ColumnType='Item' ReturnType='String' Value='Location'-! />","<!-Column ColumnType='Item' ReturnType='Date' Value='StartDateTime'-! />","<!-Column ColumnType='Item' ReturnType='Date' Value='EndDateTime'-! />","<!-Column ColumnType='Item' ReturnType='String' Value='Body'-! />","<Formula>!-@Length(AppointmentType)=1-!</Formula>")
+!define TARGETFIELDS ("<!-Field Name='Title' NotesItems='Subject;Title' Type='Text'-! />","<!-Field Name='EventDate' NotesItems='EventDate; StartDateTime' Type='DateTime'-! />","<!-Field Name='EndDate' NotesItems='EndDate; EndDateTime' Type='DateTime'-! />","<!-Field Name='Location' NotesItems='Location' Type='Text'-! />","<!-Field Name='Description' NotesItems='Description;Body;BodyHtml;RenderHtml;BodyText' Type='Note'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Title' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Location' SourceValue='Location' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Description' SourceValue='Body' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='EventDate' SourceValue='StartDateTime' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='EndDate' SourceValue='EndDateTime' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R3 -g -p -f -h

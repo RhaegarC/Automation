@@ -1,0 +1,12 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|▶ abc|
+
+'''Check Table in Section'''
+!|script|remote|${NMSP}|
+|CheckControlInSection|Text[text() = 'Table In Section:']|ExpectedValue|True|
+|CheckControlInSection|Text[text() = 'aaaaa']|ExpectedValue|True|
+
+'''Check Tabtable in Section'''
+!|script|remote|${NMSP}|
+|CheckControlInSection|Text[text() = 'Tabbed Table:']|ExpectedValue|True|
+|CheckControlInSection|DefaultValue[text() = 'Tab1']|ExpectedValue|True|

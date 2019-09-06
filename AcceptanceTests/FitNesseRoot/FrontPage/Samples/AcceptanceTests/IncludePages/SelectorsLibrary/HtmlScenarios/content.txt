@@ -1,0 +1,74 @@
+!|scenario|main|
+|eval|$main = $null|
+|eval|$main = $page.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('div') !-|-! ? {$_.className -eq 'ms-wikicontent ms-rtestate-field'}|
+
+!|scenario|select|tags|properties|props|limit to|filter|
+|eval|$elements = $res = $null|
+|main|
+|eval|$res = @(@tags !-|-! % { $main.getElementsByTagName($_) !-|-! ? {$_.@filter}})|
+|eval|!-$elements = $res | Element @props-!|
+
+!|scenario|select|tags|limit to|filter|
+|select|@tags|properties|@()|limit to|@filter|
+
+!|scenario|select|tags|properties|props|
+|eval|$elements = $res = $null|
+|main|
+|eval|$res = @(@tags !-|-! % { $main.getElementsByTagName($_) })|
+|eval|!-$elements = $res | Element @props-!|
+
+!|scenario|select|tags|
+|select|@tags|properties|@()|
+
+!|scenario|GetTag|tagName|
+|main|
+|eval|$tags = @($main.getElementsByTagName('@tagName') !-|-! select tagName)|
+
+!|scenario|GetItems|web|list|list|caml|query|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|show|eval|try{ $ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr) }catch{ $_.Exception.Message }|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "@query"|
+|eval|$items = $ctx.Site.OpenWeb('@web').Lists.GetByTitle('@list').GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|GetFileVersions|web|list|list|caml|query|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|show|eval|try{ $ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr) }catch{ $_.Exception.Message }|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "@query"|
+|eval|$items = $ctx.Site.OpenWeb('@web').Lists.GetByTitle('@list').GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$fileVersions=$null|
+|eval|$fileVersions= $items[0].File.Versions|
+|eval|$ctx.Load($fileVersions)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|DeleteItems|web|list|list|caml|query|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|show|eval|try{ $ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr) }catch{ $_.Exception.Message }|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "@query"|
+|eval|$items = $ctx.Site.OpenWeb('@web').Lists.GetByTitle('@list').GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$items !-|-! % {$_.DeleteObject()}|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|DeleteItem|web|list|list|id|id|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|show|eval|try{ $ctx.Credentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr) }catch{ $_.Exception.Message }|
+|eval|$item= $ctx.Site.OpenWeb('@web').Lists.GetByTitle('@list').GetItemById(@id)|
+|eval|$item.DeleteObject()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|Document|name|in|folder|
+|download|${SOURCE}|to|@folder\@name.${SAVE_AS}|
+|eval|$html = $null|
+|eval|$html = Get-Content '@folder\@name.${SAVE_AS}' -Encoding Utf8|

@@ -1,0 +1,3 @@
+!define APPNAME (SuiteImages)
+!define LIST (SuiteImages)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,2 @@
+!include -c <SuiteLinksFinalizeForWord.SuiteSetUp
+!include -c <SuiteLinksFinalizeForWord.DoFinalize

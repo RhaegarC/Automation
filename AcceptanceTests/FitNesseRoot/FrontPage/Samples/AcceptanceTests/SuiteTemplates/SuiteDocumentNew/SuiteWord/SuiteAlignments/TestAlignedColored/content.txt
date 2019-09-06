@@ -1,0 +1,32 @@
+!define PAGENAME (!-TestAlignedColored-!)
+
+!style_green[Check the word content contains text "Text with Tab and Pen Writing", which font is Arial, font color is black, and font size is 9.]
+
+!style_green[Check the word content contains text "No Tab for Permanent Pen":
+'No ' is Arial, bold, red, 10;
+'Tab ' is Arial, bold, black, 10;
+'for ' is Arial, bold, yellow, 10;
+'Permanent ' is Arial, bold, green, 10;
+'Pen' is Arial, bold, bule, 10.]
+
+!style_green[Check the word content contains text "        Tab Using Permanent Pen":
+there is a tab space in front of 'Tab ';
+'Tab ' is Arial, bold, black, 10;
+'Using ' is Arial, bold, red, 10;
+'Permanent' is Arial, bold, blue, 10;
+'Pen' is Arial, bold, black, 10.]
+
+!style_green[Check the word content contains text "        Tab regular text ", which font is Arial, font color is black, and font size is 9; a tab space is in front of 'Tab'.]
+
+!style_green[Displays as below:]
+---------------------------
+Text with Tab and Pen Writing
+
+'''!style_red[No] Tab !style_yellow[for] !style_green[Permanent] !style_blue[Pen]'''
+
+
+            '''Tab !style_red[Using] !style_blue[Permanent] Pen'''
+
+            Tab regular text
+---------------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

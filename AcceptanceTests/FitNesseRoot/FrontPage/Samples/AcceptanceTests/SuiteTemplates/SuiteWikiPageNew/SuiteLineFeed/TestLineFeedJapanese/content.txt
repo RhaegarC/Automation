@@ -1,0 +1,40 @@
+!* Document has 24 <BR> tags
+!define NUMBER_OF_BR (19)
+*!
+!define PAGENAME (!-TestLineFeedJapanese-!)
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"DIV",filter:"!-`$_.Style.cssText -and `$_.Style.cssText.ToLower().Contains('text-align: left')-!",selector:"innerText"}|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|ああああああああああ|
+|いああああああああああ|
+|うああああああああああ|
+|えああああああああああ|
+|おああああああああああ| 
+
+''Check for extra table indent''
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"TABLE",selector:"marginLeft"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|marginLeft|
+|null|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"TD",selector:"innerText"}|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|=~/ああああああああああ/|
+|null|
+|null|
+|null|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${PAGENAME}.aspx",tag:"BR"}|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-$tags = @($elements | select tagName)-!|
+|check|eval|$tags.Count|${NUMBER_OF_BR}|

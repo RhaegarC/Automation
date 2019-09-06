@@ -1,0 +1,13 @@
+!|script|remote|${NMSP}|
+|GetTabInfo|7|
+
+'''Check the controls exist'''
+!|script|remote|${NMSP}|
+|GetNintexFormControl|$ele.Id|controlType|d2p1:PanelFormControlProperties|
+|GetNintexFormControl|$ele.TabbedId|controlType|d2p1:ChoiceFormControlProperties|
+
+'''Check the rules'''
+!|Query:remote|${NMSP}|$nintexXml.SelectNodes("//*/ns:Rule",$ns) !-|-! ? {$_.ExpressionValue -like '*'+$ele.TabbedId+'*'} !-|-! select ExpressionValue|
+|ExpressionValue|
+|=~/\{Control:\S*\}\s*!= "Tab1"/|
+|=~/\{Control:\S*\}\s*!= "Tab2_merge"/|

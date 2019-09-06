@@ -1,0 +1,10 @@
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${VERIFY_DOCUMENT}|
+|select|'A'|properties|href|
+
+!|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|href|
+|=~/${VERIFY_FILENAME}/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|(Invoke-WebRequest -Uri '${LIST_URL}/${VERIFY_FOLDER}/${VERIFY_FILENAME}' -Credential $AdminCred).StatusCode|200|

@@ -1,0 +1,9 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestButtonLabelChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}"}|
+
+
+!|Query:remote|${NMSP}|!-$main| select @{N='Label'; E={$_.innerText.Trim()}}-!|
+|Label|
+|=~/BUTTON: 中文信息BUTTON/|

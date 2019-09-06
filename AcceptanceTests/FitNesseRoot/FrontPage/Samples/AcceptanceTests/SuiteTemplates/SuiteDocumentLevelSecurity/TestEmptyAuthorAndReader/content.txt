@@ -1,0 +1,23 @@
+!|script|Remote|${SHAREPOINT}:38|
+|SelectListItemsName|test empty.aspx|attribute|DisplayName|user|${TestUser}|
+
+!|Query:Remote|${SHAREPOINT}:38|$listItems !-|-! select Name|
+|Name|
+|Read|
+
+
+!|script|Remote|${SHAREPOINT}:38|
+|SelectListItemsName|test empty.aspx|attribute|DisplayName|user|${TestManager}|
+
+!|Query:Remote|${SHAREPOINT}:38|$listItems !-|-! select Name|
+|Name|
+|Read|
+
+
+#!|Query:Remote|${SHAREPOINT}|$list.Items !-|-! ?{$_.Name -eq 'test empty.aspx'} !-|-! %{$_.RoleAssignments} !-|-! ?{$_.Member.DisplayName -eq '${TestUser}'} !-|-! %{$_.RoleDefinitionBindings} !-|-! select Name |
+#|Name|
+#|Read|
+
+#!|Query:Remote|${SHAREPOINT}|$list.Items !-|-! ?{$_.Name -eq 'test empty.aspx'} !-|-! %{$_.RoleAssignments} !-|-! ?{$_.Member.DisplayName -eq '${TestManager}'} !-|-! %{$_.RoleDefinitionBindings} !-|-! select Name |
+#|Name|
+#|Read|

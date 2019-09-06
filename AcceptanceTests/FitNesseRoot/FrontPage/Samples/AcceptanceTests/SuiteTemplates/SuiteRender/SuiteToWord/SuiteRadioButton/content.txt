@@ -1,0 +1,18 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can render a radio button to documents
+So that I have documents migrated properly
+
+!1 scenarios
+![
+Given There is radio button with 5 options
+When I render the document and migrate to document
+Then I can see the radio button is migrated properly
+
+Given There is 3 radio buttons with 5 options for each in a merged table cell
+When I render the document and migrate to document
+Then I can see the radio buttons are migrated properly
+]!

@@ -1,0 +1,18 @@
+!*> Verify 1 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'Style.marginLeft'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|
+|UL|${LIST_NO_INDENT}|
+
+*!
+!*> Verify 2 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Ordered Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|UL|
+|UL|
+*!

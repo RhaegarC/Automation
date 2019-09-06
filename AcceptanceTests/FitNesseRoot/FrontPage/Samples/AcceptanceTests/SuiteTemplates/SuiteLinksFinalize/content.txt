@@ -1,0 +1,17 @@
+!define WEB (LinkFinalize)
+!define LIST (${RUNNING_PAGE_NAME})
+!define MIGRATION (DocLib2DocLibWikiPages)
+!define MAXRECORD (9999)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteLinksFinalize.EditJob)
+
+!define FIRSTDOC (!-FirstDoc-!)
+!define SECONDDOC (!-SecondDoc-!)
+!define THIRDDOC (!-ThirdDoc-!)
+!define MAPDOC (!-TestImageMapLinks-!) 
+
+!* Suite parameters
+|'''Parameter'''|'''Possible values'''|'''Where to define?'''|Meaning|
+|!style_meta[LT_ENABLED]|!style_caps{!-False, True-!}|Mode Level|''Enable Link Tracking'' check-box at http://lab1_sp2010.nmsp.org/sites/ImportService/_layouts/NMSPServicesConfig.aspx or http://lab2_sp2013.nmsp.org/sites/WebServices/_layouts/15/NMSPServicesConfig.aspx|
+|!style_meta[MAXRECORD]|e.g. !style_meta[9999]|Test Level|In use by >EditJob. Specifies how many documents we want to migrate. Usually we want to migrate all documents. We need override this value only in >SuiteWikiPages.TestLinkToNotMigratedDocument|
+*!
+!contents -R3 -g -p -f -h

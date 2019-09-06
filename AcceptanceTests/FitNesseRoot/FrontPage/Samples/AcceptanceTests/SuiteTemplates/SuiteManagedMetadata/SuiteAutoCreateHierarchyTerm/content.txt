@@ -1,0 +1,17 @@
+!define LIST (!-SuiteAutoCreateHierarchyTerm-!)
+!define TARGETFIELDS ("<!-Field Name='-!${TAGGINGFIELD}!-' NotesItems='Category' Type='ManagedMetadata' HierarchyOption='MapAsHierarchy' ProvisionNewTaxonomyTerms='true'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='-!${TAGGINGFIELD}!-' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate source data with hierarchy terms into sharePoint
+So that I can view these terms was mapped into sharePoint Term Store
+
+!1 scenarios
+![
+Given a Data Field of Target Data Definition was added (Target Type = ManagedMetadata, Hierarchy Option = MapAsHierarchy, Add Missing Terms To Term = True)
+And Field Mappings of the new Data Field was added
+When I run migration
+Then I can view these terms was mapped into sharePoint Term Store
+]!

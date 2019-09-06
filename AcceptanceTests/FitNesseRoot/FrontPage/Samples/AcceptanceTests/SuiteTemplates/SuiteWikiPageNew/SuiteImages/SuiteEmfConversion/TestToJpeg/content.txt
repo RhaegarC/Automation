@@ -1,0 +1,11 @@
+!* No EMF images
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestWindowsMetaFile.aspx",tag:"img",selector:"src"}|
+*!
+
+!* We have converted 2 images to the JPEG images
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/TestWindowsMetaFile.JPG/|
+|=~/TestWindowsMetaFile-[0-9A-F]{15}.JPG/|
+*!

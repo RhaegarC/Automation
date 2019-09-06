@@ -1,0 +1,13 @@
+!* Simulate Starting the program from database context menu
+!|script|remote|${NMSP36}|
+|eval| Start-Process '${NMSP_Install_Directory_Client}\Bin\${EXE}' -ArgumentList '-Server local -DB ${DATABASE}'!-|-! out-null|
+*!
+
+!|script|remote|${NMSP36}|
+|GetObject|ConnectionString|
+|check|eval|$object.Current.IsEnabled.ToString()|False|
+|check|eval|$object !-|-! Get-UIAEditText|server="local"; database="${DATABASE}"; zone=utc|
+
+!|script|remote|${NMSP36}|
+|GetObject|FormList|
+|check|eval|$object.Current.IsEnabled.ToString()|True|

@@ -1,0 +1,16 @@
+!define READ_WRITTEN_PATTERN ($writtenCount -eq 16)
+!include -c ReRunMigration
+
+!|script|Remote|${NMSP}|
+|check|eval|(Date '$SecondPdf') -gt (Date '$FirstPdf')|True|
+|check|eval|(Date '$SecondDocx') -gt (Date '$FirstDocx')|True|
+|check|eval|(Date '$SecondMsg') -gt (Date '$FirstMsg')|True|
+|check|eval|(Date '$SecondHtml') -gt (Date '$FirstHtml')|True|
+
+!* Original content of this document is restored in !-SharePoint-!
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${EDITABLE_PATH}|Contains|Original|
+*!
+
+!include -c VerifyAttachmentsSkipReplace
+

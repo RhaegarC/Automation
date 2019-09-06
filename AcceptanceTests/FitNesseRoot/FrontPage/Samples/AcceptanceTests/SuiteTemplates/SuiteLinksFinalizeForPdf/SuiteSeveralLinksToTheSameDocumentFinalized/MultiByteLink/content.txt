@@ -1,0 +1,8 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|download|${PDFSOURCE}|to|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+|ParsePdfDoc|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$list.Action | select @{N='href'; E={$_.URI}}-!| 
+|href|
+|=~/FirstDoc.pdf/|
+

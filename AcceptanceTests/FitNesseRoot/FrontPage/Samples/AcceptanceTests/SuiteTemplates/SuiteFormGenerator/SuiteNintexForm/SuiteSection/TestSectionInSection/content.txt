@@ -1,0 +1,3 @@
+!|script|remote|${NMSP}|
+|GetSectionContent|▼ outside Section|
+|CheckControlInSection|DisplayName[text() = '▶ inside Section']|ExpectedValue|True|

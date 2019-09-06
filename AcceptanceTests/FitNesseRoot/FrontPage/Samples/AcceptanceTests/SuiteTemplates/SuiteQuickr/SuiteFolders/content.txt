@@ -1,0 +1,2 @@
+!define PLACE (suitequickr)
+!contents -R2 -g -p -f -h

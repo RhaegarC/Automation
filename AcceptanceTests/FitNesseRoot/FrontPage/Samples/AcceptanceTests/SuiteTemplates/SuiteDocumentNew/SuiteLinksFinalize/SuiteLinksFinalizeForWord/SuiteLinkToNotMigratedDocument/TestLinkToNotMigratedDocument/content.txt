@@ -1,0 +1,12 @@
+!define PAGENAME (!-FirstDoc-!)
+
+!style_green[Check the word content contains text shown as below, the "SecondDoc" is a link, but its url is not finalized.]
+--------------------
+Start First document
+ 
+Link to !-SecondDoc-! by using View with special characters
+ 
+ 
+End document
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

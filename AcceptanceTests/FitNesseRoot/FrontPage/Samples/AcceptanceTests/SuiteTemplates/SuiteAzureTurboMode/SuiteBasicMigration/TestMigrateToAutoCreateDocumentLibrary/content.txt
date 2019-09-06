@@ -1,0 +1,11 @@
+!define GROUP {!-SuiteBasicMigration-!}
+!define LIST {!-MigrateToAutoCreateDocumentLibrary-!}
+!define DATABASE {!-DocLibrary-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}"}|
+
+|script|
+|newParsePdfDoc|!{url:"${LIST_URL}/Render_CheckBoxes.pdf",file:"${WORD_FOLDER}\Render_CheckBoxes.pdf"}|
+|check|eval|$pdfPage|Aspose.Pdf.Page|

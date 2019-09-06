@@ -1,0 +1,6 @@
+!define WEB (!-LinksFinalizeForHtml-!)
+!define SAVE_AS (html)
+!define SOURCE (${LIST_URL}/${PAGENAME}.html)
+
+
+!contents -R2 -g -p -f -h

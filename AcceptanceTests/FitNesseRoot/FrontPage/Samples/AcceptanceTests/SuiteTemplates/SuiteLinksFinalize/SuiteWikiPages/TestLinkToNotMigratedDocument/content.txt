@@ -1,0 +1,27 @@
+!define MAXRECORD (1)
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!* Auto redirect enabled. But it doesn't redirect as the target document has not been migrated
+!include -c .NmSp.AcceptanceTests.IncludePages.LinkTrackingService.EnableAutoRedirect
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${FIRSTDOC}.aspx|
+
+!|Query:Remote|${WEB_SCRAPER}|$page.Links !-|-! ? {$_.innerText -eq 'SecondDoc'}|
+|href|
+|${Link}|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${Link}|Contains|This record has not been migrated to SharePoint.|
+*!
+!* Finalize doesn't change anything as the target document has not been migrated
+!define LINKS (0)
+!define DOCUMENTS (0)
+!include -c <SuiteLinksFinalize.DoFinalize
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${FIRSTDOC}.aspx|
+
+!|Query:Remote|${WEB_SCRAPER}|$page.Links !-|-! ? {$_.innerText -eq 'SecondDoc'}|
+|href|
+|${Link}|
+*!

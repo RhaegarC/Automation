@@ -1,0 +1,9 @@
+!|Query:Remote|${NMSP}|GetFiles '${GET_FILES}\_Attachments'|
+|Name|
+|NMSPMapping.json|
+|TestAcrobatDocumentOle.pdf|
+|TestExcelSheetOle.xlsx|
+|TestExcelSheetOleInvestigation.xlsx|
+|TestPaintPictureOle.bmp|
+|TestPowerPointShowOle.pptx|
+|TestWordDocumentOle.docx|

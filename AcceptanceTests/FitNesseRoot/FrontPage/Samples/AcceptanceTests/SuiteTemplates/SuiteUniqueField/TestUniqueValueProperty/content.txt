@@ -1,0 +1,6 @@
+!include -c <AcceptanceTests.IncludePages.RunMigration
+!|script|Remote|${SHAREPOINT}:38|
+|eval|$list = (Get-SPWeb ${WEB_URL}).Lists['${LIST}']|
+
+!|script|Remote|${SHAREPOINT}:38|
+|check|eval|$list.fields['${TARGET_FIELD_NAME}'].EnforceUniqueValues|True|

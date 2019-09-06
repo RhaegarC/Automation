@@ -1,0 +1,3 @@
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|Special#{}%~&'chars.txt|

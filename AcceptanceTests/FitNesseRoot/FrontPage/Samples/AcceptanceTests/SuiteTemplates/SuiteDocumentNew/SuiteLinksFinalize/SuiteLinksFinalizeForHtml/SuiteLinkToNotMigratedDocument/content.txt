@@ -1,0 +1,6 @@
+!define LIST (!-SuiteLinkToNotMigratedDocument-!)
+!define MAXRECORD (1)
+!define LINKS (0)
+!define DOCUMENTS (0)
+!define MIGRATION (!-DocLib2HtmlDoc-!)
+!contents -R2 -g -p -f -h

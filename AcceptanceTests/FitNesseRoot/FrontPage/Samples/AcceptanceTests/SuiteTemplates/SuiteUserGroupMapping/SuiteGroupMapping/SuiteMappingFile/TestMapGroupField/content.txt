@@ -1,0 +1,13 @@
+!define SOURCE_FIELD {<!-Column ColumnType='Item' Value='AdditionalAuthors' ReturnType='String' Option='Multi'-!/>}
+!define TARGET_FIELD {<!-Field MultipleValues='false' Name='Group' AddToViews='DefaultView' Type='User'-!/>}
+!define MAPPING_FIELD {<!-Mapping Destination='Group' SourceValue='AdditionalAuthors' FormatString='' -!/>}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:"From='CN=anbeel/O=anbeel'",sourceFields:"${SOURCE_FIELD}",targetFields:"${TARGET_FIELD}",mapFields:"${MAPPING_FIELD}",mapACLRoles:"true",securityMapping:"true"}|
+
+!|script|Remote|${NMSP}|
+|eval|$mapgroup = ([xml]$log).Log.entry !-|-! ? context -eq 'Map Group'|
+
+!|Subset Query:Remote|${NMSP}|$mapgroup|
+|message|
+|=~/Found existing Principal from name 'testgroup'/|

@@ -1,0 +1,24 @@
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define DATABASE (!-SuiteDocumentLevelSecurity-!)
+!define GROUP (!-SuiteDocumentLevelSecurity-!)
+!define LIST (!-DocumentLevelSecurity-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate source items with permissions to Office365 with Azure Turbo Mode 
+So that I can view those permissions of migrated items in Office365
+
+!1 scenarios:
+![
+Given Windows Identity Foundation 3.5 was installed
+And the type of SharePoint Environments was set to "SharePoint web services (Office 365 Authentication)"
+And the Azure Turbo Mode was enabled
+And source data with permissions was selected in Designer
+And "Map Reader/Author fields" of Advanced tab was checked
+And the user mappings were added into UserMapping.xml
+And the xml file path was set in User Mapping tab of Options
+When I run a migration
+Then I can view those permissions of migrated items in Office365
+]!

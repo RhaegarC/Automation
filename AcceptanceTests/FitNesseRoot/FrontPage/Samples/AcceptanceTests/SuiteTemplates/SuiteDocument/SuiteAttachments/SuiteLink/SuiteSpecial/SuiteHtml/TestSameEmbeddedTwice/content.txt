@@ -1,0 +1,6 @@
+!note We should migrated Ole object only once as it is actually the same object.
+
+!|Query:Remote|${WEB_SCRAPER}|$html !-|-! GetAllHrefsFromText|
+|href|content|
+|=~/_Attachments${SLASH}TestSameEmbeddedTwice.docx/||
+|=~/_Attachments${SLASH}TestSameEmbeddedTwice.docx/||

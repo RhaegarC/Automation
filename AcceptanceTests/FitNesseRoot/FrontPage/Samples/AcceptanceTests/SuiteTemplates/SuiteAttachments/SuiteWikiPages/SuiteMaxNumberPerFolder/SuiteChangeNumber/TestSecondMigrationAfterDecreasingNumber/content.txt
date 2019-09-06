@@ -1,0 +1,39 @@
+!define MaxItemsPerFolder (3)
+!include -c <NmSp.AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|Query:Remote|${NMSP}|GetFiles ${GET_FILES}|
+|Name|
+|${FOLDERNAME}|
+|${FOLDERNAME1}|
+|${FOLDERNAME2}|
+|${FOLDERNAME3}|
+|${FOLDERNAME4}|
+|TestAttachmentCountInAlternateFolder2.aspx|
+|TestAttachmentCountInAlternateFolder1.aspx|
+|=~/TestAttachmentCountInAlternateFolder2-[0-9A-F]{15}.aspx/|
+|=~/TestAttachmentCountInAlternateFolder1-[0-9A-F]{15}.aspx/|
+
+!define ATTACHMENTFOLDER (${FOLDERNAME2})
+!|Query:Remote|${NMSP}|GetFiles ${GET_ATTACHMENTFILES}|
+|Name|
+|Attachment5.txt|
+|Attachment6.txt|
+|same attachment.txt|
+
+!define ATTACHMENTFOLDER (${FOLDERNAME3})
+!|Query:Remote|${NMSP}|GetFiles ${GET_ATTACHMENTFILES}|
+|Name|
+|Attachment1.txt|
+|Attachment2.txt|
+|same attachment.txt|
+
+!define ATTACHMENTFOLDER (${FOLDERNAME4})
+!|Query:Remote|${NMSP}|GetFiles ${GET_ATTACHMENTFILES}|
+|Name|
+|Attachment3.txt|
+|Attachment4.txt|
+
+!define VERIFY_FILENAME (Attachment1.txt)
+!define VERIFY_DOCUMENT (TestAttachmentCountInAlternateFolder1.aspx)
+!define VERIFY_FOLDER (${FOLDERNAME3})
+!include -c <SuiteMaxNumberPerFolder.VerifyAttachmentLink

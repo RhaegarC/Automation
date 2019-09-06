@@ -1,0 +1,6 @@
+!define LIST (analysisList)
+!define SPHOSTNAME (sp2016)
+!define GROUP (analysis)
+!define LIST (analysisList)
+
+!contents -R2 -g -p -f -h

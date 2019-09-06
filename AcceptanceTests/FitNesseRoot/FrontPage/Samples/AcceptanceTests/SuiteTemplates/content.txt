@@ -1,0 +1,21 @@
+!* Common parameters
+|'''Parameter'''|'''Possible values'''|'''Where to define?'''|Meaning|
+|!style_meta[NMSP]|!style_caps{lab1, lab2,lab3,lab4,ss1}|Root Level|Computer name where ''Migrator for Notes to !-SharePoint-!'' console were installed|
+|!style_meta[SHAREPOINT]|!style_caps{lab1_sp2010,lab2_sp2013,lab3_sp2010,lab4_sp2013}|Root Level|!-SharePoint-! Front-End server. We don't use this variable for !-SharePoint Online-!|
+|!style_meta[SHAREPOINT30]|e.g. !style_meta[SHAREPOINT:30] or !style_meta[SHAREPOINT]|Root Level|There is the compatibility issue between !-SharePoint 2010 CMDLets and PowerShell 3.0-!. You have to run !-PowerShell-! in compatibility mode (''!-PowerShell-! -v 2'') to be able to use !-SharePoint 2010 CMDLets-!. At the same time we want to use new !-PowerShell 3.0 CMDLet-! ''Invoke-WebRequest''. What is why we have 2 !-PowerSlim-! agents (PS v2 on standard port 35 and PS v3 on port 30) on !-SharePoint-! 2010 Front-End servers. We don't have this issue in !-SharePoint-! 2013.|
+|!style_meta[SQLHOST]|!style_caps{sp2010, sp2013}|Root Level|SQL Server|
+|!style_meta[AUTH]|!style_caps{!-ClassicModeAuthentication, Office365Authentication-!}|Root Level||
+|!style_meta[MODE]|!style_caps{!-WebServices, ImportService-!}|Mode Level||
+|!style_meta[SITE]|e.g. !style_caps{/sites/WebServices}|Mode Level|Target site collection relative url|
+|!style_meta[SITE_URL]|!style_meta[WEBAPP_URL/SITE]|Read-only|Check definitions at <AcceptanceTests for more information|
+|!style_meta[WEB]|e.g. !style_caps{Team Site}|Feature Level|Target web name|
+|!style_meta[WEB_URL]|!style_meta[SITE_URL/WEB]|Read-only|Check definitions at <AcceptanceTests for more information|
+|!style_meta[LIST]|e.g. !style_caps{Shared Documents, Calendar}|Feature Level|Target list name|
+|!style_meta[LIST_URL]|!style_meta[WEB_URL/LIST]|Read-only||
+|!style_meta[MARGIN_LEFT]|!style_caps{MARGIN-LEFT: 40px}|Read-only||
+ * ''Read-only - You don't need to define Read-only parameters. They are defined at <AcceptanceTests page''
+ * ''Root Level - Should be defined at <AcceptanceTests.SharePoint2010, <AcceptanceTests.SharePoint2013, <AcceptanceTests.SharePointOnline pages only''
+ * ''Mode Level - Immediate children of Root Level (e.g. <AcceptanceTests.SharePoint2010.WebServices)''
+ * !style_meta[SHAREPOINT] ''is not applicable for <AcceptanceTests.SharePointOnline''
+*!
+!contents -R2 -g -p -f -h

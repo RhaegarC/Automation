@@ -1,0 +1,6 @@
+!* Document url contains '''Blocked'''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText")!-|-!WordHyperLinkElement|
+|href|
+|=~/Blocked/|
+*!
+!include -c <SuiteGeneral.CheckBlockedWarningMessage

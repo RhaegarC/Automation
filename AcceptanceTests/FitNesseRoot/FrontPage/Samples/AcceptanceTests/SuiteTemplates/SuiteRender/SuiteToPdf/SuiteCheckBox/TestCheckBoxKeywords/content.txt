@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestCheckBoxKeywords-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

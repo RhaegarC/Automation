@@ -1,0 +1,2 @@
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.SuiteMaxNumberPerFolder.SuiteChangeNumber.EditJob)
+!contents -R2 -g -p -f -h

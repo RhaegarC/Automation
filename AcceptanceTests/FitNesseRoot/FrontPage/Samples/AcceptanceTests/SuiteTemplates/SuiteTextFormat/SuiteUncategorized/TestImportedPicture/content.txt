@@ -1,0 +1,29 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'SPAN'|limit to|Style.cssText|
+
+|Subset Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|!- -!Text on right side|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|limit to|Style.textAlign -eq 'left'|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/picture/|
+|=~/Text on right side/|
+|=~/Text after picture/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|'IMG'|properties|src|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/_Attachments/TestImportedPicture.JPG/|
+
+!define NUMBER_OF_BR (0)
+
+
+
+
+

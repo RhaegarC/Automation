@@ -1,0 +1,57 @@
+!define TaskName {!-TestTask-!}
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|discoverLocalDatabases|
+|eval|$db=Get-Database ALL "(local)" "SuiteDatabaseAnalysis"|
+|eval|$db.TechnicalClassName = "Document Library"|
+|applyClassRule|!{class:"Document Library",removedJobs:"DocLibrary to !-BasicPage-!"!-,-!"DocLibrary to List",server:"(local)",addedJobs:"${NMSP_Install_Directory_Client}\Job Files\!-DocLibrary to BasicPage-!.pmjob",site_url:"!-http://sp2016/sites/test-!",database:"SuiteDatabaseAnalysis"}|
+
+|script|
+|stopServer86|
+
+|script|remote|${NMSP}:36|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Tasks\${TaskName}.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_UserOptions.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options_RemoteSpSites.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Jobs\${TaskName}_analysis.analysisList.job" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Jobs\${TaskName}_!-DocLibrary to BasicPage.job-!" -Force|
+
+
+|script|
+|importUilib|
+|startConsole|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+|eval|sleep 10|
+|eval|displayContextMenu "SuiteDatabaseAnalysisDb"|
+|eval|clickMenu "MigrateToSharePoint"|
+|eval|sleep 5|
+|eval|click "CreateScheduledTask"|
+|eval|click "TaskOK"|
+|eval|setText "NewTaskName" "${TaskName}"|
+|eval|click "BtnTaskOption"|
+|eval|click "NotesTab"|
+|eval|click "BtnCfgRepository"|
+|eval|setText "CBServer" "nmsp-quickr"|
+|eval|setText "TxtDbPath" "QuestRepository.nsf"|
+|eval|click "BtnPathOK"|
+|eval|click "RepositoryErrorOK"|
+|eval|click "BtnPathCancel"|
+|eval|click "OptionOK"|
+|eval|try{click "NotesConnectionYes"}catch{}|
+|eval|!-Set-Date (Get-Date).AddHours(-1)-!|
+|eval|click "NewTaskOK"|
+|eval|!-Set-Date (Get-Date).AddHours(1)-!|
+
+|script|remote|${NMSP}:36|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Tasks\${TaskName}.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_UserOptions.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options_RemoteSpSites.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Jobs\${TaskName}_analysis.analysisList.job"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Jobs\${TaskName}_!-DocLibrary to BasicPage.job-!"|True|

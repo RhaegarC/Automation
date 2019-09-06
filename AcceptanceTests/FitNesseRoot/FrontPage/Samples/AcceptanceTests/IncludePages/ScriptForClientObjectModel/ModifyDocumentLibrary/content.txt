@@ -1,0 +1,11 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$list = $ctx.Site.OpenWeb('${WEB}').Lists.GetByTitle('${LIST}')|
+|eval|$list.Context.Load($list)|
+|eval|$list.Context.ExecuteQuery()|
+|eval|$list.OnQuickLaunch = $true|
+|eval|$list.EnableModeration = ${ENABLE_CONTENT_APPROVAL}|
+|eval|$list.Update()|
+|eval|$list.Context.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+

@@ -1,0 +1,43 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.CreateWebIfNotExists
+!include -c <AcceptanceTests.IncludePages.RemoveList
+
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 5|
+
+!|script|Remote|${SHAREPOINT}:38|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+|eval|$web = Get-SpWeb ${SITE_URL}|
+|show|eval|Get-SPUser -Web $web|
+|eval|Remove-SPUser -Identity "i:0#.w!-|-!${TestUser}" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "${TestUser}" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "${TestManager}" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "i:0#.w!-|-!${TestManager}" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "${TestNonExistingUser}" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "i:0#.w!-|-!${TestNonExistingUser}" -Web $web -Confirm:$False|
+|show|eval|Get-SPUser -Web $web|
+
+!|script|Remote|${SHAREPOINT}:38|
+|eval|$web = Get-SpWeb ${SITE_URL}|
+|eval|New-SPUser -UserAlias "${TestUser}" -Web $web|
+|eval|New-SPUser -UserAlias "${TestManager}" -Web $web|
+|eval|New-SPUser -UserAlias "${TestNonExistingUser}" -Web $web|
+|show|eval|Get-SPUser -Web $web|
+
+!|script|Remote|${NMSP}|
+|Add|Options/IdentityMappingOptions/IdentityLookupMode|InnerText|MappingFileLookup|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/NotesIdPassword|InnerText|ukxpoTKrlTn3ZvoGMUBv+w==|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile/Path|InnerText|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Set|identityMappings/userMappings/user[@notes='CN=Vladimir Sementchouk/O=Vladimir Sementchouk']|Attributes|@{sharePoint='${TestManager}'}|in|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|
+|Set|identityMappings/userMappings/user[@notes='CN=Konstantin Vlasenko/O=Konstantin Vlasenko']|Attributes|@{sharePoint='${TestUser}'}|in|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|
+|Add|identityMappings/userMappings/user|Attributes|@{notes='anbeel'; sharePoint='${TestNonExistingUser}'}|to|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|
+
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${SHAREPOINT}:38|
+|eval|$web = Get-SPWeb '${SITE_URL}/${WEB}'|
+|eval|$list = $web.GetList('${SITE_URL}/${WEB}/${LIST}/Forms/AllPages.aspx')|
+|show|eval|$list.title|

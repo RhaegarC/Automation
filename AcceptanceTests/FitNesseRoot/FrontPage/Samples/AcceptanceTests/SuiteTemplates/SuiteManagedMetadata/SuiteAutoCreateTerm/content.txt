@@ -1,0 +1,4 @@
+!define LIST (!-SuiteAutoCreateTerm-!)
+!define TARGETFIELDS ("<!-Field Name='-!${TAGGINGFIELD}!-' NotesItems='Category' Type='ManagedMetadata' ProvisionNewTaxonomyTerms='true'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='-!${TAGGINGFIELD}!-' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h

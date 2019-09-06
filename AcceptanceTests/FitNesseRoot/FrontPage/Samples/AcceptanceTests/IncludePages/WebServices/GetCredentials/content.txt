@@ -1,0 +1,9 @@
+!|script|Remote|${NMSP},${WEB_SCRAPER}|
+|eval|$username = "${Admin}"|
+|eval|$password = "${AdminPassword}"|
+
+!|script|Remote|${WEB_SCRAPER},${NMSP}|
+|eval|$secstr = New-Object -TypeName System.Security.SecureString|
+|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
+|eval|$AdminCred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr|
+|check|eval|$AdminCred|System.Management.Automation.PSCredential|

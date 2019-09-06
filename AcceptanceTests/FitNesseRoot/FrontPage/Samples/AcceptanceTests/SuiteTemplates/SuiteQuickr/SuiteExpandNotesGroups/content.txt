@@ -1,0 +1,23 @@
+!define PLACE (!-UserAndGroupMapping-!)
+!define QRSERVER (!-quickr/O=ec2l-!)
+!define ROOM (!-PageLibrary8525813F00299FF8.nsf-!)
+!define LIST (!-SuiteExpandNotesGroups-!)
+!define JOBFILE (c:\${MODE}\${AUTH}\${WEB}.${LIST}.qrjob)
+!define User (Reader1)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can expand [All Members] group of sub room in Quickr place to !-SharePoint-! groups
+So that I can view those members or groups in [All Members] group in !-SharePoint-!
+
+!1 scenarios
+![
+Given an [All Members] group was added in sub room of Quickr place
+And the user mappings were added into UserMapping.xml
+And the xml file path was set in User Mapping tab of Options
+And "Expand Notes Group to SharePoint Groups" "Map Reader/Author fields" of Advanced tab was checked
+When I run migration
+Then I can view those members or groups in [All Members] group in SharePoint
+]!

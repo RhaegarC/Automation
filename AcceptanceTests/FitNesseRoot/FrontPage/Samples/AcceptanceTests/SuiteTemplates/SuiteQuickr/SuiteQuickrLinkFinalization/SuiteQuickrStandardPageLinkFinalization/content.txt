@@ -1,0 +1,53 @@
+!define PLACE (suitequickr)
+
+!contents -R2 -g -p -f -h
+
+As an administrator
+I can migrate proper navigation links to quickr
+so that the customers can access the pages from navigator.
+
+!3 scenarios:
+![
+Given I created a quick place
+And I add extra folder into it
+And I add empty folder into it
+And I enabled provisioning navigation links for the database
+When I run the migration to SharePoint
+Then I can find notes links in navigation links
+When I finalize the links
+Then I can see all the links are finalized properly, including the ones for folders
+]!
+
+!1 user story
+
+As an administrator
+I can finalize the links in the documents migrated from quickr
+So that I can redirect to the target documents quickly
+
+!1 scenarios
+![
+Given there is links whose names and url are not the same to another page in quickr page
+When I run migration and do link finalization
+Then I see the link points to the target documents in sharepoint
+
+Given there is links whose names and url are the same to another page in quickr page
+When I run migration and do link finalization
+Then I see the link points to the target documents in sharepoint
+
+Given there is links to quickr page not migrated
+When I run migration and do link finalization
+Then I see the link is not finalized
+
+Given there is links of 2 documents pointing to same quickr page
+When I run migration and do link finalization
+Then I see the links points to the target documents in sharepoint
+
+Given there is a file preview link in a quickr page
+When I run migration and do link finalization
+Then I can see the link points to the target preview page in sharepoint
+
+Given there is a quickr file download link in a quickr page
+When I run migration and do link finalization
+Then I can see the link points to the target document in sharepoint
+
+]!

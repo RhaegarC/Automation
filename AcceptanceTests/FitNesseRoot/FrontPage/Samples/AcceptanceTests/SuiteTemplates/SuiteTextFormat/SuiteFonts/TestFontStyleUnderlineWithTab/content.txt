@@ -1,0 +1,10 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'U'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|Text|
+|ABCD|
+|E|
+|F|
+|G|
+|H|

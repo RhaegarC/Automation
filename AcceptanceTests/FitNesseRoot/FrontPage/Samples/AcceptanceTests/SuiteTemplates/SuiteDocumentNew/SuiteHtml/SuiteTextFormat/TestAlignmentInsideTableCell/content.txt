@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestAlignmentInsideTableCell-!)
+
+!style_green[Check the html content contains "Right aligned Text (2, 1)", which should be right aligned.]
+!style_green[Check the html content contains "Left aligned Text (2, 2)", which should be left aligned.]
+!style_green[Check the html content contains "Vertical aligned : Center", which should be vertical aligned in center.]
+!style_green[Check the html content contains "Vertical aligned : Bottom", which should be vertical aligned in bottom.]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

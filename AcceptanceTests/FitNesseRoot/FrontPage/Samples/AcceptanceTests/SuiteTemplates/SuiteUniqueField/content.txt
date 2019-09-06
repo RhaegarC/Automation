@@ -1,0 +1,7 @@
+!define WEB (UniqueField)
+!define APPNAME (ChoiceAndLookupFields)
+!define MIGRATION (BasicList)
+!define LIST (${RUNNING_PAGE_NAME})
+!define TARGET_FIELD_NAME (UniqueField)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteUniqueField.EditJob)
+!contents -R2 -g -p -f -h

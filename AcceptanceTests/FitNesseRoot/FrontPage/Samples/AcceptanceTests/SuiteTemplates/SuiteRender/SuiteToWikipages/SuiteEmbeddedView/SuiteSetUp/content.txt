@@ -1,0 +1,12 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{template:"${MIGRATION}",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"Subject='TestEmbeddedView'"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestEmbeddedView.aspx",tag:"table"}|
+|eval|$tables=$elements !-|-! select innerHTML |
+
+#test

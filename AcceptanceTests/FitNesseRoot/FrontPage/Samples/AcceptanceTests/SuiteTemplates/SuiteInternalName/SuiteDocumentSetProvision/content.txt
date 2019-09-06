@@ -1,0 +1,22 @@
+!define LIST (!-SuiteDocumentSetProvision-!)
+!define DATABASE (!-DocLibrary-!)
+!define Field1Name (Description)
+!define Field1DsInternalName (DocumentSetDescription)
+!define Field2Name (Name)
+!define Field2DsInternalName (FileLeafRef)
+!define TARGETFIELDS ("<Field Name=!-'DocSet' Type='DocumentSet' InternalName=''-!><DocumentSetTemplate><DocSetContentType>Document Set</DocSetContentType><DocSetField><MappableName>Description</MappableName><InternalName></InternalName><Type>Note</Type></DocSetField><DocSetField><MappableName>Name</MappableName><InternalName></InternalName><Type>Text</Type><AutomapNames>Subject;Title;{Name}</AutomapNames></DocSetField></DocumentSetTemplate></Field>-!")
+!define MAPFIELDS ("<!-Mapping Destination='DocSet.Name' SourceValue='Subject' -!/>","<!-Mapping Destination='DocSet.Description' SourceValue='Status' -!/>")
+
+!contents -R2 -g -p -f -h
+
+As an administrator
+I have a Document Library with Document Set. after migration, the data is in Document Set
+
+!3 scenarios:
+![
+Given there is field in the Document Set
+Given prepare a field with empty internal name and same name
+When I run the migration to SharePoint
+Then I can see no field is created in the Document Set
+Then I can see data is migrated to the field
+]!

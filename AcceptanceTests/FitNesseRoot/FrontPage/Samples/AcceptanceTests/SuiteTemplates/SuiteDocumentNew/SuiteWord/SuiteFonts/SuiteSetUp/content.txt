@@ -1,0 +1,7 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"!-@Contains(subject;'TestFontStyleStrikeout') | @Contains(subject;'TestFontStyleStrikeoutWithTab') | @Contains(subject;'TestFontStyleUnderline')| @Contains(subject;'TestFontStyleUnderlineWithTab')| @Contains(subject;'TestTextFontScription')| @Contains(subject;'TestTextFonts')| @Contains(subject;'TestFontInMultipleParagaphs')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

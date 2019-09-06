@@ -1,0 +1,5 @@
+!define WEB (!-SuiteSpecialAttachments-!)
+!define LIST (!-SuiteSpecialAttachment-!)
+!define TEST_DOCUMENT (!-JAM_TARRA PK3_Massaosasto_206026 Koivukuiduttimen muutos hylkykuiduttimeksi_doc-!)
+!define DATABASE (!-TestAttachment2784112-1-!)
+!contents -R2 -g -p -f -h

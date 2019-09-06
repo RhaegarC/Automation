@@ -1,0 +1,7 @@
+!define WEB (SuiteHtml)
+!define APPNAME (SimpleObjectsLib)
+!define FOLDER (HTML)
+!define MIGRATION (DocLib2HtmlDoc)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+
+!contents -R2 -g -p -f -h

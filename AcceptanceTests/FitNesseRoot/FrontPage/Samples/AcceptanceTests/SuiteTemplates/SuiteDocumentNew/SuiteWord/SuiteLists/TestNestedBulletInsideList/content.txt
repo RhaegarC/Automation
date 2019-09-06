@@ -1,0 +1,13 @@
+!define PAGENAME (!-TestNestedBulletInsideList-!)
+
+!style_green[Check the word content contains 2 parent sections '1.        First number.' and '2.        Second number.', and the first parent section has a nested section, (the font is Arial, black, 11).
+Displays as below:]
+------------------
+1.   First number.
+            •   First level bullet.
+                  •   Second level bullet.
+                        •   Third level bullet.
+                              •   Fourth level bullet.
+2.   Second number.
+------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

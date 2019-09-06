@@ -1,0 +1,4 @@
+!define DATABASE (!-SuiteMetadata-!)
+!define LIST (!-SuiteHierarchy-!)
+!define TARGETFIELDS (<Field Name=!-'SuiteHierarchy' Type='ManagedMetadata' NotesItems='Category' ProvisionNewTaxonomyTerms='false' HierarchyOption='MapAsHierarchy'-! />)
+!contents -R2 -g -p -f -h

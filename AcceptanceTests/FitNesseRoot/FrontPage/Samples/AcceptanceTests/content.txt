@@ -1,0 +1,80 @@
+!* New defines
+!define SITE_URL (${WEBAPP_URL}${SITE})
+!define WEB_URL (${SITE_URL}/${WEB})
+!define LIST_URL (${WEB_URL}/${LIST})
+!define OPENPATH (${LIST_URL})
+!define PSVERSION ()
+!define JOBFILE (c:\${MODE}\${AUTH}\${WEB}.${LIST}.pmjob)
+!define DOMINODOCJOBFILE (c:\${MODE}\${AUTH}\${WEB}.${LIST}.ddjob)
+!define LOTUS_NOTES_DATA_DIR [c:\Program Files (x86)\IBM\Lotus\Notes\Data]
+!define TARGETFOLDER (${BASEFOLDER}\${WEB}\${APPNAME}\${LIST})
+!define TEMPLATE_PATH (http://fitnesse.at-nmsp.com/files/nmsp)
+!define WORD_FOLDER (c:\TargetFolder)
+!define TARGET_FILE (${TARGETFOLDER}\${PAGENAME}.${SAVE_AS})
+!define UNIQUE_ENV (false)
+!define CUSTOM_FILTER (disablecustomfilter)
+!define ORIGIN_SITE_URL (https://questsoftware.sharepoint.com/sites/nmspFitnesse)
+!define ENV_NAME (allenv)
+!define CMDPARAMETER (!-null-!)
+*!
+!* adapt to multiple environments
+!define SHAREPOINT_ONLY (comment:!style_red['''this table is only for !-SharePoint-!,will not be executed if you can see this message'''])
+!define FOLDER_ONLY (comment:!style_red['''this table is only for Folder,will not be executed if you can see this message'''])
+
+!define ACCESS_KEY (NA)
+!define STORAGE_ACCOUNT {NA}
+*!
+!*> Temporary to support old tests
+!define WEB (${GROUP})
+!define WEBAPP_URL (http://${SPHOSTNAME})
+!define SITE (/)
+*!
+
+!*> defines
+!define SuccessExitCode (-1<=_<=0)
+!define ErrorExitCode (-3)
+!define MigrationExitCode (${SuccessExitCode})
+
+!define TURBO_MODE (false)
+!define SiteCollectionUrl (http://${SPHOSTNAME})
+!define WEBURL_RELATIVE (${MODE}${GROUP})
+!define TARGETWEB (http://${SPHOSTNAME}/${WEBURL_RELATIVE}/)
+!define LISTURL_RELATIVE (/${WEBURL_RELATIVE}/${TARGETLIST}/)
+!define TARGETLISTURL (${TARGETWEB}${TARGETLIST}/)
+!define SQLHOST (${NMSP})
+!define SQLINSTANCE (nmsp)
+!define SITE (/sites/Test)
+
+!define SharePointLinkTrackingEnabled (False)
+
+!define LOAD_ASPOSE_PDF (add-type -Path "c:\msi\Aspose.Pdf.dll")
+!define LOAD_ASPOSE_EMAIL (add-type -Path "c:\msi\Aspose.Email.dll")
+!define LOAD_ASPOSE_WORDS (add-type -Path "c:\msi\Aspose.Words.dll")
+*!
+!*> !-PowerShell-! statements
+!define TAG_AREA {$page.ParsedHtml.getElementsByTagName('area') !-|-! select href, shape}
+*!
+!* User Mappings
+!define USERMAPPING_FILE (!-UserMappings.xml-!)
+!define USERMAPPING_USER1 (!-VELASKEC\uservladimir-!)
+!define USERMAPPING_USER2 (!-VELASKEC\userkonstantin-!)
+!define USERMAPPING_NONEXISTENTUSER (!-VELASKEC\userkonstantin1-!)
+!define USERMAPPING_USERLOGINNAME1 (!-i:0#.w|VELASKEC\uservladimir-!)
+!define USERMAPPING_USERLOGINNAME2 (!-i:0#.w|VELASKEC\userkonstantin-!)
+!define USERMAPPING_NONEXISTENTUSERLOGIN (!-i:0#.w|VELASKEC\userkonstantin1-!)
+*!
+!define MARGIN_LEFT (MARGIN-LEFT)
+!define COLON_CHAR (:)
+
+!define LIST_NO_INDENT (-20px)
+!define LIST_ONE_INDENT (null)
+!define LIST_FIVE_INDENT (80px)
+!define LIST_SIX_INDENT (100px)
+
+!define TEXT_2_TABS (margin-left:40px)
+!define TEXT_3_TABS (margin-left:60px)
+!define TEXT_4_TABS (margin-left:80px)
+
+!define READ_WRITTEN_PATTERN ($writtenCount -ge $readCount)
+
+!contents -R1 -g -p -f -h

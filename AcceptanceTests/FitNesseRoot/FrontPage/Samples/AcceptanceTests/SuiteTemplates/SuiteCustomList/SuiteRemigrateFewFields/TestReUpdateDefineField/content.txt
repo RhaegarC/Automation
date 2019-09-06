@@ -1,0 +1,12 @@
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",formula:"${FORMULA}",duplicateHandle:"Update",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${NEWMAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:${CAML}}|
+
+!define URL (${WEB}/Lists/${LIST}/Attachments/\d)
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='Category'; E={$_['Category']} }, @{ N='ID'; E={$_['ID']} }, @{ N='Version'; E={$_['Version']} } |
+|Title|Category|ID|Version|
+|!-TestTabbedTable-!|Regression Testing|1||

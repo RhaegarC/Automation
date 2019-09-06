@@ -1,0 +1,21 @@
+!*> Copy msi
+!|script|Remote|!-$lab | ? {$_.SharePoint} | % {$_.name}-!|
+|eval|Import-Module 'C:\Program Files (x86)\AWS Tools\PowerShell\AWSPowerShell'|
+|show|eval|Read-S3Object -BucketName NMSP -Key $VERSION/Quest.SanboxLinkRedirector-$VERSION.wsp -File c:\msi\${SandboxLinkRedirector_WSP}|
+|show|eval|Read-S3Object -BucketName NMSP -Key $VERSION/NotesMigratorForSharePoint-Services-$VERSION.msi -File c:\msi\nmsp-services.msi|
+
+*!
+!*> Install product
+!|script|Remote|!-$lab | ? {$_.SharePoint} | % {$_.name}-!|
+|check|eval|(start c:\msi\nmsp-services.msi '/qn ISPOOLUSER="${Admin}" ISPOOLPASSWORD="${AdminPassword}" /l*v c:\msi\setup.log' -wait -PassThru).ExitCode|0|
+
+#|check|eval|Add-SPSolution  c:\msi\${SandboxLinkRedirector_WSP}|SPSolution Name=${SandboxLinkRedirector_WSP}|
+#|check|eval|Install-SPSolution -Identity ${SandboxLinkRedirector_WSP}|Admin SVC must be running in order to create deployment timer job.|
+#|show|eval|Start-SPAdminJob|
+
+!|Query:Remote|!-$lab | ? {$_.SharePoint} | % {$_.name}-!|Get-SPSolution|
+|Name|SolutionId|Deployed|
+|${Admin_WSP}|519931ce-058f-4025-8869-7bfc60dd32f6|True|
+|${FrontEnd_WSP}|70bcbc5e-0beb-4fa6-8451-a155c8fe4544|True|
+#|${SandboxLinkRedirector_WSP}|73219c6c-e294-48c9-a314-3c292144790f|True|
+*!

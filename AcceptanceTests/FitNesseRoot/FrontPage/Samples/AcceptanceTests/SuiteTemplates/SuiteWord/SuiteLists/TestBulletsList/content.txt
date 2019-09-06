@@ -1,0 +1,5 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordListItems $numbering | 
+|text|type|
+|First string|bullet|
+|Second string|bullet|
+

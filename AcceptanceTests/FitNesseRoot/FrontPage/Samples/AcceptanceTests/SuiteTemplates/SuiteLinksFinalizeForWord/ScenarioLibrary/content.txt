@@ -1,0 +1,9 @@
+#!|scenario|ParseWordDoc|source|
+#|eval|$password = "Qwerty123"|
+#|eval|$rc = New-Item -ItemType directory -Path "C:\WordDocs"|
+#|eval|$webclient = New-Object System.Net.WebClient|
+#|eval|$webclient.Credentials = new-object System.Net.NetworkCredential("administrator", $password, "velaskec")| 
+#|show|eval|$webclient.DownloadFile('@source', "${TARGET}")|
+#|Unzip|${TARGET}|to|${TARGETFOLDER}|
+#|show|eval|$file = "${TARGETFOLDER}\word\document.xml"|
+#|eval|[xml]$document = Get-Content $file|

@@ -1,0 +1,5 @@
+!|script|Remote|${NMSP}|
+|Folder LinkTracking enabled|${BASEFOLDER}|
+
+!|script|Remote|${NMSP}|
+|MMC LinkTracking enabled|

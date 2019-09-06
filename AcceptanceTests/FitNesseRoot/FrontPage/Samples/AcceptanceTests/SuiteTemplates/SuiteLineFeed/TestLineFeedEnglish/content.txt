@@ -1,0 +1,14 @@
+!* Document has 9 <BR> tags
+!define NUMBER_OF_BR (6)
+*!
+
+!|script|Remote|${WEB_SCRAPER}|
+|select|"DIV"|properties|"Text"|limit to|Style.cssText -and $_.Style.cssText.ToLower().Contains('text-align: left')|
+
+|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/AAAAAA/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|Get Tag|BR|
+|check|eval|$tags.Count|${NUMBER_OF_BR}|

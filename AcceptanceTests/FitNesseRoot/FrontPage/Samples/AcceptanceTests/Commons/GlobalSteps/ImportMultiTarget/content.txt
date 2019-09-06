@@ -1,0 +1,7 @@
+|comment:target|
+|env:exportToFolder|
+|!{template:"templates/folder/${MIGRATION}",fd_location:"${TARGETFOLDER}"}|
+
+|comment:target|
+|env:default|
+|!{template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|

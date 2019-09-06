@@ -1,0 +1,625 @@
+!*> Prerequisite
+!|scenario|loadSharePointApi|
+|start|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\bin"|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.dll")|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Runtime.dll")|
+|loadCredential|
+
+!|scenario|loadCredential|
+|start|remote|${NMSP}|
+|eval|$username = "${Admin}"|
+|eval|$password = "${AdminPassword}"|
+|eval|$secstr = New-Object -TypeName System.Security.SecureString|
+|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
+|eval|$AdminCred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr|
+
+|comment: parameters for !style_blue['''waitElementExists''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[timeout]|no|int|30|if no value is set, it will be 30 seconds|
+|!style_blue[by]|no|string|"className"|id,className,name|
+|!style_blue[value]|no|string|"ms-rtestate-field"||
+
+!|scenario|waitElementExists|args|
+|start|remote|${NMSP}:38|
+|convertHash|@args|
+|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+|eval|$timeout=30|
+|eval|if($hash.timeout){$timeout=$hash.timeout}|
+|eval|$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds($timeout))|
+|eval|!-if($hash.by -eq "className"){
+$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::ClassName($hash.value)))
+}
+if($hash.by -eq "id"){
+$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::Id($hash.value)))
+}
+if($hash.by -eq "name"){
+$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::Name($hash.value)))
+}
+-!|
+*!
+
+!*> Create/Delete
+|comment: parameters for !style_blue['''addSPList''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[type]|no|string|"Tasks"|"Tasks","CustomList","DocLibrary"|
+|!style_blue[sp_site]|yes|string|"http://sp2010"||
+|!style_blue[sp_web]|yes|string|"SuiteDocuments"||
+|!style_blue[sp_list]|yes|string|"SuiteVersion"||
+|!style_blue[enableMinorVersions]|no|string|"true"|"true","false"|
+
+!|scenario|addSPList|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|cleanUpTarget|@args|
+|loadSharePointApi|
+|eval|$site = $hash.sp_site + '/' + $hash.sp_web|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$web=$ctx.Web|
+|eval|$listInfo= new-object Microsoft.SharePoint.Client.ListCreationInformation|
+|eval|$listInfo.Title= $hash.sp_list|
+|eval|!-switch($hash.type)
+{
+"Tasks" {$ctID = 107}
+"CustomList" {$ctID = 100}
+default {$ctID = 101}
+}-!|
+|eval|$listInfo.TemplateType = $ctID|
+|eval|$newList = $web.Lists.Add($listInfo)|
+|eval|!-if($hash.enableMinorVersions)
+{
+$newList.EnableVersioning=$true
+$newList.EnableMinorVersions=$true
+$newList.Update()
+}
+-!|
+|eval|$ctx.Load($newList)|
+|eval|try {$ctx.ExecuteQuery()} catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}|
+
+|comment: parameters for !style_blue['''addSPListItems''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[web]|yes|string|"http://sp2010/sites/Test/SuiteLookUpFields"||
+|!style_blue[list]|yes|string|"SuiteVersion"||
+|!style_blue[items]|yes|array|@{Title ="Canada"},@{Title ="US"}||
+
+!|scenario|addSPListItems|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.web)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Web.Lists.GetByTitle($hash.list)|
+|eval|!-
+foreach($i in @($hash.items))
+{
+$itemInfo = New-Object Microsoft.SharePoint.Client.ListItemCreationInformation
+$item = $list.AddItem($itemInfo)
+$i.GetEnumerator() | % {$item[$_.Name] = $_.Value}
+$item.Update()
+}
+-!|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+|comment: parameters for !style_blue['''DeleteSPListItem''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[sp_site]|yes|string|"http://sp2010"||
+|!style_blue[sp_web]|yes|string|"SuiteDocuments"||
+|!style_blue[sp_list]|yes|string|"SuiteVersion"||
+|!style_blue[itemId]|yes|int|2||
+
+!|scenario|DeleteSPListItem|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$item= $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list).GetItemById($hash.itemId)|
+|eval|$item.DeleteObject()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+|comment: parameters for !style_blue['''addSPListFields''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[web]|yes|string|"http://sp2010/sites/Test/SuiteLookUpFields"||
+|!style_blue[list]|yes|string|"SuiteVersion"||
+|!style_blue[fields]|yes|array|"<!-Field Type='Choice' Name='Category' DisplayName='Category'-!><!-CHOICES-!><!-CHOICE-!>Canada</!-CHOICE-!></!-CHOICES-!></!-Field-!>"||
+
+!|scenario|addSPListFields|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.web)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Web.Lists.GetByTitle($hash.list)|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-
+foreach($xfield in @($hash.fields))
+{
+$field = $list.Fields.AddFieldAsXml($xfield, $false, 16)
+$ctx.Load($field)
+$ctx.ExecuteQuery()
+}
+-!|
+|eval|$ctx.Dispose()|
+
+
+!|scenario|createWeb|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$webInfo = new-object Microsoft.SharePoint.Client.WebCreationInformation|
+|eval|$webInfo.Title = $hash.sp_web|
+|eval|$webInfo.Url = $hash.sp_web|
+|eval|$webInfo.UseSamePermissionsAsParentSite = $true|
+|eval|$webInfo.WebTemplate = 'STS#1'|
+|eval|$web = $ctx.Web.Webs.Add($webInfo)|
+|eval|$ctx.Load($web)|
+|eval|try{ $ctx.ExecuteQuery() }catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}|
+
+!|scenario|removeWeb|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|!-
+if($hash.sp_web)
+{
+$web = $ctx.Site.OpenWeb($hash.sp_web)
+}
+else
+{
+$web = $ctx.web
+}
+-!|
+|eval|$web.DeleteObject()|
+|eval|$ctx.Load($web)|
+|eval|try{ $ctx.ExecuteQuery()}catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message }catch [Microsoft.SharePoint.Client.ClientRequestException] { $_.Exception.Message } finally {$ctx.Dispose()}|
+
+!|scenario|modifyList|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list)|
+|eval|$list.Context.Load($list)|
+|eval|$list.Context.ExecuteQuery()|
+|eval|$list.OnQuickLaunch=$hash.onQuickLaunch|
+|eval|$list.EnableModeration=$hash.enableModeration|
+|eval|$list.Update()|
+|eval|$list.Context.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|removeList|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list)|
+|eval|$list.DeleteObject()|
+|eval|$ctx.Load($list)|
+|eval|try{ $ctx.ExecuteQuery()}catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message } finally {$ctx.Dispose()}|
+
+!|scenario|cleanUpTarget|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|loadSharePointApi "${NMSP_Install_Directory_Client}\bin"|
+|createWeb|@args|
+|removeList|@args|
+
+!|scenario|checkList|args|
+|start|Remote|${NMSP}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list)|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+|check|eval|$list -ne $null|True|
+*!
+
+!*> Read from pages
+|comment: parameters for !style_blue['''openSharePointPage''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[url]|yes|string|"http://sp2010/sites/Test/SuiteMultiByteCharacters/SuiteMultiByteCharacters/TestJapanessinHotSpot.aspx"||
+
+!|scenario|openSharePointPage|args|
+|start|remote|${NMSP}|
+|loadCredential|
+|convertHash|@args|
+|eval|$request = Invoke-WebRequest -Uri $hash.url -${CREDENTIALS} -MaximumRedirection 0 -TimeoutSec 120 -ErrorAction Ignore|
+|check|eval|$request.StatusCode|200|
+|eval|$content = $request.content|
+
+|comment: parameters for !style_blue['''getWikiContent''']|
+|'''Name'''|'''Mandatory'''|'''Type'''|'''Example'''|'''Remark'''|
+|!style_blue[url]|yes|string|"http://sp2010/sites/Test/SuiteMultiByteCharacters/SuiteMultiByteCharacters/TestJapanessinHotSpot.aspx"||
+|!style_blue[tag]|no|string|"Tasks"|"tr"|
+|!style_blue[filter]|no|string|"`$_.Style.cssText -and `$_.Style.cssText.ToLower().Contains('text-align: left')"|remember use escape character for $_|
+|!style_blue[selector]|no|string|"href"||
+
+!|scenario|getWikiContent|args|
+|openSharePointPage|@args|
+|eval|$main = $request.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('div') !-|-! ? {$_.className -eq 'ms-wikicontent ms-rtestate-field'}|
+|eval|!-
+$elements = $null
+if($hash.tag)
+{
+$elements = $main.getElementsByTagName($hash.tag)
+if($hash.filter)
+{
+$elements = $elements | ? {iex $hash.filter}
+}
+if($hash.selector)
+{
+$script:propertiesForSelector = 
+@{
+Name = '$element.tagName'
+Text = '$element.innerText'
+marginLeft = '$element.Style.marginLeft'
+map = '$element.parentElement.name'
+}
+$properties=@{}
+$hash.selector|?{$_ -in $propertiesForSelector.keys}|%{$properties[$_]=$propertiesForSelector[$_]}
+$hash.selector|?{$_ -notin $propertiesForSelector.keys}|%{$properties[$_]="`$element.$_"}
+$script:elements = $elements | % {$script:element=$_;$script:p=@{}; $properties.GetEnumerator()|%{$p.add($_.key,(iex $_.value))};New-Object PSObject -Property $p }
+}
+}
+-!|
+
+!|scenario|parseHtml|args|
+|openSharePointPage|@args|
+|eval|$main = $request.ParsedHtml|
+|eval|!-
+$elements = $null
+if($hash.tag)
+{
+$elements = $main.getElementsByTagName($hash.tag)
+if($hash.filter)
+{
+$elements = $elements | ? {iex $hash.filter}
+}
+if($hash.selector)
+{
+$elements = $elements | select $hash.selector
+}
+}
+-!|
+
+!|scenario|getListItems|args|
+|loadSharePointApi|@args|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = $hash.caml|
+|eval|$items = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list).GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+
+!|scenario|getVersionItems|args|
+|loadSharePointApi|@args|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = $hash.caml|
+|eval|$items = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list).GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-
+$versions = $null
+if($items.Count -eq 1)
+{
+$versions = $items[0].File.Versions
+$ctx.Load($versions)
+$ctx.ExecuteQuery()
+}
+-!|
+|eval|$ctx.Dispose()|
+
+
+!|scenario|EditFile|path|
+|eval|$stream = new-object System.IO.MemoryStream|
+|eval|$writeStream = New-Object System.IO.StreamWriter $stream|
+|eval|$writeStream.WriteLine('Hello')|
+|eval|$writeStream.Flush()|
+|eval|$stream.Seek(0, 'Begin')|
+|eval|[Microsoft.SharePoint.Client.File]::SaveBinaryDirect($ctx, '@path', $stream, $true)|
+
+!|scenario|getListItemRolePermissions|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadSharePointApi|@args|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = $hash.caml|
+|eval|$items = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list).GetItems($caml)|
+|eval|$ctx.Load($items)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-
+$permissions=@{}
+foreach ($item in $items) {
+    $roleAssignments = $item.RoleAssignments
+    $ctx.Load($roleAssignments)
+    $ctx.ExecuteQuery()
+        if ($roleAssignments.Count -gt 0) {
+            foreach ($role in $roleAssignments) {           
+                $member = $role.Member 
+                $roleDefinitionBindings = $role.RoleDefinitionBindings
+                $ctx.Load($member) 
+                $ctx.Load($roleDefinitionBindings) 
+                $ctx.ExecuteQuery()
+                $permissions[$member.LoginName]=$roleDefinitionBindings
+            }
+            
+        }
+}
+-!|
+|eval|$ctx.Dispose()|
+
+!|scenario|getListRolePermissions|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadSharePointApi|@args|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$list = $ctx.Site.OpenWeb($hash.sp_web).Lists.GetByTitle($hash.sp_list)|
+|eval|$ctx.Load($list)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-
+$permissions=@{}
+$roleAssignments = $list.RoleAssignments
+$ctx.Load($roleAssignments)
+$ctx.ExecuteQuery()
+if ($roleAssignments.Count -gt 0) {
+	foreach ($role in $roleAssignments) {           
+		$member = $role.Member 
+        $roleDefinitionBindings = $role.RoleDefinitionBindings
+        $ctx.Load($member) 
+        $ctx.Load($roleDefinitionBindings) 
+        $ctx.ExecuteQuery()
+        $permissions[$member.LoginName]=$roleDefinitionBindings
+     }            
+}
+-!|
+|eval|$ctx.Dispose()|
+*!
+
+!*> Managed Metadata
+!|scenario|deleteTaxonomyTermSet|args|
+|start|remote|${TAXONOMY}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName($hash.groupName)|
+|eval|$termset = $group.TermSets.GetByName($hash.termsetName)|
+|eval|$termset.DeleteObject()|
+|eval|try{ $ctx.ExecuteQuery() }catch {}|
+|eval|$group = $termstore.Groups.GetByName($hash.groupName)|
+|eval|$ctx.Load($group)|
+|eval|$group.DeleteObject()|
+|eval|$termstore.CommitAll()|
+|eval|try{ $ctx.ExecuteQuery() }catch {} finally {$ctx.Dispose()}|
+|eval|sleep 2|
+
+!|scenario|createTaxonomyTermSet|args|
+|start|remote|${TAXONOMY}|
+|convertHash|@args|
+|loadCredential|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.CreateGroup($hash.groupName,[System.Guid]::NewGuid())|
+|eval|$ctx.Load($group)|
+|eval|try{ $ctx.ExecuteQuery() }catch {}|
+|eval|$group = $termstore.Groups.GetByName($hash.groupName)|
+|eval|$termset = $group.CreateTermSet($hash.termsetName, [System.Guid]::NewGuid(), 1033)|
+|eval|$termset.IsOpenForTermCreation = $true|
+|eval|$termstore.CommitAll()|
+|eval|try{ $ctx.ExecuteQuery() }catch {}|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+|eval|sleep 3|
+
+!|scenario|addCategoryColumn|args|
+|start|remote|${TAXONOMY}|
+|convertHash|@args|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$web = $ctx.Site.OpenWeb($hash.sp_web)|
+|eval|$ctx.Load($web)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$fields = $web.Fields|
+|eval|$ctx.Load($fields)|
+|eval|$ctx.ExecuteQuery()|
+|eval|!-<pre>
+do{
+    $field = $fields.GetByTitle($hash.taggingField)
+    $ctx.Load($field)
+    $field.DeleteObject()
+    try{ $ctx.ExecuteQuery() }catch [Microsoft.SharePoint.Client.ServerException] { $field = $null}
+}until($field -eq $null)
+</pre>-!|
+|eval|$fieldschema = "<Field Type='TaxonomyFieldType' Name='"+$hash.taggingField+"' DisplayName='"+$hash.taggingField+"' />"|
+|eval|$field = $fields.AddFieldAsXml($fieldschema, $false, 0)|
+|eval|$ctx.Load($field)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$taxonomyfield = [Microsoft.SharePoint.Client.ClientContext].GetMethod("CastTo").MakeGenericMethod([Microsoft.SharePoint.Client.Taxonomy.TaxonomyField]).Invoke($ctx, $field)|
+|eval|$taxonomyfield.SspId = $termstore.Id|
+|eval|$taxonomyfield.TermSetId = $termset.Id|
+|eval|$taxonomyfield.Update()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$list = $web.Lists.GetByTitle($hash.sp_list)|
+|eval|$ctx.Load($list )|
+|eval|$ctx.ExecuteQuery()|
+|eval|$contenttypes = $list.ContentTypes|
+|eval|$ctx.Load($contenttypes)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$contenttype = $contenttypes[0]|
+|eval|$fieldlink = new-object Microsoft.SharePoint.Client.FieldLinkCreationInformation|
+|eval|$fieldlink.Field = $field|
+|eval|$contenttype.FieldLinks.Add($fieldlink)|
+|eval|$contenttype.Update($false)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$view = $list.DefaultView|
+|eval|$view.ViewFields.Add($hash.taggingField)|
+|eval|$view.Update()|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+|eval|sleep 3|
+
+!|scenario|createTerm|args|
+|start|remote|${TAXONOMY}|
+|convertHash|@args|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$termGroup = $hash.term.Split("/")|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName($hash.groupName)|
+|show|eval|$group.count|
+|eval|$termset = $group.TermSets.GetByName($hash.termsetName)|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$culture = Get-Culture|
+|eval|$lcid = $culture.LCID|
+|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+  $isServerTermNull = $false
+  $term = $parent.Terms.GetByName($t)
+  $ctx.Load($term)
+  try{$ctx.ExecuteQuery()}catch{$isServerTermNull = $true}
+
+  if($isServerTermNull -eq $true) {
+    $term = $parent.CreateTerm($t,$lcid,[System.Guid]::NewGuid())
+    $termstore.CommitAll()
+    $ctx.Load($term)
+    $ctx.ExecuteQuery()
+    sleep 3
+  }
+  $parent = $term
+}
+-!|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+|eval|sleep 1|
+
+!|scenario|setTermTagging|args|
+|start|remote|${TAXONOMY}|
+|convertHash|@args|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$termGroup = $hash.term.Split("/")|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termGroup = $hash.term.Split("/")|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName($hash.groupName)|
+|eval|$termset = $group.TermSets.GetByName($hash.termsetName)|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+$parent = $parent.terms.GetByName($t)
+$ctx.Load($parent)
+try{$ctx.ExecuteQuery()}catch{}
+sleep 1
+}
+-!|
+|eval|$parent.IsAvailableForTagging = $hash.isAvailableForTagging|
+|eval|$termstore.CommitAll()|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+|eval|sleep 1|
+
+*!
+
+!*> User Manage
+!|scenario|removeUsers|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$web = $ctx.Web|
+|eval|$users = $web.SiteUsers|
+|eval|$removeUsers = @($hash.users)|
+|eval|!-foreach($xuser in $removeUsers) 
+{
+	$users.RemoveByLoginName($xuser)
+    $ctx.Load($users)
+    try
+    {
+        $ctx.ExecuteQuery()
+    }
+    catch
+    {}
+}
+-!|
+|eval|$ctx.Dispose()|
+
+!|scenario|ensureUsers|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|loadSharePointApi|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext($hash.sp_site)|
+|eval|$ctx.Credentials = $AdminCred|
+|eval|$web = $ctx.Web|
+|eval|$users = $web.SiteUsers|
+|eval|$ensureUsers = @($hash.users)|
+|eval|!-foreach($xuser in $ensureUsers) 
+{
+$user = $web.EnsureUser($xuser)
+$users.AddUser($user)
+}
+-!|
+|eval|$ctx.Load($users)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|
+*!

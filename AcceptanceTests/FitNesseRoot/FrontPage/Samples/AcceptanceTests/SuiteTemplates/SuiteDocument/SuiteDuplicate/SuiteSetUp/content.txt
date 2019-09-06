@@ -1,0 +1,3 @@
+!include -c <SuiteFolder.IncludePages.SuiteSetUp
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp

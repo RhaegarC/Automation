@@ -1,0 +1,10 @@
+!define LabName (ss2.at-nmsp.com)
+!define TURBO_MODE (true)
+!define STORAGE_ACCOUNT {spoturbonew}
+!define ACCESS_KEY {!-jheds7HVllsduuSjDW34hQ9c0CKQjyltBmQAV77STIO7fadlXdcPOCW44jRwVHzn9715cCPeBWkjb6r5Yitj0A==-!}
+
+!define SITE (/sites/testsite)
+!define SITE_COLLECTION (wsmzh.sharepoint.com-sites-testsite)
+
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,11 @@
+https://github.com/GitQuest/NMSP/issues/351
+
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|'bgColor','Style.borderColor'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|Style.borderColor|bgColor|
+|This cell has background color NONE|=~/rgb\(0, 0, 224\)!-|-!#0000e0/|null|
+|This cell has background color WHITE|=~/rgb\(0, 0, 224\)!-|-!#0000e0/|#ffffff|
+|This cell has background color NONE|=~/rgb\(0, 0, 224\)!-|-!#0000e0/|null|
+|This cell has background color RED|=~/rgb\(0, 0, 224\)!-|-!#0000e0/|#ff0000|

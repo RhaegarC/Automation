@@ -1,0 +1,19 @@
+!*> Verify 1 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'Style.marginLeft'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|
+|OL|${LIST_NO_INDENT}|
+*!
+!*> Verify 3 list items
+!define COLOR [=~/rgb\(0, 0, 0\)|#0{6}/]
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'Style.textAlign','Style.color','Style.fontFamily','Style.fontSize','Style.paddingBottom'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|Style.textAlign|Style.color|Style.fontFamily|Style.fontSize|Style.paddingBottom|
+|Number 1 with link DELL.|justify|null|null|null|5.5px|
+|Number 2.|justify|${COLOR}|Arial, san-serif|11pt|5.5px|
+|Number 3 with link Quest|justify|null|null|null|5.5px|
+*!

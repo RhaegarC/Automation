@@ -1,0 +1,12 @@
+!|scenario|EmailFindProperty|instance|
+|eval|$elements = $null|
+|eval|$elements = [Aspose.Email.Mail.MailMessage]::GetProperty(@instance).GetValue($msgFile, $null)|
+
+!|scenario|MsgDocument|name|in|folder|
+|download|${LIST_URL}/@name.${SAVE_AS}|to|@folder\@name.${SAVE_AS}|
+|eval|${LOAD_ASPOSE_EMAIL}|
+|eval|$msg =[Aspose.Email.Mail.MailMessage]::Load('@folder\@name.${SAVE_AS}', [Aspose.Email.Mail.MessageFormat]::Msg)|
+|eval|$msgBody,$msgAttachments='HtmlBody','Attachments' !-|-! % {[Aspose.Email.Mail.MailMessage].GetProperty($_).GetValue($msg,$null)}|
+|eval|'From','To','CC','Bcc' !-|-! % { Set-Variable -Name $_ -Value ([Aspose.Email.Mail.MailMessage].GetProperty($_).GetValue($msg,$null)) -Scope Global }|
+|eval|$outlookMessage = [Aspose.Email.outlook.MapiMessage]::FromFile('@folder\@name.${SAVE_AS}')|
+#|eval|$msgBody,$msgAttachments,$from,$to,$cc,$bcc='HtmlBody','Attachments','From','To','CC','Bcc' !-|-! % {[Aspose.Email.Mail.MailMessage].GetProperty($_).GetValue($msg,$null)}|

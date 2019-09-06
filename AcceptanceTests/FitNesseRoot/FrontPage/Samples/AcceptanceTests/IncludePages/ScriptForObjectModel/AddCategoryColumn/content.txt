@@ -1,0 +1,17 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$field = $web.Fields['${TAGGINGFIELD}']|
+|eval|while($field -ne $null){$field.Delete(); $field = $web.Fields['${TAGGINGFIELD}'] }|
+|eval|$field = $web.Fields.CreateNewField('TaxonomyFieldType', '${TAGGINGFIELD}')|
+|eval|$field.SspId = $termstore.Id|
+|eval|$field.TermSetId = $termset.Id|
+|eval|$web.Fields.Add($field)|
+|eval|$web.Update()|
+|eval|$field = $web.Fields['${TAGGINGFIELD}']|
+|eval|$fieldlink = new-object Microsoft.SharePoint.SPFieldLink($field)|
+|eval|$list = $web.Lists['${LIST}']|
+|eval|$contenttype = $list.ContentTypes[0]|
+|eval|$contenttype.FieldLinks.Add($fieldlink)|
+|eval|$contenttype.Update()|
+|eval|$view = $list.DefaultView|
+|eval|$view.ViewFields.Add('${TAGGINGFIELD}')|
+|eval|$view.Update()|

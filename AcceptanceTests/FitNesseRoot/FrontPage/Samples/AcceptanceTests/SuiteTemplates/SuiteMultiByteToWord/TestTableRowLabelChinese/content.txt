@@ -1,0 +1,11 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | select @{N='Label'; E={$_.innerText.Trim()}}-!|
+|Label|
+|中文信息|
+|1.1|
+|中文信息|
+|1.2|
+|中文信息|
+|2.1|
+|中文信息|
+|2.2|  
+

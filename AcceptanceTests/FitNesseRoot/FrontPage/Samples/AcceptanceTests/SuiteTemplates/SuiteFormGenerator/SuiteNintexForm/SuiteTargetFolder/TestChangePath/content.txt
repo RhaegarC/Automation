@@ -1,0 +1,5 @@
+
+!|Query:remote|${NMSP}|Get-ChildItem "${NMSP_Install_Directory_Client}\Bin\Target Files\New Folder\" !-| select Name-!|
+|Name|
+|${FORM_NAME}|
+|${FORM_NAME}.xml|

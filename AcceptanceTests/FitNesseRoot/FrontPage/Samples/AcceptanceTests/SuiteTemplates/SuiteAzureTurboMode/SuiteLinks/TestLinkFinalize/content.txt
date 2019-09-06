@@ -1,0 +1,26 @@
+!define GROUP {!-SuiteLinks-!}
+!define LIST {!-TestLinkFinalize-!}
+!define DATABASE {!-SuiteDuplicate-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",linkConversionType:"UseLinkTracking"}|
+
+|script|
+|newParsePdfDoc|!{url:"${LIST_URL}/Document1.pdf",file:"${WORD_FOLDER}\Document1.pdf"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$pdfPage.Annotations.Action.URI!-|-!?{-not $_.contains("Attachment")}|
+|Value|
+|https://questsoftware.sharepoint.com/sites/nmspFitnesse/QuestLinkTracking.aspx?noteslink=notes:///85257dcb0058facf/626e6035eadbb4cd85256499006b15a6/a7089f96261b9eb485257dcb00596351|
+|https://questsoftware.sharepoint.com/sites/nmspFitnesse/QuestLinkTracking.aspx?noteslink=notes:///85257dcb0058facf/626e6035eadbb4cd85256499006b15a6/a7089f96261b9eb485257dcb00596351|
+
+|script|
+|linkFinalize|!{linkNumber:6,docNumber:3}|
+
+|script|
+|newParsePdfDoc|!{url:"${LIST_URL}/Document1.pdf",file:"${WORD_FOLDER}\Document1.pdf"}|
+
+!|Query:Remote|${WEB_SCRAPER}|$pdfPage.Annotations.Action.URI!-|-!?{-not $_.contains("Attachment")}|
+|Value|
+|${LIST_URL}/Document2.pdf|
+|${LIST_URL}/Document2.pdf|

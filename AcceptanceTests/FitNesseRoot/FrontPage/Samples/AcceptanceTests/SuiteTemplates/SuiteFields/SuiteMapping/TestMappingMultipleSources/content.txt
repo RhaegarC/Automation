@@ -1,0 +1,24 @@
+!define LIST {!-TestMappingMultipleSources-!}
+!define SOURCE_FIELD {<!-Column ColumnType='RichText' Option='Html' Alias='Body_1Html' Value='Body_1' -!/>","<!-Column ColumnType='RichText' Option='Html' Alias='Body_2Html' Value='Body_2' />-!}
+!define MAPPING_FIELD {<!-Mapping Destination='WikiField' SourceValue='Body_1Html' MultiValueDisposition='Default' Transform='None' FormatString='{0}' -!/>","<!-Mapping Destination='WikiField' SourceValue='Body_2Html' MultiValueDisposition='Default' Transform='None' FormatString='{0}' />-!}
+!define COLOR_BLUEBERRY [=~/rgb\(0, 65, 194\)|#0041c2/]
+!define COLOR_BURGUNDY [=~/rgb\(245, 43, 151\)|#f52b97/]
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",autoCreateList:"true",autoCreateFields:"true",sourceFields:"${SOURCE_FIELD}",mapFields:"${MAPPING_FIELD}",view:"${VIEW}"}|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${LIST}.aspx",tag:"DIV",filter:'$_.Style.Color -ne $null',selector:!-'innerText','Style.textAlign','Style.Color','Style.fontFamily','Style.textDecoration','Style.fontSize'-!}|
+
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|innerText|Style.textAlign|Style.Color|Style.fontFamily|Style.fontSize|
+|Body content 1|left|${COLOR_BLUEBERRY}|Arial, san-serif|18pt|
+|Body content 2|left|${COLOR_BURGUNDY}|Arial, san-serif|36pt|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/${LIST}.aspx",tag:"U",selector:'innerText'}|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements| 
+|innerText|
+|Body content 1|

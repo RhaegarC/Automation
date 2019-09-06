@@ -1,0 +1,2 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}"}|

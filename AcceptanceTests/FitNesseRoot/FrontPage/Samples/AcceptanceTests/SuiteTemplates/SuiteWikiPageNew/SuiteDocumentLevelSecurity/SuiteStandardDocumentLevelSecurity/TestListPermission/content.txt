@@ -1,0 +1,10 @@
+|script|
+|getListRolePermissions|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Subset Query:Remote|${NMSP}|$permissions["${USERMAPPING_USERLOGINNAME1}"] !-|-! select Name|
+|Name|
+|Full Control|
+
+!|Subset Query:Remote|${NMSP}|$permissions["${USERMAPPING_USERLOGINNAME2}"] !-|-! select Name|
+|Name|
+|Contribute|

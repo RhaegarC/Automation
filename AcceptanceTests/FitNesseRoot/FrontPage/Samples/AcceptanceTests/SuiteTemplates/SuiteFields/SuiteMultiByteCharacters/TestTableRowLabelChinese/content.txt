@@ -1,0 +1,11 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestTableRowLabelChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"td",selector:!-"innerText"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|innerText|
+|中文信息1.1|
+|中文信息1.2|
+|中文信息2.1|
+|中文信息2.2|

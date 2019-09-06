@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestExcelAttachment-!)
+
+!style_green[Check the word embedded files contains "Book1.xlsx".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

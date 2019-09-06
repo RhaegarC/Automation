@@ -1,0 +1,44 @@
+!define DuplicateHandle (Skip)
+!define TARGET_FOLDER (C:\TargetFolder\SuiteDocument\SuiteDuplicate\TestSkip)
+!define LIST (!-TestSkip-!)
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",duplicateHandle:"${DuplicateHandle}", preserveDates:"false", clearListData:"false", mapFields:"<!-Mapping Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' -!/>"!-,-!"<!-Mapping Destination='Objects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|$FirstPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$FirstDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$FirstMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$FirstHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|
+
+!* !-Replace content of EditableAttachment.txt file in SharePoint/Folder-!
+!|script|Remote|${NMSP}|
+|EditFile|${EDITABLE_PATH}|
+*!
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+!|script|Remote|${NMSP}|
+|$SecondPdf=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.pdf'}).Modified|
+|$SecondDocx=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.docx'}).Modified|
+|$SecondMsg=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.msg'}).Modified|
+|$SecondHtml=|eval|(GetFiles ${GET_FILES} !-|-! ? {$_.Name -eq '${TARGETFILENAME}.html'}).Modified|
+
+
+!|script|Remote|${NMSP}|
+|check|eval|(Date "$SecondPdf") -eq (Date "$FirstPdf")|True|
+|check|eval|(Date "$SecondDocx") -eq (Date "$FirstDocx")|True|
+|check|eval|(Date "$SecondMsg") -eq (Date "$FirstMsg")|True|
+|check|eval|(Date "$SecondHtml") -eq (Date "$FirstHtml")|True|
+
+!* Original content of this document is replaced by "Hello" in !-SharePoint/Folder-!. Read [[Dangerous finding: we are removing the customer's content while migration][https://commons.quest.com/thread/32539]] for more information
+!|script|Remote|${WEB_SCRAPER}|
+|Page|${WEBAPP_URL}${EDITABLE_PATH}|Contains|Hello|
+*!
+
+!include -c VerifyAttachmentsSkipReplace

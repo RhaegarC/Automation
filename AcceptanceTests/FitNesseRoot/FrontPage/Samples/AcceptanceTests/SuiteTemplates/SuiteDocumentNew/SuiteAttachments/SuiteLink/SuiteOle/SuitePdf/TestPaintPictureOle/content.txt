@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestPaintPictureOle-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/TestPaintPictureOle.bmp".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

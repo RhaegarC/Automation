@@ -1,0 +1,22 @@
+!define VIEW (!-Suite Fonts-!)
+!define LIST (!-SuiteDocumentModdate-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+ As an administrator
+ I can migrate data to PDF/PDFA
+ So that I can view them in !-SharePoint-! without task suspended which caused by !-ModDate-! value empty error
+
+!1 scenarios
+![
+Given PDF/PDFA Documents were selected in Target Data Definition
+And {DocModified}->Doc.Modified was added in Map Data Tab
+When I run a migration
+Then I can view them in SharePoint without task suspended which caused by ModDate value empty error
+
+When I delete {DocModified}->Doc.Modified in Map Data Tab
+And I run a migration
+Then I can view the friendly error message instead of ModDate value empty error
+]!

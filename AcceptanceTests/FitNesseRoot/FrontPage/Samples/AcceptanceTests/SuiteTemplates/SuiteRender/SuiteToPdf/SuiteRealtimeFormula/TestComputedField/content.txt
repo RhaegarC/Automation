@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestComputedField-!)
+
+|script|
+|jobDefinition|!{template:"Render2DocLibPdfDoc",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"subject='TestComputedField'",mapFields:"<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />"!-,-!"<Mapping !-Destination='Doc.EmbeddedObjects' SourceValue='RenderEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />"}|
+!include <SuiteCases.GlobalSteps.RunMigration
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

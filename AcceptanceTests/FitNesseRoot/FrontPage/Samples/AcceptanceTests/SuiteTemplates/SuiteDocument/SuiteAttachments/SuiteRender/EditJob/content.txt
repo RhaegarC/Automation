@@ -1,0 +1,8 @@
+!|script|Remote|${NMSP}|
+|SourceColumn|@{ColumnType='Render';Alias='RenderHtml';Option='Html'}|
+|SourceColumn|@{ColumnType='Attachment'; Value='$ALL';Alias='RenderAttachments';Option='Multi'}|
+|SourceColumn|@{ColumnType='OleObject';Render='true';Alias='RenderEmbeddedObjects';Option='Multi'}|
+|SourceColumn|@{ColumnType='Image';Render='true';Alias='RenderImages';Option='Multi'}|
+|Formula|subject="${DOCUMENT_NAME}"|for|${JOBFILE}|
+|Mapping|RenderAttachments|to|Word.Attachments|job|${JOBFILE}|
+|Mapping|RenderEmbeddedObjects|to|Word.EmbeddedObjects|job|${JOBFILE}|

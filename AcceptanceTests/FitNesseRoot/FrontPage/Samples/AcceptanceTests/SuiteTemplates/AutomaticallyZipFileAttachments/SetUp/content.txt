@@ -1,0 +1,3 @@
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${PAGE_NAME}.aspx|
+|select|'A'|properties|href, innerText|

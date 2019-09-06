@@ -1,0 +1,26 @@
+!|script|Remote|${NMSP}|
+|eval|$server37 = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 37 server37' -PassThru|
+|eval|sleep 5|
+
+!|script|Remote|${NMSP}:37|
+|eval|Add-Type -Path C:\selenium\WebDriver.dll|
+|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+|eval|$driver = New-Object OpenQA.Selenium.IE.InternetExplorerDriver|
+|eval|$driver.Url="${CA}/_admin/${NMSP_Company_Name}/NMSP_LinkFinalizer.aspx?SiteCollection=${SITE_URL}"|
+|eval|$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds(30))|
+|eval|$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::Id("ctl00_PlaceHolderMain_ButtonSection_Buttons_FinalizeButton")))|
+|eval|($driver.FindElementById("ctl00_PlaceHolderMain_ButtonSection_Buttons_FinalizeButton")).click()|
+|eval|$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds(120))|
+|eval|$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementExists([OpenQA.Selenium.By]::Xpath("//span[contains(text(),'Finalization complete.')]")))|
+|check|eval|($driver.FindElementById("ctl00_PlaceHolderMain_ResultsSection_Results_lblRecords")).text|Successfully finalized ${LINKS} links in ${DOCUMENTS} documents|
+|eval|$driver.Close()|
+|eval|$driver.Dispose()|
+|eval|$driver.Quit()|
+
+!|script|Remote|${NMSP}|
+|eval|Write-Host "stop server 37"|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server37')) {$p[$_].Terminate()}
+}-!|

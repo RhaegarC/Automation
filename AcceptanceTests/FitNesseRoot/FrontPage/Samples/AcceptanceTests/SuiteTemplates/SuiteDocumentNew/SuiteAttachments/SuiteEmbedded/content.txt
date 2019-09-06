@@ -1,0 +1,22 @@
+!define OBJ_DRAW_ASPECT (Content)
+!define ATT_DRAW_ASPECT (Icon)
+!define MAPFIELDS ("<Mapping !-Destination='Word.Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Word.EmbeddedObjects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='PDF.Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='PDF.EmbeddedObjects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='MSG.Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='MSG.EmbeddedObjects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='HTML.Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='HTML.EmbeddedObjects' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate source data with embedded object into sharePoint
+So that I can view these migrated documents with embedded object in sharePoint
+
+!1 scenarios
+![
+Given source data with embedded object in Notes was ready
+And Target Data Definition was set to PDF/(PDF/A)
+And BodyAttachments->Doc.Attachments, BodyEmbeddedObjects->Doc.EmbeddedObjects was added in Map Data
+When I run migration
+Then I can view these migrated documents with embedded object in SharePoint
+When I open these migrated documents with PDF Reader
+And I double click the paperclip icon of the embedded object
+Then I can view these embedded object in relate tools
+
+]!

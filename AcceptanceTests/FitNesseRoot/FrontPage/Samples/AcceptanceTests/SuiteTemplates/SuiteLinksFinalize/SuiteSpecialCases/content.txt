@@ -1,0 +1,3 @@
+!define APPNAME (SuiteLinksFinalize.SuiteSpecialCases)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteLinksFinalize.SuiteSpecialCases.EditJob)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,15 @@
+!note Hide paragraph if formula {Status = 1 | Status = 3} if True. 
+!note This formula used for texts in Table cells:"Text in Cell 1", "Text in Cell 2", and for "Body Text" in Body
+!note Status value set 1, but "Text in Cell 2" and "Body Text" are not hidden 
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideTextInCell.aspx",tag:"div",filter:"!-`$_.innerText -like 'Text in Cell*'-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideTextInCell.aspx",tag:"SPAN",filter:"!-`$_.innerText -eq 'Body Text'-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|

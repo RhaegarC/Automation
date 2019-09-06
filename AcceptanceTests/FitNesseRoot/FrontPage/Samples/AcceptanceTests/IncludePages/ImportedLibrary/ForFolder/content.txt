@@ -1,0 +1,9 @@
+!|scenario|dataTarget|args|
+|convertHash|@args|
+|eval|removeNodes "TransferJob/SharePointConnection","TransferJob/FolderConnection"|
+|eval|addChildNode "TransferJob" "<FolderConnection><Location>$($hash.fd_location)</Location></FolderConnection>"|
+
+!|scenario|cleanUpTarget|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|remove-item $hash.fd_location -recurse -force|

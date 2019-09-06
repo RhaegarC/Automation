@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestOleIconWithMetafile-!)
+
+!style_green[Check the word embedded files contains "/image1.emf".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

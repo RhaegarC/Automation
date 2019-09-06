@@ -1,0 +1,30 @@
+!define DATABASE (SimpleObjectsLib)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can run a Script Scan on the database I selected
+So that I can view the correct number of lines of script scanned in Last Script Scan
+ 
+!1 scenarios
+![
+Given a database which contains some lines in lotusscript and formula labels
+And Cache Database Script option in Advanced Configuration Options - Analysis tab is disabled
+When I double click on this database to open Database Properties - Script Analysis tab
+And I click the Script Scan button
+Then I can view the correct number of lines of script scanned in Last Script Scan(blank row or comments or comment blocks are ignored)
+And Cache data path keep empty
+
+When I enabled Cache Database Script option in Advanced Configuration Options - Analysis tab
+And I delete some lines in lotusscript or formula labels
+And I double click on this database to open Database Properties - Script Analysis tab
+And I click the Script Scan button
+Then I can view the number of lines of script scanned in Last Script Scan keep the value as last scanned
+And Cache data path showed the dxl file under a fixed path <MNSP_Home>\ScriptScan
+
+When I load an options which Cache Database Script option is disabled
+And I double click on this database to open Database Properties - Script Analysis tab
+And I click the Script Scan button
+Then I can view the correct number of lines of script scanned in Last Script Scan(blank row or comments or comment blocks are ignored)
+And Cache data path keep empty
+]! 

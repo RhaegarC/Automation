@@ -1,0 +1,7 @@
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$page.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('td') | select background -!|
+|background|
+|=~/_Attachments/TestTableCellBackgroundImageNameChinese.JPG/|
+
+
+-!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${PAGE_NAME}.aspx|

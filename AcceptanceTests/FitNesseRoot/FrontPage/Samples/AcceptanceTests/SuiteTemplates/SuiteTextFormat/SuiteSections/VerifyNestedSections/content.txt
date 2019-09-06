@@ -1,0 +1,18 @@
+!* Verify 2 section headers
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.className','parentElement.tagName'|limit to|className -like 'sectionheader*'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|parentElement.className|
+|DIV|null|
+|DIV|section|
+*!
+!* Verify 2 sections
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.className','parentElement.tagName'|limit to|className -eq 'section'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|parentElement.className|
+|DIV|null|
+|DIV|section|
+*!

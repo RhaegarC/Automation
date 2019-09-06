@@ -1,0 +1,25 @@
+!include -c VerifyOneSection
+!*> Verify 4 list elements
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'parentElement.className','parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|parentElement.tagName|parentElement.className|
+|UL|DIV|section|
+|UL|LI|null|
+|UL|LI|null|
+|OL|LI|null|
+*!
+!*> Verify 6 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Ordered Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|UL|
+|OL|
+|OL|
+|UL|
+|UL|
+|UL|
+*!

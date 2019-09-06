@@ -1,0 +1,7 @@
+!define APPNAME (!-SuiteAttachments-!)
+!define LIST (!-SuiteSpecialMapping-!)
+!define VIEW (!-Suite General-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' ReturnType='String' Value='Form'-! />")
+!define TARGETFIELDS ("<!-Field Name='-!${TAGGINGFIELD}!-' Type='ManagedMetadata' ProvisionNewTaxonomyTerms='false'-! />","<!-Field IsTitleField='true' Name='Title' NotesItems='Category' Type='Text'-! />","<!-Field Name='FileLeafRef' NotesItems='DocumentEmbeddedObjects; DocumentAttachments' Type='File'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='-!${TAGGINGFIELD}!-' SourceValue='Form' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Title' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='FileLeafRef' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h

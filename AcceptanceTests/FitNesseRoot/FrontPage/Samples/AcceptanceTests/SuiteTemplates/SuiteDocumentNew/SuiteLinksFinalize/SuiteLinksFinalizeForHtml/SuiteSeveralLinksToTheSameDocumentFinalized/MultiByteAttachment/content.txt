@@ -1,0 +1,5 @@
+!define PAGENAME (!-MultiByteAttachment-!)
+
+!style_green[Check the html content contains "_Attachments/中文文档资料.jpg".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

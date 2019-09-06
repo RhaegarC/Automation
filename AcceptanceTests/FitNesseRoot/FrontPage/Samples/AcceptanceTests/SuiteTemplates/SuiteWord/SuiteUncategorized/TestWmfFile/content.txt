@@ -1,0 +1,7 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|Case WMF file|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("v:shape") | select alt-!|
+|alt|
+|image0.GIF|

@@ -1,0 +1,21 @@
+!|scenario|CreateTerm|term|
+|eval|$termstore.FlushCache()|
+|eval|$groups = $termstore.Groups|
+|eval|$group = $groups['${TAGGINGFIELD}']|
+|eval|$termset = $group.TermSets['${TAGGINGFIELD}']|
+|eval|$culture = Get-Culture|
+|eval|$lcid = $culture.LCID|
+|show|eval|$termGroup = "@term".Split("/")|
+|show|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+$terms = $parent.Terms
+if($terms[$t] -eq $null)
+{
+$parent.CreateTerm($t,$lcid)
+$termstore.CommitAll()
+}
+$terms = $parent.Terms
+$parent = $terms[$t]
+}
+-!|

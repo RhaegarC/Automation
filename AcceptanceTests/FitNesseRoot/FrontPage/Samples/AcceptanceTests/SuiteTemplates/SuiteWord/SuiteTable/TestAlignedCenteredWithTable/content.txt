@@ -1,0 +1,42 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement| 
+|text|text-align|
+|"Instandhaltung MET"|center|
+|Schließen Sie dieses.|center|
+|(z.B. durch Doppelklick)|center|
+|Aufgabe der Datenbank|left|
+|Diese Datenbank dient zur Verwaltung von Dokumenten im Geltungsbereich.!- -!|left|
+|Struktur der Datenbank|left|
+|Die Datenbank besitzt verschiedene Ansichten .!- -!|left|
+|Freie Dokumente|left|
+|Die dieser Ansicht zugeordneten Dokumente sind nach Start.|left|
+|Instandhalter|left|
+|Die dieser Ansicht zugeordneten Dokumente .|left|
+|Startansicht|center|
+|MET-Kontakt-|center|
+|partner-Hilfe|center|
+|Einrichter-Hilfe|center|
+|Instandhalter-|center|
+|Hilfe|center|
+|Alle Dokumente|center|
+|Login|center|
+|Kontaktpartner-Login|center|
+|Einrichter-Login|center|
+|Instandhalter-Login|center|
+|Instandhalter-Login|center|
+|Freie Dokumente|left|
+|Freie Dokumente|left|
+|MET-Kontaktpartner-Dokumente|left|
+|Freie Dokumente|left|
+|MET-Kontaktpartner-Dokumente|left|
+|Einrichter-Dokumente|left|
+|Freie Dokumente|left|
+|MET-Kontaktpartner-Dokumente|left|
+|Freie Dokumente|left|
+|MET-Kontaktpartner-Dokument|left|
+|Zugriffsrechte|left|
+|Der Zugriff auf die DB/Dokumente wird zum einem über Lotus-Notes verwaltet.|left|
+|Ansprechpartner:|left|
+|xxx!- -!|left|
+|* * *|center|
+|Datenbank "Instandhaltung MET"|center|
+|Januar 2111|center|

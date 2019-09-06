@@ -1,0 +1,21 @@
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|expandMenu "HelpMenu"|
+|eval|clickMenu "AboutMenu"|
+|check|eval|getControlName "ProductName"|Migrator for Notes to SharePoint|
+|check|eval|getControlName "CopyRight"|© 2019 Quest Software Inc. All Rights Reserved.|
+|check|eval|getControlName "TradeMarks"|Quest and the Quest logo are trademarks and registered trademarks of Quest Software Inc. For a complete list of Quest marks, visit www.quest.com/legal/trademarks.aspx. All other trademarks and registered trademarks are property of their respective owners.|
+|eval|click "Contact"|
+|check|eval|getControlName "BlurbLabel"|Quest listens to customers worldwide and delivers innovative technology, business solutions and services they trust and value. We look forward to hearing from you.|
+|check|eval|getControlName "TechnicalSuport"|? Technical Support|
+|check|eval|getControlName "PhoneLink"|1 (949) 754-8000|
+|eval|click "DoneButton"|
+
+
+
+|script|
+|stopUiautomation|

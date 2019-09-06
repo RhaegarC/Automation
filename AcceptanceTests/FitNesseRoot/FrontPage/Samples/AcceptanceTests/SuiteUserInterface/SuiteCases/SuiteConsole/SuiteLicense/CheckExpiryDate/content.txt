@@ -1,0 +1,58 @@
+!|script|Remote|${NMSP}:36|
+|importUilib                         |
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "LicenseDetails" |
+|eval|[xml]$license = Get-Content $path|
+|eval|$licenseType = $license.GetElementsByTagName("LicenseType").'#text'|
+|eval|$currentDate = Get-Date|
+|eval|$expiryDate = $license.GetElementsByTagName("ExpiryDate").'#text'|
+|eval|$trialinstallbyDate = $license.GetElementsByTagName("TrialInstallByDate").'#text'|
+|eval|$trialDays = $license.GetElementsByTagName("TrialDays").'#text'|
+|eval|$mnspExpires=$null|
+|eval|$mnspExpires=getControlName "LicenseExpires"|
+|eval|$ldays = $null|
+|eval|$leftDays = $null|
+|eval|$licenseExpiryDate=$null|
+|eval|!-if ($expiryDate -ne $null){
+              $expiryDate = [DateTime]$expiryDate
+              $ldays = $expiryDate - $currentDate
+            }
+      elseif ($licenseType -eq "Trial"){
+              $trialinstallbyDate = [DateTime]$trialinstallbyDate
+              $aDays = $currentDate + $trialDays - $trialinstallbyDate
+            	if ($aDays.Days -gt 0 ){
+                	$ldays = $trialinstallbyDate - $currentDate
+                }
+                else{
+                    $leftDays= $trialDays
+                }
+      }-!|
+|eval|!-if ($ldays -ne $null){
+			if($ldays.Days -gt -1){
+              	$leftDays = $ldays.Days+1
+            }
+            else{
+                $leftDays = $ldays.Days
+            }
+      }-!|
+|eval|!-if ($expiryDate -ne $null){
+              $licenseExpiryDate = "{0:d}" –f $expiryDate
+			}
+       elseif ($licenseType -eq "Trial"){
+            	if ($aDays.Days -gt 0 ){
+                	$licenseExpiryDate = "{0:d}" –f $trialinstallbyDate
+                }
+                else{
+                	$licenseExpiryDate = $currentDate + $trialDays
+                    $licenseExpiryDate = "{0:d}" –f $licenseExpiryDate
+                }
+      }-!|
+|eval|!-if ($leftDays -ge 0){
+			$licenseExpiryDate = "{0} ({1} days left)" -f $licenseExpiryDate, $leftDays
+	   }-!|
+|show|eval|$leftDays|
+|show|eval|"License Expires show in MNSP: "+ $mnspExpires|
+|show|eval|"Expiry Date in License: "+ $licenseExpiryDate| 
+|eval|$comp=$mnspExpires -eq $licenseExpiryDate|
+|check|eval|$comp|True|
+|eval|click "LicenseOK"|

@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestTableNameChinese-!)
+
+!style_green[Check the word content contains text and tables displays as below:]
+!img files/nmsp/images/CheckpointImages/TestTableNameChinese.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

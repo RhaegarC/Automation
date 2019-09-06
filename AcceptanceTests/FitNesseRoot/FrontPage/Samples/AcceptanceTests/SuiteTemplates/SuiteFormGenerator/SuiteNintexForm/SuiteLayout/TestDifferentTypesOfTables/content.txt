@@ -1,0 +1,4 @@
+!|script|remote|${NMSP}|
+|CheckTableCellCount|Caption table(2 rows, 2 columns):|CellCount|4|
+|CheckTableCellCount|Animated table(3 rows, 2 columns):|CellCount|6|
+|CheckTableCellCount|Programed table(3 rows, 3 columns):|CellCount|9|

@@ -1,0 +1,29 @@
+'''Check Editable Checkbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MyCheckBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Computed Checkbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'ComputedCheckBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|false|
+
+'''Check Multi Value Checkbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MultiValueCheckbox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Multi Choice Checkbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'MultiChoiceCheckBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|
+
+'''Check Formula Choice Checkbox'''
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'FormulaChoiceCheckBox']|ExpectedValue|True|
+|NintexFieldAttribute|i:type|ExpectedValue|d2p1:ChoiceFormControlProperties|
+|NintexFieldProperty|IsEnabled|ExpectedValue|true|

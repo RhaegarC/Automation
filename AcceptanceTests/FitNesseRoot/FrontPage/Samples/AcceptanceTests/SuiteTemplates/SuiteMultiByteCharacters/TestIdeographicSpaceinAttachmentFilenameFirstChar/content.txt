@@ -1,0 +1,6 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|href, innerText|
+
+!| Query: Remote |${WEB_SCRAPER}|$elements|
+|href|innerText|
+|about:/sites/Test/SuiteMultiByteCharacters/SuiteMultiByteCharacters/_Attachments/ideographic_space.png|　ideographic_space.png|

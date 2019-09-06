@@ -1,0 +1,28 @@
+!4 !style_blue[Test new feature MNSP-1079 Add timeout setting for Turbo model]
+
+!define LIST (!-SuiteMigrationTimeOut-!)
+!define MIGRATION (!-DocLib2HtmlDoc-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+!define MigrationExitCode (-5)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can set the migration import job timeout for Azure Turbo Mode
+So that I can view the migration with Azure Turbo Mode stopped automatically at the set timeout
+
+!1 scenarios
+![
+Given migration import job timeout for Azure Turbo Mode was not set or keep it null
+When I run a migration with Azure Turbo Mode
+Then I can view the migration completed successfully
+
+Given migration import job timeout for Azure Turbo Mode was set as 0 or negative number
+When I click OK button
+Then I can view an error "The stop migration import job interval must be a positive number" pop out
+
+Given migration import job timeout for Azure Turbo Mode was set as a small positive number
+When I run a migration with Azure Turbo Mode
+Then I can view the migration stopped automatically at the set timeout
+]!

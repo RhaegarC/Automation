@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"!-@Contains(Subject;'TopicDoclinkInReply' )-!",linkConversionType:"UseLinkTracking"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+

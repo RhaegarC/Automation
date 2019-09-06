@@ -1,0 +1,6 @@
+!|Query:Remote|${NMSP}|$warning !-|?-! context -eq 'Form Name Checking' !-|-! select @{ N='message'; E={$_.message}} |
+|message|
+|The form 'NotExistForm' does not exist.|
+|The form 'MainTopic' does not exist.|
+|The form 'NotExistForm' does not exist.|
+|The form 'NotExistForm' does not exist.|

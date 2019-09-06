@@ -1,0 +1,3 @@
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",addNodes:!-@{path="TransferJob/JobOptions/LinkConversionOptions";-!node="<LinkConversionType>UseLinkTracking</LinkConversionType>"!-}-!}|
+!include <SuiteCases.GlobalSteps.RunMigration

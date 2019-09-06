@@ -1,0 +1,4 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|$image = !-$page.ParsedHtml.getElementById('ctl00_PlaceHolderMain_WikiField').getElementsByTagName('img')-!|
+|check|eval|!-$image|%{$_.outerHTML.Contains('width')}-!|False|
+|check|eval|!-$image|%{$_.outerHTML.Contains('height')}-!|False|

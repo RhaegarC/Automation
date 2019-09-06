@@ -1,0 +1,23 @@
+!define LIST {!-TestMissingChoiceFalse-!}
+!define DATABASE {!-ChoiceAndLookupFields-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!define LOOKUP_LIST {!-TestMissingChoiceFalse_Lookup-!}
+!define TARGET_FIELD {<!-Field MultipleValues='false' Name='Category' AddToViews='DefaultView' Type='Choice' AddMissingChoices='false' IsRequired='false'-!/>}
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|addSPListFields|!{web:"${WEB_URL}",list:"${LIST}",fields:"<!-Field Type='Choice' Name='Category' DisplayName='Category'-!><!-CHOICES-!><!-CHOICE-!>Canada</!-CHOICE-!></!-CHOICES-!></!-Field-!>"}|
+
+|script|
+|runMigrationToExistingList|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",autoCreateList:"false",autoCreateFields:"false",targetFields:"${TARGET_FIELD}",mapFields:"<!-Mapping Destination='Category' SourceValue='Category' MultiValueDisposition='All' Transform='None' FormatString='{0}' -!/>"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['FileLeafRef']}},@{N='Category';E={$_['Category']}}|
+|Title|Category|
+|NoCategories.pdf|null|
+|TwoCategories.pdf|Canada; US|
+|SecondCategory.pdf|US|
+|FistCategory.pdf|Canada|
+|SpecialCharacters.pdf|<US>|

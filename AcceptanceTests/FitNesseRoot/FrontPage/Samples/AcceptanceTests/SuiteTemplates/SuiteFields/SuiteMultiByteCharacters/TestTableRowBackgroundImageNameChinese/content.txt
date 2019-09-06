@@ -1,0 +1,13 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestTableRowBackgroundImageNameChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"TD",selector:!-"background"-!}|
+
+!|Query:remote|${NMSP}|$elements|
+|background|
+|"#000000"|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese.JPG/|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|
+|"#000000"|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|
+|=~/_Attachments/TestTableRowBackgroundImageNameChinese-/|

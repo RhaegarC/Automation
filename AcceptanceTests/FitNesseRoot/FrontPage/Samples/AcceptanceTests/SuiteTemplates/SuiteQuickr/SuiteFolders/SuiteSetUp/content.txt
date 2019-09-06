@@ -1,0 +1,16 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|removeWeb|!{sp_site:"${SITE_URL}",sp_web:"${WEB}"}|
+
+!|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|discoverQuickrDatabases|
+|applyClassRule|!{class:"Quickr",navigationLink:$true,removedJobs:"Quickr-Folders"!-,-!"QR-Pages"!-,-!"Quickr-Pages",addedJobs:"${NMSP_Install_Directory_Client}\Job Files\Quickr-Folders.qrjob"!-,-!"${NMSP_Install_Directory_Client}\Job Files\QR-Pages.qrjob",site_url:"${SITE_URL}",database:"${PLACE}"}|
+|runDatabaseMigration|!{database:"${PLACE}"}|
+
+|script|
+|stopServer86|

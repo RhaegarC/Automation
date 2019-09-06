@@ -1,0 +1,2 @@
+'''This file is to make the differences between the tests inside the Suite'''
+Create [[!-JobDefinition-!][.NmSp.AcceptanceTests.SharePoint2010.TargetList.SuiteChoiceFields.TestDefaultValue.JobDefinition]] page under each test and define the necessary parameters.

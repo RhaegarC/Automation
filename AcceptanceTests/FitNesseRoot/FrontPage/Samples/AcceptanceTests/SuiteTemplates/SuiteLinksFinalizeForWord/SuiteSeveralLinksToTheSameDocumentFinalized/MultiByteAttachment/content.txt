@@ -1,0 +1,6 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText") !-|-! ${WORDPROPERTYSELECT}|
+|${WORDPROPERTY}|
+|=~/_Attachments/中文文档资料.jpg!-|-!_Attachments/%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3%e8%b5%84%e6%96%99.jpg/|

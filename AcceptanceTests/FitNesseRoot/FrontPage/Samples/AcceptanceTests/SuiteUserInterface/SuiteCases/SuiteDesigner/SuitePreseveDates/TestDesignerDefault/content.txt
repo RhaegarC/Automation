@@ -1,0 +1,13 @@
+!|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|click MapDataTab|
+|eval|$status = Invoke-Expression ((getExpression "PreserveDates") +"!-|-!Get-UIACheckBoxToggleState")|
+|check|eval|$status|True|
+
+!|script|
+|stopUiautomation|
+

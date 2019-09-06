@@ -1,0 +1,10 @@
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? context -eq 'Add Fields to Table: [tbl_vw_SECTION_blank_MAIL]'|
+|message|
+|!-ALTER TABLE tbl_vw_SECTION_blank_MAIL ADD 
+[BooleanField] bit ,
+[NumberField] decimal ,
+[CurrencyField] money ,
+[DateTimeField] datetime ,
+[TimeField] time ,
+[FileField] varbinary(MAX) ,
+[TextField] text -!|

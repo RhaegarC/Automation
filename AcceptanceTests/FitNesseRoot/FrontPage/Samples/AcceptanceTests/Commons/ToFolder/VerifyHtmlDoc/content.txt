@@ -1,0 +1,41 @@
+|comment: !style_red['''IMPORTANT!''']|
+|Parameter|Mandatory|Remark|Example|
+|PAGENAME|Yes||!-!define PAGENAME (TestAlignedColored)-!|
+|ORIGIN_SITE_URL|No|Specifiy where the standard files are generated when there are links in documents|!-!define ORIGIN_SITE_URL (http://sp2010/sites/test)-!|
+|TARGET_FILE|No|redefine it if you want different standard file names|!-!${TARGETFOLDER}\file1.${SAVE_AS}-!|
+|SCREENSHOT|No||!-!define SCREENSHOT (http://fitnesse.at-nmsp.com/files/nmsp/compareFiles\SuiteCases.SuiteDocument.SuiteAttachments.SuiteIcon\TestAttachmentIconWithMetafile.docx_screenshot.png)-!|
+
+!|script|remote|${NMSP}|
+|eval|$targetFile_fullPath="${TARGET_FILE}"|
+|eval|!- if(!(Test-Path $targetFile_fullPath))
+{
+Copy-Item -!"${TARGETFOLDER}\${PAGENAME}.${SAVE_AS}" !-$targetFile_fullPath
+}
+-!|
+|eval|$targetFile=$targetFile_fullPath.split("\")[-1]|
+|eval|$docFolder="undefined"|
+|eval|if("${RUNNING_PAGE_PATH}".indexof("SuiteCases") -gt -1){$docFolder="${RUNNING_PAGE_PATH}".substring("${RUNNING_PAGE_PATH}".indexof("SuiteCases"))+"_${ENV_NAME}"}|
+|eval|if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder")){New-Item "\\fitnesse.at-nmsp.com\shared\$docFolder" -ItemType Directory}|
+|eval|$message=""|
+|eval|!-if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.html")){
+Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile"
+$message="compare file does not exist, check the files in \\fitnesse.at-nmsp.com\shared\$docFolder\ and turn it to $targetFile.standard.html if it is OK"
+}
+else{
+$result=$null
+$source=(Get-Content "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.html") -replace "-!${ORIGIN_SITE_URL}!-","siteurl" -replace "name="".{8}-.{4}-.{4}-.{4}-.{12}""","" |Select-String -pattern "mso:" -notmatch
+$target=(Get-Content $targetFile_fullPath) -replace "-!${SITE_URL}!-","siteurl" -replace "name="".{8}-.{4}-.{4}-.{4}-.{12}""","" |Select-String -pattern "mso:" -notmatch
+$result=Compare-Object $source $target
+if($result){
+        $message="Comparing files failed,check the documents in folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"
+        Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.failed_-!${ENV_NAME}!-.html"
+}
+else{
+        $message="Successful"
+}
+}-!|
+|show|eval|"Target Folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"|
+|check|eval|$message|Successful|
+
+!style_blue['''Screen Shot for the document''']
+${SCREENSHOT}

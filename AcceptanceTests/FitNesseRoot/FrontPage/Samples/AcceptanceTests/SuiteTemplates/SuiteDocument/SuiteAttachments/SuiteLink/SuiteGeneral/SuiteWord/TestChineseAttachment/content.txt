@@ -1,0 +1,6 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText")!-|-!WordHyperLinkElement|
+|href|
+|=~/_Attachments/中文文档资料.jpg!-|-!%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3%e8%b5%84%e6%96%99.jpg/|
+
+!|script|Remote|${WEB_SCRAPER}|
+|attachment|${OPENPATH}/_Attachments/中文文档资料.jpg|

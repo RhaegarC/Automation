@@ -1,0 +1,17 @@
+!* Verify section header
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.className','parentElement.tagName'|limit to|className -like 'sectionheader*'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|parentElement.className|
+|DIV|null|
+
+*!
+!* Verify section
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'DIV'|properties|'parentElement.className','parentElement.tagName'|limit to|className -like 'section'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|parentElement.className|
+|DIV|null|
+*!

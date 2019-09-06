@@ -1,0 +1,4 @@
+!define URL (${WEB}/Lists/${LIST}/Attachments/\d)
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title']} }, @{ N='Body'; E={$_['Body']} } |
+|Title|Body|Body|Body|Body|
+|TestMultiRichTextField|=~/${URL}/image0.JPG/|=~/${URL}/image1.JPG/|=~/${URL}/attachment.pdf/|=~/${URL}/attachment-.{15}.pdf/|

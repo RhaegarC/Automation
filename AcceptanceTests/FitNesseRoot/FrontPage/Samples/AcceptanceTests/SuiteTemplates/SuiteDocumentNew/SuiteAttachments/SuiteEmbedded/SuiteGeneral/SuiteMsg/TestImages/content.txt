@@ -1,0 +1,11 @@
+!define PAGENAME (!-TestImages-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|CrazyTruck.jpg|
+|123w.bmp|
+|icon_yahoo.gif|
+|iconWarning16.png|

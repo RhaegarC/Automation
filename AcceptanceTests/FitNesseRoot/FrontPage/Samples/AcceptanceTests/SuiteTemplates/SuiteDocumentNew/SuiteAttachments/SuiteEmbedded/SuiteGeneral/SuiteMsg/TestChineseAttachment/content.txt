@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestChineseAttachment-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|中文文档资料.jpg|

@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",formula:"!-@Contains(subject;'TestChineseAttachment') | @Contains(subject;'TestFileNameWithPlusSign') | @Contains(subject;'TestFileNameWithSpace') | @Contains(subject;'TestFileNameWithSpecChars') | @Contains(subject;'TestImages')-!",mapFields:${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

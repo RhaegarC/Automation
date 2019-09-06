@@ -1,0 +1,8 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|title, outerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|title|outerText|
+|中文信息POPUP|Pop-up|
+
+

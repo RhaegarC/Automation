@@ -1,0 +1,10 @@
+
+!| script | remote | ${NMSP}:36 |
+|eval|click "Documentation"|
+|eval|$pageUri=getControlValue "InternalExplorerServer"|
+|eval|if($pageUri.Contains("?")){$pageUri= $pageUri.Substring(0,$pageUri.IndexOf('?'))}|
+|eval|$htmlContent= Invoke-WebRequest $pageUri|
+|check|eval|$pageUri.Contains("DocumentationPage.htm")|True|
+|check|eval|$htmlContent.RawContent.Contains("Documentation in this Package")|True|
+|check|eval|$htmlContent.RawContent.Contains("MinorVersion")|False|
+

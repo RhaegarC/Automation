@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|MaxRecords|${MAXRECORD}|job|${JOBFILE}|
+|LinkConversionType|UseLinkTracking|job|${JOBFILE}|
+
+
+
+

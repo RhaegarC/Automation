@@ -1,0 +1,6 @@
+|script|
+|download|!{file:"${TARGETFOLDER}\${FILENAME}.pdf",url:"${LIST_URL}/${FILENAME}.pdf"}|
+
+|script|Remote|${NMSP}|
+|newParsePdfDoc|!{url:"${LIST_URL}/${FILENAME}.pdf",file:"${TARGETFOLDER}\${FILENAME}.pdf"}|
+|check|eval|$extractedText.contains("Content in basic document")|True|

@@ -1,0 +1,35 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I should see appropriate descriptions of sharepoint version on the interface
+So that it will not be missleading
+reference: https://wiki.labs.quest.com/pages/viewpage.action?pageId=171487690
+
+!1 scenarios
+![
+Given NMSP is installed
+When go to Setup Wizard
+Then I can see sharepoint instead of sharepoint 2010 on the interface
+
+Given NMSP is installed
+When go to InfoPath generator
+Then I can see "at least SharePoint 2010 & InfoPath 2010" instead of sharepoint 2010 & InfoPath 2010 on the interface
+
+Given NMSP is installed
+When go to Options→SharePoint tab → Test Connections
+Then I can see sharepoint instead of sharepoint 2010 on the interface
+
+Given NMSP is installed
+When go to Target Data Definition(SharePoint)
+Then I can see sharepoint instead of sharepoint 2010 on the interface
+
+Given NMSP is installed
+When go to Document Set Template
+Then I can see sharepoint instead of sharepoint 2010 on the interface
+
+Given NMSP is installed
+When go to Import Views From Notes window
+Then I can see sharepoint instead of sharepoint 2010 on the interface
+]!

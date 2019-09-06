@@ -1,0 +1,4 @@
+!include -c GetCredentials
+!include -c GetSession
+!include -c LoadSharePointApi
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions

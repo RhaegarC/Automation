@@ -1,0 +1,11 @@
+!* !-Note-!
+ * This test is failed in build 6.5.0.1918 (6.5 RTM build)
+*!
+
+!|Query:Remote|${NMSP}|GetFiles ${SOURCEFOLDER} ${SITE_URL} ${WEB} ${LIST} |
+|Modified|
+|5/22/2014 8:10:23 PM|
+|5/22/2014 5:24:01 PM|
+|5/22/2014 5:24:16 PM|
+|8/27/2015 2:58:03 AM|
+|3/23/2018 7:14:30 AM|

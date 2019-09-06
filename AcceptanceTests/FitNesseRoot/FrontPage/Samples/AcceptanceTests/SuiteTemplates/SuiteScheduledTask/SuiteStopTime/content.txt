@@ -1,0 +1,37 @@
+!define MigrationExitCode (-6)
+!contents -R2 -g -p -f -h
+
+!1 user story
+As an administrator
+I can create a scheduled migrate task with a Stop Time
+So that I can suspend the scheduled migrate task in definite time and rerun the task whenever I want
+!1 scenarios
+![
+Given migration Target Site and Migration Job were set in the Properties of Database
+When I create a scheduled migrate task without a Stop Time
+Then I can view this scheduled migrate task completed correctly
+And I can view the migrated data in target site
+
+When I create a scheduled migrate task with a Stop time set to earlier than or equal to Start time
+Then I can view this scheduled migrate task can not be created
+And a warning dialog pop out
+
+When I create a scheduled migrate task with a Stop time which is earlier than the time for task completed
+Then I can view this scheduled migrate task was stopped at the Stop Time, and its status change to Suspended 
+When I right click of this scheduled migrate task and select Continue in context menu
+Then I can view this scheduled migrate task resume running and completed correctly
+
+When I create a scheduled migrate task with a Stop time
+And I cancel it before the Stop Time
+Then I can view this scheduled migrate task was stopped, and its status change to Cancelled
+And I right click of this scheduled migrate task
+Then I can not see the Continue option in context menu
+
+When I create a scheduled migrate task with a Stop time which is later than the time for task completed
+Then I can view this scheduled migrate task completed correctly
+And I can view the migrated data in target site
+
+When I create a scheduled migrate task with a Stop time
+And I try to cancel it just at the Stop Time
+Then I can not cancel it when it reached the Stop Time
+]!

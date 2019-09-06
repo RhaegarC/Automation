@@ -1,0 +1,3 @@
+!|Query:Remote|${WEB_SCRAPER}|$list.Action.URI|
+|Value|
+|=~/_Attachments/TestPaintPictureOle.bmp/|

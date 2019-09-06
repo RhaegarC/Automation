@@ -1,0 +1,4 @@
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteAttachments.SuiteEmbedded.EditJob)
+!define OBJ_DRAW_ASPECT (Content)
+!define ATT_DRAW_ASPECT (Icon)
+!contents -R2 -g -p -f -h

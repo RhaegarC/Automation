@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",formula:"!-@Contains(subject;'TestAlignmentInsideTableCell') | @Contains(subject;'TestBulletListInNestedSections') | @Contains(subject;'TestImportedPicture') | @Contains(subject;'TestListWithLinks') | @Contains(subject;'TestTextFonts') | @Contains(subject;'TestFontHighlighter')-!"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

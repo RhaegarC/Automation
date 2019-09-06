@@ -1,0 +1,15 @@
+#!*> We have to enable Link Tracking as we are working with document links in this suite
+#!|script|Remote|${NMSP}|
+#|MMC LinkTracking enabled|
+#|LinkConversionType|UseLinkTracking|job|${JOBFILE}|
+#!img /files/nmsp/images/LinkTracking/LinkTracking.png
+#*!
+!*> Select records based on view
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+!img /files/nmsp/images/ReadySamples/SelectRecords.png
+*!
+!* Exclude document from selection
+!|script|Remote|${NMSP}|
+|Formula|subject!="TestTwoBodyAttachmentsAndTwoDocAttachmentsMapping"|for|${JOBFILE}|
+*!

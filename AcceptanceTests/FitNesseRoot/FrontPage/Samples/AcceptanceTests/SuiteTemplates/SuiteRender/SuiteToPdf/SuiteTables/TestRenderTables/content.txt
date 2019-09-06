@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestRenderTables-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

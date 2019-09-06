@@ -1,0 +1,3 @@
+!define SAVE_AS (docx)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.${SAVE_AS})
+!contents -R2 -g -p -f -h

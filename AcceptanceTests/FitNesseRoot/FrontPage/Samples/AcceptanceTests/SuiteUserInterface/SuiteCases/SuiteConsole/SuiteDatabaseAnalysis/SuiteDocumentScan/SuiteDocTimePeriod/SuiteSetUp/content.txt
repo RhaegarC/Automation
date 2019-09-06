@@ -1,0 +1,11 @@
+!include -c <SuiteDatabaseAnalysis.SuiteSetUp
+
+!|script|Remote|${NMSP}|
+|eval|$currenyDate=Get-Date|
+|eval|$startDate= Set-Date "6/15/2015 01:01"|
+
+|script|
+|startConsole|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+|getAnalyzeResult|!{databaseElement:!-"SuiteDatabaseAnalysisDb"-!,scanOption:!-"ScanDocument"-!,resultType:!-"AnalyzeResult"-!}|

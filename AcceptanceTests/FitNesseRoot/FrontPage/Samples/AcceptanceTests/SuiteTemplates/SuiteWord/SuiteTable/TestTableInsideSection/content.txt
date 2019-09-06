@@ -1,0 +1,9 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement | 
+|text|
+|This Section has a Table|
+|Section with Table|
+|Cell (1, 1)|
+|Cell (1, 2)|
+|Cell (2, 1)|
+|Cell (2, 2)|
+

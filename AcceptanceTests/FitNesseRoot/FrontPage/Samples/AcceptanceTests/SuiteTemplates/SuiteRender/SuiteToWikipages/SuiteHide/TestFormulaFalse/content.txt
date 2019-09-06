@@ -1,0 +1,17 @@
+'' Formula not activated! ''
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestFormulaFalse.aspx",tag:"tr",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/Form:\s*Body hide formula is False/|
+|=~/Author:\s*Konstantin/|
+|=~/Subject:\s*TestFormulaFalse/|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestFormulaFalse.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|TEXT!- -!|

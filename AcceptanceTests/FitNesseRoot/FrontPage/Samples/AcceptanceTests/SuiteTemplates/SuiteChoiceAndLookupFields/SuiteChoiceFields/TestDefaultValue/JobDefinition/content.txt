@@ -1,0 +1,5 @@
+!define AddMissingChoices (true)
+!define MultipleValues (false)
+!define MultiValueDisposition (Default)
+!define LIST (${TARGET_FIELD_TYPE}_TestDefaultValue)
+!define TARGETFIELDS ("<!-Field MultipleValues='-!${MultipleValues}!-' Name='Category' DefaultValue='DefaultValue' AddToViews='-!${AddToViews}!-' Type='-!${TARGET_FIELD_TYPE}!-' AddMissingChoices='-!${AddMissingChoices}!-' IsRequired='true'-!></Field>")

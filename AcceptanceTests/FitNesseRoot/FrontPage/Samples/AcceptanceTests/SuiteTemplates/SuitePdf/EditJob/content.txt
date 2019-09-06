@@ -1,0 +1,3 @@
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+#|Remove|TransferJob/SharePointTargetDefinition/MigrateCustomProperties|from|${JOBFILE}|

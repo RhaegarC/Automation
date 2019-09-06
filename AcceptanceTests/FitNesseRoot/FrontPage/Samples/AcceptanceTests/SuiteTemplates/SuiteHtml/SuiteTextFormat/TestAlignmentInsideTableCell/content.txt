@@ -1,0 +1,13 @@
+!|Query:Remote|${WEB_SCRAPER}|$html !-|-! GetAllTableCellText|
+|text|style|
+|Centered Text (1, 1)|margin:0pt; text-align:center|
+|Centered Text (1, 2)|margin:0pt; text-align:center|
+|Right aligned Text (2, 1)|margin:0pt; text-align:right|
+|Left aligned Text (2, 2)|margin:0pt|
+|AAA</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">AAA</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">AAA</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">AAA</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">AAA</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">AAA|margin:0pt|
+|Vertical aligned : Top|margin:0pt|
+|Vertical aligned : Center|margin:0pt; text-align:center|
+|BBB</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">BBB</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">BBB</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">BBB</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">BBB</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">BBB|margin:0pt|
+|CCC</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">CCC</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">CCC</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">CCC</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">CCC</span></p><p style="margin:0pt"><span style="font-family:Arial; font-size:9pt; font-style:normal; font-variant:normal; font-weight:normal">CCC|margin:0pt|
+|Vertical aligned : Bottom|margin:0pt; text-align:right|
+

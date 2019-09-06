@@ -1,0 +1,3 @@
+!define LIST (!-SuiteFakeFileName-!)
+!define VIEW (!-Suite Embedded-!)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,6 @@
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['FileRef']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|=~/TestFileNameSpecial&Contorl--ASCII.aspx/|=~/${URL}/_-Attachments/New%20Text%20Document%26Hlá-ení%20vzniku%20-kody.txt/|

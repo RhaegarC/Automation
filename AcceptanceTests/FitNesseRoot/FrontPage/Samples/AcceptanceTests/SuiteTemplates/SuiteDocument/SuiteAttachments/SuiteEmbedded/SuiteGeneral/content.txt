@@ -1,0 +1,3 @@
+!define VIEW (Suite General)
+!define LIST (SuiteEmbedded_SuiteGeneral)
+!contents -R2 -g -p -f -h

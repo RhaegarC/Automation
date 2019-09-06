@@ -1,0 +1,9 @@
+!|script|Remote|${NMSP}|
+|eval|$webInfo = new-object Microsoft.SharePoint.Client.WebCreationInformation|
+|eval|$webInfo.Title = '${WEB}'|
+|eval|$webInfo.Url = '${WEB}'|
+|eval|$webInfo.UseSamePermissionsAsParentSite = $true|
+|eval|$webInfo.WebTemplate = 'STS#1'|
+|eval|$web = $ctx.Web.Webs.Add($webInfo)|
+|eval|$ctx.Load($web)|
+|check|eval|try{ $ctx.ExecuteQuery() }catch [Microsoft.SharePoint.Client.ServerException] { $_.Exception.Message }|=~/The Web site address .* is already in use.!-|-!^$/|

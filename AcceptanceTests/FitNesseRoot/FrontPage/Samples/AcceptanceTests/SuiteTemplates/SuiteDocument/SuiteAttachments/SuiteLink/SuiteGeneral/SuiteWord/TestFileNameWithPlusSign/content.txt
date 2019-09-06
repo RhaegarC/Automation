@@ -1,0 +1,3 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText")!-|-!WordHyperLinkElement|
+|href|
+|=~/_Attachments/Special${SPACE}\+${SPACE}sign.txt/|

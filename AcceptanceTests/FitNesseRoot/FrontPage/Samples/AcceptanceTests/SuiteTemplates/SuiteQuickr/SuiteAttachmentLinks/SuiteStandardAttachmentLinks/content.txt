@@ -1,0 +1,20 @@
+!define TEMPLATE (!-QRPageToCustomList-!)
+!define LIST (!-TestStandardAttachmentLinks-!)
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can add "{!-AttachmentLinks}-! -> Body" mapping in Map Data and run a migration
+So that I can view migrated pages with !-AttachmentLinks-! inline in !-SharePoint-!
+
+!1 scenarios
+![
+Given attachments were added in quickr pages
+When I run a migration with default mappings
+Then I can view migrated pages with no AttachmentLinks inline in SharePoint
+
+Given attachments were added in quickr pages
+And "Allow Multiple Sources" of "Body" field was set to "True" in Target Data Definition
+And mapping "{AttachmentLinks}->Body" was added in Map Data Tab
+When I run a migration
+Then I can view migrated pages with AttachmentLinks inline in SharePoint
+]!

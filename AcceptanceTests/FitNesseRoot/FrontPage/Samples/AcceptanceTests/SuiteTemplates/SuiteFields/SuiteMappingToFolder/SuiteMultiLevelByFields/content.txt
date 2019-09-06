@@ -1,0 +1,7 @@
+!define GROUP {!-SuiteMultiLevelByFields-!}
+!define LIST (!-SuiteMultiLevelByFields-!)
+!define FILE (!-TestMappingFieldsToFolder-!)
+!define SOURCE (${LIST_URL}/Submitted/${FILE}/${FILE}.pdf)
+!define TARGET (${TARGETFOLDER}\Submitted\${FILE}\${FILE}.pdf)
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,47 @@
+!define SHAREPOINT30 (${SHAREPOINT}:30)
+!define WEB_SCRAPER (${NMSP})
+!define TAXONOMY (${SHAREPOINT}:38)
+!define PSVERSION (-v 2 )
+!define AUTH (!-ClassicModeAuthentication-!)
+!define WEBAPP_URL (!-http://sp2010-!)
+!define PublishFormDll (C:\msi\Nintex Forms\NFPublishLib.dll)
+!define CREDENTIALS (Credential $AdminCred)
+!define LAYOUTS (/_layouts/)
+!define CAPORT (42407)
+!define CA (http://sp2010:${CAPORT})
+!define USEMAP (useMap)
+!define Qwerty123 (iU2LNL7dQ2tlOvcwgBHnxQ==)
+!define USERMAPPING_USERLOGINNAME1 (!-VELASKEC\uservladimir-!)
+!define USERMAPPING_USERLOGINNAME2 (!-VELASKEC\userkonstantin-!)
+!define USERMAPPING_NONEXISTENTUSERLOGIN (!-VELASKEC\userkonstantin1-!)
+!* HTML character
+!define COLON_CHAR_SP (%3a)
+!define MARGIN_LEFT (MARGIN-LEFT)
+!define LESS_CHAR (<)
+!define GREATER_CHAR (>)
+!define SPACE_CHAR ( )
+!define Indexed (False)
+!define SharePointLogin (VELASKEC\administrator)
+!define SharePointDisplayName (VELASKEC\administrator)
+!define SIGNATURE_BLOCK (${RESULT2010})
+!define SHAREPOINT_ONLY (script)
+*!
+!* !-PowerShell selectors-!
+!define SELECTOR_BREADCRUMB [getElementsByTagName('h2')]
+!define SELECTOR_DESCRIPTION [getElementsByTagName('div') | ? className -eq 's4-pagedescription']
+*!
+!* Polymorphism
+!define SOURCEFOLDER (${SITE}/${WEB}/${LIST})
+!define DUPLICATION_SUFFIX (-[0-9A-F]{1,15})
+!define BASEFOLDER (C:\SharePoint)
+!define ROOT (${WEB_URL})
+!define FOLDER (${LIST})
+!define SPACE (%20)
+!define SLASH (/)
+!define TARGET_DEFINITION (SharePointTargetDefinition)
+!define GET_ATTACHMENTS (${SOURCEFOLDER}/_Attachments ${SITE_URL} ${WEB} ${LIST})
+!define GET_FILES (${SOURCEFOLDER} ${SITE_URL} ${WEB} ${LIST})
+!define EDITABLE_PATH (${SITE}/${WEB}/${LIST}/_Attachments/EditableAttachment.txt)
+*!
+
+!contents -R2 -g -p -f -h

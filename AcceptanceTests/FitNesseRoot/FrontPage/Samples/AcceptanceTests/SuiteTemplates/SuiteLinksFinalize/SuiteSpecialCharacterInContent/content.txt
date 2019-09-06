@@ -1,0 +1,4 @@
+!define LIST (SuiteSpecialCharacterInContent)
+!define APPNAME (LinkTracking)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteLinksFinalize.SuiteSpecialCharacterInContent.EditJob)
+!contents -R2 -g -p -f -h

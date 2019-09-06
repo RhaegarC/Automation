@@ -1,0 +1,3 @@
+!define LIST (!-SuiteMultiByte-!)
+!define DATABASE (!-MultiByteCharacters-!)
+!contents -R2 -g -p -f -h

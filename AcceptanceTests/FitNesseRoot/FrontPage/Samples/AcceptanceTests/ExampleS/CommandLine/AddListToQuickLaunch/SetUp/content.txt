@@ -1,0 +1,17 @@
+!*> Recreate the web
+!|script|Remote|${REMOTESP}|
+|eval|Get-SPWeb ${TARGETWEB} !-|-! Remove-SPWeb -confirm:$false|
+|eval|New-SPWeb ${TARGETWEB} -Template "STS#1" -UseParentTopNav|
+
+!|script|Remote|${REMOTESP}:30|
+|eval|$page = $null|
+|eval|$page = Invoke-WebRequest -Uri ${TARGETWEB}default.aspx -Credential $AdminCred|
+
+!|Ordered Query:Remote|${REMOTESP}:30|!-$page.Links | ? {$_.class -like 'static menu-item*'} | select innerText-!|
+|innerText|
+|Home|
+|Libraries|
+|Lists|
+|Discussions|
+*!
+!include -c .NmSp.AcceptanceTests.IncludePages.LotusNotes.LoadApi

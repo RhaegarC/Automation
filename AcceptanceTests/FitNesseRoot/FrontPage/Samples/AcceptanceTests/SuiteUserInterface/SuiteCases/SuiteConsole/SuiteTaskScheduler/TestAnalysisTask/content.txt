@@ -1,0 +1,23 @@
+!define TaskName {!-TestAnalysisTask-!}
+
+|script|remote|${NMSP}:36|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Tasks\${TaskName}.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_UserOptions.xml" -Force|
+|eval|Remove-Item "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options_RemoteSpSites.xml" -Force|
+
+|script|
+|importUilib|
+|analyzeDatabase|!{databaseElement:!-"SuiteDatabaseAnalysisDb"-!,scanOption:!-"AllScan"-!,isScheduledTask:"true",scanDesign:"true",scanDesignScript:"true",scanDoclink:"true"}|
+|eval|sleep 5|
+|eval|setText "AnalysisTaskName" "${TaskName}"|
+|eval|!-Set-Date (Get-Date).AddHours(-1)-!|
+|eval|sleep 5|
+|eval|click "AnalysisTaskOK"|
+|eval|!-Set-Date (Get-Date).AddHours(1)-!|
+
+|script|remote|${NMSP}:36|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Tasks\${TaskName}.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_UserOptions.xml"|True|
+|check|eval|test-path "$env:PROGRAMDATA\${NMSP_AppData_Path}\Scheduler\Options\${TaskName}_Options_RemoteSpSites.xml"|True|

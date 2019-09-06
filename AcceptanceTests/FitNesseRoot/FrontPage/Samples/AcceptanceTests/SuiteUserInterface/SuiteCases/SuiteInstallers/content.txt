@@ -1,0 +1,9 @@
+!define LATEST_RTM_VERSION {6.7.0.2269}
+#!define LATEST_RTM_VERSION (6.6.0.2152)
+#!define LATEST_RTM_VERSION (6.4.2.1698)
+#!define LATEST_RTM_VERSION (6.4.1.1627)
+#!define LATEST_RTM_VERSION (6.3.1.1415)
+#!define LATEST_RTM_VERSION (6.3.1.1191)
+!define EXE (NMSP.exe)
+!define PROCESS_NAME (nmsp)
+!contents -R2 -g -p -f -h

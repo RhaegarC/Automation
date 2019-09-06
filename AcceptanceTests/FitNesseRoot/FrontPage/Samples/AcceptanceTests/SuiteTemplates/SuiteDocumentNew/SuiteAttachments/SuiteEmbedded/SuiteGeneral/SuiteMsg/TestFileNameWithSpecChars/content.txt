@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestFileNameWithSpecChars-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|Special#{}%~&'chars.txt|

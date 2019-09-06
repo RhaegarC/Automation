@@ -1,0 +1,2 @@
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",targetType:"Folder",template:"templates/folder/DocLib2Document",fd_location:"${TARGETFOLDER}",mapFields:${MAPFIELDS}}|

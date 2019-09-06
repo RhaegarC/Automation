@@ -1,0 +1,16 @@
+!|script|Remote|${NMSP}|
+|eval|new-item "$($env:PROGRAMDATA)\${NMSP_AppData_Path}\" -ItemType directory -erroraction 'silentlycontinue'|
+|eval|Set-Location "$($env:PROGRAMDATA)\${NMSP_AppData_Path}"|
+|eval|Invoke-WebRequest 'http://fitnesse.at-nmsp.com/files/nmsp/options/Options.config.default.${MODE}.${AUTH}' -OutFile Options.config|
+
+#|eval|Invoke-WebRequest 'http://fitnesse.at-nmsp.com/files/nmsp/options/${RemoteSharePointSitesConfig}' -OutFile RemoteSharePointSites.config|
+
+!|script|Remote|${NMSP}|
+|eval|new-item "$($env:AppData)\${NMSP_AppData_Path}\" -ItemType directory -erroraction 'silentlycontinue'|
+|eval|Set-Location "$($env:APPDATA)\${NMSP_AppData_Path}"|
+|eval|Invoke-WebRequest 'http://fitnesse.at-nmsp.com/files/nmsp/options/UserOptions.config.${AUTH}' -OutFile UserOptions.config|
+
+!|script|Remote|${NMSP}|
+|eval|new-item "$($env:AppData)\${NMSP_AppData_Path}\" -ItemType directory -erroraction 'silentlycontinue'|
+|eval|Set-Location "$($env:PROGRAMDATA)\${NMSP_AppData_Path}"|
+|eval|Invoke-WebRequest 'http://fitnesse.at-nmsp.com/files/nmsp/UserMappings.xml' -OutFile UserMappings.xml|

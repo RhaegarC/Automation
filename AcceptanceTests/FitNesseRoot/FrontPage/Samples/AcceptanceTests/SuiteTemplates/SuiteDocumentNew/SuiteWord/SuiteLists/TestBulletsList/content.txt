@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestBulletsList-!)
+
+!style_green[Check the word content contains a bullet list: "•	First string" and "•	Second string" (the font is Arial, black, 9).
+Displays as below:]
+--------------------
+•	First string
+•	Second string
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

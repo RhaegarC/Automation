@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include -c <AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",sourceFields:${SOURCEFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigration

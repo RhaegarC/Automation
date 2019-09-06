@@ -1,0 +1,4 @@
+!include -c <AcceptanceTests.IncludePages.RemoveList
+-!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${WEB_URL}|List|${LIST}|Application|${APPNAME}|
+!include -c >JobDefinition

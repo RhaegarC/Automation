@@ -1,0 +1,6 @@
+!define MIGRATION (!-DocLib2Document-!)
+!define LIST (!-SuiteEncryptDocument-!)
+!define PDFSOURCE {${LIST_URL}/${FILENAME}.pdf}
+!define APPNAME (!-SuiteAttachments-!)
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,50 @@
+!define LIST {!-SuiteLinkFinalizeWithScope-!}
+!define LINKS (8)
+!define DOCUMENTS (6)
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can select which migrated documents to run link finalization
+And I can select which !-DocLinks-! in the migrated documents to run link finalization
+So that I can be redirected to the correct pages when I clicking the !-DocLinks-! in migrated documents
+
+!1 scenarios
+![
+Given documents contain !-DocLinks-! were migrated with "Use the Link Tracking Service"
+1. specific + All
+And "Specific migrated documents. Document folder (relative path) or URLs starting with:" was selected
+And I set a migrated library URL in it
+And "All DocLinks" was selected
+When I run a finalization
+And I click the !-DocLinks-! in migrated documents of the library set in "Specific migrated documents. Document folder (relative path) or URLs starting with:"
+Then I can be redirected to the direct link pages
+When I click the !-DocLinks-! in migrated documents of the library but not set in "Specific migrated documents. Document folder (relative path) or URLs starting with:"
+Then I can not be redirected to the direct link pages
+
+2. All + specific
+Given "All migrated documents" was selected
+And "DocLinks in specific migrated documents. Document folder (relative path) or URLs starting with:" was selected
+And I set a migrated library URL in it
+When I run a finalization
+And I click the !-DocLinks-! pointed to migrated documents of the library set in "DocLinks in specific migrated documents. Document folder (relative path) or URLs starting with:"
+Then I can be redirected to the direct link pages
+When I click the !-DocLinks-! not pointed to migrated documents of the library set in "DocLinks in specific migrated documents. Document folder (relative path) or URLs starting with:"
+Then I can not be redirected to the direct link pages
+
+3. specific + specific
+Given "Specific migrated documents. Document folder (relative path) or URLs starting with:" was selected
+And "DocLinks in specific migrated documents. Document folder (relative path) or URLs starting with:" was selected
+And a migrated library URL was set in both of them
+When I run a finalization
+And I click the !-DocLinks-! in migrated documents of this library and pointed to migrated documents of this library
+Then I can be redirected to the direct link pages
+When I click the !-DocLinks-! not in this library nor pointed to migrated documents of this library
+Then I can not be redirected to the direct link pages
+
+4. All + All
+Given "All migrated documents" was selected
+And "All DocLinks" was selected
+When I run a finalization
+Then I can be redirected to the direct link pages when I clicking the !-DocLinks-! in migrated documents
+]!

@@ -1,0 +1,22 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can run DB discovery/DB analyzation/migration with tmp log files saved automatically
+So that I can check this log files when exception occurs
+
+!1 scenarios
+![
+Given MNSP V6.13 installed
+When I run DB discovery/DB analyzation/migration in background
+And I close console before task complete
+Then I can view a tmp log file with task start time as file name saved in "<MNSP_Home>\Log Files"
+
+When I run DB discovery/DB analyzation/migration
+And I end MNSP task in Windows Task Manager
+Then I can view a tmp log file with task start time as file name saved in "<MNSP_Home>\Log Files"
+
+When I run DB discovery/DB analyzation/migration
+Then I can view a tmp log file with task start time as file name saved in "<MNSP_Home>\Log Files" before task complete
+And I wait until this task completed
+Then I can view no tmp log file for this task saved in "<MNSP_Home>\Log Files"
+]!

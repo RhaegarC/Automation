@@ -1,0 +1,6 @@
+!contents -R2 -g -p -f -h
+|script|
+|startUiautomation|
+
+|script|
+|importUilib|

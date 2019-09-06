@@ -1,0 +1,6 @@
+!define TURBO_MODE (true)
+!define STORAGE_ACCOUNT {nmspstorageforat}
+!define ACCESS_KEY {!-NXSIZmkkwIG1NIOs8OwNOfSnGmXvtaVypfR2zZTnFPSpjAH6VGod9YcRPZ2YjqHBETDh/UUMGQUWUbwVTTWHbQ==-!}
+
+!contents -R2 -g -p -f -h
+

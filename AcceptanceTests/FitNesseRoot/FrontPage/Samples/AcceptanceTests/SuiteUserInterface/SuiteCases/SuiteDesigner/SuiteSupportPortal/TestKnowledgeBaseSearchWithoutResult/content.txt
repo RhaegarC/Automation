@@ -1,0 +1,4 @@
+!define LogErrorItem (!-LogAccessSharePointErrorItem-!)
+!define ArticleResults (!-0 article(s) are found. Click to find more on the KB web site...,0 article(s) are found. Click to find more on the KB web site...-!)
+
+!include <SuiteDesigner.SuiteSupportPortal.RunKnowledgeBaseSearch

@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestHideByReferenceInDifferentPosition-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

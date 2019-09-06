@@ -1,0 +1,15 @@
+!|script|Remote|${NMSP}|
+|$LogFolder=|eval|"$env:ProgramData\${NMSP_AppData_Path}\Log Files"|
+
+''Fix log file format if needed'' https://commons.quest.com/message/39573
+!|script|Remote|${NMSP}|
+|show|eval|(Get-ChildItem '$LogFolder' !-|-! select -last 1).Name|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|check|eval|([xml]$log).Log.summary.results.documentsRead|4|
+|check|eval|([xml]$log).Log.summary.results.documentsWritten|2|
+|check|eval|([xml]$log).Log.summary.results.errorCount|0|
+|check|eval|([xml]$log).Log.summary.results.warningCOunt|1|
+
+!|Query:Remote|${NMSP}|$critical|
+|context|message|stackTrace|

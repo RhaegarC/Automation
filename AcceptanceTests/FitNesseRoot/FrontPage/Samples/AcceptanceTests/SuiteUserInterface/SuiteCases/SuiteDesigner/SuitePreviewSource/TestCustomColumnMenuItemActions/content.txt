@@ -1,0 +1,29 @@
+!|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|click "LoadTransferJob"|
+|eval|setText "JobFile" "'C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files\DocLibrary to Document.pmjob'"|
+|eval|click "OpenFile"|
+|eval|click "Preview"|
+|eval|setText "MaxRecords" "2"|
+|eval|click "PreviewTest"|
+|eval|setWindowPattern "SourceDataDefinition" "Maximize"|
+|eval|displayContextMenu "PreviewDateColumn"|
+|eval|clickMenu "RemoveField"|
+|eval|displayContextMenu "PreviewCategoryColumn"|
+|eval|$menuItem1 = getControlName "SortAscending"|
+|check|eval|$menuItem1|Sort Ascending|
+|eval|$menuItem2 = getControlName "SortDescending"|
+|check|eval|$menuItem2|Sort Descending|
+|eval|clickMenu "GoToDefinition"|
+|eval|$categoryField = getControlName "PreviewCategoryField"|
+|check|eval|$categoryField|Category|
+|eval|$dateField = getControlName "PreviewDateField"|
+|check|eval|$dateField||
+
+
+!|script|
+|stopUiautomation|

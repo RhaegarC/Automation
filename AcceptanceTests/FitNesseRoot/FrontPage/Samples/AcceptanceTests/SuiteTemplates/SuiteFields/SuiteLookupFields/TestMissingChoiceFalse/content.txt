@@ -1,0 +1,23 @@
+!define LIST {!-TestMissingChoiceFalse-!}
+!define DATABASE {!-ChoiceAndLookupFields-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!define LOOKUP_LIST {!-TestMissingChoiceFalse_Lookup-!}
+!define TARGET_FIELD {<!-Field MultipleValues='false' Name='Category' AddToViews='DefaultView' LookupColumn='Title' Type='Lookup' AddMissingChoices='false' IsRequired='false'-!><!-LookupTarget-!><!-ListName-!>!-TestMissingChoiceFalse_Lookup-!</!-ListName-!></!-LookupTarget-!></!-Field-!>}
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LOOKUP_LIST}",type:"CustomList"}|
+|addSPListItems|!{web:"${WEB_URL}",list:"${LOOKUP_LIST}",items:!-@{Title ="Canada"}-!}|
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",targetFields:"${TARGET_FIELD}",mapFields:"<!-Mapping Destination='Category' SourceValue='Category' MultiValueDisposition='All' Transform='None' FormatString='{0}' -!/>"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['FileLeafRef']}},@{N='Category';E={$_['Category'].LookupValue}}|
+|Title|Category|
+|NoCategories.pdf|null|
+|TwoCategories.pdf|Canada|
+|SecondCategory.pdf|null|
+|FistCategory.pdf|Canada|
+|SpecialCharacters.pdf|null|

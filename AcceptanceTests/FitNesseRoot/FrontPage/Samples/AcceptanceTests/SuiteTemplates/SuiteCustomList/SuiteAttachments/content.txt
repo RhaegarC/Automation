@@ -1,0 +1,10 @@
+!define MIGRATION (!-BasicList-!)
+!define LIST (!-SuiteAttachments-!)
+!define VIEW (!-Suite General-!)
+!define APPNAME (!-SuiteAttachments-!)
+!define FORMULA (!-subject!='TestTwoBodyAttachmentsAndTwoDocAttachmentsMapping'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Value='Body' Alias='BodyHtml' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='Body' Alias='BodyAttachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='Body' Alias='BodyImages'  Option='Multi'-! />","<!-Column ColumnType='OleObject' Value='Body' Alias='BodyEmbeddedObjects' Option='Multi'-! />")
+!define TARGETFIELDS ("<!-Field AddToViews='DefaultView' Name='Content' Type='Note'-! />","<!-Field AlternateFolder='_attachments' Name='Attachments' Type='Attachments' AllowMultiple='true'-! />")
+!define MAPFIELDS ("<Mapping !-Destination='Content' SourceValue='BodyHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyImages' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define CAML ("<View><Query></Query></View>")
+!contents -R2 -g -p -f -h

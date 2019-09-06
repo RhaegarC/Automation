@@ -1,0 +1,3 @@
+!define LIST (Discussion)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDiscussion.SuitePreserveIdentities.EditJob)
+!contents -R2 -g -p -f -h

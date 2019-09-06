@@ -1,0 +1,5 @@
+!|Query:Remote|${WEB_SCRAPER}|$pdf.EmbeddedFiles|
+|Name|
+|object0.pptx|
+
+!note '''!-FileName-!''' mapping doesn't work here (https://github.com/GitQuest/NMSP/issues/171)

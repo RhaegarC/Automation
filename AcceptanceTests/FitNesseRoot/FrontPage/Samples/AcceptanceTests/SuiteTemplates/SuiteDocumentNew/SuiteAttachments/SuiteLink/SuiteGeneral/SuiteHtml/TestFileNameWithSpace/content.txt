@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpace-!)
+
+!style_green[Check the html content contains "_Attachments/Space char.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

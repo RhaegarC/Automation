@@ -1,0 +1,23 @@
+!*> Verify 2 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'Style.marginLeft','parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|parentElement.tagName|
+|OL|${LIST_NO_INDENT}|DIV|
+|UL|${LIST_NO_INDENT}|LI|
+
+*!
+!*> Verify 6 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|OL|
+|OL|
+|UL|
+|UL|
+|OL|
+|OL|
+*!

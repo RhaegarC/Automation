@@ -1,0 +1,4 @@
+|script|remote|${NMSP}:36|
+|eval|displayContextMenu "SuiteDatabaseAnalysisDb"|
+|eval|clickMenu "ExtractDatabaseUsersMenuItem"|
+|check|eval|getControlValue "NotesName"|$New$Group/User$|

@@ -1,0 +1,12 @@
+!|script|
+|startUiautomation|
+|closeMainWindows|
+
+!|script|
+|importUilib|
+
+|script|
+|linkFinalize|!{linkNumber:${LINKS},docNumber:${DOCUMENTS}}|
+
+!|script|
+|stopUiautomation|

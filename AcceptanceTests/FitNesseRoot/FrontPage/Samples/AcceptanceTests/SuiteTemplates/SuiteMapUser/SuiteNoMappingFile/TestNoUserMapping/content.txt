@@ -1,0 +1,16 @@
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|eval|$mapuser = ([xml]$log).Log.entry !-|-! ? context -eq 'Map User'|
+
+!|Subset Query:Remote|${NMSP}|$mapuser |
+|rec|message|
+|1|Map Notes user 'CN=Stephen Walch/O=Proposion' to Windows user 'CN=Stephen Walch/O=Proposion' (NOT CACHED)|
+|1|=~/User mapping failed/|
+|1|=~/Map Notes user 'CN=Stephen Walch/O=Proposion' to Windows user/|
+|1|=~/Found existing Principal from name/|
+|1|=~/Map Notes user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to Windows user/|
+|1|=~/User mapping failed for 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko'/|
+|1|=~/Map Notes user 'CN=Konstantin Vlasenko/O=Konstantin Vlasenko' to Windows user/|
+|1|=~/Found existing Principal from name/|

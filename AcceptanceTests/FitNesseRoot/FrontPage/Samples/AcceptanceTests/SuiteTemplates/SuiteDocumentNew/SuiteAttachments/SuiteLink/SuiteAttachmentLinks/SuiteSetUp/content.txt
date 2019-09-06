@@ -1,0 +1,8 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}", formula:"subject='TestTwoBodyAttachmentsAndTwoDocAttachmentsMapping'", removeNodes:"//TransferJob/SharePointTargetDefinition/ExtractIcons",addNodes:!-@{path="TransferJob/SharePointTargetDefinition";node="<ExtractIcons>false</ExtractIcons>"}-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

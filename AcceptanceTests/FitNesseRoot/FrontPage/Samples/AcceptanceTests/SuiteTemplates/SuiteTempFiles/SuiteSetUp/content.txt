@@ -1,0 +1,9 @@
+|script|Remote|${NMSP}|
+|eval|!-
+foreach($i in 1..65535)
+{
+$tempfile = [System.IO.Path]::GetTempFileName()
+}-!|
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",targetType:"Folder",template:"templates/folder/Render2WordDoc",formula:!-"Subject='radiobutton'|Subject='documentlinkicom'"-!,fd_location:"${TARGETFOLDER}"}|

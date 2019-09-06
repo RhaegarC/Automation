@@ -1,0 +1,8 @@
+!|script|Remote|${NMSP}:36|
+|eval|$source = "http://fitnesse.at-nmsp.com/files/nmsp/"+"${LICENSE}"|
+|eval|$folderExist = Test-Path ${FOLDER}|
+|eval|if ($folderExist -eq $false){md ${FOLDER}}|
+|eval|$path = "${FOLDER}\" +"${LICENSE}"|
+|eval|Invoke-WebRequest $source -OutFile $path|
+|eval|$res = LicenseInstallerCmd -path $path|
+|check|eval|$res|License successfully installed.|

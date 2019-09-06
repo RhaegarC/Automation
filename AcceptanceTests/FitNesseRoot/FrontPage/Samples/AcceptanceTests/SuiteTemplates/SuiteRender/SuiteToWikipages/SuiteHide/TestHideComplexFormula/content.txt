@@ -1,0 +1,15 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideComplexFormula.aspx",tag:"tr",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/Form:\s*Body hidden complex formula/|
+|=~/Author:\s*Konstantin/|
+|=~/Subject:\s*TestHideComplexFormula/|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideComplexFormula.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|1!- -!|

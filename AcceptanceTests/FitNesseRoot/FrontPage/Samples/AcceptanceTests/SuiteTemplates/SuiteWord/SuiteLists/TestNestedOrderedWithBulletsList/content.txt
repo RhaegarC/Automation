@@ -1,0 +1,9 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordListItems $numbering | 
+|text|type|
+|First line|decimal|
+|Second line|decimal|
+|First sub line|bullet|
+|Second sub line|bullet|
+|Third line|decimal|
+|Fourth line|decimal|
+

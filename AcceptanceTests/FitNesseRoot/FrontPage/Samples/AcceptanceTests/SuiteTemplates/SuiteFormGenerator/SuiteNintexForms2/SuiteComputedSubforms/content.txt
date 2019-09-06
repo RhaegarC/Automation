@@ -1,0 +1,31 @@
+!define DATABASE (!-SuiteFormGenerator-!)
+!define FORM (!-ComputedSubforms-!)
+!define TARGET_FOLDER (!-C:\Users\administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files-!)
+!define TARGET_FILE {${TARGET_FOLDER}\!-NintexForm_(local)_SuiteFormGenerator_ComputedSubforms.xml-!}
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As a Sharepoint administrator
+I can migrate computed subform to Nintex form
+so that I can migrate the text and fields in the subforms
+
+!1 scenarios
+
+|comment|
+|Given:Formula can be Calculated?|When: I Select a subform|Then:I Can see the content of which subform migrated|Test|
+|Yes|Default|Default|[[!-TestDefaultSubformForCalculatedFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestDefaultSubformForCalculatedFormula]]|
+|Yes|Another|Selected|[[!-TestSelectAnotherForCalculatedFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestSelectAnotherForCalculatedFormula]]|
+|Yes|Cancel|None|[[!-TestCancelSubformForCalculatedFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestCancelSubformForCalculatedFormula]]|
+|No|Default|None|[[!-TestDefaultSubformForIncalculableFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestDefaultSubformForIncalculableFormula]]|
+|No|Another|Selected|[[!-TestSelectAnotherForIncalculableFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestSelectAnotherForIncalculableFormula]]|
+|No|Cancel|None|[[!-TestCancelSubformForCalculatedFormula-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestCancelSubformForCalculatedFormula]]|
+
+|comment|
+|Given:Formula can be Calculated?|When: I Select a subform|Given: It Contains Another Formula. Can be calculated?|When: I Select a subform|Then:I Can see the content of which subform migrated|Test|
+|Yes|Default|Yes|Default|Both, have the same structure|[[!-TestNestingComputedSubforms-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestNestingComputedSubforms]]|
+
+|comment|
+|Given:Formula in a section?|When: I hide the section|Then:I Can see dialog box for the formula?|When:I select a subform for the formula|And:I can see the calculated subform migrated?|Test|
+|Yes|Yes|No|Default|No|[[!-TestComputedSubformInHiddenSection-!][SuiteComputedSubforms.SuiteHideComputedSubforms.TestComputedSubformInHiddenSection]]|
+|Yes|No|Yes|Default|Yes|[[!-TestNestingComputedSubforms-!][SuiteComputedSubforms.SuiteGeneralComputedSubforms.TestNestingComputedSubforms]]|

@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestComputedField-!)
+|script|
+|jobDefinition|!{template:"Render2HTMLFiles",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"subject='TestComputedField'"}|
+!include <SuiteCases.GlobalSteps.RunMigration
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

@@ -1,0 +1,39 @@
+!define GROUP {!-SuiteLookUpFields-!}
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate source values to Lookup columns in Office365 with Azure Turbo Mode 
+So that I can view those migrated values in Lookup columns in Office365 without any warning message
+
+!1 scenarios:
+![
+Given Windows Identity Foundation 3.5 was installed
+And the type of SharePoint Environments was set to "SharePoint web services (Office 365 Authentication)"
+And the Azure Turbo Mode was enabled
+And a Lookup column was added in Office365
+And this Lookup data field was added in Target Data Definition by clicking "Load from SharePoint List" button (Designer)
+And the source value mapping to the Lookup field was added in Map Data tab (Designer)
+When I run a migration
+Then I can view migrated value in Lookup column in Office365 without any warning message
+
+Given a Lookup column with "Allow multiple values" enabled was added in Office365
+And this Lookup data field was added in Target Data Definition by clicking "Load from SharePoint List" button (Designer)
+And the source values mapping to the Lookup field was added in Map Data tab (Designer)
+When I run a migration
+Then I can view migrated values in Lookup column in Office365 without any warning message
+
+Given a Lookup column was added in Custom Document Set in Office365
+And Custom Document Set was added and set in the Data Fields of Target Data Definition (Designer)
+And the source value mapping to the Lookup field of Custom Document Set was added in Map Data tab (Designer)
+When I run a migration
+Then I can view migrated value in migrated Document Set Lookup column in Office365 without any warning message
+
+Given a Lookup column with "Allow multiple values" enabled was added in Custom Document Set in Office365
+And Custom Document Set was added and set in the Data Fields of Target Data Definition (Designer)
+And the source values mapping to the Lookup field of Custom Document Set was added in Map Data tab (Designer)
+When I run a migration
+Then I can view migrated values in migrated Document Set Lookup column in Office365 without any warning message
+]!

@@ -1,0 +1,9 @@
+!|script|remote|${NMSP}|
+|eval|!-get-process chrome|stop-process-!|
+
+!|script|remote|${NMSP36}|
+|Click|ViewReport|
+
+!|script|remote|${NMSP}|
+|eval|sleep 30|
+|check|eval|!-get-process chrome| where-object {$_.mainwindowhandle -ne 0 -and $_.MainWindowTitle -eq "Notes to Nintex Migration for -!${FORM_NAME}!- - Google Chrome" } -!|System.Diagnostics.Process (chrome)|

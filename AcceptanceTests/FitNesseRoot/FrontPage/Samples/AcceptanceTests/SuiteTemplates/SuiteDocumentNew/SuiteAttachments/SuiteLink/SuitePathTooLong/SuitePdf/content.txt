@@ -1,0 +1,4 @@
+!define MAPFIELDS ("<Mapping !-Destination='PDF.Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define SAVE_AS (pdf)
+!define UNIQUE_ENV (false) 
+!contents -R2 -g -p -f -h

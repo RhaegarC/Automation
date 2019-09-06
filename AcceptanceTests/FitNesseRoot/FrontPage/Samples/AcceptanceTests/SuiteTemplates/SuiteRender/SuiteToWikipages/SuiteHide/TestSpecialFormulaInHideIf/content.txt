@@ -1,0 +1,11 @@
+!|Subset Query:Remote|${NMSP}|$warning|
+|context|message|stackTrace|
+|Hidden Formula Checking in Notes Form 'SpecialFormulaInHideIf'|=~/Hidden formula : @ClientType!="Notes"/||
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestSpecialFormulaInHideIf.aspx",tag:"tr",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/test2/|
+|null|

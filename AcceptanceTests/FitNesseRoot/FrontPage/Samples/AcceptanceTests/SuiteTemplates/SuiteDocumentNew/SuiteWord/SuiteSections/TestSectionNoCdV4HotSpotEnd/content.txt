@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestSectionNoCdV4HotSpotEnd-!)
+
+!style_green[Check the word content contains text displays as below:]
+----
+'''http://vlasenko.org'''(underlined)
+Section Title
+　　　This is text in my section
+----
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

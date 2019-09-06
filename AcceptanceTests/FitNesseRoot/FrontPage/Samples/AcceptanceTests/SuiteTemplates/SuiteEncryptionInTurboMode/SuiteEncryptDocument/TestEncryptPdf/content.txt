@@ -1,0 +1,10 @@
+|script|
+|newParsePdfDoc|!{url:"${PDFSOURCE}",file:"${TARGETFOLDER}\${FILENAME}.pdf"}|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|$textAbsorber = New-Object Aspose.Pdf.Text.TextAbsorber|
+|eval|$pdf.Pages.Accept($textAbsorber)|
+|eval|$extractedText = $textAbsorber.Text|
+|check|eval|$extractedText.contains("${FILECONTENT}")|True|
+
+

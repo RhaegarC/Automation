@@ -1,0 +1,22 @@
+'''Install evaluation license'''
+!|script|Remote|${NMSP}|
+|eval|$source = "http://fitnesse.at-nmsp.com/files/nmsp/EvaluationExpiryDateLicense.dlv"|
+|eval|$path = "c:\msi\EvaluationExpiryDateLicense.dlv"|
+|eval|Invoke-WebRequest $source -OutFile $path -Credential $AdminCred|
+|eval|$res = LicenseInstallerCmd -path $path|
+|check|eval|$res|License successfully installed.|
+
+'''Run Migration Job'''
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+'''Check if number of records is exceeded the license limit'''
+!|script|Remote|${NMSP}|
+|eval|[xml]$license = Get-Content $path|
+|eval|$recordsLimit = [int]$license.GetElementsByTagName("Records").'#text'|
+|check|eval|$recordsLimit|_${READ_LIMIT_PATTERN}|
+
+'''Install standard license'''
+!|script|Remote|${NMSP}|
+|eval|$path = "c:\msi\license.dlv"|
+|eval|$res = LicenseInstallerCmd -path $path|
+|check|eval|$res|License successfully installed.|

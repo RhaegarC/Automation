@@ -1,0 +1,12 @@
+!define LIST (!-TestMaxSkipRecordsWhenFailedItemsMigration-!)
+!define APPNAME (!-SuiteAttachments-!)
+
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${APPNAME}",unid:"!-30b0f77873668f8a85257ce0005ee03f;37469eb02b2806cc85257ce0005ee041-!",maxRecord:1,skipRecord:1}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|Open|${LIST_URL}/TestFileNameWithSpace.html|

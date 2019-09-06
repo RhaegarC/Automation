@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestFileNameWithSpace-!)
+!define UNIQUE_ENV (true)
+
+!style_green[Check the pdf content contains "_Attachments/Space char.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

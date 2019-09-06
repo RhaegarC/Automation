@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpecChars-!)
+
+!style_green[Check the html content contains "_Attachments/Special______'chars.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

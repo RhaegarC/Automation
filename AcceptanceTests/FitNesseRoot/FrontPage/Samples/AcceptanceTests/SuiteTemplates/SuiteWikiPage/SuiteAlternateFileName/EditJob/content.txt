@@ -1,0 +1,3 @@
+!|script|Remote|${NMSP}|
+|Source Column|@{ColumnType="Formula"; Value="@Text(Subject)+'${ALT_SUFFIX}'"; Alias="AlternateName"}|
+|set|TransferJob/Mapping[@Destination='AltFileName']|Attributes|@{SourceValue='AlternateName'}|in|${JOBFILE}|

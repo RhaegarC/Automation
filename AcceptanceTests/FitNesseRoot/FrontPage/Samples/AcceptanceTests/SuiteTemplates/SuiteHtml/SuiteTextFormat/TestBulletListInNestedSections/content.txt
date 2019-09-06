@@ -1,0 +1,4 @@
+!|Query:Remote|${NMSP}|$html !-|-! GetAllLIText|
+|text|style|
+|First bullet|font-family:serif; font-size:9pt; margin:0pt 0pt 0pt 31.99pt; padding-left:4.01pt; text-indent:0pt|
+|Second bullet|font-family:serif; font-size:9pt; margin:0pt 0pt 0pt 31.99pt; padding-left:4.01pt; text-indent:0pt|

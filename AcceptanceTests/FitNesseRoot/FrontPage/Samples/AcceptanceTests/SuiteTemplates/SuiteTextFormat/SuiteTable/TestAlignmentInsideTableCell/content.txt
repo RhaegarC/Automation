@@ -1,0 +1,34 @@
+!include -c NoExtraIndentForTable
+!* Verify table cells
+!|script|Remote|${WEB_SCRAPER}|
+|select|'P'|properties|'parentElement.Style.textAlign','parentElement.valign'|limit to|innerText -ne $null|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|parentElement.Style.textAlign|parentElement.valign|
+|Centered Text (1, 1)|center|top|
+|Centered Text (1, 2)|center|top|
+|Right aligned Text (2, 1)|right|top|
+|Left aligned Text (2, 2)|left|top|
+|AAA|left|top|
+|AAA|left|top|
+|AAA|left|top|
+|AAA|left|top|
+|AAA|left|top|
+|AAA|left|top|
+|Vertical aligned : Top|left|top|
+|Vertical aligned : Center|center|middle|
+|BBB|left|top|
+|BBB|left|top|
+|BBB|left|top|
+|BBB|left|top|
+|BBB|left|top|
+|BBB|left|top|
+|CCC|left|top|
+|CCC|left|top|
+|CCC|left|top|
+|CCC|left|top|
+|CCC|left|top|
+|CCC|left|top|
+|Vertical aligned : Bottom|right|bottom|
+
+*!

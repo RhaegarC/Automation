@@ -1,0 +1,5 @@
+!define AddMissingChoices (true)
+!define MultipleValues (true)
+!define MultiValueDisposition (All)
+!define LIST (${TARGET_FIELD_TYPE}_TestMultipleValues)
+!define LookupListName (!-LookupListTestMultipleValues-!)

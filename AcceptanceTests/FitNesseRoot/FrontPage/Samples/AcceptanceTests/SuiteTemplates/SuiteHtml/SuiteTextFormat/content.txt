@@ -1,0 +1,6 @@
+!define VIEW (Suite TextFormat)
+!define LIST (SuiteTextFormat)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.${SAVE_AS})
+!define SAVE_AS (html)
+
+!contents -R2 -g -p -f -h

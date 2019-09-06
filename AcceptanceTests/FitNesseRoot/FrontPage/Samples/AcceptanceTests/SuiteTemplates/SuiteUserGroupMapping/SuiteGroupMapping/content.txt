@@ -1,0 +1,17 @@
+!define GroupName (testgroup)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can map the groups when doing migration
+So that I can migrate assign previledges of groups in !-SharePoint-!
+
+!1 scenarios
+![
+Given I set "Treat input as login name" in User Mapping
+And I set "Use Text File lookup" in Group mapping
+And I choose proper group mapping xml file
+When I run migration
+Then I can find the groups are migrated to SharePoint
+]!

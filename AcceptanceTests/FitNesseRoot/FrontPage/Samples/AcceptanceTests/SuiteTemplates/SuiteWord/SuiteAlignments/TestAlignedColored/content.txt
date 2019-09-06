@@ -1,0 +1,15 @@
+!| Subset Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordFontElement|
+|text|color|weight|
+|Text with Tab and Pen Writing|000000|normal|
+|No!- -!|FF0000|bold|
+|Tab|000000|bold|
+|for|FFBF18|bold|
+|Permanent|00C200|bold|
+|Pen|0080FF|bold|
+|Tab|000000|bold|
+|=~/Using/|FF0000|bold|
+|Permanent|0041C2|bold|
+|Pen|000000|bold|
+|Tab regular text!- -!|000000|normal|
+
+

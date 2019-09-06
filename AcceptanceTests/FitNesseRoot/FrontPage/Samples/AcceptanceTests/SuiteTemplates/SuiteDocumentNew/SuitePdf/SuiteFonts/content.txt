@@ -1,0 +1,23 @@
+!define VIEW (!-Suite Fonts-!)
+!define LIST (!-SuiteFonts-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+As an administrator
+I can migrate paragraphs with different inline elements to !-SharePoint-!
+So that I can view paragraphs without blank line were migrated, and display same as it in original
+
+!1 scenarios
+![
+Given paragraphs with different inline elements were prepared in Notes
+Inline elements:
+1.Text only
+2.Text in tables
+3.Text with indent
+4.Text in section
+5.Text with inline links (after migration, blank line was added above links)
+6.Text with inline lists (after migration, blank line was added above lists)
+7.Text with inline images (after migration, blank line was added above images)
+When I run a migration
+Then I can view paragraphs without blank line were migrated, and display same as it in original
+]!

@@ -1,0 +1,3 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking"}|
+|cleanUpDatabase|

@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideByReferenceInSection.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Hide Foumula Reference In Section|
+|Used Formula from Ref 1.!- -!| 
+|Subject: TestHideByReferenceInSection!- -!|

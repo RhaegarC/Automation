@@ -1,0 +1,13 @@
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query><Where><Eq><FieldRef Name = 'FileLeafRef'/><Value Type='Text'>${RUNNING_PAGE_NAME}.docx</Value></Eq></Where></Query></View>|
+|$ETag=|eval|"{$($items[0]['UniqueId'])}"|
+
+!|script|Remote|${NMSP}|
+|eval|$driver.Url = "${WEB_URL}/_layouts/15/WopiFrame.aspx?sourcedoc=$ETag&file=${RUNNING_PAGE_NAME}.docx&action=default"|
+|eval|$driver.switchTo().frame("WebApplicationFrame")|
+|eval|$driver.FindElementById("flyoutWordViewerEdit-Medium").Click()|
+|eval|$driver.FindElementById("btnFlyoutEditOnWeb-Menu32").Click()|
+|eval|while($driver.FindElementById("load_back").Displayed){ sleep 3 }|
+|show|eval|$driver.FindElementById("PageContentContainer").Displayed|
+|eval|$driver.FindElementById("RibbonPinButton-Small").Click()|
+

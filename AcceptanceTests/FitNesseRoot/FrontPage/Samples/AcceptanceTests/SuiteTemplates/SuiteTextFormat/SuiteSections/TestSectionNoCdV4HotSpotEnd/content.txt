@@ -1,0 +1,5 @@
+!include -c VerifyOneSection
+!*> Verify text inside section
+-!|script|Remote|${WEB_SCRAPER}|
+|check|eval|$elements.Text|This is text in my section|
+*!

@@ -1,0 +1,13 @@
+!include -c <WebServices.IncludePages.SuiteSetUp
+!include -c <ImportService.IncludePages.SuiteSetUp
+
+!include -c <ImportService.IncludePages.CleanupTarget
+!include -c <WebServices.IncludePages.CleanupTarget
+
+!|script|Remote|${NMSP}|
+|SharePoint LinkTracking|${LT_ENABLED}|
+!include -c <AcceptanceTests.IncludePages.ExecuteSystemUnderTest
+
+
+
+

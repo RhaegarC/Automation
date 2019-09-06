@@ -1,0 +1,15 @@
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can provision site members from database ACL to !-SharePoint-!
+So that I can view people or groups in !-SharePoint-! Permissions List
+
+!1 scenarios
+![
+Given people or groups in database ACL was mapped in UserMapping.xml
+And "ACL Entry Mapping" was enabled in Migration Targets tab of DB properties 
+When I run a migration with "Provision site members from x database ACL" enabled in Console
+Then I can not view any Object reference not set to an instance error
+And I can view these people or groups in SharePoint Permissions List
+]!

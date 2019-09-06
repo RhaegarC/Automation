@@ -1,0 +1,7 @@
+!|script|remote|${NMSP}|
+|eval|$xml = $null|
+|eval|$xml = [xml](Get-Content "${TARGET_FOLDER}\${DEFAULT_NAME}\Report_${DEFAULT_NAME}.html")|
+
+!|script|remote|${NMSP}|
+|check|eval|$xml.html.body.div.InnerText.Trim()|Notes to Nintex Migrationform name: ${FORM_NAME}|
+|check|eval|$xml.html.body.table.tr.count|322|

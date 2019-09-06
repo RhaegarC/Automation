@@ -1,0 +1,3 @@
+!define LIST (SuiteEmfConversion)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWikiPage.SuiteImages.SuiteEmfConversion.EditJob)
+!contents -R2 -g -p -f -h

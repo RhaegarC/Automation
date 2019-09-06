@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHideByReferenceOfOptionNotChecked.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Set 'Hide paragraph if formula is True(1 = 1)' and option is not checked. Ref 1..|
+|Used Formula from Ref 1.| 
+|Subject: TestHideByReferenceOfOptionNotChecked|

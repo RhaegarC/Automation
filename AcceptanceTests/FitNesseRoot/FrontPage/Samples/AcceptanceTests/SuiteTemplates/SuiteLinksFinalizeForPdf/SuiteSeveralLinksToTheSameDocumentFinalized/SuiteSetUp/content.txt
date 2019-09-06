@@ -1,0 +1,2 @@
+!include -c <SuiteLinksFinalizeForPdf.SuiteSetUp
+!include -c <SuiteLinksFinalizeForPdf.DoFinalize

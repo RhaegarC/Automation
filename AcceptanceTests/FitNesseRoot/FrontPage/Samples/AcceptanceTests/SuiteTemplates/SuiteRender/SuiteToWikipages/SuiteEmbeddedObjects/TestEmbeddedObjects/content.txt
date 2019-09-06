@@ -1,0 +1,8 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestRenderEmbeddedObjects.aspx",tag:"img",selector:"src"}|
+
+|Query:Remote|${NMSP}|$elements|
+|src|
+|=~/\/_Attachments\/TestRenderEmbeddedObjects.*\.GIF/|
+|=~/\/_Attachments\/TestRenderEmbeddedObjects.*\.GIF/|
+|=~/\/_Attachments\/TestRenderEmbeddedObjects.*\.GIF/|

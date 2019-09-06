@@ -1,0 +1,12 @@
+!define PAGENAME (!-TestLargeParagraph-!)
+
+!style_green[Check the word content contains 5 paragraphs;]
+!style_green[Check the first paragraph: 
+"The 64K limit on paragraphs has been removed in Notes/Domino 6. To ensure backward compatibility, "large" paragraphs are broken into smaller paragraphs which are bracketed by a CDLARGEPARAGRAPH record with its Flags member set to CDLARGEPARAGRAPH_BEGIN and a CDLARGEPARAGRAPH record with its Flags member set to CDLARGEPARAGRAPH_END."]
+!style_green[Check the second paragraph: "1.	First Paragraph"]
+!style_green[Check the third paragraph begin with text "2.	Second Paragraph", and this paragraph contains "4096""4096x2=8192""4096X3=12288""4096x4=16384""4096x5=20480""4096x6=24576""4096x7=28672""4096x8=32768", other text are "0"]
+!style_green[Check the fourth paragraph:"3.	Third Paragraph"]
+!style_green[Check the fifth paragraph:"4.	Fourth Paragraph"]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

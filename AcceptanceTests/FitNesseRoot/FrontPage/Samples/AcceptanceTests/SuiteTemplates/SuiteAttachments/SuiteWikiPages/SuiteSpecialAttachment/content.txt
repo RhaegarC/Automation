@@ -1,0 +1,6 @@
+!define WEB (SuiteSpecialAttachments)
+!define APPNAME (TestAttachment2784112-1)
+!define LIST (SuiteSpecialAttachment)
+!define TEST_DOCUMENT (JAM_TARRA PK3_Massaosasto_206026 Koivukuiduttimen muutos hylkykuiduttimeksi_doc)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.SuiteSpecialAttachment.EditJob)
+!contents -R2 -g -p -f -h

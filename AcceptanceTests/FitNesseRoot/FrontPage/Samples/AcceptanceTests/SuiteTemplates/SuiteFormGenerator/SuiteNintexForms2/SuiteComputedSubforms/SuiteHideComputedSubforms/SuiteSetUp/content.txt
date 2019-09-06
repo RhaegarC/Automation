@@ -1,0 +1,14 @@
+|script|
+|startUiautomation|
+
+|script|
+|importUilib|
+
+|script|
+|generateNintexForm|!{db:"${DATABASE}",form:"${FORM}",computed:!-"Computed2","_cancel","_default","Computed6","_default","_cancel"-!,hide:!-@{browser="true"}-!}|
+
+|script|
+|!-PublishNintexForm-!|!{targetFile:"${TARGET_FILE}",url:"${SITE_URL}",listName:"Tasks",contentType:"Task"}|
+
+|script|
+|parseHtml|!{url:!-"http://sp2010/sites/Test/Lists/Tasks/NewForm.aspx"-!,tag:"label",filter:!-"`$_.className -eq ''nf-label-control''"-!}|

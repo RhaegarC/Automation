@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",view:"${VIEW}",sourceFields:"<!-Column ColumnType='Render' Alias='RenderHtml' Option='Html' -!/>",selectDocs:"!-FormulaSectionTitle-!",mapFields:"<!-Mapping Destination='WikiField' SourceValue='RenderHtml' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,14 @@
+!* set file watcher
+!|script|Remote|${SHAREPOINT}|
+|eval|$server38 = start powershell '${PSVERSION}-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 38 server38' -PassThru|
+|eval|sleep 3|
+
+!|script|Remote|${SHAREPOINT}:38|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+|eval|Get-SPUser -web "${SITE_URL}" !-|-! ?{-not $_.DisplayName.contains("administrator")} !-|-! Remove-SPUser -web "${SITE_URL}" -confirm:$false|
+|eval|$folder = 'c:\shared'|
+|eval|$fsw = New-Object IO.FileSystemWatcher $folder, *.* -Property @{IncludeSubdirectories = $true; NotifyFilter = [IO.NotifyFilters]'FileName, LastWrite'}|
+|eval|$global:files = @()|
+|eval|$onCreated = Register-ObjectEvent $fsw Created -SourceIdentifier FileCreated -Action { $global:files += $Event.SourceEventArgs.FullPath }|
+
+*!

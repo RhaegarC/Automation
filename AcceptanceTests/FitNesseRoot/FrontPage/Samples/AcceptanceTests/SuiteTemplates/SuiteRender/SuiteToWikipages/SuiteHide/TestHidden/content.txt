@@ -1,0 +1,14 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHidden.aspx",tag:"tr",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|=~/Form:\s*Body Should be hidden/|
+|=~/Author:\s*Konstantin/|
+|=~/Subject:\s*TestHidden/|
+
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestHidden.aspx",tag:"div",filter:"!-`$_.parentElement.className -eq `$null-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|

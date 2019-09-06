@@ -1,0 +1,53 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As a user
+I can check the information of the product from Console
+So that I get more familiar with the product
+
+!1 scenarios
+
+![
+Given NMSP is installed
+And PDF reader is installed
+When I go to "Documentation" of Console
+Then I can see links for "Documentation", "Notes to SharePoint white paper and tech brief library", "Training video library - MNSP release 6.4 and newer","User Guide" and "Release Notes"
+When I click the button for "Documentation"
+Then I can go to NMSP online documents
+When I click the button for "Notes to SharePoint white paper and tech brief library"
+Then I can go to http://en.community.dell.com/techcenter/sharepoint-for-all/w/wiki/11363.notes-to-sharepoint-white-paper-and-tech-brief-library
+When I click the button for "Training video library - MNSP release 6.4 and newer"
+Then I can go to https://support.quest.com/migrator-for-notes-to-sharepoint/videos/
+When I click the button for "User Guide"
+Then I can open User Guide PDF
+When I click the button for "Release Notes"
+Then I can open Release Notes PDF
+
+Given I am on the page of Documentation
+And PDF reader is not installed
+When When I click the button for "User Guide"
+Then I get a message that requests PDF reader.
+When When I click the button for "Release Notes"
+Then I get a message that requests PDF reader.
+
+Given NMSP is installed
+When I go to "support" of Console
+Then I can see the links for "support", "check for updates", "knowledge base" and "Get Online Support"
+When I click "Browse" after "Support"
+Then I can go to https://support.quest.com/migrator-for-notes-to-sharepoint/6.8
+When I click "Check" after "Check for Updates"
+Then I can go to https://support.quest.com/migrator-for-notes-to-sharepoint/6.8/download-new-releases
+When I click "Browse" after "Knowledge base"
+Then I can go to https://support.quest.com/migrator-for-notes-to-sharepoint/kb/
+When I click "Browse" after "Get Online Support"
+Then I can go to https://support.quest.com/contact-support/
+
+Given NMSP is installed 
+When I go to "Contact us" of Console
+Then I can see detailed information of "Contact Information", "Technical Support", "Phone Number"
+When I click "Technical Support"
+Then I can go to the site "https://www.quest.com/company/contact-us.aspx"
+When I click "1(949) 754-8000"
+Then I can dial the phone number
+]!

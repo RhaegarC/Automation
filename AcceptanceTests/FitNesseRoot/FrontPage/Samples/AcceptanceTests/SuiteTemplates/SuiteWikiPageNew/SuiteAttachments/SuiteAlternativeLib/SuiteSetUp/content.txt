@@ -1,0 +1,9 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:“${LIST}”,template:"${MIGRATION}", view:"${VIEW}", properties:!-@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Files']";name="AlternateLibrary";value="Documents"}-!!-,-!!-@{path="TransferJob/SharePointTargetDefinition/Field[@Name='Files']";name="AlternateFolder";value=""}-!}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!|script|Remote|${NMSP}|
+|get items|${WEB}|list|${LIST}|caml|<View><Query></Query></View>|

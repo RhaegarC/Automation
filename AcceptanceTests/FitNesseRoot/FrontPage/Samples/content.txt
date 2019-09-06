@@ -1,0 +1,41 @@
+!*> Define
+!define TEST_SYSTEM (slim)
+!define SLIM_PORT (0)
+!define SLIM_POOL_SIZE (1)
+!define COMMAND_PATTERN (PowerShell -executionpolicy unrestricted -file .\slim.ps1)
+
+!define Admin (VELASKEC\Administrator)
+!define AdminPassword (Qwerty123)
+
+!define LinkServer (${SQLHOST}\SHAREPOINT)
+!define LocalLinkServer (.\SHAREPOINT)
+!define LinkDatabase (QuestLinkTracking)
+!define LinkTrackPage (QuestLinkTracking.aspx)
+
+!define LN_PASSWORD ()
+!define NMSP (${LabName})
+!define NMSP36 (${NMSP}:36)
+!define NMSP86 (${LabName}:86)
+!define SQL (${LabName}_${SQLHOST})
+!define REMOTEQ1SHORTNAME (quickr82)
+!define REMOTEQ2SHORTNAME (quickr)
+!define REMOTEQ1 (1_${REMOTEQ1SHORTNAME})
+!define REMOTEQ2 (2_${REMOTEQ2SHORTNAME})
+!define REMOTESP (${LabName}_${SPHOSTNAME})
+!define REMOTESP30 (${REMOTESP}:30)
+
+!define ASPOSE_PDF (Aspose.Pdf for .NET 10.0.0)
+
+
+!define NMSP_Product_Version (6.8.0)
+!define NMSP_Product_Name (Migrator for Notes to SharePoint)
+!define NMSP_Company_Name (Quest)
+!define NMSP_Install_Directory_Client {!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint-!}
+!define NMSP_Install_Directory_Service (!-C:\Program Files\Quest\Migrator for Notes to SharePoint Services-!)
+!define NMSP_AppData_Path {!-Quest\Migrator for Notes to SharePoint-!}
+!define Admin_WSP (quest.nmsp.admin.wsp)
+!define FrontEnd_WSP (quest.nmsp.frontend.wsp)
+!define SandboxLinkRedirector_WSP (quest.sandboxlinkredirector.wsp)
+*!
+
+!contents -R2 -g -p -f -h

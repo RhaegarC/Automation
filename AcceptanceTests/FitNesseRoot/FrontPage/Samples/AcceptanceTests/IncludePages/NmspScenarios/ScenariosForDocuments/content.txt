@@ -1,0 +1,138 @@
+!|scenario|makeMappingFile|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|$mappingFile="UserMappings.xml"|
+|eval|if($hash.templateMappingFile -ne $null){$mappingFile=$hash.templateMappingFile}|
+|eval|download "http://fitnesse.at-nmsp.com/files/nmsp/$($mappingFile)" "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint" "UserMappings.xml"|
+|eval|$xml = [xml](get-content "$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\UserMappings.xml")|
+|eval|!-if($hash.clearUsers -eq "true"){
+removeNodes "identityMappings/userMappings/user"
+}
+-!|
+|eval|!-if($hash.clearGroups -eq "true"){
+removeNodes "identityMappings/groupMappings/group"
+}
+-!|
+|eval|!-if($hash.users){
+$hash.users|%{addChildNode "identityMappings/userMappings" $_}
+}
+-!|
+|eval|!-if($hash.groups){
+$hash.groups|%{addChildNode "identityMappings/groupMappings" $_}
+}
+-!|
+|eval|$targetFile="$($env:PROGRAMDATA)\Quest\Migrator for Notes to SharePoint\UserMappings.xml"|
+|eval|if($hash.target){$targetFile=$hash.target}|
+|eval|$xml.save($targetFile)|
+
+
+!|scenario|newParseWordDoc|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|eval|$targetFolder="$($hash.folder)\$($hash.name)"|
+|eval|!-copy "$targetFolder.docx" "$targetFolder.zip"
+$shell_app = new-object -com shell.application
+$exist = Test-Path -Path $targetFolder
+if (-not $exist) {new-item -ItemType directory -Path $targetFolder}
+$zip_file = $shell_app.namespace("$targetFolder.zip")
+remove-item "$targetFolder/*" -recurse -confirm:$false
+$destination = $shell_app.namespace("$targetFolder")
+$destination.Copyhere($zip_file.items())
+remove-item "$targetFolder.zip"
+-!|
+|eval|[xml]$document = Get-Content "$targetFolder\word\document.xml"|
+|eval|[xml]$rels = Get-Content "$targetFolder\word\_rels\document.xml.rels"|
+|eval|$file = "$targetFolder\word\numbering.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|$numbering = $null|
+|eval|if ($exist) {[xml]$numbering = Get-Content $file}|
+
+!|scenario|downloadDocument|args|
+|convertHash|@args|
+|loadCredential|
+|show|eval|New-Item (Split-Path $hash.file) -type directory -force|
+|show|eval|try {Invoke-WebRequest -Uri $hash.url -OutFile $hash.file -${CREDENTIALS} }catch{ $_.Exception.Message }|
+|eval|$exist = Test-Path -Path $hash.file|
+|eval|if ($exist) {Unblock-File $hash.file}|
+
+!|scenario|download|args|
+|start|remote|${NMSP}|
+|downloadDocument|@args|
+
+!|scenario|download|url|to|target|
+|show|eval|New-Item (Split-Path @target) -type directory -force|
+|show|eval|try { Invoke-WebRequest -Uri "@url" -OutFile "@target" -${CREDENTIALS} }catch{ $_.Exception.Message }|
+|eval|$exist = Test-Path -Path "@target"|
+|eval|if ($exist) {Unblock-File "@target"}|
+
+!|scenario|newParsePdfDoc|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|downloadDocument|@args|
+|eval|${LOAD_ASPOSE_PDF}|
+|eval|(new-object Aspose.Pdf.License).SetLicense('c:\msi\Aspose.Pdf.lic')|
+|eval|$pdf = $null|
+|eval|$pdf = new-object Aspose.pdf.Document($hash.file)|
+|eval|$pdfPage = $pdf.Pages[1]|
+|eval|$trivrect = [Aspose.Pdf.Rectangle]::Trivial|
+|eval|$la = New-Object Aspose.Pdf.Annotations.LinkAnnotation($pdfPage, $trivrect)|
+|eval|$selector = new-object Aspose.Pdf.Annotations.AnnotationSelector($la)|
+|eval|$pdfPage.Accept($selector)|
+|eval|$list = $selector.Selected|
+|eval|$numberOfLinks = $list.Count|
+|eval|!-if($hash.findText){
+$elements = $null
+$searchOption= New-Object Aspose.Pdf.Text.TextOptions.TextSearchOptions($true)
+$textfragment = new-object Aspose.Pdf.Text.TextFragmentAbsorber($hash.findText, $searchOption)
+$pdf.Pages.Accept($textfragment)
+$elements = $textfragment.TextFragments | select Text, @{ Name="font-family"; E={$_.TextState.Font.FontName} }, @{ Name="font-size"; E={$_.TextState.FontSize} }, @{ Name="color"; E={$_.TextState.ForegroundColor.ToString()} }
+}
+-!|
+|eval|$textAbsorber = New-Object Aspose.Pdf.Text.TextAbsorber|
+|eval|$pdf.Pages.Accept($textAbsorber)|
+|eval|$extractedText = $textAbsorber.Text|
+|eval|$numberOfLines = $extractedText.Split('\n').Length|
+
+!|scenario|newWordDoc|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|downloadDocument|@args|
+|eval|$targetFolder="$($hash.targetFolder)"|
+|eval|!-copy "$targetFolder.docx" "$targetFolder.zip"
+$shell_app = new-object -com shell.application
+$exist = Test-Path -Path $targetFolder
+if (-not $exist) {new-item -ItemType directory -Path $targetFolder}
+$zip_file = $shell_app.namespace("$targetFolder.zip")
+remove-item "$targetFolder/*" -recurse -confirm:$false
+$destination = $shell_app.namespace("$targetFolder")
+$destination.Copyhere($zip_file.items())
+remove-item "$targetFolder.zip"
+-!|
+|eval|[xml]$document = Get-Content "$targetFolder\word\document.xml"|
+|eval|$file = "$targetFolder\word\numbering.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$numbering = Get-Content $file}|
+|eval|${LOAD_ASPOSE_WORDS}|
+|eval|$doc = new-object Aspose.Words.Document($hash.file)|
+|eval|$docOleObjects = $doc.GetChildNodes([Aspose.Words.NodeType]::Shape, $true) !-|-! % {  New-Object PSObject -Property @{ ProgId = $_.OleFormat.ProgId; OleIcon = $_.OleFormat.OleIcon; IconCaption = [System.Web.HttpUtility]::UrlDecode($_.OleFormat.IconCaption) } }|
+|eval|$file = "$targetFolder\word\_rels\document.xml.rels"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$rels = Get-Content $file}|
+|eval|$target = $rels.Relationships.Relationship|
+
+!|script|Remote|${WEB_SCRAPER}|
+|eval|!-<pre>filter global:WordHyperLinkElement {
+   if($_.parentNode.rPr)
+   {
+     New-Object PSObject -Property @{
+      href = $_.'#text'.split('"')[1]
+     }
+   }
+}</pre>-!|
+
+!|scenario|newParseHtmlDoc|args|
+|start|remote|${NMSP}|
+|convertHash|@args|
+|downloadDocument|@args|
+|eval|$html = $null|
+|eval|$html = Get-Content $hash.file -Encoding Utf8|

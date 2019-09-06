@@ -1,0 +1,4 @@
+!define APPNAME (SuiteProperties)
+!define LIST (SuiteProperties) 
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteDocument.SuiteProperties.EditJob)
+!contents -R2 -g -p -f -h

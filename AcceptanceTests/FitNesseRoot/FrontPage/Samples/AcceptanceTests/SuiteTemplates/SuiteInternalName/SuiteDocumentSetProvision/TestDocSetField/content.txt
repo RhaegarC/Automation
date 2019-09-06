@@ -1,0 +1,3 @@
+!|Script|Remote|${NMSP}|
+|check|eval|@(([xml]$log).Log.entry !-|-! ? { $_.message -like '*''${Field1DsInternalName}'' in the job cache*'}).Count|1|
+|check|eval|@(([xml]$log).Log.entry !-|-! ? { $_.message -like '*''${Field2DsInternalName}'' in the job cache*'}).Count|1|

@@ -1,0 +1,33 @@
+!|script|Remote|${NMSP}|
+|EditJobFile|${JOBFILE}|Select records based on view|${VIEW}|
+
+'''Mapping for Header '''
+-!|script|Remote|${NMSP}|
+|Mapping|Subject|to|Doc.Subject|job|${JOBFILE}|
+|Mapping|Category|to|Doc.ComboBoxTitle1|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.PlainTextSubject|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.PlainTextTitle1_1|job|${JOBFILE}|
+
+'''Mapping for Body '''
+-!|script|Remote|${NMSP}|
+|Mapping|Date|to|Doc.DatePickerTitle1_1|job|${JOBFILE}|
+|Mapping|Category|to|Doc.ComboBoxTitle1_1|job|${JOBFILE}|
+|Mapping|Category|to|Doc.ListBoxTitle1_1|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.TestRT|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.RichTextTitle1_1|job|${JOBFILE}|
+
+
+'''Mapping for Cell'''
+-!|script|Remote|${NMSP}|
+|Mapping|"test"|to|Doc.RichTextWith|SourceType|Constant|job|${JOBFILE}|
+|Mapping|Date|to|Doc.Publish Date|job|${JOBFILE}|
+|Mapping|BodyText|to|Doc.PlainTextWithout|job|${JOBFILE}|
+|Mapping|BodyText|to|Doc.RichTextWithout|job|${JOBFILE}|
+|Mapping|BodyText|to|Doc.PlainText|job|${JOBFILE}|
+
+'''Mapping for Footer '''
+-!|script|Remote|${NMSP}|
+|Mapping|Rich Text|to|Doc.RichTextTitle1|SourceType|Constant|job|${JOBFILE}|
+|Mapping|Date|to|Doc.DatePickerTitle1|job|${JOBFILE}|
+|Mapping|Category|to|Doc.ListBoxTitle1|job|${JOBFILE}|
+|Mapping|Subject|to|Doc.PlainTextTitle1|job|${JOBFILE}|

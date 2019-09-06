@@ -1,0 +1,9 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'STRONG'|properties|innerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|Aufgabe der Datenbank|
+|Struktur der Datenbank|
+
+!define NUMBER_OF_BR (0)

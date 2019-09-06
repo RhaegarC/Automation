@@ -1,0 +1,25 @@
+!define DATABASE (!-SuiteRender-!)
+!define WEB (!-SuiteMsg-!)
+!define LIST (!-TestEmailAddress-!)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define MAPFIELDS ("<Mapping !-Destination='MSG.Bcc' SourceType='Constant' SourceValue='test'-! />","<Mapping !-Destination='MSG.To' SourceType='Constant' SourceValue='test'-! />","<Mapping !-Destination='MSG.From' SourceType='Constant' SourceValue='test'-! />","<Mapping !-Destination='MSG.Cc' SourceType='Constant' SourceValue='test'-! />")
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate content to msg file
+So that more target files are supported
+
+!1 scenarios
+![
+Given there is a notes mail
+And it has mail addresses in to, from, cc, bcc
+When I migrate it to msg file
+Then to, from, cc, bcc and content are migrated
+
+Given there is a notes mail
+And it has Notes users in to, from, cc, bcc
+When I migrate it to msg file
+Then to, from, cc, bcc and content are migrated
+]!

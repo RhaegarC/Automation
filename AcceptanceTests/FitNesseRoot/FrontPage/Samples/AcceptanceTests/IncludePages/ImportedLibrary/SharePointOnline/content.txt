@@ -1,0 +1,17 @@
+!|scenario|loadCredential|
+|start|remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.dll")|
+|eval|Add-Type -Path (Resolve-Path "Microsoft.SharePoint.Client.Runtime.dll")|
+|eval|$username = "${Admin}"|
+|eval|$password = "${O365_PASSWORD}"|
+|eval|$secstr = New-Object -TypeName System.Security.SecureString|
+|eval|$password.ToCharArray() !-|-! ForEach-Object {$secstr.AppendChar($_)}|
+|eval|$AdminCred = new-object Microsoft.SharePoint.Client.SharePointOnlineCredentials($username, $secstr)|
+|check|eval|$AdminCred|Microsoft.SharePoint.Client.SharePointOnlineCredentials|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext("${SITE_URL}")|
+|eval|$ctx.Credentials = $AdminCred|
+
+!|script|remote|${NMSP}|
+|eval|Import-Module c:\powershell\GetSharePointOnlinePage.psm1|
+|eval|try{$O365Session = Get-SPOnlineSession '${WEBAPP_URL}' '${Admin}' '${O365_PASSWORD}'}catch [Exception]{}|

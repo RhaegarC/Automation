@@ -1,0 +1,4 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordHybridListItems $numbering | 
+|indLeft|hanging|type|
+|280|263|bullet|
+|280|263|bullet|

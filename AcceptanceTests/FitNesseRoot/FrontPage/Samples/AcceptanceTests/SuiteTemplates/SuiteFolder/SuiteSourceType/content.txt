@@ -1,0 +1,4 @@
+!define LIST (!-SourceType-!)
+!define APPNAME (!-SuiteAttachments-!)
+!define DATABASE (!-SuiteAttachments-!)
+!contents -R2 -g -p -f -h

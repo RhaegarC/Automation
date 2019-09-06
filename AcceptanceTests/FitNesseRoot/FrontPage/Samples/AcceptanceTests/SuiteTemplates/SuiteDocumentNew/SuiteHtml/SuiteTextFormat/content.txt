@@ -1,0 +1,5 @@
+!define LIST (!-SuiteTextFormat-!)
+!define MIGRATION (!-DocLib2HtmlDoc-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+
+!contents -R2 -g -p -f -h

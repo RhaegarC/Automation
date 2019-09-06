@@ -1,0 +1,4 @@
+'''Check the version'''
+#!|script|Remote|${NMSP}|
+#|get file versions|${WEB}|list|${LIST}|caml|<View><Query><Where><Eq><FieldRef Name = 'Title'/><Value Type='Text'>TestIconSize</Value></Eq></Where></Query></View>|
+#|check|eval|$fileVersions.Count|1|

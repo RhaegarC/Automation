@@ -1,0 +1,5 @@
+!define MIGRATION (!-DocLib2DocumentX-!)
+!define DATABASE (!-SimpleObjectsLib-!)
+!define LIST (!-SuiteReadWritten-!)
+!define DOCUMENT_NAME (!-TestProperties-!)
+!contents -R2 -g -p -f -h

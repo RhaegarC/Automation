@@ -1,0 +1,42 @@
+!define DATABASE (!-SuiteAttachments-!)
+!define APPNAME (${DATABASE})
+!define MIGRATION (!-DocLib2DocLibWikiPages-!)
+!define WEB (!-SuiteScheduledTask-!)
+!define TASKJOBFILE ($env:PROGRAMDATA\Quest\!-Migrator for Notes to SharePoint\Scheduler\Jobs\-!${TASKNAME}_${LIST}.job)
+!define TASKTEMPLATE (!-ScheduledTask-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can create a scheduled task for migrating data to sharepoint sub site which is not exists 
+So that I can view these data in related sub site of sharepoint
+
+!1 scenarios
+![
+Given a new sub-site was added under one of 'SharePoint Targets'
+And this sub-site was selected as Migration Targets in DB properties
+And "Provision X planned !-SharePoint-! site (if needed)" was disabled in Migrate to SharePoint dialog
+And "Create a scheduled task" was selected
+When I click OK button of the Migrate to SharePoint dialog
+And I set the scheduled task name and start time
+Then the scheduled task would be failed
+And I can't view those migrated data in sharepoint sub site
+
+Given a new sub-site was added under one of 'SharePoint Targets'
+And this sub-site was selected as Migration Targets in DB properties
+And "Provision X planned !-SharePoint-! site (if needed)" was enabled in Migrate to SharePoint dialog
+And "Create a scheduled task" was selected
+When I click OK button of the Migrate to SharePoint dialog
+And I set the scheduled task name and start time
+Then I can view those migrated data in sharepoint sub site after the scheduled task finished successfully
+
+Given a created classification rule with "Auto Target" and "Migration Jobs" set
+And the "Auto Target" has "Create new site for each database" set
+And this class rule was applied to a DB which can meet the rule
+And "Provision X planned !-SharePoint-! site (if needed)" was enabled, "Create a scheduled task" was selected in Migrate to SharePoint dialog
+When I click OK button of the Migrate to SharePoint dialog
+Then I can view the "Target Site" in New Scheduled Migrate Task dialog should be the same with the Target Site in "Migration Targets" tab of DB properties 
+When I set the scheduled task name and start time
+Then I can view those migrated data in the "Target Site" of sharepoint after the scheduled task finished successfully
+]!

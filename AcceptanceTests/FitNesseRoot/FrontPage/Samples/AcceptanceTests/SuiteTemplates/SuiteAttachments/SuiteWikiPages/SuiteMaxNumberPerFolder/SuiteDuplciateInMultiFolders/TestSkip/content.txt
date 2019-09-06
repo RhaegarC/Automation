@@ -1,0 +1,4 @@
+!define READ_WRITTEN_PATTERN ( $writtenCount -eq 0)
+!include -c <AcceptanceTests.IncludePages.RunMigration
+
+!include -c <SuiteMaxNumberPerFolder.VerifyDuplciateInMultiFolders

@@ -1,0 +1,12 @@
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|AllowMultilineTextbox|
+
+!|script|remote|${NMSP}|
+|GetSectionContent|▼ Section containing subform|
+|CheckControlInSection|DisplayName[text() = 'TextField2']|ExpectedValue|True|
+
+'''[[Valify Bug: there is blank space when some fields are hidden in some subform][http://tfs.prod.quest.corp:8080/Windows%20Management/Notes%20Migrator%20for%20SharePoint/_workitems#_a=edit&id=452928]]'''
+
+!|script|remote|${NMSP}|
+|ControlSize|DisplayName[text() = 'RichTextLite']|Height|50|Width|200|
+|check|eval|$layout.top|670|

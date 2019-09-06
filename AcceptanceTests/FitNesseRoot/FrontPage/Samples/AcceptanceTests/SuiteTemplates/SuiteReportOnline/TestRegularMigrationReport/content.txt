@@ -1,0 +1,28 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+
+!|script|Remote|${NMSP}|
+|eval|$ctx2 = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx2.Credentials = $AdminCred |
+
+!|script|Remote|${NMSP}|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"|
+|eval|$items = $ctx2.Site.RootWeb.Lists.GetByTitle('${REPORT_LIST}').GetItems($caml)|
+|eval|$ctx2.Load($items)|
+|eval|$ctx2.ExecuteQuery()|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} },@{ N='Source Type'; E={$_['Source_x0020_Type']} }, @{ N='Status'; E={$_['Status']} } ,@{ N='Migration Mode'; E={$_['Migration_x0020_Mode']} } ,@{ N='Source Documents'; E={$_['Source_x0020_Documents']} } ,@{ N='Processed Documents'; E={$_['Processed_x0020_Documents']} } ,@{ N='Migrated Items'; E={$_['Migrated_x0020_Items']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Warnings'; E={$_['Warnings']} }, @{ N='Accepted'; E={$_['Accepted']} }, @{ N='Target Definition'; E={$_['Target_x0020_Definition']} }, @{ N='Last Error'; E={$_['Last_x0020_Error']} } |
+|Job Name|Source Type|Status|Migration Mode|Source Documents|Processed Documents|Migrated Items|Errors|Warnings|Accepted|Target Definition|Last Error|
+|"${WEB}.${LIST}"|"Notes"|"Completed"|"${MIGRATION_MODE}"|12|12|12|0|1|false|"PDF Documents"|null|
+
+!|script|Remote|${NMSP}|
+|eval|$caml = new-object Microsoft.SharePoint.Client.CamlQuery|
+|eval|$caml.ViewXml  = "<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"|
+|eval|$items = $ctx2.Site.RootWeb.Lists.GetByTitle('${SUMMARY_LIST}').GetItems($caml)|
+|eval|$ctx2.Load($items)|
+|eval|$ctx2.ExecuteQuery()|
+|eval|$ctx2.Dispose()|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Records Read'; E={$_['Records_x0020_Read']} } ,@{ N='Records Written'; E={$_['Records_x0020_Written']} } ,@{ N='Warnings'; E={$_['Warnings']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Run By'; E={$_['Run_x0020_By']} },@{ N='Database'; E={$_['Database']} }   |
+|Job Name|Records Read|Records Written|Warnings|Errors|Run By|Database|
+|"${WEB}.${LIST}"|12|12|1|0|"Administrator"|"${APPNAME}.nsf"|

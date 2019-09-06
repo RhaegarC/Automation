@@ -1,0 +1,6 @@
+!*> Defines
+!define TARGETWEB (http://sharepoint/AddListToQuickLaunch/)
+!define TARGETLIST (CommandLine.AddListToQuickLaunch.${MIGRATION})
+!define JOBFILE (c:\${TARGETLIST}.pmjob)
+*!
+!contents -R2 -g -p -f -h

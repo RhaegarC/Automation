@@ -1,0 +1,8 @@
+!define VIEW (!-Suite Max Number-!)
+!define FOLDERNAME (!-_Attachments-!)
+!define FOLDERNAME1 (${FOLDERNAME}-0001)
+!define FOLDERNAME2 (${FOLDERNAME}-0002)
+!define FOLDERNAME3 (${FOLDERNAME}-0003)
+!define FOLDERNAME4 (${FOLDERNAME}-0004)
+!define GET_ATTACHMENTFILES (${SOURCEFOLDER}/${ATTACHMENTFOLDER} ${SITE_URL} ${WEB} ${LIST})
+!contents -R2 -g -p -f -h

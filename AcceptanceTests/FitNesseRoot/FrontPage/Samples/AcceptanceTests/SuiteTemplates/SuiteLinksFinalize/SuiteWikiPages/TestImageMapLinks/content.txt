@@ -1,0 +1,12 @@
+!include -c <AcceptanceTests.IncludePages.CreateJobAndRunMigration
+!* Finalize
+!include -c <SuiteLinksFinalize.DoFinalize
+*!
+-!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${PAGE_NAME}.aspx|
+
+!|Query:Remote|${WEB_SCRAPER}|${TAG_AREA}|
+|href|shape|
+|=~/${FIRSTDOC}.aspx/|=~/(?i)RECT/|
+|=~/${SECONDDOC}.aspx/|=~/(?i)POLY/|
+|=~/${THIRDDOC}.aspx/|=~/(?i)CIRCLE/|

@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}|
+|eval|$server = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 36 server36' -PassThru|

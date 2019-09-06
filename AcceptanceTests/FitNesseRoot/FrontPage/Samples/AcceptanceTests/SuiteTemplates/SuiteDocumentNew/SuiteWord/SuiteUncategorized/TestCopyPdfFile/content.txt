@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestCopyPdfFile-!)
+
+!style_green[Check the word content contains text "Copy PDF File and paste", and a pdf icon under the text, when click the pdf icon, it should open "TestLinkHref.pdf".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

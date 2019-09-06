@@ -1,0 +1,5 @@
+!|script|Remote|${WEB_SCRAPER}|
+|PDF find text|Evaluation Only|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Text|

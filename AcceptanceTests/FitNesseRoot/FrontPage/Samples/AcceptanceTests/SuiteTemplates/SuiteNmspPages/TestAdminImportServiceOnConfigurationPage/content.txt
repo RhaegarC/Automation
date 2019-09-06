@@ -1,0 +1,6 @@
+!define ID (ctl00_PlaceHolderMain_ctl01)
+
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${CA}${ADMIN}NMSPTestImportService.aspx?SiteCollection=${WEBAPP_URL}${SITE}&ISAddr=${WEBAPP_URL}:8088/ImportSession.svc&AppID=${Admin}&SFPath=&SFCPath=|
+
+!include -c CheckImportServiceContent

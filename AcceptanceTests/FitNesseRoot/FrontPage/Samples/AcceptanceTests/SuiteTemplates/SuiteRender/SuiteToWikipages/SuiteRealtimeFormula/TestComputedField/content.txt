@@ -1,0 +1,11 @@
+!define PAGENAME (!-TestComputedField-!)
+
+|script|
+|jobDefinition|!{template:"${MIGRATION}",job:"${JOBFILE}",db:"SuiteRender",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"subject='TestComputedField'"}|
+!include <SuiteCases.GlobalSteps.RunMigration
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestComputedField.aspx",tag:"div",filter:"!-`$_.innerText -like 'Date:*'-!",selector:"Text"}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Date:09/30/2016 02:55:36.62 AM|

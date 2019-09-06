@@ -1,0 +1,44 @@
+!|scenario|PDFDocument|name|in|folder|
+|download|${LIST_URL}/@name.${SAVE_AS}|to|@folder\@name.${SAVE_AS}|
+|eval|${LOAD_ASPOSE_PDF}|
+|eval|(new-object Aspose.Pdf.License).SetLicense('c:\msi\Aspose.Pdf.lic')|
+|eval|$pdf = new-object Aspose.pdf.Document('@folder\@name.pdf')|
+|eval|$list = $pdf.Pages[1].Annotations|
+|eval|$abs = new-object Aspose.Pdf.ImagePlacementAbsorber|
+|eval|$pdf.Pages[1].Accept($abs)|
+#$abs is required for get image dimension and resolution http://www.aspose.com/docs/display/pdfnet/Get+the+Resolution+and+Dimensions+of+Embedded+Images
+
+!|scenario|PDFFindText|regex|
+|eval|$elements = $null|
+|eval|$searchOption= New-Object Aspose.Pdf.Text.TextOptions.TextSearchOptions($true)|
+|eval|$textfragment = new-object Aspose.Pdf.Text.TextFragmentAbsorber('@regex',$searchOption)|
+|eval|$pdf.Pages.Accept($textfragment)|
+|eval|!-<pre>$elements = $textfragment.TextFragments | select `
+    Text, `
+    @{ Name="font-family"; E={$_.TextState.Font.FontName} }, `
+    @{ Name="font-size"; E={$_.TextState.FontSize} }, `
+    @{ Name="color"; E={$_.TextState.ForegroundColor.ToString()} }</pre>-!|
+
+
+!|scenario|GetPdfContent|source|
+|eval|${LOAD_ASPOSE_PDF}|
+|eval|(new-object Aspose.Pdf.License).SetLicense('c:\msi\Aspose.Pdf.lic')|
+|eval|$pdf = new-object Aspose.pdf.Document(@source)|
+|eval|$list = $pdf.Pages[1].Annotations|
+|eval|$numberOfLinks = $list.Count|
+|eval|$textAbsorber = New-Object Aspose.Pdf.Text.TextAbsorber|
+|eval|$pdf.Pages.Accept($textAbsorber)|
+|eval|$extractedText = $textAbsorber.Text|
+|eval|$numberOfLines = $extractedText.Split('\n').Length|
+
+!|scenario|ParsePdfDoc|source|
+|eval|${LOAD_ASPOSE_PDF}|
+|eval|(new-object Aspose.Pdf.License).SetLicense('c:\msi\Aspose.Pdf.lic')|
+|eval|$pdf = $null|
+|eval|$pdf = new-object Aspose.pdf.Document("@source")|
+|eval|$pdfPage = $pdf.Pages[1]|
+|eval|$trivrect = [Aspose.Pdf.Rectangle]::Trivial|
+|eval|$la = New-Object Aspose.Pdf.Annotations.LinkAnnotation($pdfPage, $trivrect)|
+|eval|$selector = new-object Aspose.Pdf.Annotations.AnnotationSelector($la)|
+|eval|$pdfPage.Accept($selector)|
+|eval|$list = $selector.Selected|

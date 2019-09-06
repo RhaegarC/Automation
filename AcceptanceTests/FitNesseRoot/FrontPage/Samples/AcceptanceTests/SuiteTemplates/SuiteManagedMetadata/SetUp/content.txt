@@ -1,0 +1,34 @@
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!include -c <SharePointOnline.IncludePages.LoadSharePointApi
+!include -c <SharePoint2013New.IncludePages.LoadSharePointApi
+!include -c <SharePoint2016.IncludePages.LoadSharePointApi
+!include -c <SharePoint2019.IncludePages.LoadSharePointApi
+
+#!include -c <ImportService.IncludePages.AddTermstoreAdministrator
+#!include -c <WebServices.IncludePages.AddTermstoreAdministrator
+
+!include -c <SharePoint2010New.IncludePages.DeleteTaxonomyGroup
+!include -c <SharePoint2013New.IncludePages.DeleteTaxonomyTermSet
+!include -c <SharePoint2016.IncludePages.DeleteTaxonomyTermSet
+!include -c <SharePoint2019.IncludePages.DeleteTaxonomyTermSet
+!include -c <SharePointOnline.IncludePages.DeleteTaxonomyTermSet
+
+!include -c <SharePoint2010New.IncludePages.CreateTaxonomyGroupAndTermSet
+!include -c <SharePoint2013New.IncludePages.CreateTaxonomyTermSet
+!include -c <SharePoint2016.IncludePages.CreateTaxonomyTermSet
+!include -c <SharePoint2019.IncludePages.CreateTaxonomyTermSet
+!include -c <SharePointOnline.IncludePages.CreateTaxonomyTermSet
+
+!include -c <SharePoint2010New.IncludePages.AddDocumentLibrary
+!include -c <SharePoint2013New.IncludePages.AddDocumentLibrary
+!include -c <SharePoint2016.IncludePages.AddDocumentLibrary
+!include -c <SharePoint2019.IncludePages.AddDocumentLibrary
+!include -c <SharePointOnline.IncludePages.AddDocumentLibrary
+
+!include -c <SharePoint2010New.IncludePages.AddCategoryColumn
+!include -c <SharePoint2013New.IncludePages.AddCategoryColumn
+!include -c <SharePoint2016.IncludePages.AddCategoryColumn
+!include -c <SharePoint2019.IncludePages.AddCategoryColumn
+!include -c <SharePointOnline.IncludePages.AddCategoryColumn

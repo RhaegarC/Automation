@@ -1,0 +1,35 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") | WordHyperLinkElement -!|
+|href|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|
+|file://alvclyw40/Attachments/Cases/1067113/mapping.jpg|
+|http://www.slashdot.org|
+|http://www.slashdot.org|
+|https://slashdot.org|
+|https://slashdot.org|
+|http://www.slashdot.org|
+|http://www.slashdot.org|
+|ftp://www.slashdot.org|
+|ftp://www.slashdot.org|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement -!| 
+|text|
+|link to file://!- -!|
+|Link to external image|
+|link to double backslash|
+|Link to backslash|
+|link to!- -!|
+|www.slashdot.org|
+|=~/no http:/|
+|Slashdot|
+|Link to!- -!|
+|https://slashdot.org|
+|=~/should not change/|
+|Slashdot|
+|Link to!- -!|
+|http://www.slashdot.org|
+|=~/should not change/|
+|Slashdot|
+|Link to!- -!|
+|ftp://www.slashdot.org|
+|=~/should not change/|
+|Slashdot|

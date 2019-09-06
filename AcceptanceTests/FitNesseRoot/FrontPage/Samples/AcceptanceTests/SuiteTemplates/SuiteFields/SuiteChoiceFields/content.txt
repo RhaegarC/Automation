@@ -1,0 +1,2 @@
+!define GROUP {!-SuiteChoiceFields-!}
+!contents -R2 -g -p -f -h

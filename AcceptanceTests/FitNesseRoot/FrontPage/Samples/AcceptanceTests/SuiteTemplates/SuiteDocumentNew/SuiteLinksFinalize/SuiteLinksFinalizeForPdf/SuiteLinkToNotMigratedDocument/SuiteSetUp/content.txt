@@ -1,0 +1,10 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"!-@Contains(subject;'FirstDoc')-!",linkConversionType:"${LinkConversionType}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!include <SuiteCases.GlobalSteps.LinkFinalization

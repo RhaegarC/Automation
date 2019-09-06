@@ -1,0 +1,10 @@
+!define WEB (!-SignatureBlockList-!)
+!define MIGRATION (!-BasicList-!)
+!define APPNAME (!-SimpleObjectsLib-!)
+!define VIEW (!-Suite SignatureBlock-!)
+!define LIST (!-SignatureBlock-!)
+!define PRESERVE (<pre>{0}</pre>)
+!define SOURCEFIELDS ("<!-Column ColumnType='Item' ReturnType='String' Value='SignatureBlock'-! />","<!-Column ColumnType='Render' Alias='RenderHtml' Option='Html'-! />","<!-Column ColumnType='Item' Option='Multi' ReturnType='String' Value='ReviewerList'-! />")
+!define TARGETFIELDS ("<!-Field MultiLine='true' Name='SignatureBlock' NotesItems='SignatureBlock' Type='Note'-! />","<!-Field Name='Body' NotesItems='BodyHtml; RenderHtml' Type='Note' AllowMultiple='true'-! />","<!-Field Name='ReviewerList' NotesItems='ReviewerList' Type='Text'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='ReviewerList' SourceValue='ReviewerList' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<!-Mapping Destination='Body' SourceValue='RenderHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h

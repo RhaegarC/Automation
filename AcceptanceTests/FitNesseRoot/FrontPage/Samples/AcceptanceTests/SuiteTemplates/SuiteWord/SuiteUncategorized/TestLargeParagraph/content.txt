@@ -1,0 +1,7 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:p") !-|-! WordListItemElement $numbering | 
+|text|type|
+|First Paragraph|decimal|
+|=~/Second Paragraph/|decimal|
+|Third Paragraph|decimal|
+|Fourth Paragraph|decimal|
+

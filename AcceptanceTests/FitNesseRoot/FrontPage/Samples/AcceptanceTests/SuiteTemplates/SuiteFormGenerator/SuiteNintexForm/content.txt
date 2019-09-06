@@ -1,0 +1,11 @@
+!define DATABASE {SuiteFormGenerator}
+!define LabComputerName (NMSP)
+!define EXE {FormGenerator.exe}
+!define PROCESS_NAME {FormGenerator}
+!define OBJECT_FILE {FormGenerator.xml}
+!define DEFAULT_NAME {NintexForm_(local)_SuiteFormGenerator_${FORM_NAME}}
+!define TARGET_FOLDER (C:\Users\Administrator\Documents\Quest\Migrator for Notes to SharePoint\Target Files)
+!define NOTESFORM_FILE (${TARGET_FOLDER}\${DEFAULT_NAME}\NotesForm_${DEFAULT_NAME}.xml)
+!define TARGET_FILE (${TARGET_FOLDER}\${DEFAULT_NAME}.xml)
+!define GROUP {}
+!contents -R2 -g -p -f -h

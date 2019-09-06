@@ -1,0 +1,35 @@
+!define LIST (!-SuiteDisImgAfterLoad-!)
+!define APPNAME (!-SuiteDisplayImgAfterLoad-!)
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate images with "Display images after loading" enabled to !-SharePoint-!
+So that I can view these images were migrated or have "[Delay Load image cannot be extracted]" displayed and proper warning messages shown in Log
+
+!1 scenarios
+![
+Given large size images (such as 2MB) were added in Notes document
+And "Display images after loading" was enabled in DB properties
+And Word/Pdf/(Pdf/A) was selected as Target
+And make sure mapping "BodyImages -> Files" or "BodyImages -> Attachments" wasn't added
+When I run a migration
+Then I can view "[Delay Load image cannot be extracted]" displayed in migrated Word/Pdf/(Pdf/A) instead of images
+And warning messages "An image was not extracted correctly.  This may indicate a corrupted Notes document or an image that was saved in a way that we could not extract.  Please try unchecking the "Display images after loading" database property, editing and resaving the document." shown in Log
+
+Given large size images (such as 2MB) were added in Notes document
+And "Display images after loading" was enabled in DB properties
+And Wiki was selected as Target
+And make sure mapping "BodyImages -> Files" was added
+When I run a migration
+Then I can view "[Delay Load image cannot be extracted]" displayed in migrated wiki page instead of images
+And warning messages "An image was not extracted correctly.  This may indicate a corrupted Notes document or an image that was saved in a way that we could not extract.  Please try unchecking the "Display images after loading" database property, editing and resaving the document." shown in Log
+
+Given large size images (such as 2MB) were added in Notes document
+And "Display images after loading" was enabled in DB properties
+And Custom list was selected as Target
+And make sure mapping "BodyImages -> Attachments" was added
+When I run a migration
+Then I can view "[Delay Load image cannot be extracted]" displayed in migrated custom list page instead of images
+And warning messages "An image was not extracted correctly.  This may indicate a corrupted Notes document or an image that was saved in a way that we could not extract.  Please try unchecking the "Display images after loading" database property, editing and resaving the document." shown in Log
+]!

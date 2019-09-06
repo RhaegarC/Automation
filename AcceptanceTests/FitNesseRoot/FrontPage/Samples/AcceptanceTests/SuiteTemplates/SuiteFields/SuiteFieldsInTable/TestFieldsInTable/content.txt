@@ -1,0 +1,22 @@
+!define LIST {!-TestFieldsInTable-!}
+!define DATABASE {!-SimpleObjectsLib-!}
+!define MIGRATION {!-BasicList-!}
+!define SOURCE_FIELDS (!-'<Column ColumnType="RichText" Option="Html" Alias="RichText1Html" Value="RichText1" />','<Column ColumnType="RichText" Option="Html" Alias="RichText2Html" Value="RichText2" />','<Column ColumnType="RichText" Option="Html" Alias="RichText3Html" Value="RichText3" />','<Column ColumnType="RichText" Option="Html" Alias="RichText4Html" Value="RichText4" />','<Column ColumnType="RichText" Option="Html" Alias="RichText5Html" Value="RichText5" />','<Column ColumnType="RichText" Option="Html" Alias="RichText6Html" Value="RichText6" />','<Column ColumnType="Item" ReturnType="String" Value="Text1" />','<Column ColumnType="Item" ReturnType="String" Value="Text2" />','<Column ColumnType="Item" ReturnType="String" Value="Text3" />','<Column ColumnType="Item" ReturnType="String" Value="Text4" />','<Column ColumnType="Item" ReturnType="String" Value="Text5" />','<Column ColumnType="Item" ReturnType="String" Value="Text6" />'-!)
+
+!define TARGET_FIELDS (!-'<Field Name="RichText1" NotesItems="RichText1Html" Type="Note" />','<Field Name="RichText2" NotesItems="RichText2Html" Type="Note" />','<Field Name="RichText3" NotesItems="RichText3Html" Type="Note" />','<Field Name="RichText4" NotesItems="RichText4Html" Type="Note" />','<Field Name="RichText5" NotesItems="RichText5Html" Type="Note" />','<Field Name="RichText6" NotesItems="RichText6Html" Type="Note" />','<Field Name="Text1" NotesItems="Text1" Type="Note" />','<Field Name="Text2" NotesItems="Text2" Type="Note" />','<Field Name="Text3" NotesItems="Text3" Type="Note" />','<Field Name="Text4" NotesItems="Text4" Type="Note" />','<Field Name="Text5" NotesItems="Text5" Type="Note" />','<Field Name="Text6" NotesItems="Text6" Type="Note" />'-!)
+
+!define MAP_FIELDS (!-'<Mapping Destination="RichText1" SourceValue="RichText1Html" />','<Mapping Destination="RichText2" SourceValue="RichText2Html" />','<Mapping Destination="RichText3" SourceValue="RichText3Html" />','<Mapping Destination="RichText4" SourceValue="RichText4Html" />','<Mapping Destination="RichText5" SourceValue="RichText5Html" />','<Mapping Destination="RichText6" SourceValue="RichText6Html" />','<Mapping Destination="Text1" SourceValue="Text1" />','<Mapping Destination="Text2" SourceValue="Text2" />','<Mapping Destination="Text3" SourceValue="Text3" />','<Mapping Destination="Text4" SourceValue="Text4" />','<Mapping Destination="Text5" SourceValue="Text5" />','<Mapping Destination="Text6" SourceValue="Text6" />'-!)
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",forms:"TableForm",sourceFields:${SOURCE_FIELDS},targetFields:${TARGET_FIELDS},mapFields:${MAP_FIELDS}}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['Title']}},@{N='Text1';E={$_['Text1']}},@{N='Text2';E={$_['Text2']}},@{N='Text3';E={$_['Text3']}},@{N='Text4';E={$_['Text4']}},@{N='Text5';E={$_['Text5']}},@{N='Text6';E={$_['Text6']}}|
+|Title|Text1|Text2|Text3|Text4|Text5|Text6|
+|TestFieldsInTableCells|Cell(1,0)|Cell(1,1)|Cell(1,2)|Cell(1,3)|Cell(1,4)|Cell(1,5)|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['Title']}},@{N='RichText1';E={$_['RichText1']}},@{N='RichText2';E={$_['RichText2']}},@{N='RichText3';E={$_['RichText3']}},@{N='RichText4';E={$_['RichText4']}},@{N='RichText5';E={$_['RichText5']}},@{N='RichText6';E={$_['RichText6']}}|
+|Title|RichText1|RichText2|RichText3|RichText4|RichText5|RichText6|
+|TestFieldsInTableCells|=~/Cell\(0,0/|=~/Cell\(0,1\)/|=~/Cell\(0,2\)/|=~/Cell\(0,3\)/|=~/Cell\(0,4\)/|=~/Cell\(0,5\)/|

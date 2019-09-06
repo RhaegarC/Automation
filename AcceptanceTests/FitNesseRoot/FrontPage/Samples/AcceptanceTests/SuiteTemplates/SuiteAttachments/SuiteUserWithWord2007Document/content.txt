@@ -1,0 +1,5 @@
+!define MIGRATION (DocLib2BinaryFiles)
+!define LIST (TestAttachmentUserWithWord2007Document)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteUserWithWord2007Document.EditJob)
+
+!contents -R2 -g -p -f -h

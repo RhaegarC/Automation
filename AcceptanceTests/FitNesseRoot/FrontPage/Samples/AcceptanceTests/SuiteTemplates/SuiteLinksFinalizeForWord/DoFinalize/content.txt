@@ -1,0 +1,3 @@
+!include -c <WebServices.IncludePages.FinalizeLinks
+!include -c <ImportService.IncludePages.FinalizeLinks
+!include -c <SuiteFolder.IncludePages.FinalizeLinks

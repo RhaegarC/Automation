@@ -1,0 +1,11 @@
+!include <SuiteCases.GlobalSteps.SetUpForLinkFinalization
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",linkConversionType:"${LinkConversionType}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!include -c <ImportService.IncludePages.ConnectLinkTracking
+
+!include <SuiteCases.GlobalSteps.LinkFinalization

@@ -1,0 +1,7 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|download|${PDFSOURCE}|to|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+|ParsePdfDoc|${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$list.Action | select @{N='href'; E={$_.URI}}-!| 
+|href|
+|=~/_Attachments/%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3%e8%b5%84%e6%96%99.jpg/|

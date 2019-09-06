@@ -1,0 +1,24 @@
+!define PAGENAME (!-TestNestedOrderedWithBulletsList-!)
+
+!style_green[Check the word content contains text shown as below, (the font is Arial, 9, color just shown as below):]
+----------------------
+!style_blue[XXX]
+!style_blue[      '''BBB''']
+!style_red[      YYY]
+!style_red[            '''CCC''']
+!style_green[      ZZZ]
+!style_green[            '''DDD''']
+!style_blue[      '''EEE''']
+
+This is a list of strings with Numbers and Bullets.
+
+
+1.   First line
+2.   Second line
+            •	First sub line
+            •	Second sub line
+3.   Third line
+4.   Fourth line
+---------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

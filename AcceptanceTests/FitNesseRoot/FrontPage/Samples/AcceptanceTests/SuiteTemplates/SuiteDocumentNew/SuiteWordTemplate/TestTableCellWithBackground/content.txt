@@ -1,0 +1,17 @@
+!define MIGRATION (!-DocLib2DocLibWordDocTemplateBodyTable-!)
+!define LIST (!-TestTableCellWithBackground-!)
+!define VIEW (!-Suite Table-!)
+!define PAGENAME (!-TestTableCellWithBackground-!)
+!define TARGET_FILE (${TARGETFOLDER}\${PAGENAME}_TableCellWithBackground.${SAVE_AS})
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"@Contains(subject;'TestTableCellWithBackground')"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!style_green[Check the word content displays as below:]
+!img files/nmsp/images/CheckpointImages/TestTableCellWithBackground.png
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

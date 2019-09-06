@@ -1,0 +1,42 @@
+!define LIST {!-TestReplace-!}
+!define DATABASE {!-SuiteDuplicate-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",duplicateHandle:"Replace"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<!-View Scope='RecursiveAll'-!><!-Query-!><!-Where-!><!-Eq-!><!-FieldRef Name='FileDirRef' -!/><!-Value Type='Text'-!>/sites/nmspFitnesse/${WEB}/${LIST}</!-Value-!></!-Eq-!></!-Where-!></!-Query-!></!-View-!>"}|
+
+!|script|remote|${NMSP}|
+|eval|$first_1 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document1.pdf'}).SMLastModifiedDate|
+|eval|$first_2 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document2.pdf'}).SMLastModifiedDate|
+|eval|$first_3 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document3.pdf'}).SMLastModifiedDate|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Name';E={$_['FileLeafRef']}},@{N='LastModified';E={$_['SMLastModifiedDate']}}|
+|Name|LastModified|
+|_Attachments||
+|Document1.pdf||
+|Document2.pdf||
+|Document3.pdf||
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<!-View Scope='RecursiveAll'-!><!-Query-!><!-Where-!><!-Eq-!><!-FieldRef Name='FileDirRef' -!/><!-Value Type='Text'-!>/sites/nmspFitnesse/${WEB}/${LIST}</!-Value-!></!-Eq-!></!-Where-!></!-Query-!></!-View-!>"}|
+
+!|script|remote|${NMSP}|
+|eval|$second_1 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document1.pdf'}).SMLastModifiedDate|
+|eval|$second_2 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document2.pdf'}).SMLastModifiedDate|
+|eval|$second_3 = ($items.fieldValues !-|-! ?{$_.FileLeafRef -eq 'Document3.pdf'}).SMLastModifiedDate|
+|check|eval|$first_1 -lt $second_1|True|
+|check|eval|$first_2 -lt $second_2|True|
+|check|eval|$first_3 -lt $second_3|True|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Name';E={$_['FileLeafRef']}},@{N='LastModified';E={$_['SMLastModifiedDate']}}|
+|Name|LastModified|
+|_Attachments||
+|Document1.pdf||
+|Document2.pdf||
+|Document3.pdf||

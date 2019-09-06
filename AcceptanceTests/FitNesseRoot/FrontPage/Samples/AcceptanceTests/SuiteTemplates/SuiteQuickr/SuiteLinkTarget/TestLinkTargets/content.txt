@@ -1,0 +1,7 @@
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|
+
+!|Subset Query:Remote|${NMSP}|$items !-|-! select @{ N='Title'; E={$_['Title0']} }, @{ N='WikiField'; E={$_['WikiField']} }|
+|Title|WikiField|
+|TestLinktoNewWindow|=~/href=\"http&#58;//www.google.com\" target=\"_blank\"/|
+|TestLinksTargets|=~/href=\"http&#58;//www.quest.com\" target=\"_blank\"/|

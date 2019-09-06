@@ -1,0 +1,18 @@
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? context -eq 'Provision Table: [LookupFrom]'|
+|message|
+|!-CREATE TABLE LookupFrom (
+[PKey] int IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+[Subject] varchar(MAX) );-!|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? context -eq 'Add Fields to Table: [tbl_vw_SECTION_blank_MAIL]'|
+|message|
+|!-ALTER TABLE tbl_vw_SECTION_blank_MAIL ADD 
+[PKey] int IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+[LSubject] int FOREIGN KEY REFERENCES LookupFrom(PKey) -!|
+
+!|Query:Remote|${NMSP}|([xml]$log).Log.entry !-|-! ? context -eq 'Provision Table: [AttachmentsTable]'|
+|message|
+|!-CREATE TABLE AttachmentsTable (
+[AttachPKey] int IDENTITY (1, 1) NOT NULL PRIMARY KEY ,
+[attachment] varchar(MAX) ,
+[attachid] int FOREIGN KEY REFERENCES tbl_vw_SECTION_blank_MAIL(PKey) );-!|

@@ -1,0 +1,2 @@
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false"}|

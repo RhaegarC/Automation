@@ -1,0 +1,6 @@
+!|script|Remote|${NMSP}|
+|JobFile|${JOBFILE}|Template|${MIGRATION}|Web|${WEB_URL}|List|${LIST}|Application|${APPNAME}|
+
+''Edit job file''
+${EditJob}
+!include -c RunMigration

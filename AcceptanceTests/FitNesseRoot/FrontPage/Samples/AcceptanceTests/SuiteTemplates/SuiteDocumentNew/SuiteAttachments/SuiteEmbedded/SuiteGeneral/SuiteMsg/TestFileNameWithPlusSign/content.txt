@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestFileNameWithPlusSign-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|Special + sign.txt|

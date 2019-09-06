@@ -1,0 +1,16 @@
+!define PLACE (suitequickr)
+!define LIST (!-TestLinkTargets-!)
+
+!contents -R2 -g -p -f -h
+
+!1 user story
+As an administrator
+I can migrate links set to open in new window to !-SharePoint-!
+So that I can click these links and view pages in new window
+
+!1 scenarios
+![
+Given quickr link page with "Open URL in new window" enabled and quickr page with link which target is "New Window (_blank)" were selected as Source data
+When I run a migration
+Then I can click these links and view pages in new window
+]!

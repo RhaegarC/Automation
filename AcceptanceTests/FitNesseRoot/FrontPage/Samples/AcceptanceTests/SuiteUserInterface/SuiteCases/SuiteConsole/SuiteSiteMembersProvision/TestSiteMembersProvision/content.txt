@@ -1,0 +1,25 @@
+|script|
+|importUilib|
+|startConsole|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|checkBox "PromptOnError" "false" $subtitutions|
+|eval|click "OptionOK" $subtitutions|
+|eval|click "NotesConnectionYes"|
+|eval|sleep 2|
+|eval|expandTreeItem "NotesDatabases"|
+|eval|click "AllDatabases"|
+|eval|sleep 5|
+|eval|doubleClick "SuiteDatabaseAnalysisDb"|
+|eval|click "MigrationTargetsTab"|
+|eval|checkBox "MapNotesUsers" "true"|
+|eval|click "SavePropertiesOK"|
+|eval|sleep 2|
+|eval|displayContextMenu "SuiteDatabaseAnalysisDb"|
+|eval|clickMenu "MigrateToSharePoint"|
+|eval|sleep 3|
+|eval|click "ContentMigrationJobOption"|
+|eval|click "MigrateToSharePointOK"|
+|eval|sleep 10|
+|check|eval|getControlName "ProvisionMembershipResult"|=~/Member Provisioning Completed/|

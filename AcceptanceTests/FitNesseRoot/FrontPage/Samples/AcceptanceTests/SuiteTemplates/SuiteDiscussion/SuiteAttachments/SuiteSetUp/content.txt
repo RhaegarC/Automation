@@ -1,0 +1,15 @@
+!define CAML ("<View><Query></Query></View>")
+!define FORMULA (!-@contains(subject;'FileLose')-!)
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"${FORMULA}"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|Remote|${NMSP}|
+|eval|!- $ms= $warning.message | Where-Object {$_ -like "*was not extracted correctly*"} -!|
+|check|eval|$ms.count|0|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:${CAML}}|

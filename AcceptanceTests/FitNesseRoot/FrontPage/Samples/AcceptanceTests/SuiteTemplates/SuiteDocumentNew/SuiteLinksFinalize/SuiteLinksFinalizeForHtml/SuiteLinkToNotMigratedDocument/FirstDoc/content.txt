@@ -1,0 +1,13 @@
+!define PAGENAME (!-FirstDoc-!)
+!define ORIGIN_SITE_URL (http://sp2016/sites/test)
+
+!style_green[Check the html content contains text shown as below, the "SecondDoc" is a link, but its url is not finalized.]
+--------------------
+Start First document
+ 
+Link to !-SecondDoc-! by using View with special characters
+ 
+ 
+End document
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

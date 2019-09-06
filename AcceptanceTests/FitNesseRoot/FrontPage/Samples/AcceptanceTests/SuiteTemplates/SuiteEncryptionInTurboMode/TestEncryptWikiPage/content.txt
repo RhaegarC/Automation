@@ -1,0 +1,3 @@
+|script|
+|openSharePointPage|!{url:"${LIST_URL}/${FILENAME}.aspx"}|
+|check|eval|$content.contains("${FILECONTENT}")|True|

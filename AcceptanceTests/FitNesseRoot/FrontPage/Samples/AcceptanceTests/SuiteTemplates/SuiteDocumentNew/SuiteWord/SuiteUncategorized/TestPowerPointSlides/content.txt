@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestPowerPointSlides-!)
+
+!style_green[Check the word content contains two ppt slides.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

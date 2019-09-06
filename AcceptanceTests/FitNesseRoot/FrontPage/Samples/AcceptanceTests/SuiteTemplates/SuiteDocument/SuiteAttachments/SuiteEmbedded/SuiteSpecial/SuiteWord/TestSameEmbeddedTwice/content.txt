@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$docOleObjects|
+|ProgId|OleIcon|
+|Word.Document.12|False|
+|Word.Document.12|False|

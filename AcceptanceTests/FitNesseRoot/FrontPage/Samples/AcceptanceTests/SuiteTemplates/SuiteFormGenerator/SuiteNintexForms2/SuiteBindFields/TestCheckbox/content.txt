@@ -1,0 +1,5 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<span (disabled="disabled"!-|-!class="aspNetDisabled") data-nfChoiceValue="Option1"><input.*type="checkbox".*Option1</label></span>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<span (disabled="disabled"!-|-!class="aspNetDisabled") data-nfChoiceValue="Option2"><input.*type="checkbox".*checked="checked".*Option2</label></span>/|

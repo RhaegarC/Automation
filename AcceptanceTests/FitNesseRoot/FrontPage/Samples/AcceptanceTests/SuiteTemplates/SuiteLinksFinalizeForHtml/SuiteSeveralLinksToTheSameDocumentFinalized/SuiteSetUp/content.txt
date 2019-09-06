@@ -1,0 +1,2 @@
+!include -c <SuiteLinksFinalizeForHtml.SuiteSetUp
+!include -c <SuiteLinksFinalizeForHtml.DoFinalize

@@ -1,0 +1,4 @@
+!|script|Remote|${WEB_SCRAPER}|
+|eval|remove-item "${TARGETFOLDER}" -force -recurse -confirm:$false -ea silent|
+
+

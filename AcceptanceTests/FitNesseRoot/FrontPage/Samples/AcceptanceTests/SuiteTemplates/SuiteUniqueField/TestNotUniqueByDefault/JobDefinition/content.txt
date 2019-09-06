@@ -1,0 +1,3 @@
+-!|script|Remote|${NMSP}|
+|Target|@{Name='${TARGET_FIELD_NAME}'; Type='Text'; AddToViews='DefaultView'}|
+|Mapping|Subject|to|${TARGET_FIELD_NAME}|job|${JOBFILE}|

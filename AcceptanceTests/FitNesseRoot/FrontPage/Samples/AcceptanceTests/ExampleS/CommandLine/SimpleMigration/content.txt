@@ -1,0 +1,2 @@
+!define TARGETWEB (http://sharepoint/)
+!contents -R2 -g -p -f -h

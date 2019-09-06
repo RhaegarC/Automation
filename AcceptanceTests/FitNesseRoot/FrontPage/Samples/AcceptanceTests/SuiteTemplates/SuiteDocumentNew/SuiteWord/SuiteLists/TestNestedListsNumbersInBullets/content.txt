@@ -1,0 +1,18 @@
+!define PAGENAME (!-TestNestedListsNumbersInBullets-!)
+
+!style_green[Check the word content contains text shown as below (the font is Arial, font color is black, font size is 9):]
+--------------------
+Create bullet list and insert number lists for each bullet using Indent Paragraph
+
+            •   Bullet 1
+                        1.   Number 1 in bullet 1
+                        2.   Number 2 in bullet 1
+            •   Bullet 2
+                        1.   Number 1 in bullet 2
+                        2.   Number 2 in bullet 2
+            •   Bullet 3
+
+End of test not in bullet list
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

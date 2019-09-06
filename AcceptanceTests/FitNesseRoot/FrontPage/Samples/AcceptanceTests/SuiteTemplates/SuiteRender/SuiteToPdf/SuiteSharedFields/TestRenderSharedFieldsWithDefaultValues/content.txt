@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestRenderSharedFields_defaultvalue-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

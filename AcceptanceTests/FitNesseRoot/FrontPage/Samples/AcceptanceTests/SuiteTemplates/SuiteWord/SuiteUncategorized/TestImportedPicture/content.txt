@@ -1,0 +1,9 @@
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|Text with imported picture|
+|=~/Text on right side/|
+|Text after picture|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("v:shape") | select alt-!|
+|alt|
+|image0.JPG|

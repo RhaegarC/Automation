@@ -1,0 +1,11 @@
+!define PAGENAME (!-TestTabBetweenTexts-!)
+
+!style_green[Check the word content contains text "Text1""Text2""Text3", and there is 4 tabs between "Text1" and "Text2", 10 tabs between "Text2" and "Text3".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+
+
+
+
+

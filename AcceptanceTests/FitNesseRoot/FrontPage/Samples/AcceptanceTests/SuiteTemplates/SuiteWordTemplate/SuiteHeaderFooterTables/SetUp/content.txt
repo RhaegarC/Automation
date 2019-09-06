@@ -1,0 +1,16 @@
+#!define TARGETFOLDER (${WORD_FOLDER}\${LIST})
+#!define TARGET (${WORD_FOLDER}\${LIST}\${TEST_DOC}.docx)
+
+!include -c <WebServices.IncludePages.DownloadDocument
+!include -c <ImportService.IncludePages.DownloadDocument
+
+!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${TEST_DOC}|in|${TARGETFOLDER}|
+|eval|$file = "${TARGETFOLDER}\${TEST_DOC}\word\header2.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$header = Get-Content $file}|
+|eval|$file = "${TARGETFOLDER}\${TEST_DOC}\word\footer2.xml"|
+|eval|$exist = Test-Path -Path $file|
+|eval|if ($exist) {[xml]$footer = Get-Content $file}|
+
+

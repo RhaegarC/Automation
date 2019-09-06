@@ -1,0 +1,28 @@
+!define LINKS (7)
+!define DOCUMENTS (6)
+
+!include -c <AcceptanceTests.IncludePages.ExecuteSystemUnderTest
+
+!* Verification Pdf document before finalization
+!define LINK (notes${COLON_CHAR}///85257B4F0055CD9C/0/FF16649C9A93DC4E85257B4F00606FB0)
+!include <SuiteRootFolder.VerifyDocumentContent
+*!
+
+!* move to new target folder
+!|script|Remote|${NMSP}|
+|eval|remove-item "${NEWBASEFOLDER}" -force -recurse -confirm:$false|
+|eval|New-Item ${NEWTARGETFOLDER} -type directory|
+|eval|Move-Item ${TARGETFOLDER} ${NEWTARGETFOLDER}|
+*!
+
+!define BASEFOLDER (${NEWBASEFOLDER})
+'''reset the option to make it successful to add another root folder'''
+!include -c <AcceptanceTests.IncludePages.ResetGlobalOptions
+!include -c <AcceptanceTests.SuiteFolder.IncludePages.EnableFolderLinkTracking
+
+!include -c <AcceptanceTests.SharePoint2010New.WebServices.IncludePages.FinalizeLinks
+
+!* Verification Pdf document after finalization
+!define LINK (=~/SecondDoc.pdf/)
+!include <SuiteRootFolder.VerifyDocumentContent
+*!

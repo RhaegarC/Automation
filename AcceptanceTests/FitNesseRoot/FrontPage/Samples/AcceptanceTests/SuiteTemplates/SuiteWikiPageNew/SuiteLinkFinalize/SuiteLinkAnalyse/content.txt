@@ -1,0 +1,19 @@
+!define LIST {!-SuiteLinkAnalyse-!}
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can select to analyze migrated documents in Console - Link Analyzer/Updater/Finalizer - Analyze
+So that I can view the correct status of analyze result in Analyzer Results
+ 
+!1 scenarios
+![
+Given DocA contains the link of DocB in Notes
+When I run a migration for DocA and DocB to O365
+Then I can view migrated DocA and DocB in O365
+When I run an analyze in Console - Link Analyzer/Updater/Finalizer - Analyze
+Then I can view the Status of migrated DocA and DocB are "Found"
+
+When I delete DocB in O365
+And I re-run an analyze
+Then I can view the Status of migrated DocB changed to "Not Found"
+]!

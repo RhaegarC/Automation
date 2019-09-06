@@ -1,0 +1,2 @@
+!define DATABASE {!-SuiteLinksFinalize.SuiteSpecialCases-!}
+!contents -R2 -g -p -f -h

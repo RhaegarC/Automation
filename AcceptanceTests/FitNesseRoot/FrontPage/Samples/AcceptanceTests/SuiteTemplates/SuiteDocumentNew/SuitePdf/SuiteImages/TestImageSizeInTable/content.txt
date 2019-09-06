@@ -1,0 +1,6 @@
+!define PAGENAME (!-TestImageSizeInTable-!)
+
+!style_green[Check the pdf content contains a png picture on the left.]
+!style_green[Check the pdf content contains a jpeg picture on the right.]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

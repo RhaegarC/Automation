@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|eval|$endDate=Get-Date|
+|eval|$realDate=$currenyDate.AddSeconds(($endDate-$startDate).TotalSeconds)|
+|eval|Set-Date $realDate|
+
+|script|
+|stopUiautomation|

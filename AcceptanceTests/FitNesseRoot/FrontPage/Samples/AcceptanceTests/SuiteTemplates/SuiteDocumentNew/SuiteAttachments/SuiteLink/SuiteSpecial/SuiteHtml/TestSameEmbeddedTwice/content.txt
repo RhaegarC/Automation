@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestSameEmbeddedTwice-!)
+
+!style_green[We should migrated Ole object only once as it is actually the same object. Check the html content contains "_Attachments/TestSameEmbeddedTwice.docx" twice.]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

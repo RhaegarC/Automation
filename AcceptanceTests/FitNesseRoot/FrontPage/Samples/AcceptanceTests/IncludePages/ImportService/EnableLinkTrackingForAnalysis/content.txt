@@ -1,0 +1,6 @@
+!|script|Remote|${SQLHOST}|
+|eval|Set-Service SQLBrowser -StartupType Manual|
+|eval|Start-Service "SQL Server Browser"|
+
+!|script|Remote|${NMSP}|
+|MMC LinkTracking enabled|

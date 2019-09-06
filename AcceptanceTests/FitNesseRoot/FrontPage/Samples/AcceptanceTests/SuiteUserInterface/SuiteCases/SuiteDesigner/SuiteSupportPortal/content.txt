@@ -1,0 +1,40 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can use support portal when I encounter some problems
+So that I can easily find a solution
+
+!1 scenarios
+![
+Given there is error during migration
+When I search for solution
+And there is no solution for it
+Then I can see 0 articles are found
+When I click the link
+Then I can see the key word in the url
+And I can browser the kb web site with the key word in search bar
+
+Given there is error during migration
+When I search for solution
+And there is one article for it
+Then I can see 1 article is found
+
+Given there is error during migration
+When I search for solution
+And there is more than 10 articles for it
+Then I can see 10 articles are found
+When I click the link
+Then I can browser the kb web site with the key word in search bar and results already found
+
+Given there is error during migration
+When I search for solution
+Then the key word must be appropriate
+And the result is acceptable
+
+Given there is error during analysis
+When I search for solution
+Then the key word must be appropriate
+And the result is acceptable
+]!

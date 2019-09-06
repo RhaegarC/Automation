@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestEmbeddedView-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

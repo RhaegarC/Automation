@@ -1,0 +1,9 @@
+-!|script|Remote|${NMSP}|
+|Source|@{Value='AdditionalAuthors';Alias='{overridedocumentwriters}';ReturnType='String';Option='Multi'}|
+|Source|@{Value='AdditionalReaders';Alias='{overridedocumentreaders}';ReturnType='String';Option='Multi'}|
+|Set|TransferJob/SecurityMapping|Attributes|@{Enabled='true'}|in|${JOBFILE}|
+|Set|TransferJob/SecurityMapping/AccessLevelMappings/AccessLevelMapping[@NotesAccessLevel='Author']|Attributes|@{SharePointPermissionLevel='Contribute';SharePointGroup='{Members}'}|in|${JOBFILE}|
+|Remove|TransferJob/SecurityMapping/MapACLUsers|from|${JOBFILE}|
+|Remove|TransferJob/SecurityMapping/MapACLGroups|from|${JOBFILE}|
+|Add|TransferJob/SecurityMapping/MapACLRoles/MapACLRoles|InnerText|true|to|${JOBFILE}|
+|Add|TransferJob/SecurityMapping/MapDocumentLevelSecurity|InnerText|true|to|${JOBFILE}|

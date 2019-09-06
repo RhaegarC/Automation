@@ -1,0 +1,7 @@
+-!|script|Remote|${WEB_SCRAPER}|
+|ParseWordDoc|${RUNNING_PAGE_NAME}|in|${TARGETFOLDER}|
+
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:instrText") !-|-! ${WORDPROPERTYSELECT}|
+|${WORDPROPERTY}|
+|=~/FirstDoc.docx/|
+

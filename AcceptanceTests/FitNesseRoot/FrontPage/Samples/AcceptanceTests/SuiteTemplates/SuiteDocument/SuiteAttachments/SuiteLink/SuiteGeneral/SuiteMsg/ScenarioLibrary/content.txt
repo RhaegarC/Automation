@@ -1,0 +1,3 @@
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.HtmlFunctions
+!include -c .NmsP.AcceptanceTests.IncludePages.SelectorsLibrary.MsgScenarios
+

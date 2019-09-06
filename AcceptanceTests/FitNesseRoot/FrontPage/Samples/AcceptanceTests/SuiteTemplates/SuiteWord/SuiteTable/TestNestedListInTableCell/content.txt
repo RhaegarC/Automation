@@ -1,0 +1,13 @@
+!* We have one table cell
+!|script|Remote|${WEB_SCRAPER}|
+|eval|$tc = $document.GetElementsByTagName("w:tc")|
+|check|eval|$tc.Count|1|
+*!
+!* We have to list items inside the table cell
+!|Query: Remote|${WEB_SCRAPER}|$tc.GetElementsByTagName("w:p")!-|-! WordListItemElement $numbering | 
+|text|type|
+|B1|decimal|
+|B2|bullet|
+*!
+
+#!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | select '#text', @{N='parent';E={$_.parentNode.parentNode.parentNode}} -!|

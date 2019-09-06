@@ -1,0 +1,25 @@
+!* Siteid for ${SITE_URL}
+!|script|Remote|${SHAREPOINT}|
+|$siteid=|eval|(Get-SPSite ${SITE_URL}).id|
+*!
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${WEBAPP_URL}:${CAPORT}${ADMIN}NMSPServicesConfig.aspx?siteid=$siteid|
+!* Title
+!|script|Remote|${WEB_SCRAPER}|
+|check|eval|$page.ParsedHtml.title|${NMSP_Product_Name} Services Configuration|
+*!
+!* Breadcrumb
+!|Subset Query: Remote|${WEB_SCRAPER}|$page.ParsedHtml.${SELECTOR_BREADCRUMB} !-|-! % {$_.innerText.trim()}|
+|Value|
+|${NMSP_Company_Name} ${NMSP_Product_Name} Services Configuration|
+*!
+!* Description
+!|Query: Remote|${WEB_SCRAPER}|$page.ParsedHtml.${SELECTOR_DESCRIPTION} !-|-! select innerText|
+|innerText|
+|=~/.*Use the settings on this page to configure ${NMSP_Company_Name} ${NMSP_Product_Name} Services./|
+*!
+!* Import Services enable/disable
+!|Subset Query: Remote|${WEB_SCRAPER}|!-$page.ParsedHtml.getElementsByTagName('input') | select name, value, checked-!|
+|name|value|checked|
+|=~/chkImportService/|on|${IS_ENABLED}|
+*!

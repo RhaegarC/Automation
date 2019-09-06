@@ -1,0 +1,37 @@
+!contents -R2 -g -p -f -h
+!define ROOT_FOLDER_NAME (Options)
+
+!1 user story
+
+As an administration,
+I can view the time period of form used for each Notes database,
+So that I can decide which database to migrate.
+
+!1 scenarios
+
+|comment:check the result by time period. Test: [SuiteDocTimePeriod.TestAnalyzeDocuments]|
+|Given: number of documents created 30 days ago|And: 31|And: 60|And: 61|And: 90|And: 91|And: 120|And: 121|And: 365|And: 366|When: I scan the database|Then: the value under 30 day count|And: 30 day size|And: 60(count)|And: 60 (size)|And: 90(count)|And: 90 (size)|And: 120(count)|And: 120 (size)|And: 365(count)|And: 365 (size)|And: Total(count)|And: Total (size)|
+|1|0|0|1|0|0|0|1|0|0| |1|as summed|1|as summed|2|as summed|2|as summed|3|as summed|3|as summed|
+|0|1|0|0|0|1|0|0|0|1| |0|as summed|1|as summed|1|as summed|2|as summed|2|as summed|3|as summed|
+|0|0|1|0|0|0|1|0|0|0| |0|as summed|1|as summed|1|as summed|2|as summed|2|as summed|2|as summed|
+|0|0|0|0|1|0|0|0|1|0| |0|as summed|0|as summed|1|as summed|1|as summed|2|as summed|2|as summed|
+|0|0|0|0|0|0|0|0|0|0| |0|as summed|0|as summed|0|as summed|0|as summed|0|as summed|0|as summed|
+
+![ check result after a second scan
+Given there are documents created using a form
+When I scan the form for detailed info by time period
+And I click "document scan"
+And I scan the detailed info again
+Then I can see the values by time period
+
+Given there is repository database created in RTM 6.4
+When I install current version
+Then I can view the database scan details
+And I can scan the database and view the doc by time period
+
+Given there is repository database created in Current Version
+When I install RTM 6.4
+Then I can view the database scan details
+]!
+
+

@@ -1,0 +1,17 @@
+!|script|Remote|${SHAREPOINT}:38|
+|eval|Add-PSSnapin Microsoft.SharePoint.PowerShell -erroraction 'silentlycontinue'|
+|eval|$web = Get-SpWeb ${SITE_URL}|
+|show|eval|Get-SPUser -Web $web|
+|eval|Remove-SPUser -Identity "i:0#.w!-|-!VELASKEC\userkonstantin" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "VELASKEC\userkonstantin" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "VELASKEC\uservladimir" -Web $web -Confirm:$False|
+|eval|Remove-SPUser -Identity "i:0#.w!-|-!VELASKEC\uservladimir" -Web $web -Confirm:$False|
+|show|eval|Get-SPUser -Web $web|
+
+!|script|Remote|${NMSP}|
+|Add|Options/IdentityMappingOptions/IdentityLookupMode|InnerText|MappingFileLookup|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/NotesIdPassword|InnerText|ukxpoTKrlTn3ZvoGMUBv+w==|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+|Add|Options/IdentityMappingOptions/MappingFile/Path|InnerText|C:\ProgramData\Quest\Migrator for Notes to SharePoint\UserMappings.xml|to|C:\ProgramData\${NMSP_AppData_Path}\Options.config|
+
+!contents -R2 -g -p -f -h

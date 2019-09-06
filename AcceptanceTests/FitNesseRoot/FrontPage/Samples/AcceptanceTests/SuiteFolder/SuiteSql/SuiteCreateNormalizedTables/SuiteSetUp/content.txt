@@ -1,0 +1,30 @@
+!contents -R2 -g -p -f -h
+
+!define NormalizedTables (!-<NormalizedTables><TableDefinition><TableName>AttachmentsTable</TableName><TableType>OneToMany</TableType></TableDefinition><TableDefinition><TableName>LookupFrom</TableName><TableType>Lookup</TableType></TableDefinition></NormalizedTables>-!)
+
+!define AutoCreateFields (!-<Field ColumnName='UNID' Type='VarChar' TableName='tbl_vw_SECTION_blank_MAIL' /><Field ColumnName='PKey' Type='Integer' TableName='tbl_vw_SECTION_blank_MAIL' IsPrimaryKey='true' IsIdentityColumn='true' /><Field ColumnName='AttachPKey' Type='Integer' TableName='AttachmentsTable' IsPrimaryKey='true' IsIdentityColumn='true' /><Field ColumnName='attachment' Type='VarChar' TableName='AttachmentsTable' /><Field ColumnName='attachid' Type='Integer' TableName='AttachmentsTable' IsGatingField='true' LinkToPrimary='true' /><Field ColumnName='PKey' Type='Integer' TableName='LookupFrom' IsPrimaryKey='true' IsIdentityColumn='true' /><Field ColumnName='Subject' Type='VarChar' TableName='LookupFrom' IsGatingField='true' /><Field ColumnName='LSubject' Type='Integer' TableName='tbl_vw_SECTION_blank_MAIL' LookupTable='LookupFrom' /><AutoCreateTable>true</AutoCreateTable><AutoCreateFields>true</AutoCreateFields>-!)
+
+|script|remote|${NMSP}|
+|loadSqlLib|
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='AttachmentsTable') DROP TABLE [AttachmentsTable]"|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='tbl_vw_SECTION_blank_MAIL') DROP TABLE [tbl_vw_SECTION_blank_MAIL] "|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='LookupFrom') DROP TABLE [LookupFrom]"|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "CREATE TABLE tbl_vw_SECTION_blank_MAIL(ParentUNID varchar(max) NULL,UNID varchar(max) NULL,Form varchar(max) NULL,MAIL_blank_ADDRESS varchar(max) NULL)"|
+|eval|ExecuteNonQuery $con $comStr|
+
+
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",sqlServerEnabled:"true"}|
+
+|script|
+|jobDefinition|!{template:"ViewColumn2SQL",db:"SRSG Tracking03",targetType:"SQL",job:"${JOBFILE}",removeNodes:!-"//NormalizedTables","//Field[@ColumnName='UNID']"-!,addNodes:!-@{path="TransferJob/SqlServerTargetDefinition";-!node="${NormalizedTables}${AutoCreateFields}"!-}-!}|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|

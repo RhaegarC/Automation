@@ -1,0 +1,36 @@
+!define LIST (!-TestRecoverableErrors-!)
+!define MigrationExitCode (-2)
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"Suite Sections",autoCreateFields:"false",autoCreateList:"false",targetFields:"<Field Name='notexist' Type='Text' ></Field>",mapFields:"<Mapping Destination='notexist' !-SourceValue-!='From' ></Mapping>"}|
+
+|script|remote|${NMSP}|
+|eval|Set-Location "!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin-!"|
+|eval|!-
+do {
+ $process = start .\NMSPCMD.EXE "-job -!${JOBFILE}!-" -NoNewWindow -wait -PassThru
+ $process.WaitForExit()
+}
+while($process.ExitCode -eq 1)
+-!|
+|check|eval|$process.ExitCode|-2|
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${REPORT_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Status'; E={$_['Status']} } ,@{ N='Processed Documents'; E={$_['Processed_x0020_Documents']} } ,@{ N='Migrated Items'; E={$_['Migrated_x0020_Items']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Warnings'; E={$_['Warnings']} } , @{ N='Last Error'; E={$_['Last_x0020_Error']} }|
+|Job Name|Status|Processed Documents|Migrated Items|Errors|Warnings|Last Error|
+|${WEB}.${LIST}|Completed|13|0|13|1|=~/Context:Error writing List item/|
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SUMMARY_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Records Read'; E={$_['Records_x0020_Read']} } ,@{ N='Records Written'; E={$_['Records_x0020_Written']} } ,@{ N='Warnings'; E={$_['Warnings']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Run By'; E={$_['Run_x0020_By']} },@{ N='Database'; E={$_['Database']} }   |
+|Job Name|Records Read|Records Written|Warnings|Errors|Run By|Database|
+|SuiteReportToSharePoint.${LIST}|13|0|1|13|Administrator|${APPNAME}.nsf|

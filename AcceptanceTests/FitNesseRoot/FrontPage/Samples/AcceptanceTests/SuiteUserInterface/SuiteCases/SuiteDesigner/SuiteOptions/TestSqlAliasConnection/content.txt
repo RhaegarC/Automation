@@ -1,0 +1,28 @@
+!define ALIASNAME (testalias)
+
+|script|
+|startUiautomation|
+
+|script|remote|${NMSP}|
+|eval|$x86 = "HKLM:\Software\Microsoft\MSSQLServer\Client\ConnectTo"|
+|eval|$x64 = "HKLM:\Software\Wow6432Node\Microsoft\MSSQLServer\Client\ConnectTo"|
+|eval|if((test-path -path $x86) -ne $True){New-Item $x86}|
+|eval|if((test-path -path $x64) -ne $True){New-Item $x64}|
+|eval|$TCPAlias = "DBMSSOCN,${SQLINSTANCE}"|
+|eval|New-ItemProperty -Path $x86 -Name "${ALIASNAME}" -PropertyType String -Value $TCPAlias -Force|
+|eval|New-ItemProperty -Path $x64 -Name "${ALIASNAME}" -PropertyType String -Value $TCPAlias -Force|
+
+!|script|
+|startDesigner|
+|importUilib|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|click "Options"|
+|eval|click "LinkTrackingTab" $subtitutions|
+|eval|checkbox "EnableLinkTracking" "true" $subtitutions|
+|eval|setText "LinkServer" "${ALIASNAME}" $subtitutions|
+|eval|setText "LinkDatabase" "QuestLinkTrackingForUI" $subtitutions|
+|eval|click "TestConnection" $subtitutions|
+|check|eval|getControlName "ResultContent" $subtitutions|Test Connection Passed.|
+
+|script|
+|stopUiautomation|

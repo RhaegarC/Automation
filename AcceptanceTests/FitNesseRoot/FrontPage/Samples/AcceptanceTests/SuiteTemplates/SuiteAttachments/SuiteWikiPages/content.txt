@@ -1,0 +1,4 @@
+!define MIGRATION (DocLib2DocLibWikiPages)
+!define LIST (SuiteWikiPages)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.EditJob)
+!contents -R2 -g -p -f -h

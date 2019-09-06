@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpace-!)
+
+!style_green[Check the word content contains "_Attachments/Space char.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

@@ -1,0 +1,3 @@
+!define DATABASE (!-SuiteHide-!)
+!define LIST (!-SuiteHide-!)
+!contents -R2 -g -p -f -h

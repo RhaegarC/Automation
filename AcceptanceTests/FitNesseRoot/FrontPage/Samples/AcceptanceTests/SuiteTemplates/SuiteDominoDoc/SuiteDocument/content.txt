@@ -1,0 +1,19 @@
+!define MIGRATION (!-DominoDoc2DocLibWordPdf-!)
+!define LIST (!-TestDominoDocWordPdf-!)
+!define APPNAME (!-TestDominoDocWordPdf-!)
+!define FILENAME (!-Basic Document-!)
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate the document of domino.doc to !-SharePoint-!
+So that I can have the content on !-SharePoint-! sites
+
+!1 scenarios
+SuiteDocument.TestBasicMigration
+![
+Given I have a document in domino.doc database
+When I run the migration to SharePoint
+Then I can see the content in the body on SharePoint page
+]!

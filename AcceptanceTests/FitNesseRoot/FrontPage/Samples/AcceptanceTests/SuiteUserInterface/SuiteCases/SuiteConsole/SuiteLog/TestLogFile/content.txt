@@ -1,0 +1,25 @@
+!|script|Remote|${NMSP}:86|
+|eval|$options = [Quest.NSP.Migrator.Options]::Load()|
+|eval|$catalog = new-object Quest.NSP.Migrator.Catalog($options)|
+|eval|$catalog.RefreshIfNeeded()|
+|eval|$task = new-object Quest.NSP.Migrator.DiscoveryTask|
+|eval|$task.Options = $options|
+|eval|$task.Catalog = $catalog|
+|eval|$task.ScanLocations = $options.ScanLocations|
+|eval|$startTime = Get-Date|
+|eval|$task.InitializeTaskRecord($true)|
+|eval|$task.StartInBackground()|
+|eval|$logFile = Get-ChildItem "$env:ProgramData\${NMSP_AppData_Path}\Log Files" !-|-! sort LastWriteTime !-|-! select -last 1|
+|check|eval|($logFile.CreationTime) -ge $startTime|True|
+|eval|!-
+do {
+	sleep 3
+}
+while($task.RunningTaskRecord.Status -in (
+    [Quest.NSP.Migrator.TaskStatus]::Pending,
+    [Quest.NSP.Migrator.TaskStatus]::Running,
+    [Quest.NSP.Migrator.TaskStatus]::RunningWithErrors,
+    [Quest.NSP.Migrator.TaskStatus]::RunningWithWarnings
+    ))
+-!|
+|check|eval|Test-Path $logFile|False|

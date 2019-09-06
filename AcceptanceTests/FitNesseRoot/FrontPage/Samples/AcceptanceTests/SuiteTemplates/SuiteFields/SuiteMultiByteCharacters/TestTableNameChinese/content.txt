@@ -1,0 +1,17 @@
+!define TARGET_PAGE (${LIST_URL}/!-TestTableNameChinese.aspx-!)
+
+|script|
+|getWikiContent|!{url:"${TARGET_PAGE}",tag:"td"}|
+
+!|Query:remote|${NMSP}|!-$elements| select @{N='Label'; E={$_.innerText.Trim()}}-!|
+|Label|
+|中文信息1.1|
+|中文信息1.2|
+|中文信息2.1|
+|中文信息2.2|
+|中文档资料-1.1|
+|中文档资料-1.2|
+|中文档资料-2.1|
+|中文档资料-2.2|
+|中文档资料-1|
+|中文档资料-2|

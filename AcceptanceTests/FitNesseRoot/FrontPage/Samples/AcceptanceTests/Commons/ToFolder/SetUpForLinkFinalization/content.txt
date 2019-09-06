@@ -1,0 +1,4 @@
+|script|
+|setOptions|!{template:"${MODE}.${AUTH}",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTracking",folderLinkTracking:"true",rootFolderLocation:"${FOLDERLTLOCATION}"}|
+|startSqlService|
+|cleanUpDatabase|

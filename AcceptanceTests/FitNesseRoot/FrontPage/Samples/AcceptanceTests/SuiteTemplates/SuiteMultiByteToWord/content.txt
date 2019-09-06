@@ -1,0 +1,11 @@
+!define WEB (SuiteMultiByteToWord)
+!define APPNAME (MultiByteCharacters)
+!define MIGRATION (DocLib2DocLibWordDoc)
+!define VIEW (Suite MultiByteToWord)
+!define LIST (SuiteMultiByteToWord)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.docx)
+#!define TARGETFOLDER (c:\WordDocs\${WEB}\${LIST})
+#!define TARGET (c:\WordDocs\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx)
+!define TARGETFOLDER (${WORD_FOLDER}\${WEB}\${LIST})
+!define TARGET (${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx)
+!contents -R2 -g -p -f -h

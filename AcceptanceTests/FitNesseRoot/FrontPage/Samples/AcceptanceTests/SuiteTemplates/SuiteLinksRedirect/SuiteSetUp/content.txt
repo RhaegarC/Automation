@@ -1,0 +1,4 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include -c <WebServices.IncludePages.EnableLinkTracking
+!include -c <ImportService.IncludePages.EnableLinkTracking
+!include -c .NmSp.AcceptanceTests.IncludePages.ImportService.LoadSharePointApi

@@ -1,0 +1,9 @@
+!define WEB (SuitePdfa)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibPdfDoc)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuitePdfa.EditJob)
+!define TARGETFILENAME (TestMigrationToFolder)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.pdf)
+!define TARGET (${TARGETFOLDER}\${RUNNING_PAGE_NAME}.pdf)
+!contents -R2 -g -p -f -h

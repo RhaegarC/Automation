@@ -1,0 +1,8 @@
+!define MAPFIELDS ("<!-Mapping Destination='MSG.From' SourceValue='author@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.To' SourceValue='TO_A@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.To' SourceValue='TO_B@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.Cc' SourceValue='CC_A@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.Cc' SourceValue='CC_B@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.Bcc' SourceValue='BCC_A@email.net' SourceType='Constant' -!/><!-Mapping Destination='MSG.Bcc' SourceValue='BCC_B@email.net' SourceType='Constant' />-!")
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",mapFields,${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

@@ -1,0 +1,11 @@
+!include -c <AcceptanceTests.SuiteTemplates.SuiteAttachments.SuiteWikiPages.SuiteAlternativeLib.EditJob
+
+!* ''Add source definitions'''
+-!|script|Remote|${NMSP}|
+|Source Column|@{ColumnType="Item"; Value="Item19"}|
+*!
+
+!* ''Mapping'''
+-!|script|Remote|${NMSP}|
+|set|TransferJob/Mapping[@Destination='AltFileName']|Attributes|@{SourceValue='Item19'}|in|${JOBFILE}| 
+*!

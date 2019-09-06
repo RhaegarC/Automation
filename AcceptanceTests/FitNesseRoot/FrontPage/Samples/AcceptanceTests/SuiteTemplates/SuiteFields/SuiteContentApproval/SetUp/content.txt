@@ -1,0 +1,8 @@
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|modifyList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",onQuickLaunch:$true,enableModeration:$true}|
+
+|script|
+|runMigration|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",targetFields:"${TARGETFIELDS}",mapFields:"${MAPFIELDS}"}|

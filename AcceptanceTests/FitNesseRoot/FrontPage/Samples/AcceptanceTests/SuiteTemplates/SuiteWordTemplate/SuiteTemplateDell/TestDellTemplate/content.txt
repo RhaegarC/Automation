@@ -1,0 +1,24 @@
+!* Test document's Body
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!| 
+|text|
+|Basic text|
+*!
+
+!* Test document's Header
+!|Query: Remote|${WEB_SCRAPER}|!-$header.GetElementsByTagName("w:t") | WordTextElement-! |
+|text|
+|Author:!- -!|
+|Title:!- -!|
+|Creation Date:!- -!|
+|Category:!- -!|
+|test|
+|BasicDocumentForTemplate|
+|12/12/2014 6:20:34 PM|
+|Category_2|
+*!
+
+#!*> Verify migration log file
+#!|Query:Remote|${NMSP}|$warning|
+#|context|message|
+#|=~/SharePoint Environment/|=~/SharePoint Environment/ |
+#*!

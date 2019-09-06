@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestTableCellBackgroundImageNameChinese-!)
+
+!style_green[Check the word content contains a table, but the background image of first cell in first row is empty.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

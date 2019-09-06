@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<properties>
+<Edit>true</Edit>
+<Files>true</Files>
+<Help/>
+<Properties>true</Properties>
+<RecentChanges>true</RecentChanges>
+<Refactor>true</Refactor>
+<Search>true</Search>
+<Suites/>
+<SymbolicLinks>
+<ImportMultiTarget>.NmSp.AcceptanceTests.Commons.GlobalSteps.ImportMultiTarget</ImportMultiTarget>
+<LinkFinalization>.NmSp.AcceptanceTests.Commons.WebServices.LinkFinalization</LinkFinalization>
+<QuitSelenium>.NmSp.AcceptanceTests.Commons.ToFolder.QuitSelenium</QuitSelenium>
+<RunMigration>.NmSp.AcceptanceTests.Commons.ToFolder.RunMigration</RunMigration>
+<SetUpForLinkFinalization>.NmSp.AcceptanceTests.Commons.ToFolder.SetUpForLinkFinalization</SetUpForLinkFinalization>
+<SuiteSetUp>.NmSp.AcceptanceTests.Commons.ToFolder.SuiteSetUp</SuiteSetUp>
+<VerifyHtmlDoc>.NmSp.AcceptanceTests.Commons.ToFolder.VerifyHtmlDoc</VerifyHtmlDoc>
+<VerifyMsgDoc>.NmSp.AcceptanceTests.Commons.GlobalSteps.VerifyMsgDoc</VerifyMsgDoc>
+<VerifyPdfDoc>.NmSp.AcceptanceTests.Commons.ToFolder.VerifyPdfDoc</VerifyPdfDoc>
+<VerifyTargetItems>.NmSp.AcceptanceTests.Commons.ToFolder.VerifyTargetItems</VerifyTargetItems>
+</SymbolicLinks>
+<Versions>true</Versions>
+<WhereUsed>true</WhereUsed>
+</properties>

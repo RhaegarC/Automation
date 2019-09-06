@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestRenderImages-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

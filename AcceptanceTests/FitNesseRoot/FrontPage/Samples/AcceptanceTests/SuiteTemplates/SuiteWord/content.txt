@@ -1,0 +1,13 @@
+!define WEB (SuiteWord)
+!define APPNAME (SimpleObjectsLib)
+!define MIGRATION (DocLib2DocLibWordDoc)
+!define EditJob (!include -c <AcceptanceTests.SuiteTemplates.SuiteWord.EditJob)
+!define SOURCE (${LIST_URL}/${RUNNING_PAGE_NAME}.docx)
+!define TARGETFOLDER (c:\TargetFolder\${WEB}\${LIST})
+!define TARGET (${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx)
+
+!* !-DrawAspect-!
+ * '''Icon''' if the Attachment opened in new Windows
+ * '''Content''' if the Attachment opened inside Word Document
+*!
+!contents -R2 -g -p -f -h

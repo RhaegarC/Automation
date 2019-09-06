@@ -1,0 +1,12 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'IMG'|properties|src|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|src|
+|=~/_Attachments/TestImageNameChinese.JPG/|
+
+
+
+
+
+

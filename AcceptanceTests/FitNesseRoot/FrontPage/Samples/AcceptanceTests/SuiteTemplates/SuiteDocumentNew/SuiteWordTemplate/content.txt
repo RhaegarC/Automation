@@ -1,0 +1,6 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define VIEW (!-Suite Word Template-!)
+!define APPNAME (!-SuiteWordTemplate-!)
+!define PAGENAME (!-BasicDocumentForTemplate-!)
+!define SAVE_AS (docx)
+!contents -R2 -g -p -f -h

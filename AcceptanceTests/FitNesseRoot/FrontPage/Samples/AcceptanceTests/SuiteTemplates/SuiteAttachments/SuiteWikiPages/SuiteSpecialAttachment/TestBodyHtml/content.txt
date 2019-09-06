@@ -1,0 +1,8 @@
+''' This test will be failed in build < 6.5.0.1898 '''
+!|script|Remote|${WEB_SCRAPER}|
+|Open|${LIST_URL}/${TEST_DOCUMENT}.aspx|
+|select|'A'|properties|href|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|
+|=~/SuiteSpecialAttachments/SuiteSpecialAttachment/_Attachments/J100E006.doc/|

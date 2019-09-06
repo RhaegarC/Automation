@@ -1,0 +1,7 @@
+!define VIEW (Suite Icon)
+!define LIST (SuiteEmbedded_SuiteIcon)
+!define SAVE_AS (docx)
+!define FORMULA (!-subject='TestOLEIconWithMetafile'-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Value='Spec' Alias='SpecHtml' Option='Html'-! />","<!-Column ColumnType='RichText' Value='Spec' Alias='SpecText' ReturnType='String'-! />","<!-Column ColumnType='RichText' Value='Spec' Alias='SpecMime' Option='Mime'-! />","<!-Column ColumnType='Attachment' Value='Spec' Alias='SpecAttachments' Option='Multi'-! />","<!-Column ColumnType='OleObject' Value='Spec' Alias='SpecEmbeddedObjects' Option='Multi'-! />","<!-Column ColumnType='Image' Value='Spec' Alias='SpecImages' Option='Multi'-! />")
+!define MAPFIELDS ("<Mapping !-Destination='Word.Body' SourceValue='SpecHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Word.Images' SourceValue='SpecImages' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Word.Attachments' SourceValue='SpecAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Word.EmbeddedObjects' SourceValue='SpecEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h

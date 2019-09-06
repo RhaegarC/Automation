@@ -1,0 +1,16 @@
+!*> Close all processes
+!|script|Remote|${NMSP}|
+|eval|!-'nmsp','mmc','FormGenerator' | % {get-process $_} | stop-process-!|
+*!
+!include -c .NmSp.AcceptanceTests.IncludePages.StartServer
+!*> wait for 4 seconds
+|script|
+|eval|sleep 4|
+*!
+!include -c .NmSp.AcceptanceTests.IncludePages.UiAutomation.LoadApi
+!include -c <ImportService.IncludePages.SuiteSetUp
+!* get the list where Nintex form is imported
+
+!|script|Remote|${NMSP}|
+|createList|Tasks|Template|107|
+*!

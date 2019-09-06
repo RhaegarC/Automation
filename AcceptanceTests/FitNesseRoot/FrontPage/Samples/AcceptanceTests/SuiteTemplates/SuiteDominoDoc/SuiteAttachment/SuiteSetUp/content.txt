@@ -1,0 +1,7 @@
+!include <SuiteCases.SuiteDominoDoc.SuiteSetUp
+
+|script|
+|runMigration|!{job:"${DOMINODOCJOBFILE}",template:"${MIGRATION}",sourceType:"DominoDoc",server:"${DOMINODOC_SERVER}",path:"${DOMINODOC_PATH}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|

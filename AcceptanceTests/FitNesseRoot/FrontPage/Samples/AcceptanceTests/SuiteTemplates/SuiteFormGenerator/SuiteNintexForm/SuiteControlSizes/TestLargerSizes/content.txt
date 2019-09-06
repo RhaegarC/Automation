@@ -1,0 +1,39 @@
+!*> generate Nintex Form using sizes larger than default
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|SetText|MinGap|Value|10|
+|SetText|SingleWidth|Value|400|
+|SetText|MultiWidth|Value|400|
+|SetText|MultiHeight|Value|100|
+|SetText|RichWidth|Value|400|
+|SetText|RichHeight|Value|100|
+|SetText|ChoiceWidth|Value|400|
+|SetText|ChoiceHeight|Value|80|
+|SetText|DropdownWidth|Value|400|
+|SetText|YesnoWidth|Value|200|
+|SetText|CellWidth|Value|200|
+|SetText|PeopleWidth|Value|600|
+|SetText|CellHeight|Value|60|
+|Click|Next|
+|Click|Next|
+*!
+
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+
+!|script|remote|${NMSP}|
+|ControlSize|DisplayName[text() = 'MyComputedText']|Height|30|Width|400|
+|ControlSize|DisplayName[text() = 'AllowMultilineTextbox']|Height|100|Width|400|
+|ControlSize|DisplayName[text() = 'RichText']|Height|100|Width|400|
+|ControlSize|DisplayName[text() = 'MyCheckBox']|Height|80|Width|400|
+|ControlSize|DisplayName[text() = 'EditableDialogList']|Height|30|Width|400|
+|ControlSize|DisplayName[text() = 'AuthorBox']|Height|35|Width|600|
+
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|This Form List all type of Fields:|

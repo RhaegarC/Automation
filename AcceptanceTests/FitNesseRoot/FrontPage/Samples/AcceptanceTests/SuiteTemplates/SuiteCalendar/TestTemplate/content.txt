@@ -1,0 +1,25 @@
+!* Set !-SharePoint-! time zone
+!|script|Remote|${SHAREPOINT}:38|
+|set time zone|${TimeZone}|to website|${WEB_URL}|
+*!
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",sourceFields:${SOURCEFIELDS},targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+
+
+!include <SuiteCases.GlobalSteps.RunMigration
+!* Get all list items
+!|script|Remote|${SHAREPOINT}:38|
+|eval|$web = Get-SPWeb ${WEB_URL}|
+|eval|$spList = $web.Lists['${LIST}']|
+*!
+
+!|Query:Remote|${SHAREPOINT}:38| !-$spList.Items | select Title, @{N='StartTime'; E={$_['EventDate'].ToString()}},@{N='EndTime'; E={$_['EndDate'].ToString()}}-!|
+|Title|StartTime|EndTime|
+|Event11/27/2013(Created at Time Zone UTC+13:00)|11/${EVENT_1_START}/2013 12:00:00 AM|11/${EVENT_1_STOP}/2013 11:59:00 PM|
+|Event11/27/2013(Created at Time Zone UTC-05:00)|11/${EVENT_2_START}/2013 12:00:00 AM|11/${EVENT_2_STOP}/2013 11:59:00 PM|
+|Event11/27/2013(Created at Time Zone UTC-12:00)|11/${EVENT_3_START}/2013 12:00:00 AM|11/${EVENT_3_STOP}/2013 11:59:00 PM|
+|Appointment12/03/2013(Created at Time Zone UTC-5:00)|${APPOINTMENT_START}|${APPOINTMENT_STOP}|
+|Invitation12/04/2013(Created at Time Zone UTC-5:00)|${INVITATION_START}|${INVITATION_STOP}|
+|Reminder12/05/2013(Created at Time Zone UTC-5:00)|${REMINDER_START}|${REMINDER_STOP}|
+|Anniversary12/06/2013(Created at Time Zone UTC-5:00)|${ANNIVERSARY_START}|${ANNIVERSARY_STOP}|
+

@@ -1,0 +1,8 @@
+!|script|remote|${NMSP}|
+|NintexFieldExist|Text[text() = 'This is Pass-Through text.']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'ComputedWhenCompose']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'RadioButton']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'ComputedDatetime']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'MyCheckBox']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'TextField']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'AllowMultilineTextbox']|ExpectedValue|True|

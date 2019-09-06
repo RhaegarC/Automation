@@ -1,0 +1,8 @@
+!define PAGENAME (!-TestImportedPicture-!)
+
+!style_green[Check the word content contains text "Text with imported picture";
+Check the word content contains a picture, which is under the text "Text with imported picture";
+Check the word content contains text "Text on right side", which is under the picture;
+Check the word content contains text "Text after picture", which is under the text "Text on right side".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

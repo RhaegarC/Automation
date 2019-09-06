@@ -1,0 +1,11 @@
+'''The zip file will not be zipped. 7z file will be zipped'''
+'''The decision is made by extensions'''
+ * AttachFileZIP.zip - real zip file
+ * !-AttachFile7Z.7z-! - 7z file
+ * !-TextFileWithZipExt.zip-! - simple text file with '''zip''' extension
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|href|innerText|
+|=~/_Attachments/AttachFileZIP.zip/|AttachFileZIP.zip|
+|=~/_Attachments/AttachFile7Z.zip/|AttachFile7Z.7z|
+|=~/_Attachments/TextFileWithZipExt.zip/|TextFileWithZipExt.zip|

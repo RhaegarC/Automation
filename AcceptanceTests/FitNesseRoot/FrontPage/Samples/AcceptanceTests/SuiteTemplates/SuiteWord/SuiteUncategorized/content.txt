@@ -1,0 +1,3 @@
+!define VIEW (Suite Uncategorized)
+!define LIST (SuiteUncategorized)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,8 @@
+'''Check the items'''
+!|Query:Remote|${NMSP}|GetItems ${SITE_URL} ${WEB} ${LIST}|
+|Title|Category|
+|NoCategories|null|
+|TwoCategories|["Canada","US"]|
+|SecondCategory|US|
+|FistCategory|Canada|
+|SpecialCharacters|<US>|

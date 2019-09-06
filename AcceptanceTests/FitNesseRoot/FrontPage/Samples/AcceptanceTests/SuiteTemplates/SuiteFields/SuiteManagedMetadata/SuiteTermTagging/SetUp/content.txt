@@ -1,0 +1,33 @@
+|script|
+|deleteTaxonomyTermSet|!{sp_site:"${SITE_URL}",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+
+|script|
+|deleteTaxonomyTermSet|!{sp_site:"${SITE_URL}",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"SuiteAutoCreateTerm"}|
+
+|script|
+|createTaxonomyTermSet|!{sp_site:"${SITE_URL}",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+
+|script|
+|addSPList|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|addCategoryColumn|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",taggingField:"${TAGGINGFIELD}"}|
+
+|script|
+|addSPListFields|!{web:"${WEB_URL}",list:"${LIST}",fields:"<!-Field Type='TaxonomyFieldType' Name='-!${TERMFIELD}!-' DisplayName='-!${TERMFIELD}!-' -!/>"}|
+
+|script|
+|createTerm|!{sp_site:"${SITE_URL}",term:"EnabledTermWithChild/ChildTerm1",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+|createTerm|!{sp_site:"${SITE_URL}",term:"EnabledTermWithoutChild",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+|createTerm|!{sp_site:"${SITE_URL}",term:"DisabledTermWithChild/ChildTerm2",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+|createTerm|!{sp_site:"${SITE_URL}",term:"DisabledTermWithoutChild",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+|createTerm|!{sp_site:"${SITE_URL}",term:"ParentTerm1/EnabledChildTerm",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+|createTerm|!{sp_site:"${SITE_URL}",term:"ParentTerm1/DisabledChildTerm11",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}"}|
+
+|script|
+|setTermTagging|!{sp_site:"${SITE_URL}",term:"DisabledTermWithChild",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}",isAvailableForTagging:$false}|
+|setTermTagging|!{sp_site:"${SITE_URL}",term:"DisabledTermWithoutChild",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}",isAvailableForTagging:$false}|
+|setTermTagging|!{sp_site:"${SITE_URL}",term:"ParentTerm1/DisabledChildTerm11",groupName:"Site Collection - ${SITE_COLLECTION}",termsetName:"${TAGGINGFIELD}",isAvailableForTagging:$false}|
+
+|script|
+|runMigrationToExistingList|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",targetFields:"${TARGERFIELDS}",mapFields:"${MAPFIELDS}"}|

@@ -1,0 +1,34 @@
+!define MAPFIELDS ("<Mapping !-Destination='Doc.Images' SourceValue='RenderImages' FormatString='{0}'-! />","<Mapping !-Destination='Doc.Attachments' SourceValue='RenderAttachments' FormatString='{0}'-! />")
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render bulleted lists to documents
+So that I view them migrated properly
+
+!1 scenarios
+![
+Given bulleted list in different situations as below:
+1. Normal bulleted list with default tab stops
+2. Normal bulleted list with empty tab stops
+3. Normal bulleted list with custom tab stops
+4. Numbered bulleted list with default tab stops
+5. Numbered bulleted list with empty tab stops
+6. Numbered bulleted list with custom tab stops
+7. Table contains 1.- 6.
+
+When I render the bulleted list and migrate them to Word/Pdf/Custom List/Wiki
+Then I can see the bulleted lists are migrated properly
+]!
+!1 user story
+As an administrator
+I can render table with background image in front of attachments into pdf
+So that I view them migrated properly
+
+!1 scenarios
+![
+Given table with background image in front of attachments were added in source document
+And Render was selected as Source Data Definition
+And mappings "RenderAttachments -> Doc.Attachments", "RenderEmbeddedObjects -> Doc.EmbeddedObjects", "RenderImages -> Doc.Images" were added
+When run a migration
+Then I can see table and attachments are migrated properly
+]!

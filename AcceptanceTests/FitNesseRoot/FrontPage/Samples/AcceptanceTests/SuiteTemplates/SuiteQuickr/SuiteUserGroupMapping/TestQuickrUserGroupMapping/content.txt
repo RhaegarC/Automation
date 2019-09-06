@@ -1,0 +1,11 @@
+!define PAGE_URL (${LIST_URL})
+
+!include <SuiteCases.GlobalSteps.VerifyWebPage
+
+!|Query:remote|${NMSP}:38|$driver.FindElementByClassName("ms-listviewtable").FindElementsByTagName("tr")!-|-! Select -Skip 1 @{N='title';E={$_.FindElementsByTagName("td")[2].text}},@{N='reader';E={$_.FindElementsByTagName("td")[8].text}}|
+|title|reader|
+|Test Group|VELASKEC\adgroup1|
+|TestReader|VELASKEC\userkonstantin|
+|Home||
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

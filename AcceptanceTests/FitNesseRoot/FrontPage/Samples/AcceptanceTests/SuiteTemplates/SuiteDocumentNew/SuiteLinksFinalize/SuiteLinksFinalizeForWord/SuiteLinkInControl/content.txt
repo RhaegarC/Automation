@@ -1,0 +1,5 @@
+!define LIST (!-SuiteLinkInControl-!)
+!define LINKS (7)
+!define DOCUMENTS (6)
+
+!contents -R2 -g -p -f -h

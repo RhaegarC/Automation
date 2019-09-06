@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestEmbeddedObjectAndAttachment-!)
+
+!|script|remote|${NMSP}|
+|MsgDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+!|Query:Remote|${WEB_SCRAPER}|$msgAttachments|
+|Name|
+|object0.xlsx|
+|prepare.txt|

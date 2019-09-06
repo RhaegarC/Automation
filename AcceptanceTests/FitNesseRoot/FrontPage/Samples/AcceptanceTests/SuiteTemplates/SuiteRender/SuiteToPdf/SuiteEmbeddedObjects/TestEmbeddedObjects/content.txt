@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestRenderEmbeddedObjects-!)
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

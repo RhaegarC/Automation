@@ -1,0 +1,38 @@
+|comment: !style_red['''IMPORTANT!''']|
+|Parameter|Mandatory|Remark|Example|
+|PAGENAME|Yes||!-!define PAGENAME (TestAlignedColored)-!|
+|UNIQUE_ENV|No|If there are links, which will result in differences in different environments|!-!define UNIQUE_ENV (true)-!|
+|TARGET_FILE|No|redefine it if you want different standard file names|!-!${TARGETFOLDER}\file1.${SAVE_AS}-!|
+|SCREENSHOT|No||!-!define SCREENSHOT (http://fitnesse.at-nmsp.com/files/nmsp/compareFiles\SuiteCases.SuiteDocument.SuiteAttachments.SuiteIcon\TestAttachmentIconWithMetafile.docx_screenshot.png)-!|
+
+
+!|script|remote|${NMSP}|
+|eval|$targetFile_fullPath="${TARGET_FILE}"|
+|eval|$targetFile=$targetFile_fullPath.split("\")[-1]|
+|eval|$docFolder="undefined"|
+|eval|if("${RUNNING_PAGE_PATH}".indexof("SuiteCases") -gt -1){$docFolder="${RUNNING_PAGE_PATH}".substring("${RUNNING_PAGE_PATH}".indexof("SuiteCases"))}|
+|eval|if("${UNIQUE_ENV}".ToLower() -eq "true"){$docFolder = $docFolder + "_${ENV_NAME}"}|
+|eval|if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder")){New-Item "\\fitnesse.at-nmsp.com\shared\$docFolder" -ItemType Directory}|
+|eval|$message=""|
+|eval|!-if(!(Test-Path "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.pdf")){
+Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile"
+$message="compare file does not exist, check the files in \\fitnesse.at-nmsp.com\shared\$docFolder\ and turn it to $targetFile.standard.docx if it is OK"
+}
+else{
+$result=$null
+$source=(Get-Content "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.standard.pdf") -notmatch "\/Root 2 0 R\/Info 1 0 R\/ID|\/ModDate\(|\/M\(D\:|\<xmp\:ModifyDate\>"
+$target=(Get-Content $targetFile_fullPath) -notmatch "\/Root 2 0 R\/Info 1 0 R\/ID|\/ModDate\(|\/M\(D\:|\<xmp\:ModifyDate\>"
+$result=Compare-Object $source $target
+if($result){
+        $message="Comparing files failed,check the documents in folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"
+        Copy-Item $targetFile_fullPath "\\fitnesse.at-nmsp.com\shared\$docFolder\$targetFile.failed_-!${ENV_NAME}!-.pdf"
+}
+else{
+        $message="Successful"
+}
+}-!|
+|show|eval|"Target Folder: http://fitnesse.at-nmsp.com/files/nmsp/compareFiles/$docFolder"|
+|check|eval|$message|Successful|
+
+!style_blue['''Screen Shot for the document''']
+${SCREENSHOT}

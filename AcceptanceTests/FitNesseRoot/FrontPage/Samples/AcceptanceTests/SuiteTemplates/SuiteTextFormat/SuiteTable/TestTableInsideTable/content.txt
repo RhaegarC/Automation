@@ -1,0 +1,42 @@
+!*> Verify tables
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TABLE'|properties|'parentElement.tagName','Style.textAlign','Style.marginLeft','Style.marginRight'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|Style.textAlign|Style.marginLeft|Style.marginRight|
+|DIV|left|null|auto|
+|TD|left|null|auto|
+|TD|center|auto|auto|
+|TD|right|auto|null|
+|TD|center|auto|auto|
+*!
+
+!*> Verify table cells
+!|script|Remote|${WEB_SCRAPER}|
+|select|'P'|properties|'parentElement.Style.textAlign'|
+
+!|Subset Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|parentElement.Style.textAlign|
+|CELL 1,1 with left aligned table|left|
+|cell (1,1)|left|
+|cell (1,2)|left|
+|cell (2,1)|left|
+|cell (2,2)|left|
+|CELL 1,2 with center aligned table|left|
+|center 1,1|center|
+|center 1,2|center|
+|center 2,1|center|
+|center 2,2|center|
+|CELL 2,1 with right aligned table|left|
+|left 1,1|left|
+|center 1,2|center|
+|right 2,1|right|
+|left 2,2|left|
+|CELL 2,2 with center aligned table|left|
+|right 1,1|right|
+|right 1,2|right|
+|right 2,1|right|
+|right 2,2|right|
+*!
+
+

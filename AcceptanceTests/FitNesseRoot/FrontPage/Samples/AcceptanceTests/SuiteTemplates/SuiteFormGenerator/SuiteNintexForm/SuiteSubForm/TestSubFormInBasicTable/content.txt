@@ -1,0 +1,7 @@
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|Account name|
+
+!|script|remote|${NMSP}|
+|NintexFieldExist|DisplayName[text() = 'DisplayName']|ExpectedValue|True|
+|eval|$controlId=$node.UniqueId|
+|CheckControlInTable|SubForm3(subform inside table):|CellIndex|4|ControlId|$controlId|ControlExist|True|

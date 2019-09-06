@@ -1,0 +1,14 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|innerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|innerText|
+|First Paragraph|
+|=~/(?m)Second Paragraph\r\n0{4092}4096.{28660}4096x8=32768/|
+|Third Paragraph|
+|Fourth Paragraph|
+
+!* ''<BR>''s description
+!define NUMBER_OF_BR (1)
+  * New line after "Second Paragraph"
+*!

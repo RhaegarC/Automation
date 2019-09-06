@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestFileNameWithSpecChars-!)
+!define UNIQUE_ENV (true)
+
+''' We are replacing '# { } % ~ &'characters by '_' in an attachment's name while migrating it to !-SharePoint-!.
+''' The problem is that we didn't change an attachment name and url in a document which is referencing to it. 
+
+!style_green[Check the pdf content contains "_Attachments/Special______'chars.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

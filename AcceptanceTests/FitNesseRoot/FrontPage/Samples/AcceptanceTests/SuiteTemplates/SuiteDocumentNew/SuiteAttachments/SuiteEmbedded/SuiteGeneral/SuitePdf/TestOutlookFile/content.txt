@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestOutlookFile-!)
+
+!style_green[Check the pdf embedded files contains "Outlook.msg".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

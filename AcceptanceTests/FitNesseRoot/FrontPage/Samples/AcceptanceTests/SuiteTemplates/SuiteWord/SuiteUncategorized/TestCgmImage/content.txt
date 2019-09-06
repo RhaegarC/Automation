@@ -1,0 +1,8 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | WordTextElement-!|
+|text|
+|Case 2186595|
+|End of case|
+
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:instrText") | ? {$_.GetAttribute("xml:space") -ne "preserve"} | WordHyperLinkElement -!|
+|href|
+|=~/http/|

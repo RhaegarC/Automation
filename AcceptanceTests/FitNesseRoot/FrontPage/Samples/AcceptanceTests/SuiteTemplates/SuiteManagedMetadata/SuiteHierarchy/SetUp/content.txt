@@ -1,0 +1,25 @@
+!include -c <SuiteManagedMetadata.SetUp
+
+!include -c <SharePoint2010New.IncludePages.CreateTerm
+!include -c <SharePoint2013New.IncludePages.CreateTerm
+!include -c <SharePoint2016.IncludePages.CreateTerm
+!include -c <SharePoint2019.IncludePages.CreateTerm
+!include -c <SharePointOnline.IncludePages.CreateTerm
+
+!include -c <SharePoint2010New.IncludePages.SetTermTagging
+!include -c <SharePoint2013New.IncludePages.SetTermTagging
+!include -c <SharePoint2016.IncludePages.SetTermTagging
+!include -c <SharePoint2019.IncludePages.SetTermTagging
+!include -c <SharePointOnline.IncludePages.SetTermTagging
+
+!* Add terms
+!|script|Remote|${TAXONOMY}|
+|CreateTerm|DisabledChildTerm/DisabledChildTerm_Level2|
+|CreateTerm|DisabledParentTerm/DisabledParentTerm_Level2|
+|SetTermTagging|DisabledParentTerm|Value|$false|
+|SetTermTagging|DisabledChildTerm/DisabledChildTerm_Level2|Value|$false|
+*!
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",targetFields:${TARGETFIELDS},mapFields:${MAPFIELDS}}|
+!include <SuiteCases.GlobalSteps.RunMigrationToExistingTarget

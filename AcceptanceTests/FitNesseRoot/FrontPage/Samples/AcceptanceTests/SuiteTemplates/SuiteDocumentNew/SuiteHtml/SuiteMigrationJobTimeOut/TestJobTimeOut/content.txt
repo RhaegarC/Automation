@@ -1,0 +1,10 @@
+!|script|Remote|${NMSP}|
+|show|eval|(Get-ChildItem '$LogFolder' !-|-! select -last 1).Name|
+|eval|$log = Get-ChildItem '$LogFolder' !-|-! select -last 1 !-|-! Get-Content|
+|eval|if($log[-1] -ne '</log>'){$global:log += '</log>'}|
+|eval|$info = ([xml]$log).Log.entry !-|-! ? severity -eq 'Informational'|
+
+!|Subset Query:Remote|${NMSP}|$info|
+|context|message|
+|Stopped|Migration aborted due to error or timeout|
+

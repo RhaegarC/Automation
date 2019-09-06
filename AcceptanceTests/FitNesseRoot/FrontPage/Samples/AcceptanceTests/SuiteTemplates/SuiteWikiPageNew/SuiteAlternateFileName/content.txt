@@ -1,0 +1,3 @@
+!define LIST (!-SuiteAlternateFileName-!)
+!define DATABASE (!-SuiteImages-!)
+!contents -R2 -g -p -f -h

@@ -1,0 +1,57 @@
+|script|
+|startConsole|
+
+|script|remote|${NMSP}:36|
+|eval|!-
+if(Test-Path "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions.config"){
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions.config"
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_UserOptions.config"
+    Remove-Item "C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_RemoteSpSites.config"
+}
+-!|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|displayContextMenu "OptionOK" $subtitutions|
+|eval|clickMenu "OptionSaveAs" $subtitutions|
+|eval|setText "OptionsName" "NewOptions"|
+|eval|click "SaveAsOK"|
+|eval|click "NotesConnectionYes"|
+
+|script|remote|${NMSP}|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions.config"-!|True|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_UserOptions.config"-!|True|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_RemoteSpSites.config"-!|True|
+
+|script|remote|${NMSP}:36|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "LoadOptions"|
+|eval|click "OptionsDropDown"|
+|eval|click "NewOptionsItem"|
+|eval|click "OptionsLoadOK"|
+|eval|click "OptionsLoadOKButton"|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "LoadOptions"|
+|eval|click "OptionsDropDown"|
+|eval|click "DefaultOptionsItem"|
+|eval|click "OptionsLoadOK"|
+|eval|click "OptionsLoadOKButton"|
+
+|script|remote|${NMSP}:36|
+|eval|!-$subtitutions=@{'Migrator for Notes to SharePoint Options'='Migrator for Notes to SharePoint Options - Default'}-!|
+|eval|displayContextMenu "TopNode"|
+|eval|clickMenu "AdvancedOptions"|
+|eval|clickHyperlink "ManageOptionsList" $subtitutions|
+|eval|click "NewOptionsListItem"|
+|eval|click "OptionsDeleteButton"|
+|eval|click "OptionsDeleteYes"|
+|eval|click "OptionsMgrCloseButton"|
+|eval|click "OptionCancel" $subtitutions|
+
+|script|remote|${NMSP}|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions.config"-!|False|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_UserOptions.config"-!|False|
+|check|eval|Test-Path !-"C:\ProgramData\Quest\Migrator for Notes to SharePoint\Saved Options\NewOptions_RemoteSpSites.config"-!|False|
+
+|script|
+|closeMainWindows|

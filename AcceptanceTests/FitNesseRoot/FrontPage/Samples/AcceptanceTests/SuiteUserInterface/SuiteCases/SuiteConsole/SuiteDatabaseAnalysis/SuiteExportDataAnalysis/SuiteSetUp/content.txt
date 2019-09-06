@@ -1,0 +1,7 @@
+!include -c <SuiteDatabaseAnalysis.SuiteSetUp
+
+|script|
+|importUilib|
+|analyzeDatabase|!{databaseElement:!-"SuiteDatabaseAnalysisDb"-!,scanOption:!-"AllScan"-!}|
+|eval|sleep 5|
+|exportAnalyzeResult|!{databaseElement:!-"SuiteDatabaseAnalysisDb"-!}|

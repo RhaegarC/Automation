@@ -1,0 +1,13 @@
+|script|
+|startServer38|
+
+!|script|remote|${NMSP}:38|
+|eval|Add-Type -Path C:\selenium\WebDriver.dll|
+|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+|eval|$driver = New-Object OpenQA.Selenium.IE.InternetExplorerDriver|
+|eval|$driver.Url="${WEBAPP_URL}${SITE}${LAYOUTS}NMSPTestLinkTracking.aspx?SiteCollection=&SqlServer=${SQLINSTANCE}&SqlDatabase=${LinkDatabase}&ConnString=Data Source=${SQLINSTANCE}; Initial Catalog=${LinkDatabase}; UID=velaskec%5Cadministrator; PWD=Qwerty123&ISAddr=${WEBAPP_URL}:8888/ImportSession.svc&ISEnabled=true&ISImpersonation=true"|
+|check|eval|$driver.FindElementById("ctl00_PlaceHolderMain_ctl00_InputFormControl0_lblConnectionStatus").text|A test connection to the Link Tracking database from the Services Configuration page passed.|
+|check|eval|$driver.FindElementById("ctl00_PlaceHolderMain_ctl00_InputFormControl0_lblConnectionStatusIS").text|A test connection to the Link Tracking database from the Import Service passed.|
+|check|eval|$driver.PageSource.Contains("Migrator for Notes to SharePoint")|True|
+
+!include <SuiteCases.GlobalSteps.QuitSelenium

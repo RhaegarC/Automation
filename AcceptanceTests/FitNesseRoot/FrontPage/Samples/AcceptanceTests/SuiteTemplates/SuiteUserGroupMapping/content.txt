@@ -1,0 +1,4 @@
+!define WEB {!-SuiteUserGroup-!}
+!define MIGRATION {!-DocLib2DocLibWikiPages-!}
+!define DATABASE {!-SimpleObjectsLib-!}
+!contents -R2 -g -p -f -h

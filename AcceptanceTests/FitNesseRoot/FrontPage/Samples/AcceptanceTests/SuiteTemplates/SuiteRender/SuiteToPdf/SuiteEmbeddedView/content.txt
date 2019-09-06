@@ -1,0 +1,18 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can migrate embedded view to sharePoint
+So that I can see all the content in sharePoint
+
+!1 scenarios
+![
+Given there is embeded view that is under another view("select a location for the new view" when creating the view)
+When I render the form and migrate to sharepoint
+Then I can see the view is migrated
+
+Given there is embeded view whose name contains special characters (~!@#$%^&*()_+{}:"<>?`-=[]\;',./) in Notes Documents
+When I render the form and migrate to sharepoint
+Then I can see the view is migrated
+]!

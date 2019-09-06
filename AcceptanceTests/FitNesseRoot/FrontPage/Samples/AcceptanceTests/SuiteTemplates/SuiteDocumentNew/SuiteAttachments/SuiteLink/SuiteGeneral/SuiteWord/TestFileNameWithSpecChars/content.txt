@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpecChars-!)
+
+!style_green[Check the word content contains "_Attachments/Special______'chars.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

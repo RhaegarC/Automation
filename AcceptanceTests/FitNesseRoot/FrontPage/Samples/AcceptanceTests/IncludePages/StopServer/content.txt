@@ -1,0 +1,2 @@
+!|script|Remote|${NMSP}|
+|eval|$server.Kill()|

@@ -1,0 +1,7 @@
+|script|
+|download|!{url:"${LIST_URL}/_Attachments/AttachRTF.rtf",file:"${TARGETFOLDER}\_Attachments\AttachRTF.rtf"}|
+|check|eval|$exist|False|
+|download|!{url:"${LIST_URL}/_Attachments/AttachEXE.exe",file:"${TARGETFOLDER}\_Attachments\AttachEXE.exe"}|
+|check|eval|$exist|False|
+|download|!{url:"${LIST_URL}/_Attachments/Attach1MB.log",file:"${TARGETFOLDER}\_Attachments\Attach1MB.log"}|
+|check|eval|$exist|True|

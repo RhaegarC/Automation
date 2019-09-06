@@ -1,0 +1,4 @@
+!include -c <AcceptanceTests.SuiteTemplates.SuitePdf.EditJob
+
+!|Script|Remote|${NMSP}|
+|set|TransferJob/${TARGET_DEFINITION}/Field[@Name = 'Doc']|Attribute|SaveAs|Value|PdfADocument|in|${JOBFILE}|

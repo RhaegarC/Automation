@@ -1,0 +1,29 @@
+!|scenario|SetTermTagging|term|Value|value|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$ctx.Credentials = $AdminCred |
+|eval|$termGroup = "@term".Split("/")|
+|eval|$session = [Microsoft.SharePoint.Client.Taxonomy.TaxonomySession]::GetTaxonomySession($ctx)|
+|eval|$ctx.Load($session)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termGroup = "@term".Split("/")|
+|eval|$termstores = $session.TermStores|
+|eval|$ctx.Load($termstores)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$termstore = $termstores[0]|
+|eval|$group = $termstore.Groups.GetByName('Site Collection - ${SITE_COLLECTION}')|
+|eval|$termset = $group.TermSets.GetByName('${TAGGINGFIELD}')|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+$parent = $parent.terms.GetByName($t)
+$ctx.Load($parent)
+$ctx.ExecuteQuery()
+}
+-!|
+|eval|$parent.IsAvailableForTagging = @value|
+|eval|$termstore.CommitAll()|
+|eval|$ctx.Load($termset)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$ctx.Dispose()|

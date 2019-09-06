@@ -1,0 +1,8 @@
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordHybridListItems $numbering | 
+|text|type|
+|First number|decimal|
+|Second number|decimal|
+|First Number again|decimal|
+|Second Number again|decimal|
+|First bullet|bullet|
+|Second bullet|bullet|

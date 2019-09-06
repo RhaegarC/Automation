@@ -1,0 +1,21 @@
+!define DATABASE (!-SimpleObjectsLib-!)
+!define LIST (!-SuiteLinksCustomList-!)
+!define MIGRATION (!-BasicList-!)
+!define SOURCEFIELDS ("<!-Column ColumnType='RichText' Value='Body' Alias='BodyHtml' Option='Html'-! />","<!-Column ColumnType='Attachment' Value='Body' Alias='BodyAttachments' Option='Multi'-! />","<!-Column ColumnType='Image' Value='Body' Alias='BodyImages'  Option='Multi'-! />","<!-Column ColumnType='OleObject' Value='Body' Alias='BodyEmbeddedObjects' Option='Multi'-! />")
+!define TARGETFIELDS ("<!-Field AddToViews='DefaultView' Name='Content' Type='Note'-! />","<!-Field AlternateFolder='_attachments' Name='Attachments' Type='Attachments' AllowMultiple='true'-! />")
+!define MAPFIELDS ("<Mapping !-Destination='Content' SourceValue='BodyHtml' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyAttachments' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyImages' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />","<Mapping !-Destination='Attachments' SourceValue='BodyEmbeddedObjects' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can migrate doc links to !-SharePoint-! with "Convert to native notes:// URLs (plain text)" selected 
+So that I can view these doc links were migrated as plain text in !-SharePoint-!
+
+!1 scenarios
+![
+Given DocLink handling: "Convert to native notes:// URLs (plain text)" was selected in Advanced tab of Designer
+And "Process internal HTTP links as DocLinks" was enabled/disabled
+And Custom List was selected as Target Data Definition
+When I run a migration
+Then I can view these doc links were migrated as plain text in SharePoint
+]!

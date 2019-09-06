@@ -1,0 +1,10 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",sourceType:"Quickr",server:"${QRSERVER}",place:"${PLACE}",room:"${ROOM}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${TEMPLATE}",sourceVersions:"all",enableVersioning:"true",duplicateHandle:"CreateNewVersion",formula:"!-@Text(@DocumentUniqueID)='D7A88EEA7AF292B185257FF600226C3E'|@Text(@DocumentUniqueID)='995E432812243A168525828F00242CD1'-!"}|
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|runJob|!{job:"${JOBFILE}"}|

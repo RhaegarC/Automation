@@ -1,0 +1,7 @@
+!define COUNT (0)
+!define LIST (!-TestNotUsingSharedFolder-!)
+
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",sharedFolderForDataTransferEnabled:"false"}|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",formula:"Subject!='TestVersionConflictError'"}|
+!include <SuiteCases.GlobalSteps.RunMigration

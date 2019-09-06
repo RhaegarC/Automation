@@ -1,0 +1,29 @@
+!contents -R2 -g -p -f -h
+
+!1 user story
+
+As an administrator
+I can view the contact information
+So that I can get help from NMSP support of NMSP Console
+
+!1 scenarios
+![
+Given "About" box of NMSP Console is activated
+When I click "Contact"
+Then I can see the instruction text on the box
+And I can see the button "Technical Support"
+And I can see the button "General Inquiries"
+And I can see the telephone number for support: 1(949)754-8000
+
+Given "Contact" tab is chosen
+When I click "Technical Support"
+Then I navigate to the support page of Quest Software Web Site
+
+Given "Contact" tab is chosen
+When I click "General Inquiries"
+Then I navigate to the expanded contact page on quest.com
+
+Given "Contact" tab is chosen
+When I click the phone number
+Then I navigate to the address: tel:19497548000
+]!

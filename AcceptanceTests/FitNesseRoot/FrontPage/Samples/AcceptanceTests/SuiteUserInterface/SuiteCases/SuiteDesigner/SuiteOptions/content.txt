@@ -1,0 +1,12 @@
+!* Custom Paths
+!define ROOT_FOLDER_NAME (Options)
+!define PARENT_PATH (C:\${ROOT_FOLDER_NAME}\)
+!define EXIST_JOB_FILE_PATH_NAME (Job Files)
+!define EXIST_DATA_DEFINITION_PATH_NAME (Data Definitions)
+!define EXIST_LOG_FILE_PATH_NAME (Log Files)
+*!
+!* Test Job
+!define GROUP (Calendar)
+!define LIST (Calendar)
+*!
+!contents -R2 -g -p -f -h

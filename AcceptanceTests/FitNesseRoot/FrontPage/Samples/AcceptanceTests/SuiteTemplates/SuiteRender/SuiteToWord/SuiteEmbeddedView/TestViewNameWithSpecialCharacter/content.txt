@@ -1,0 +1,3 @@
+!define PAGENAME (!-TestViewNameWithSpecialCharacter-!)
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

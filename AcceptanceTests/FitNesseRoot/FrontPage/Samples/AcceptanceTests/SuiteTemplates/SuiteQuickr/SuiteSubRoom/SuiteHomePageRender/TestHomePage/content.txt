@@ -1,0 +1,5 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/Home.aspx"}|
+
+!|script|Remote|${NMSP}|
+|check|eval|$main.innerHtml.contains("td&nbsp;&nbsp;")|False|

@@ -1,0 +1,11 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$site = Get-SPSite '${SITE_URL}'|
+|eval|$session = new-object Microsoft.SharePoint.Taxonomy.TaxonomySession($site)|
+|eval|$termstore = $session.TermStores[0]|
+|eval|$termstore.FlushCache()|
+|eval|$groups = $termstore.Groups|
+|eval|try{$group = $groups['${TAGGINGFIELD}']}catch{}|
+|eval|try{$termset = $group.TermSets['${TAGGINGFIELD}']}catch{}|
+|eval|try{$termset.Delete()}catch{}|
+|eval|try{$group.Delete()}catch{}|
+|eval|$termstore.CommitAll()|

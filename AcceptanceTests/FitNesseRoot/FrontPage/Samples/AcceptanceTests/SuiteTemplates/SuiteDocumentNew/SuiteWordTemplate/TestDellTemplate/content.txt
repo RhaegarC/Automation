@@ -1,0 +1,14 @@
+!define MIGRATION (!-DocLib2DocLibWordDocTemplateDell-!)
+!define LIST (!-TestDellTemplate-!)
+!define MAPFIELDS ("<!-Mapping Destination='Doc.Author' SourceValue='test' SourceType='Constant'-! />","<!-Mapping Destination='Doc.NotesTitle' SourceValue='Subject' FormatString='{0}'-! />","<!-Mapping Destination='Doc.CreationDate' SourceValue='{DocCreated}' FormatString='{0}'-! />","<!-Mapping Destination='Doc.NotesCategory' SourceValue='Category' FormatString='{0}'-! />")
+!define TARGET_FILE (${TARGETFOLDER}\${PAGENAME}_DellTemplate.${SAVE_AS})
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{job:"${JOBFILE}",multiEnv:"target",db:"${DATABASE}",formula:"@Contains(subject;'BasicDocumentForTemplate')",mapFields:${MAPFIELDS}}|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+
+

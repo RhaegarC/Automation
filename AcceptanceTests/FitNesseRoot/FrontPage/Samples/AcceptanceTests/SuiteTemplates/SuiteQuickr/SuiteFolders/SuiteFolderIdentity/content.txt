@@ -1,0 +1,3 @@
+!define TEMPLATE (!-QRFolderToSPFolder-!)
+!define LIST (!-TestFolderIdentity-!)
+!contents -R2 -g -p -f -h

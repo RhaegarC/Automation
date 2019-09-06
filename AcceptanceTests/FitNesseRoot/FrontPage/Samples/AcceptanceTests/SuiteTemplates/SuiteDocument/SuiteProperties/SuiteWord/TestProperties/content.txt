@@ -1,0 +1,26 @@
+!* Verify properties
+!|Query:Remote|${WEB_SCRAPER}|!-$doc.BuiltInDocumentProperties.GetEnumerator() | select name, value-!|
+|Name|Value|  
+|Author|Konstantin Vlasenko|
+|Category|Kanata, Zhuhai|
+|Characters|97|
+|CharactersWithSpaces|114|
+|Company||
+|ContentStatus|Submitted|
+|CreateTime|9/15/2014 8:33:08 PM|
+|HeadingPairs|["Title",1]|
+|LastSavedTime|9/15/2014 8:34:25 PM|
+|Lines|1|
+|NameOfApplication|Microsoft Office Word|
+|Pages|1|
+|Paragraphs|2|
+|RevisionNumber|1|
+|Security|0|
+|Subject|TestProperties|
+|Template|Normal.dot|
+|Title|TestProperties|
+|TitlesOfParts||
+|TotalEditingTime|0|
+|Version|786432|
+|Words|19|
+*!

@@ -1,0 +1,27 @@
+!define PAGENAME (!-TestProperties-!)
+
+!|script|remote|${NMSP}|
+|PDFDocument|${PAGENAME}|in|${TARGETFOLDER}|
+
+
+!* Verify standard properties
+!|Query:Remote|${WEB_SCRAPER}|!-$pdf.info.GetEnumerator() | ? {[ Aspose.Pdf.DocumentInfo]::IsPredefinedKey($_.Key) -eq $true} | select key, value-!|
+|Key|Value|  
+|Author      |Konstantin Vlasenko|
+|CreationDate|=~/20140915/|
+|ModDate     |=~/20140915/|
+|Title       |${PAGE_NAME}|
+|Subject     |${PAGE_NAME}|
+|Creator     |Aspose Ltd.|
+|Producer    |=~/Aspose.Pdf/|
+*!   
+!* Verify custom properties
+!|SubSet Query:Remote|${WEB_SCRAPER}|!-$pdf.info.GetEnumerator() | ? {[ Aspose.Pdf.DocumentInfo]::IsPredefinedKey($_.Key) -eq $false} | select key, value-!|
+|Key|Value|  
+|Status      |Submitted|
+|ReviewType  |1|
+|StatusCode  |1|
+|Category    |Kanata, Zhuhai|
+|From        |CN=Konstantin Vlasenko/O=Konstantin Vlasenko|
+|ReviewTime  |0|
+*!

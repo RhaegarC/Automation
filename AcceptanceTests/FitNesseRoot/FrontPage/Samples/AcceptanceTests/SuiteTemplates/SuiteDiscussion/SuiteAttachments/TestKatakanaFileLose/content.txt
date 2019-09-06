@@ -1,0 +1,13 @@
+|script|Remote|${NMSP}|
+|show|eval|"${URL}"+$items[0].Id|
+|eval|$attachFolder=$ctx.Site.OpenWeb("${WEB}").!-GetFolderByServerRelativeUrl-!("${URL}"+$items[0].Id)|
+|eval|$ctx.Load($attachFolder)|
+|eval|$ctx.ExecuteQuery()|
+|eval|$files= $attachFolder.Files|
+|eval|$ctx.Load($files)|
+|eval|$ctx.ExecuteQuery()|
+
+!|Subset Query:Remote|${NMSP}|$files !-|-! select @{ N='Name'; E={$_.Name} }|
+|Name|
+|image0.GIF|
+|【完了】(MSM4000_MSP4060)便カレンダー作成バッチ.doc|

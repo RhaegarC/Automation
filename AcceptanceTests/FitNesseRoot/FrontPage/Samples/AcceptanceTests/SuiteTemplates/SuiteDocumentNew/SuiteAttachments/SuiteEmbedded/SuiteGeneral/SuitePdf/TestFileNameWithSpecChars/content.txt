@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestFileNameWithSpecChars-!)
+
+!style_green[Check the pdf embedded files contains "Special#{}%~&'chars.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyPdfDoc

@@ -1,0 +1,2 @@
+!|script|remote|${NMSP}|
+|CheckTableCellStyle|Basic Table|CellIndex|0|BorderColor|#0000FF|BackgroundColor|#FFFF00|

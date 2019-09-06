@@ -1,0 +1,2 @@
+!define LIST (!-SuiteDominoDocument-!)
+!contents -R2 -g -p -f -h

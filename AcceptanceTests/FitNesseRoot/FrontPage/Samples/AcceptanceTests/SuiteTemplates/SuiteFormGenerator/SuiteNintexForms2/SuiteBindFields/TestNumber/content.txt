@@ -1,0 +1,17 @@
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>121</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>0.23</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>1234</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>0</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>10000000</DIV>/|
+
+|script|remote|${NMSP}|
+|check|eval|$content|=~/<DIV class='ms-rtestate-field'>\$6.00</DIV>/|

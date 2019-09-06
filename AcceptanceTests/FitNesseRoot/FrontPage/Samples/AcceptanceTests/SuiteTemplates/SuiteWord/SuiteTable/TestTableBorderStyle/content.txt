@@ -1,0 +1,18 @@
+'' Git #324''
+!|Query: Remote|${WEB_SCRAPER}|$document.GetElementsByTagName("w:t") !-|-! WordTextElement| 
+|text|borderStyleTop|
+|Table border style: Solid|null|
+|Solid (1,1)|single|
+|Solid (1,2)|single|
+|Solid (2,1)|single|
+|Solid (2,2)|single|
+|Table border style: Ridge|null|
+|Ridge (1,1)|threeDEngrave|
+|Ridge (1,2)|threeDEngrave|
+|Ridge (2,1)|threeDEngrave|
+|Ridge (2,2)|threeDEngrave|
+|Table border style: Groove|null|
+|Groove (1,1)|threeDEmboss|
+|Groove (1,2)|threeDEmboss|
+|Groove (2,1)|threeDEmboss|
+|Groove (2,2)|threeDEmboss|

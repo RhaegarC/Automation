@@ -1,0 +1,25 @@
+!*> Verify 3 list element
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'UL','OL'|properties|'parentElement.tagName','Style.marginLeft','parentElement.className'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|Name|Style.marginLeft|parentElement.tagName|parentElement.className|
+|OL|null|DIV|section|
+|UL|${LIST_NO_INDENT}|LI|null|
+|UL|${LIST_NO_INDENT}|LI|null|
+*!
+!*> Verify 8 list items
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'LI'|properties|'parentElement.tagName'|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|parentElement.tagName|
+|OL|
+|OL|
+|UL|
+|UL|
+|OL|
+|OL|
+|UL|
+|OL|
+*!

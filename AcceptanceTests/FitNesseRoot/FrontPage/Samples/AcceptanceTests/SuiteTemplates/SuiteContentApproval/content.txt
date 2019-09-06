@@ -1,0 +1,14 @@
+!define WEB (!-SuiteContentApproval-!)
+!define LIBRARY_TITLE (!-DocLibraryContentApproval-!)
+!define WEB_SCRAPER (${SHAREPOINT})
+!define VIEW (!-Suite Special-!)
+!define LIST (!-DocLibraryContentApproval-!)
+!define TAXONOMY (${NMSP})
+!define ENABLE_CONTENT_APPROVAL ($true)
+!define APPNAME (!-SuiteAttachments-!)
+!define MIGRATION (!-DocLib2DocLibWordDoc-!)
+!define TARGETFIELDS ("<!-Field Name='Approval Status' Type='ApprovalCode'-! />")
+!define MAPFIELDS ("<!-Mapping Destination='Approval Status' SourceValue='Approved' SourceType='Constant'-! />")
+!contents -R2 -g -p -f -h
+
+

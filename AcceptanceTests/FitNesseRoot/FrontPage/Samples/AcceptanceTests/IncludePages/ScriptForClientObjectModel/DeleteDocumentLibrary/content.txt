@@ -1,0 +1,6 @@
+!|script|Remote|${TAXONOMY}|
+|eval|$ctx = New-Object Microsoft.SharePoint.Client.ClientContext('${SITE_URL}')|
+|eval|$list = $ctx.Site.OpenWeb('${WEB}').Lists.GetByTitle('${LIST}')|
+|eval|$list.DeleteObject()|
+|eval|try{$ctx.ExecuteQuery()}catch{}|
+|eval|$ctx.Dispose()|

@@ -1,0 +1,7 @@
+!define PAGENAME (!-TestFontHighlighter-!)
+
+!style_green[Check the yellow Highlighter text.]
+!style_green[Check the pink Highlighter text.]
+!style_green[Check the blue Highlighter text.]
+
+!include <SuiteCases.GlobalSteps.VerifyHtmlDoc

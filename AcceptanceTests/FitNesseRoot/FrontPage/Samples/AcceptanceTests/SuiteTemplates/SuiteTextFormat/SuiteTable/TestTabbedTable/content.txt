@@ -1,0 +1,32 @@
+# Tabbed Table migration limitation (Steve Walch)
+# We do not support tabbed tables. 
+# Or, more to the point, SharePoint rich text editors do not support them.  If you can think of a better way to present such information in SharePoint, we would love to hear about it.  
+# http://communities.quest.com/thread/23455?tstart=30
+!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|'colSpan'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|colSpan|Text|
+|2|Tab #1!- -!|tab|
+|1|This is all about the first tab|
+|1|second column|
+|2|!- -!|tab|
+|1|This is a tab with no label|
+|1|null|
+|2|Tab #2!- -!|tab|
+|1|This is the second tab.|
+|1|null|
+|2|Tab #3!- -!|tab|
+|1|This is all about the third tab.|
+|1|Some info|
+
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'TR'|limit to|className -eq 'tab'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|
+|Tab #1!- -!|
+|!- -!|
+|Tab #2!- -!|
+|Tab #3!- -!|
+!include -c NoExtraIndentForTable

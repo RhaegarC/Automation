@@ -1,0 +1,29 @@
+!define PAGENAME (!-TestLinkHref-!)
+
+!style_green[Check the word content contains text "!-This is a true Notes DocLink:-!" and an icon which can link to "notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/bc8c78c7239f857385257387000a9ff6"]
+
+!style_green[Check the word content contains text "!-This is also a Notes DocLink; [click here].-!", hotspot link 'click here' can link to "QDemo Document Library"(notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6)]
+
+!style_green[Check the word content contains text "!-This link really points to a Notes page: [click here]-!", hotspot URL 'click here' can link to "http://quest-e52a78ada:8777/site/proposion.nsf/pages/PortalMigrator"]
+
+!style_green[Check the word content contains text "!-This link points to a page outside of our Notes domain: [click here]-!", hotspot URL 'click here' can link to "http://notes2sharepoint.org/default.aspx"]
+
+!style_green[Check the word content contains text "This link does not include a view component:" and an icon which can link to "notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6"]
+
+!style_green[Check the word content contains text "This link points to a section:" and an icon which can link to "notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/99769fe9ae21fa7e85257494004f193a"]
+
+!style_green[Check the word content contains text "This link is a native database / view / doc link from Network Service Requests:" and three icons which can link to "notes:///852576e20073a967", "notes:///852576e20073a967/120c2bedef870e108525686a0051a9dd", "notes:///852576e20073a967/7a07de808078b09885256866005efde6/cc90c94d3d628726852576be0060e1e1"]
+
+!style_green[Check the word content contains text "People who are interested in this might also be interested in this case study on the Proposion web site.", 'this case study' is a hotspot URL which can link to "http://quest-e52a78ada:8777/site/Proposion.nsf/97ACC1A79DF4AA1B85256B61006DF901/313200749DBBBC3B852572E10067121B?OpenDocument"] 
+
+!style_green[Check the word content contains text "Eagle doclink", an icon link to "notes:///852571ba005f1a0b/e7a291052e43215e852567240071e2ad/7bb295581ade934b85257688007066a9", and hotspot link 'another' can link to "notes:///852571ba005f1a0b/0/7bb295581ade934b85257688007066a9"]
+
+!style_green[Check the word content contains text "Eagle notes: link and Notes://eagle/852571BA005F1A0B/E7A291052E43215E852567240071E2AD/7BB295581ADE934B85257688007066A9.", hotspot URL 'link' can link to "Notes://eagle/852571BA005F1A0B/E7A291052E43215E852567240071E2AD/7BB295581ADE934B85257688007066A9"] 
+
+!style_green[Check the word content contains text "Plain ole http link:" and hotspot URL "http://www.quest.com"]
+
+!style_green[Check the word content contains hotspot URL "http://www.quest.com"]
+
+!style_green[Check the word content contains text "Database Link:" and hotspot URL "http://queste52a78ada:8777/QuickPlace/extreme/PageLibrary852572A7000C9D27.nsf?OpenDatabase"]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

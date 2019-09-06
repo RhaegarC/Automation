@@ -1,0 +1,4 @@
+!define LIST (SuiteCaseSensitiveUrl)
+!define APPNAME (LinkTracking)
+!define SITE (/sites/test)
+!contents -R2 -g -p -f -h

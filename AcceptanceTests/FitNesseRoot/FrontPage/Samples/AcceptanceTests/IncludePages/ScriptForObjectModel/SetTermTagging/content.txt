@@ -1,0 +1,15 @@
+!|scenario|SetTermTagging|term|Value|value|
+|eval|$termstore.FlushCache()|
+|eval|$groups = $termstore.Groups|
+|eval|$group = $groups['${TAGGINGFIELD}']|
+|eval|$termset = $group.TermSets['${TAGGINGFIELD}']|
+|show|eval|$termGroup = "@term".Split("/")|
+|show|eval|$parent = $termset|
+|eval|!- foreach ($t in $termGroup)
+{
+$terms = $parent.Terms
+$parent = $terms[$t]
+}
+-!|
+|eval|$parent.IsAvailableForTagging = @value|
+|eval|$termstore.CommitAll()|

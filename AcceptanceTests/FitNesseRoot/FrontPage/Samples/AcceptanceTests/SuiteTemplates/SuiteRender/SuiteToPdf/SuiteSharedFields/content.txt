@@ -1,0 +1,18 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render shared fields to documents
+So that I view them migrated properly
+
+!1 scenarios
+![
+Given shared fields with default values were prepared in Notes
+When I render them to Word/Pdf/Custom List/Wiki
+Then I can see the shared fields are migrated properly
+And values are correct
+
+Given shared fields with modified values were prepared in Notes
+When I render them to Word/Pdf/Custom List/Wiki
+Then I can see the shared fields are migrated properly
+And values are correct
+]!

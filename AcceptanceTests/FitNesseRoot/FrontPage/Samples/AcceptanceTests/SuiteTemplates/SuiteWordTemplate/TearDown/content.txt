@@ -1,0 +1,5 @@
+!|Query: Remote|${WEB_SCRAPER}|!-$document.GetElementsByTagName("w:t") | ? '#text' -like "Evaluation*" | select '#text' -!|
+|#text|
+
+
+

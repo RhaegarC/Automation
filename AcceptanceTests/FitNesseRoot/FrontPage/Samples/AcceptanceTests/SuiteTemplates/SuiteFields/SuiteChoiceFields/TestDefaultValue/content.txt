@@ -1,0 +1,18 @@
+!define LIST {!-TestDefaultValue-!}
+!define DATABASE {!-ChoiceAndLookupFields-!}
+!define MIGRATION {!-DocLib2DocLibPdfDoc-!}
+!define TARGET_FIELD {<!-Field MultipleValues='true' Name='Category' AddToViews='DefaultView' Type='Choice' AddMissingChoices='true' IsRequired='false'-!/>}
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}",targetFields:"${TARGET_FIELD}",mapFields:"<!-Mapping Destination='Category' SourceValue='Category' MultiValueDisposition='Default' Transform='None' FormatString='{0}' -!/>"}|
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+!|Query:Remote|${NMSP}|$items.fieldValues !-|-! select @{N='Title';E={$_['FileLeafRef']}},@{N='Category';E={$_['Category']}}|
+|Title|Category|
+|NoCategories.pdf|null|
+|TwoCategories.pdf|["Canada","US"]|
+|SecondCategory.pdf|US|
+|FistCategory.pdf|Canada|
+|SpecialCharacters.pdf|<US>|

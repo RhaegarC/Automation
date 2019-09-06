@@ -1,0 +1,6 @@
+!include <SuiteCases.GlobalSteps.SuiteSetUp
+
+|script|
+|jobDefinition|!{db:"${DATABASE}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"${VIEW}",formula:"subject='TestAttachFileOutOfBody'",mapFields:${MAPFIELDS},sourceFields:"<!-Column ColumnType='Render' Alias='RenderHtml' Option='Html'-!/>"!-,-!"<!-Column ColumnType='Attachment' Value='$ALL' Alias='RenderAttachments' Option='Multi' -!/>"!-,-!"<!-Column ColumnType='OleObject' Render='true' Alias='RenderEmbeddedObjects' Option='Multi' -!/>"!-,-!"<!-Column ColumnType='Image' Render='true' Alias='RenderImages' Option='Multi' -!/>"}|
+
+!include <SuiteCases.GlobalSteps.RunMigration

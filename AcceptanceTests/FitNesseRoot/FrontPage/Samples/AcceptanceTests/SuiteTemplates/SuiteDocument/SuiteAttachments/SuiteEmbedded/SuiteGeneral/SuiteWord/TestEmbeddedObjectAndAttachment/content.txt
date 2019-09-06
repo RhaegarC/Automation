@@ -1,0 +1,4 @@
+!|Query:Remote|${WEB_SCRAPER}|$docOleObjects|
+|IconCaption|ProgId|OleIcon|
+||Excel.Sheet.12|False|
+|prepare.txt|Package|True|

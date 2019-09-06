@@ -1,0 +1,3 @@
+!define VIEW (Suite Ole)
+!define LIST (SuiteEmbedded_SuiteOle)
+!contents -R2 -g -p -f -h

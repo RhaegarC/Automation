@@ -1,0 +1,4 @@
+!include -c <NmSp.AcceptanceTests.SuiteTemplates.SuiteFields.SuiteSetUp
+
+|script|
+|runMigration|!{job:"${JOBFILE}",db:"${DATABASE}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",template:"${MIGRATION}"}|

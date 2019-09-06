@@ -1,0 +1,9 @@
+!define TARGET_FOLDER (${NOT_EXISTING_FOLDER})
+
+!include -c <AcceptanceTests.IncludePages.ExecuteSystemUnderTest
+
+!|script|Remote|${NMSP}|
+|GetPdfContent|"${TARGETFOLDER}\TestMigrationToFolder.pdf"|
+
+!|script|Remote|${NMSP}|
+|check|eval|$extractedText|Content of testing migration to folder|

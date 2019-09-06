@@ -1,0 +1,11 @@
+!define APPNAME (!-QuickrPdf-!)
+!define PLACE (suitewiki)
+!define TARGET ${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx
+!define LIST (Pdf)
+!define SAVE_AS (pdf)
+!define PAGENAME (!-link Finalization-!)
+!define TEMPLATE (!-QRPageToPdf-!)
+!define LINKS (2)
+!define DOCUMENTS (1)
+
+!contents -R2 -g -p -f -h

@@ -1,0 +1,32 @@
+!define LIST (!-TestUnrecoverableErrors-!)
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",job:"${JOBFILE}",template:"${MIGRATION}",sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",view:"Suite Sections",autoCreateFields:"false",autoCreateList:"false"}|
+
+!|script|Remote|${NMSP}|
+|eval|Set-Location "${NMSP_Install_Directory_Client}\Bin"|
+|show|eval|!-
+do {
+ $process = start .\NMSPCMD.EXE '-job -!${JOBFILE}!-' -wait -PassThru
+ $process.WaitForExit()
+ $process.ExitCode
+}
+while($process.ExitCode -eq 1)-!|
+|check|eval|$process.ExitCode|-3|
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${REPORT_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Status'; E={$_['Status']} } ,@{ N='Processed Documents'; E={$_['Processed_x0020_Documents']} } ,@{ N='Migrated Items'; E={$_['Migrated_x0020_Items']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Warnings'; E={$_['Warnings']} } , @{ N='Last Error'; E={$_['Last_x0020_Error']} }|
+|Job Name|Status|Processed Documents|Migrated Items|Errors|Warnings|Last Error|
+|${WEB}.${LIST}|Stopped|0|0|1|1|=~/does not exist on SharePoint site/|
+
+|script|Remote|${NMSP}|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${SUMMARY_LIST}",caml:"<View><Query><OrderBy><FieldRef Name='Modified' Ascending='false' /></OrderBy></Query></View>"}|
+
+!|Query:Remote|${NMSP}|$items !-|-! select -first 1 !-|-! select @{ N='Job Name'; E={$_['Title']} }, @{ N='Records Read'; E={$_['Records_x0020_Read']} } ,@{ N='Records Written'; E={$_['Records_x0020_Written']} } ,@{ N='Warnings'; E={$_['Warnings']} } , @{ N='Errors'; E={$_['Errors']} }, @{ N='Run By'; E={$_['Run_x0020_By']} },@{ N='Database'; E={$_['Database']} }   |
+|Job Name|Records Read|Records Written|Warnings|Errors|Run By|Database|
+|SuiteReportToSharePoint.${LIST}|0|0|1|1|Administrator|${APPNAME}.nsf|

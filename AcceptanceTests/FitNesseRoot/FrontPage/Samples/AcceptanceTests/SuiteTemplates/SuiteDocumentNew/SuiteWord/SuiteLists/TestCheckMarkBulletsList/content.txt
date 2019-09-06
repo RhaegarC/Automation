@@ -1,0 +1,10 @@
+!define PAGENAME (!-TestCheckMarkBulletsList-!)
+
+!style_green[Check the word content contains a bullet list: "•	First Check Mark" and "•	Second Check Mark" (the font is Arial, black, 9).
+Displays as below:]
+--------------------
+            •   First Check Mark
+            •   Second Check Mark
+--------------------
+!include <SuiteCases.GlobalSteps.VerifyWordDoc
+

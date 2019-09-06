@@ -1,0 +1,9 @@
+!define PAGENAME (!-TestTextFontScription-!)
+
+!style_green[Check the word content contains text "Tnm=A-10":
+'T' is Arial, black, 36;
+'nm' is Arial, black, bold, italic, subscript, 31.5;
+'=A' is Arial, black, 36;
+'-10' is Arial, black, italic, superscript, 31.5.]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

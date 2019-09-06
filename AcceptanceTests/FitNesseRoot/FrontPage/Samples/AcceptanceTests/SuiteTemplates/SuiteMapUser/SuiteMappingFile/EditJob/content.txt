@@ -1,0 +1,5 @@
+!* Migrate documents created by Vladimir Sementchouk only!
+!|script|Remote|${NMSP}|
+|Formula|From="CN=Vladimir Sementchouk/O=Vladimir Sementchouk"|for|${JOBFILE}|
+|MaxRecords|3|job|${JOBFILE}|
+*!

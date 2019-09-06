@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestTermWithAmpersand-!)
+
+!style_green[Check the word content contains text "The term I used was My&TermWithAmpersands&".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

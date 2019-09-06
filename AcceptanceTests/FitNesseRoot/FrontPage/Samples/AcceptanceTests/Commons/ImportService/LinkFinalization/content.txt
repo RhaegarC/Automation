@@ -1,0 +1,53 @@
+!|script|Remote|${NMSP}|
+|eval|!-$p = Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'"
+if($p.GetType().ToString() -eq 'System.Object[]'){
+0..($p.Length - 1)|%{
+    $cl = ($p[$_] | Select-Object CommandLine).CommandLine
+    if(-not($cl.EndsWith('server'))) {$p[$_].Terminate()}
+}}-!|
+|eval|$server37 = start powershell '-NonInteractive -ExecutionPolicy unrestricted -file c:\powerslim\slim.ps1 37 server37' -PassThru|
+|eval|sleep 5|
+
+
+!|script|Remote|${NMSP}:37|
+|eval|Add-Type -Path C:\selenium\WebDriver.dll|
+|eval|Add-Type -Path C:\selenium\WebDriver.Support.dll|
+|eval|!-
+$count = 0
+$driver = $null
+$result = $null
+do
+{try{$driver = New-Object OpenQA.Selenium.IE.InternetExplorerDriver
+$driver.Url="-!${CA}!-/_admin/-!${NMSP_Company_Name}!-/NMSP_LinkFinalizer.aspx?SiteCollection=-!${SITE_URL}!-"
+$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds(30))
+$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementIsVisible( [OpenQA.Selenium.by]::Id("ctl00_PlaceHolderMain_ButtonSection_Buttons_FinalizeButton")))
+($driver.FindElementById("ctl00_PlaceHolderMain_ButtonSection_Buttons_FinalizeButton")).click()
+$wait = New-Object OpenQA.Selenium.Support.UI.WebDriverWait($driver,[System.TimeSpan]::FromSeconds(120))
+$wait.Until([OpenQA.Selenium.Support.UI.ExpectedConditions]::ElementExists([OpenQA.Selenium.By]::Xpath("//span[contains(text(),'Finalization complete.')]")))
+if($driver -ne $null){$result = ($driver.FindElementById("ctl00_PlaceHolderMain_ResultsSection_Results_lblRecords")).text}
+}catch{
+$count++;
+sleep 3;
+continue;
+}
+finally
+{
+if($driver -ne $null){$driver.Close()}
+if($driver -ne $null){$driver.Dispose()}
+if($driver -ne $null){$driver.Quit()}
+$ie = get-process |? { $_.Name -eq 'iexplore' } 
+if($ie.Count -gt 0){0..($ie.Count - 1) |% { $ie[$_].Kill() }}
+}
+break;
+}while($count -lt  5)
+-!|
+|check|eval|$result|Successfully finalized ${LINKS} links in ${DOCUMENTS} documents|
+|eval|sleep 5|
+
+!|script|Remote|${NMSP}|
+|eval|Write-Host "stop server 37"|
+|eval|!-$p = [System.Object[]](Get-WmiObject Win32_Process -Filter "name = 'powershell.exe'")
+0..($p.Length - 1)|%{
+$cl = ($p[$_] | Select-Object CommandLine).CommandLine.Trim()
+if($cl.EndsWith('server37')) {$p[$_].Terminate()}
+}-!|

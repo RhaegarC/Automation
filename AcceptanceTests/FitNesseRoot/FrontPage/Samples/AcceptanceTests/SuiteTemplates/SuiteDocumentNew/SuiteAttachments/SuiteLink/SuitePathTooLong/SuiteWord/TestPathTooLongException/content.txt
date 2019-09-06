@@ -1,0 +1,5 @@
+!define PAGENAME (!-TestPathTooLongException-!)
+
+!style_green[Check the word content contains "_Attachments/GITSP ｸﾞﾛｰﾊﾞﾙ付表 別冊 ｽﾏｰﾄﾃﾞﾊﾞｲｽ運用管理規程.txt".]
+
+!include <SuiteCases.GlobalSteps.VerifyWordDoc

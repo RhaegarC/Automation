@@ -1,0 +1,16 @@
+!define PLACE (suitewiki)
+
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can finalize the links in the documents migrated from quickr
+So that I can redirect to the target documents in sharepoint
+
+!1 scenarios
+![
+Given there is two wiki pages A and B
+And wiki page A content contains wiki page B url
+When I run migration and do link finalization
+Then I can see the wiki page B url in wiki page A links to the migrated wiki page B in sharepoint
+]!

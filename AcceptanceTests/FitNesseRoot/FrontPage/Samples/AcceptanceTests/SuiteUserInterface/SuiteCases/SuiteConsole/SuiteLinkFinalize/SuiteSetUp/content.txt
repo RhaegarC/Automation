@@ -1,0 +1,9 @@
+!contents -R2 -g -p -f -h
+|script|
+|startUiautomation|
+
+|script|
+|importUilib|
+
+|script|
+|globalOptions|!{template:"${MODE}.${AUTH}",showSetupWizard:"false",linkTrackingServer:"nmsp",linkTrackingDb:"QuestLinkTrackingForTimeout",executionTimeoutSeconds:"150"}|

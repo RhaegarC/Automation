@@ -1,0 +1,33 @@
+!* Generate a form with Hidden from Notes R4.6 or later
+!|script|Remote|${NMSP36}|
+|SelectListItem|${FORM_NAME}|
+|Click|Next|
+|CheckBox|HideRead|Value|false|
+|CheckBox|HideEdit|Value|false|
+|CheckBox|HideWeb|Value|false|
+|CheckBox|HideNotes|Value|true|
+|CheckBox|HideFormula|Value|false|
+|CheckBox|HideHtml|Value|false|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+|Click|Next|
+
+!|script|remote|${NMSP}|
+|GetNintexXml|${TARGET_FILE}|
+|NintexFieldExist|Text[text() = 'This is Pass-Through text.']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'AllowMultilineTextbox']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'ComputedWhenCompose']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'Computed']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'RadioButton']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'ComputedDatetime']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'MyCheckBox']|ExpectedValue|True|
+|NintexFieldExist|DisplayName[text() = 'TextField']|ExpectedValue|False|
+|NintexFieldExist|DisplayName[text() = 'datetime']|ExpectedValue|False|
+*!
+
+!|script|Remote|${SHAREPOINT}|
+|PublishNintexForm|${TARGET_FILE}|WebUrl|${SITE_URL}|ListName|Tasks|ContentType|Task|
+
+!|script|Remote|${NMSP}|
+|Page|${SITE_URL}/Lists/Tasks/NewForm.aspx|Contains|This Form List all type of Fields:|

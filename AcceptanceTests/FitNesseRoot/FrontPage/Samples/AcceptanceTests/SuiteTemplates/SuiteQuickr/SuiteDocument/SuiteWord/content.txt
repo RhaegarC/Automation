@@ -1,0 +1,6 @@
+!define APPNAME (!-QuickrWord-!)
+!define TARGET ${WORD_FOLDER}\${WEB}\${LIST}\${RUNNING_PAGE_NAME}.docx
+!define LIST (Word)
+!define SAVE_AS (docx)
+!define TEMPLATE (!-QRPageToWord-!)
+!contents -R2 -g -p -f -h

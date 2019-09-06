@@ -1,0 +1,18 @@
+!note Git #324
+-!|script|Remote|${WEB_SCRAPER}|
+|select|'TD'|properties|'Style.borderStyle'|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|Text|Style.borderStyle|
+|Solid (1,1)|solid|
+|Solid (1,2)|solid|
+|Solid (2,1)|solid|
+|Solid (2,2)|solid|
+|Ridge (1,1)|ridge|
+|Ridge (1,2)|ridge|
+|Ridge (2,1)|ridge|
+|Ridge (2,2)|ridge|
+|Groove (1,1)|groove|
+|Groove (1,2)|groove|
+|Groove (2,1)|groove|
+|Groove (2,2)|groove|

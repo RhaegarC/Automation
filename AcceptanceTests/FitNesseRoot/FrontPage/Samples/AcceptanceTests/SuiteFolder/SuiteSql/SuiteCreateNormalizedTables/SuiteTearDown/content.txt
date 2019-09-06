@@ -1,0 +1,11 @@
+!contents -R2 -g -p -f -h
+
+!|script|remote|${NMSP}|
+|eval|$conStr = 'Data Source=${SqlServer};Initial Catalog=${NmspDatabase};Integrated Security=True'|
+|eval|$con = CreateSqlConnection($conStr)|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='AttachmentsTable') DROP TABLE [AttachmentsTable]"|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='tbl_vw_SECTION_blank_MAIL') DROP TABLE [tbl_vw_SECTION_blank_MAIL] "|
+|eval|ExecuteNonQuery $con $comStr|
+|eval|$comStr = "IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE name='LookupFrom') DROP TABLE [LookupFrom]"|
+|eval|ExecuteNonQuery $con $comStr|

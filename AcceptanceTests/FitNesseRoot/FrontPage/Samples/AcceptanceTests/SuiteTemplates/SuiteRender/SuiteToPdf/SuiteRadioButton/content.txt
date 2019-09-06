@@ -1,0 +1,40 @@
+!contents -R2 -g -p -f -h
+!1 user story
+As an administrator
+I can render a radio button to documents
+So that I have documents migrated properly
+
+!1 scenarios
+![
+Given there is a radio button with 5 options
+When I render the document and migrate it to document
+Then I can see the radio button is migrated properly
+
+Given there is 3 radio buttons with 5 options for each in a merged table cell
+When I render the document and migrate them to document
+Then I can see the radio buttons are migrated properly
+
+Given different combinations of radio buttons and text list as below
+1. Radio buttons in Section
+2. Table contains raido buttons in Section
+3. Radio buttons in tabbed tables
+4. "Number of column" of radio buttons is more than 2, two radio button groups in one line
+5. Long/ short text in front of/behind radio buttons which "Number of column" is 1
+6. Long/ short text in front of/behind radio buttons which "Number of column" is more than 2
+7. Long/ short textfield in front of/behind radio buttons which "Number of column" is 1
+8. Long/ short textfield in front of/behind radio buttons which "Number of column" is more than 2
+9. Different font in same line text in front of/ behind radio buttons
+10. Tables contains 5.- 9.
+When I render the document and migrate them to document
+Then I can see the radio buttons are migrated properly
+
+Given keyword of radio buttons is text|value format
+And keyword only contains one '|'
+When I run a migration
+Then I can see the keyword of radio buttons displayed correctly in SharePoint and the selection of this keyword is correct
+
+Given keyword of radio buttons is text|value format
+And keyword contains more than one '|'
+When I run a migration
+Then I can see the keyword of radio buttons displayed correctly in SharePoint but the selection of this keyword is lost
+]!

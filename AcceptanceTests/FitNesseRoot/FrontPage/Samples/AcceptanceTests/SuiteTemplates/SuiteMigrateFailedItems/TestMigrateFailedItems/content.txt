@@ -1,0 +1,43 @@
+!include <SuiteCases.GlobalSteps.ImportMultiTarget
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"${JOBFILE}",preserveIdentities:"true",formula:"@Contains(subject;'TestLinkHref')"}|
+
+|script|
+|cleanUpTarget|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|eval|remove-item "!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files-!\${WEB}.${LIST}.pmjob" -force -confirm:$false|
+
+!|script|remote|${NMSP}|
+|eval|Set-Location "C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Bin"|
+|eval|$process = start .\NMSPCMD.EXE ("-job ${JOBFILE}") -NoNewWindow -wait -PassThru|
+|eval|$process.WaitForExit()|
+
+
+|script|
+|startUiautomation|
+
+!|script|
+|importUilib|
+|startDesigner|
+|eval|$logFile = Get-ChildItem "$env:ProgramData\${NMSP_AppData_Path}\Log Files" !-|-! sort LastWriteTime !-|-! select -last 1|
+|show|eval|$logFile.FullName|
+|eval|rightClick "LoadTransferJob"|
+|eval|click "LoadJobFromLogMenu"|
+|eval|setText "LogFile" "$logFile"|
+|eval|click "OpenLogFile"|
+|eval|click "LoadFailedItemsOK"|
+|eval|click "SaveJob"|
+|eval|click "SaveJobFileButton"|
+
+!|script|
+|stopUiautomation|
+
+|script|
+|jobDefinition|!{db:"${APPNAME}",multiEnv:"target",job:"!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files-!\${WEB}.${LIST}.pmjob",preserveIdentities:"false",formula:"@Contains(subject;'TestLink')",editExistJob,"true"}|
+|eval|Get-Content "!-C:\Program Files (x86)\Quest\Migrator for Notes to SharePoint\Job Files-!\${WEB}.${LIST}.pmjob" !-|-! Set-Content "${JOBFILE}"|
+
+!include <SuiteCases.GlobalSteps.RunMigration
+
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}"}|
+|check|eval|$items.count|1|

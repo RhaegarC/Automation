@@ -1,0 +1,8 @@
+|script|
+|getListItems|!{sp_site:"${SITE_URL}",sp_web:"${WEB}",sp_list:"${LIST}",caml:"<View><Query></Query></View>"}|  
+
+!|script|Remote|${NMSP}|
+|check|eval|$items[0]["Title"]|TestAllLinkTypeRenderAsText|
+|check|eval|[System.Net.WebUtility]::HtmlDecode($items[0]["Body"]).contains("notes:///8525738700049e93/0/bc8c78c7239f857385257387000a9ff6")|True|
+|check|eval|[System.Net.WebUtility]::HtmlDecode($items[0]["Body"]).contains("!-notes:///85257afe0056488b/8c703b5a31c4da9385257bc1006cbf65/9b6db0d1a78d38b985257b1d00712155 -!")|True|
+|check|eval|[System.Net.WebUtility]::HtmlDecode($items[0]["Body"]).contains(">  notes:///8525738700049e93/626e6035eadbb4cd85256499006b15a6/bc8c78c7239f857385257387000a9ff6")|True|

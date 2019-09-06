@@ -1,0 +1,23 @@
+!contents -R2 -g -p -f -h
+!1 user story
+
+As an administrator
+I can migrate source data with hierarchy terms into sharePoint
+So that I can view these terms was mapped into sharePoint Term Store
+
+!1 scenarios
+![
+Given the following conditions were meet:
+1. NMSP Service was installed with the user( Application Pool Account) which is different from the administrator( the user create SharePoint) of SharePoint 
+2. The user( Application Pool Account) was added to "Site collection administrators" in "Site settings" of the Data Target SharePoint Site Collection
+3. "Enable Import Service" checkbox of "Quest Migrator for Notes to SharePoint Services Configuration" in "Site settings" of the Data Target SharePoint Site Collection was enabled 
+4. "SharePoint servers using Quest Import Service" Type in SharePoint Tab of Designer Options was selected
+5. Enable the "Update managed metadata field using web service" checkbox in Settings of Designer Options SharePoint Tab 
+6. A Data Field of Target Data Definition was added (Target Type = ManagedMetadata, Hierarchy Option = MapAsHierarchy, Add Missing Terms To Term = True)
+7. Field Mappings of the new Data Field was added
+8. A column( Type = Managed Metadata) was added in the Target List
+
+When I run migration
+Then I can view these terms was mapped into sharePoint Term Store
+And these terms can be viewed in the new added column of the Target List
+]!

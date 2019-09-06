@@ -1,0 +1,9 @@
+!|script|Remote|${WEB_SCRAPER}|
+|select|'A'|properties|outerText|
+
+!|Query:Remote|${WEB_SCRAPER}|$elements|
+|outerText|
+|中文文档资料.jpg|
+
+
+

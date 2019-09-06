@@ -1,0 +1,15 @@
+|script|
+|runScheduledTask|!{scheduledTaskName:"${TASKNAME}",taskTemplate:"${TASKTEMPLATE}",scheduledTaskType:"Analysis",databases:"!fordiscovery/${AnalyzeDB}.nsf",dataAnalysisType:"AnalyzeRichText"}|
+
+|script|
+|startServer86|
+
+|script|
+|loadDiscoveryApi|
+|getDatabase ${AnalyzeDB}|
+|check|eval|$db.DocsWithDocLinks|3|
+|check|eval|$db.DocsWithAttachments|3|
+|check|eval|$db.DocsWithComposite|3|
+
+|script|
+|stopServer86|

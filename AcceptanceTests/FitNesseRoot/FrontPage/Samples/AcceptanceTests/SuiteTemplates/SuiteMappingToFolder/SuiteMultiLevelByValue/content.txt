@@ -1,0 +1,5 @@
+!define LIST (!-SuiteMultiLevelByValue-!)
+!define MAPFIELDS ("<!-Mapping Destination='Folder' SourceValue='Subject' MultiValueDisposition='Default' Transform='None' FormatString='{0}'-! />")
+!define SOURCE (${LIST_URL}/Folder1/Folder2/${RUNNING_PAGE_NAME}/Folder1Folder2${RUNNING_PAGE_NAME}.pdf)
+!define TARGET (${TARGETFOLDER}\Folder1\Folder2\${RUNNING_PAGE_NAME}\Folder1Folder2${RUNNING_PAGE_NAME}.pdf)
+!contents -R2 -g -p -f -h

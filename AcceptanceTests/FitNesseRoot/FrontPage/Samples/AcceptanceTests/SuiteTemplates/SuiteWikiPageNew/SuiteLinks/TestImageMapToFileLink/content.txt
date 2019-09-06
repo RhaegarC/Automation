@@ -1,0 +1,9 @@
+|script|
+|getWikiContent|!{url:"${LIST_URL}/TestImageMapToFileLink.aspx",tag:"area",selector:!-"href"-!}|
+
+!|Query: Remote|${WEB_SCRAPER}|$elements|
+|href|
+|file:///c:/1.txt|
+|file:///c:/1.txt|
+|file://nmsp-share.nmsp.wm.zhu.cn.qsft/NMSPShare|
+|file://nmsp-share.nmsp.wm.zhu.cn.qsft/NMSPShare/1.txt|
